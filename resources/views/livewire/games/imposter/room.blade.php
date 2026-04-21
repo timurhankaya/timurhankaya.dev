@@ -438,7 +438,7 @@
                                 </div>
                                 <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{{ __('imposter.gameStartedDesc') }}</p>
 
-                                @if ($starterName)
+                                @if ($starterName && count($players) !== 3)
                                     <div class="mt-5 rounded-3xl border border-cyan-200/50 bg-gradient-to-br from-cyan-50/60 to-white/70 p-6 shadow-sm backdrop-blur-md dark:border-cyan-400/15 dark:from-cyan-950/30 dark:to-zinc-900/60">
                                         <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-600/70 dark:text-cyan-300/60">{{ __('imposter.starterPlayer') }}</p>
                                         <p class="cyber-title mt-2 text-xl font-bold text-zinc-950 dark:text-white">{{ $starterName }}</p>
