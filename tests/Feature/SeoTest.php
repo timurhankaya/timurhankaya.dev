@@ -111,8 +111,8 @@ it('publishes a sitemap with accurate lastmod, hreflang pairs and no ignored fie
 
 it('serves a robots file that blocks private tooling and points to the absolute sitemap', function () {
     $robots = $this->get('/robots.txt')->assertOk()->getContent();
-    expect($robots)->toContain('Disallow: /admin', 'Sitemap: http')->not->toContain('Disallow: /livewire')
-        ->and(file_exists(public_path('robots.txt')))->toBeFalse();
+    // public/robots.txt is this route's production output (see SeoBestPracticesTest), since nginx serves it from disk.
+    expect($robots)->toContain('Disallow: /admin', 'Sitemap: http')->not->toContain('Disallow: /livewire');
 });
 
 it('describes pages with linked schema.org entities that parse as json', function (string $path, array $types) {
