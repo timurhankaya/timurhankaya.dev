@@ -790,7 +790,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .brand-code-copy { min-height: 32px; padding: 4px 12px; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 11px/1.4 var(--mono); cursor: pointer; transition: color .2s, border-color .2s; }
 .brand-code-copy:is(:hover, :focus-visible), .brand-code-copy[data-copied] { color: var(--ink); border-color: var(--accent); }
 .brand-prose .brand-code pre { margin: 0; padding: 18px 22px 18px 0; border: 0; background: transparent; color: #d5d8de; font-size: 13.5px; line-height: 1.8; }
-.brand-code .hl-gutter { display: inline-block; width: 3.4em; margin-right: 1.1em; padding-right: .9em; border-right: 1px solid var(--line); color: #4b4f58; text-align: right; user-select: none; }
+.brand-code .hl-gutter { display: inline-block; width: 3.4em; margin-right: 1.1em; padding-right: .9em; border-right: 1px solid var(--line); color: #7d828c; text-align: right; user-select: none; }
 .brand-code .hl-keyword { color: #ff7a1a; }
 .brand-code :is(.hl-type, .hl-generic) { color: #ffc799; }
 .brand-code .hl-value { color: #e3c77d; }
@@ -799,7 +799,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .brand-code .hl-property { color: #b9c0cc; }
 .brand-code .hl-attribute { color: #ffc799; font-style: italic; }
 .brand-code .hl-operator { color: #9aa0aa; }
-.brand-code .hl-comment { color: #6b707a; font-style: italic; }
+.brand-code .hl-comment { color: #8a8f99; font-style: italic; }
 .brand-code .hl-addition { color: #9fd49a; }
 .brand-code .hl-deletion { color: #f08a7e; }
 .brand-code :is(.hl-strong) { font-weight: 600; }

@@ -206,3 +206,23 @@ it('writes titles for what people search and descriptions that fill the snippet'
     }
     expect($this->get('/contact')->getContent())->not->toContain('name="keywords"');
 });
+
+it('keeps code comments and line numbers readable against the code background', function () {
+    $css = file_get_contents(resource_path('css/brand.css'));
+    $color = function (string $selector, string $property) use ($css): string {
+        preg_match('/^'.preg_quote($selector, '/').'\s*\{[^}]*\b'.$property.':\s*(#[0-9a-f]{6})/mi', $css, $match);
+
+        return $match[1] ?? '#000000';
+    };
+    $luminance = function (string $hex): float {
+        $channel = fn (int $value): float => ($c = $value / 255) <= 0.03928 ? $c / 12.92 : (($c + 0.055) / 1.055) ** 2.4;
+        [$r, $g, $b] = array_map('hexdec', str_split(ltrim($hex, '#'), 2));
+
+        return 0.2126 * $channel($r) + 0.7152 * $channel($g) + 0.0722 * $channel($b);
+    };
+    $background = $luminance($color('.brand-prose .brand-code', 'background'));
+
+    foreach (['.brand-code .hl-comment', '.brand-code .hl-gutter'] as $selector) {
+        expect(($luminance($color($selector, 'color')) + 0.05) / ($background + 0.05))->toBeGreaterThanOrEqual(4.5, $selector);
+    }
+});
