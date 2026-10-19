@@ -101,13 +101,20 @@ final class Seo
         return ($locale ?? self::currentLocale()) === 'tr' ? 'tr_TR' : 'en_US';
     }
 
-    public static function imageUrl(?string $image = null): string
+    /** A share image in the page's language: `og-games.png` becomes `og-games-tr.png` on Turkish pages when that file exists. */
+    public static function imageUrl(?string $image = null, ?string $locale = null): string
     {
         if (is_string($image) && $image !== '' && Str::startsWith($image, ['http://', 'https://'])) {
             return $image;
         }
+        $path = ltrim((string) ($image ?: 'og-basic.png'), '/');
+        $locale ??= self::currentLocale();
+        if ($locale !== self::fallbackLocale()) {
+            $variant = (string) preg_replace('/(\.[a-z0-9]+)$/i', '-'.$locale.'$1', $path);
+            $path = is_file(public_path($variant)) ? $variant : $path;
+        }
 
-        return asset(ltrim((string) ($image ?: 'og-basic.png'), '/'));
+        return asset($path);
     }
 
     public static function normalizeDate(DateTimeInterface|string|null $value): ?string

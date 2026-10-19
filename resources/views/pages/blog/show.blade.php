@@ -8,7 +8,7 @@
         'title' => $post->metaTitle(),
         'description' => $post->metaDescription() ?: $postDescription,
         'canonical' => $postUrl,
-        'image' => $post->coverUrl() ?: 'og-blog-post.png',
+        'image' => $post->ogImage(),
         'type' => 'article',
         'noindex' => (bool) ($isPreview ?? false),
         'author' => 'Timurhan Kaya',

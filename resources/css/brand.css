@@ -885,3 +885,17 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     .brand-logo-tile { height: 80px; }
 }
 @media (prefers-reduced-motion: reduce) { .brand-logo-tile, .brand-logo-tile img, .brand-logo-wordmark { transition: none; } }
+
+/* Status pages: one oversized code in the accent, the message, and ways back. */
+.brand-error-shell { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; width: min(1184px, 100%); margin-inline: auto; padding-inline: 24px; }
+.brand-error-top { display: flex; align-items: center; min-height: 86px; border-bottom: 1px solid var(--line); }
+.brand-error { padding-block: clamp(56px, 9vw, 112px); max-width: 860px; }
+.brand-error-code { font-family: var(--heading); font-size: clamp(112px, 20vw, 240px); font-weight: 700; line-height: .82; letter-spacing: -.07em; color: var(--accent); margin-bottom: 28px; }
+.brand-error .brand-display { margin-top: 14px; }
+.brand-error-body { max-width: 540px; margin-top: 18px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+.brand-error-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 36px; }
+.brand-error-links { margin-top: 44px; border-top: 1px solid var(--line); max-width: 640px; }
+.brand-error-links a { display: flex; justify-content: space-between; align-items: center; padding-block: 18px; border-bottom: 1px solid var(--line); font-size: 17px; transition: color .2s; }
+.brand-error-links a:hover { color: var(--accent); }
+.brand-error-foot { padding-block: 24px; border-top: 1px solid var(--line); color: var(--muted); font: 12px/1.6 var(--mono); }
+

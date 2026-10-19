@@ -161,6 +161,17 @@ class Post extends Model
         return Seo::route($this->type === PostType::CaseStudy ? 'case-studies.show' : 'blog.show', ['slug' => $this->slug], $locale);
     }
 
+    /** Share image: the uploaded cover, else the generated title card for this language (npm run og), else the generic card. */
+    public function ogImage(?string $locale = null): string
+    {
+        if ($cover = $this->coverUrl()) {
+            return $cover;
+        }
+        $card = 'og/stories/'.$this->slug.'-'.($locale ?? app()->getLocale()).'.png';
+
+        return is_file(public_path($card)) ? $card : 'og-blog-post.png';
+    }
+
     public function coverUrl(): ?string
     {
         if (! $this->cover_image) {

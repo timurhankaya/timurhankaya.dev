@@ -1,0 +1,78 @@
+<!doctype html>
+<!-- Share card template (1200x630). scripts/og-images.mjs fills it and saves a PNG per card and language. -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url("../css/fonts.css");
+@font-face { font-family: 'Syne'; font-weight: 500 700; src: url(../fonts/syne-500-700-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Syne'; font-weight: 500 700; src: url(../fonts/syne-500-700-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+:root { --paper: #0a0a0b; --ink: #f2f3f5; --muted: #a1a5ae; --line: #292b30; --accent: #ff7a1a; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--paper); color: var(--ink); }
+.card { position: relative; width: 1200px; height: 630px; padding: 60px 72px 52px; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+/* The thin circle from the project cards, cut by the frame. */
+.card::after { content: ""; position: absolute; width: 620px; height: 620px; right: -230px; bottom: -300px; border: 1.5px solid rgb(255 255 255 / .08); border-radius: 50%; }
+.top, .bottom { display: flex; justify-content: space-between; align-items: center; font: 500 21px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+.top .domain { color: var(--muted); text-transform: none; letter-spacing: .04em; }
+.label b { color: var(--accent); font-weight: 500; margin-right: 18px; }
+.middle { align-self: center; display: grid; gap: 22px; max-width: 1000px; }
+.title { font: 600 80px/1.02 'Syne', sans-serif; letter-spacing: -.045em; text-wrap: balance; }
+.subtitle { font: 400 28px/1.45 'Geist', sans-serif; color: var(--muted); max-width: 900px; }
+.name { font: 600 176px/.9 'Syne', sans-serif; letter-spacing: -.06em; }
+.name span { display: block; color: var(--accent); }
+.bottom { position: relative; z-index: 1; padding-top: 26px; border-top: 1px solid var(--line); text-transform: none; letter-spacing: 0; }
+.logo { font: 600 40px/1 'IBM Plex Mono', monospace; letter-spacing: -4px; }
+.logo span { color: var(--accent); }
+.byline { font: 400 22px/1 'Geist', sans-serif; color: var(--muted); }
+.byline strong { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="card">
+    <div class="top"><p class="label"><b></b><span></span></p><p class="domain">timurhankaya.dev</p></div>
+    <div class="middle"></div>
+    <div class="bottom"><p class="logo">tkaya<span>.</span></p><p class="byline"><strong>Timurhan Kaya</strong> / <span></span></p></div>
+</div>
+<script>
+// Called by the generator: render({ lang, kind: 'name' | 'title', number, label, title, subtitle, role }) then wait for fonts.
+window.render = async (card) => {
+    // The language decides capitals: Turkish uppercases i to İ.
+    document.documentElement.lang = card.lang;
+    const number = document.querySelector('.label b');
+    number.textContent = card.number ? card.number + ' /' : '';
+    number.hidden = !card.number;
+    document.querySelector('.label span').textContent = card.label;
+    document.querySelector('.byline span').textContent = card.role;
+    const middle = document.querySelector('.middle');
+    middle.innerHTML = '';
+    if (card.kind === 'name') {
+        const name = document.createElement('h1');
+        name.className = 'name';
+        name.innerHTML = 'Timurhan<span>Kaya.</span>';
+        middle.append(name);
+    } else {
+        const title = document.createElement('h1');
+        title.className = 'title';
+        title.textContent = card.title;
+        middle.append(title);
+        if (card.subtitle) {
+            const sub = document.createElement('p');
+            sub.className = 'subtitle';
+            sub.textContent = card.subtitle;
+            middle.append(sub);
+        }
+        // Shrink long titles until the middle row fits between the label and the footer.
+        await document.fonts.ready;
+        let size = 80;
+        const room = middle.parentElement.clientHeight - 60 - 52 - 110;
+        while (middle.scrollHeight > room && size > 48) {
+            size -= 4;
+            title.style.fontSize = size + 'px';
+        }
+    }
+    await document.fonts.ready;
+};
+</script>
+</body>
+</html>

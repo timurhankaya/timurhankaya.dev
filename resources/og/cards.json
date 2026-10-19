@@ -1,0 +1,15 @@
+{
+    "role": { "en": "Software Developer", "tr": "Yazılım Geliştirici" },
+    "cards": [
+        { "file": "og-basic", "kind": "name", "label": { "en": "Software developer / Istanbul", "tr": "Yazılım geliştirici / İstanbul" } },
+        { "file": "og-home", "kind": "name", "label": { "en": "Software developer / Istanbul", "tr": "Yazılım geliştirici / İstanbul" } },
+        { "file": "og", "kind": "name", "label": { "en": "Software developer / Istanbul", "tr": "Yazılım geliştirici / İstanbul" } },
+        { "file": "og-blog", "number": "01", "label": { "en": "Blog", "tr": "Blog" }, "title": { "en": "Notes on building software products", "tr": "Yazılım ve ürün geliştirme notları" }, "subtitle": { "en": "Live price streams, AI agents and the decisions behind real products.", "tr": "Canlı fiyat akışları, yapay zekâ ajanları ve gerçek ürünlerin arkasındaki kararlar." } },
+        { "file": "og-blog-post", "number": "01", "label": { "en": "Blog", "tr": "Blog" }, "title": { "en": "Writing by Timurhan Kaya", "tr": "Timurhan Kaya’nın yazıları" } },
+        { "file": "og-contact", "number": "06", "label": { "en": "Contact", "tr": "İletişim" }, "title": { "en": "Keep in touch.", "tr": "İletişimde kalalım." }, "subtitle": { "en": "A project, a partnership or a question. I reply by email.", "tr": "Bir proje, bir ortaklık ya da bir soru. E-postayla dönerim." } },
+        { "file": "og-cv", "label": { "en": "CV", "tr": "CV" }, "title": { "en": "Timurhan Kaya", "tr": "Timurhan Kaya" }, "subtitle": { "en": "Software developer at Wingie Enuygun Group and co-founder of Monafy.", "tr": "Wingie Enuygun Group’ta yazılım geliştirici, Monafy’nin kurucu ortağı." } },
+        { "file": "og-games", "number": "04", "label": { "en": "Games", "tr": "Oyunlar" }, "title": { "en": "Made for game night.", "tr": "Oyun geceleri için." }, "subtitle": { "en": "Vampire Village and Word Imposter. Played on your phones, with no moderator.", "tr": "Vampir Köylü ve Word Imposter. Telefondan oynanıyor, moderatör gerekmiyor." } },
+        { "file": "og-imposter", "number": "01", "label": { "en": "Games / Clues and bluffing", "tr": "Oyunlar / İpuçları ve blöf" }, "title": { "en": "Word Imposter", "tr": "Word Imposter" }, "subtitle": { "en": "Everyone sees the secret word except the Imposter.", "tr": "Herkes gizli kelimeyi görür, Imposter görmez." } },
+        { "file": "og-vampire", "number": "02", "label": { "en": "Games / Roles and strategy", "tr": "Oyunlar / Roller ve strateji" }, "title": { "en": "Vampire Village", "tr": "Vampir Köylü" }, "subtitle": { "en": "Vampires hunt at night; by day the village votes to find them.", "tr": "Gece vampirler avlanır, gündüz köy oylamayla vampirleri bulmaya çalışır." } }
+    ]
+}

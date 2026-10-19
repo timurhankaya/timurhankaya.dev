@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Post;
 use App\Providers\AppServiceProvider;
 use App\Support\Seo;
 use App\Support\StructuredData;
+use Database\Seeders\StorySeeder;
 use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
@@ -230,3 +232,26 @@ it('keeps code comments and line numbers readable against the code background', 
 it('links the renamed GitHub profile everywhere', function (string $path) {
     expect($this->get($path)->assertOk()->getContent())->not->toContain('github.com/kayacekovic')->not->toContain('@kayacekovic')->toContain('github.com/timurhankaya');
 })->with(['/', '/tr/iletisim', '/cv']);
+
+it('uses the Turkish share image on Turkish pages when one exists', function () {
+    $og = function (string $path): string {
+        preg_match('~<meta property="og:image" content="([^"]+)"~', $this->get($path)->assertOk()->getContent(), $match);
+
+        return $match[1] ?? '';
+    };
+
+    expect($og('/games'))->toEndWith('/og-games.png')->and($og('/tr/oyunlar'))->toEndWith('/og-games-tr.png')
+        ->and(public_path('og-games-tr.png'))->toBeFile();
+});
+
+it('gives each story a share card with its own title, and a generic one otherwise', function () {
+    $this->seed(StorySeeder::class);
+    $story = Post::where('slug', 'what-is-monafy')->firstOrFail();
+    $unknown = portfolioPost(['slug' => 'no-card-yet']);
+
+    expect($story->ogImage('tr'))->toBe('og/stories/what-is-monafy-tr.png')->and(public_path($story->ogImage('en')))->toBeFile()
+        ->and($unknown->ogImage('en'))->toBe('og-blog-post.png');
+    $html = $this->get($story->publicUrl('en'))->assertOk()->getContent();
+    expect($html)->toContain('<meta property="og:image" content="'.asset('og/stories/what-is-monafy-en.png').'">')
+        ->and(collect(ldNodes($html))->firstWhere('@type', 'BlogPosting')['image'])->toBe([asset('og/stories/what-is-monafy-en.png')]);
+});

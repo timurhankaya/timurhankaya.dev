@@ -178,7 +178,7 @@ final class StructuredData
             'abstract' => $post->text('excerpt', $locale),
             'url' => $url,
             'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $url.'#webpage'],
-            'image' => [Seo::imageUrl($post->coverUrl() ?: 'og-blog-post.png')],
+            'image' => [Seo::imageUrl($post->ogImage($locale), $locale)],
             'datePublished' => Seo::normalizeDate($post->published_at),
             'dateModified' => Seo::normalizeDate($post->updated_at ?? $post->published_at),
             'author' => self::personRef($locale),
