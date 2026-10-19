@@ -551,8 +551,8 @@
             <span class="contact-item">
                 <span class="label" style="color: var(--ink-muted);">{{ $t['loc_label'] }}</span> {{ $t['loc_value'] }}
             </span>
-            <a href="https://github.com/kayacekovic" target="_blank" class="contact-item">
-                <span class="label">GitHub</span> @kayacekovic
+            <a href="https://github.com/timurhankaya" target="_blank" class="contact-item">
+                <span class="label">GitHub</span> @timurhankaya
             </a>
             <!-- Empty spot for grid to push Web down nicely if needed, or we just rely on grid -->
             <a href="https://timurhankaya.dev" target="_blank" class="contact-item" style="grid-column: 1 / -1; justify-self: end;">

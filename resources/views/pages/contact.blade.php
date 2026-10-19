@@ -54,7 +54,7 @@
                 <button type="button" data-copy-text="kayacekovic@gmail.com" data-copy-label="{{ __('brand.copy_email') }}" data-copy-label-success="{{ __('brand.copied') }}">{{ __('brand.copy_email') }}</button>
             </div>
             <div class="brand-contact-row"><div><p class="brand-label">LinkedIn</p><a href="https://www.linkedin.com/in/timurhan-kaya/" target="_blank" rel="noopener noreferrer">Timurhan Kaya <x-arrow /></a></div></div>
-            <div class="brand-contact-row"><div><p class="brand-label">GitHub</p><a href="https://github.com/kayacekovic" target="_blank" rel="noopener noreferrer">@kayacekovic <x-arrow /></a></div></div>
+            <div class="brand-contact-row"><div><p class="brand-label">GitHub</p><a href="https://github.com/timurhankaya" target="_blank" rel="noopener noreferrer">@timurhankaya <x-arrow /></a></div></div>
         </div>
         <aside class="brand-cv-aside"><h2>{{ __('brand.cv') }}</h2><p>{{ __('brand.cv_note') }}</p><a class="brand-button" href="{{ \App\Support\Seo::route('cv') }}" target="_blank" rel="noopener">{{ __('brand.cv') }} <x-arrow /></a></aside>
     </div>

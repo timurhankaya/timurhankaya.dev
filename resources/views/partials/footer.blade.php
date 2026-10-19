@@ -6,6 +6,6 @@
     </div>
     <div class="brand-footer-bottom">
         <p>© {{ now()->year }} Timurhan Kaya</p>
-        <div><a href="{{ \App\Support\Seo::route('contact') }}">{{ __('portfolio.nav.contact') }}</a><a href="https://github.com/kayacekovic" target="_blank" rel="me noopener noreferrer">GitHub <x-arrow /></a><a href="https://www.linkedin.com/in/timurhan-kaya/" target="_blank" rel="me noopener noreferrer">LinkedIn <x-arrow /></a></div>
+        <div><a href="{{ \App\Support\Seo::route('contact') }}">{{ __('portfolio.nav.contact') }}</a><a href="https://github.com/timurhankaya" target="_blank" rel="me noopener noreferrer">GitHub <x-arrow /></a><a href="https://www.linkedin.com/in/timurhan-kaya/" target="_blank" rel="me noopener noreferrer">LinkedIn <x-arrow /></a></div>
     </div>
 </footer>

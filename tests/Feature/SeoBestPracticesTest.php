@@ -157,7 +157,7 @@ it('submits every sitemap address with one command', function () {
 it('marks the social profiles in the footer as the same person', function () {
     $footer = Str::after($this->get('/')->assertOk()->getContent(), '<footer class="brand-footer">');
 
-    expect($footer)->toContain('href="https://github.com/kayacekovic" target="_blank" rel="me noopener noreferrer"')
+    expect($footer)->toContain('href="https://github.com/timurhankaya" target="_blank" rel="me noopener noreferrer"')
         ->toContain('href="https://www.linkedin.com/in/timurhan-kaya/" target="_blank" rel="me noopener noreferrer"');
 });
 
@@ -226,3 +226,7 @@ it('keeps code comments and line numbers readable against the code background', 
         expect(($luminance($color($selector, 'color')) + 0.05) / ($background + 0.05))->toBeGreaterThanOrEqual(4.5, $selector);
     }
 });
+
+it('links the renamed GitHub profile everywhere', function (string $path) {
+    expect($this->get($path)->assertOk()->getContent())->not->toContain('github.com/kayacekovic')->not->toContain('@kayacekovic')->toContain('github.com/timurhankaya');
+})->with(['/', '/tr/iletisim', '/cv']);

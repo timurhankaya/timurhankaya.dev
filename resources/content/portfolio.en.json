@@ -79,7 +79,7 @@
         "    public function links(): array",
         "    {",
         "        return [",
-        "            'github' => 'github.com/kayacekovic',",
+        "            'github' => 'github.com/timurhankaya',",
         "            'linkedin' => 'linkedin.com/in/timurhan-kaya',",
         "        ];",
         "    }",

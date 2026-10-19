@@ -14,7 +14,7 @@ final class StructuredData
 {
     public const LINKEDIN = 'https://www.linkedin.com/in/timurhan-kaya/';
 
-    public const GITHUB = 'https://github.com/kayacekovic';
+    public const GITHUB = 'https://github.com/timurhankaya';
 
     public const EMPLOYER = 'Wingie Enuygun Group';
 

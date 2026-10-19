@@ -121,7 +121,7 @@ it('leaves the social links to the footer instead of repeating them in the conta
 
     expect($contact)->toContain('brand-contact-bottom')->not->toContain('brand-socials')
         ->not->toContain('linkedin.com')->not->toContain('github.com')->not->toContain('mailto:')
-        ->and(Str::after($html, '<footer class="brand-footer">'))->toContain('linkedin.com/in/timurhan-kaya')->toContain('github.com/kayacekovic');
+        ->and(Str::after($html, '<footer class="brand-footer">'))->toContain('linkedin.com/in/timurhan-kaya')->toContain('github.com/timurhankaya');
 });
 
 it('sets the about column text and chips at a readable size', function () {
