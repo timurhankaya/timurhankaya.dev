@@ -1,13 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#09090b" />
-  <text
-    x="50%"
-    y="50%"
-    text-anchor="middle"
-    dominant-baseline="central"
-    fill="#ffffff"
-    font-size="24"
-    font-family="JetBrains Mono, monospace"
-    font-weight="700"
-  >&lt;/&gt;</text>
+  <rect width="64" height="64" rx="4" fill="#0a0a0b"/>
+  <path d="M16 15v27c0 6 4 8 10 6v-6c-3 1-4 0-4-3V29h6v-6h-6v-8zm17 0v33h6V36l8 12h8L44 32l10-9h-8l-7 7V15z" fill="#f2f3f5"/>
+  <circle cx="55" cy="50" r="4" fill="#ff7a1a"/>
 </svg>

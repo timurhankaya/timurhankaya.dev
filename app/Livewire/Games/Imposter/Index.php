@@ -4,6 +4,7 @@ namespace App\Livewire\Games\Imposter;
 
 use App\Services\Imposter\ImposterRoomService;
 use App\Support\GameIdentity;
+use App\Support\Seo;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -41,7 +42,7 @@ class Index extends Component
 
         session()->put($this->playerSessionKey($created['code']), $created['hostPlayerId']);
 
-        return redirect()->route('games.imposter.room', ['roomCode' => $created['code']]);
+        return redirect(Seo::route('games.imposter.room', ['roomCode' => $created['code']]));
     }
 
     public function joinRoom(ImposterRoomService $rooms): mixed
@@ -77,7 +78,7 @@ class Index extends Component
 
         session()->put($this->playerSessionKey($code), $joined['playerId']);
 
-        return redirect()->route('games.imposter.room', ['roomCode' => $code]);
+        return redirect(Seo::route('games.imposter.room', ['roomCode' => $code]));
     }
 
     #[On('identity-saved')]

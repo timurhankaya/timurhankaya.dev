@@ -7,6 +7,7 @@ use App\Enums\VampireRoomStatus;
 use App\Services\Vampire\VampireRoomService;
 use App\Support\GameIdentity;
 use App\Support\Games\VampireRoomPresenter;
+use App\Support\Seo;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -147,8 +148,9 @@ class Room extends Component
         }
 
         // Check for phase transitions to trigger notifications
+        // Built from the presented snapshot, the same data every player receives, never from the raw room.
         if ($room !== null && $this->lastStatus !== null && $this->lastStatus !== $this->status) {
-            $this->handleStatusChange($this->lastStatus, $this->status, $room);
+            $this->handleStatusChange($this->lastStatus, $this->status, (array) ($snapshot['nightResult'] ?? []));
         }
         $this->lastStatus = $this->status;
 
@@ -156,12 +158,12 @@ class Room extends Component
         $this->eventLog = $this->computeEventLog();
     }
 
-    private function handleStatusChange(VampireRoomStatus $old, VampireRoomStatus $new, array $room): void
+    private function handleStatusChange(VampireRoomStatus $old, VampireRoomStatus $new, array $nightResult): void
     {
         if ($new === VampireRoomStatus::Dawn) {
             $this->notification = [
                 'title' => (string) __('vampire.dawn.title'),
-                'message' => $this->getDawnMessage($room),
+                'message' => $this->getDawnMessage($nightResult),
             ];
             $this->dispatch('show-notification');
         } elseif ($new === VampireRoomStatus::Day) {
@@ -179,14 +181,14 @@ class Room extends Component
         }
     }
 
-    private function getDawnMessage(array $room): string
+    /** @param  array<string, mixed>  $nightResult  the presented night result, without protection details */
+    private function getDawnMessage(array $nightResult): string
     {
-        $nightResult = (array) ($room['nightResult'] ?? []);
         $killedId = is_string($nightResult['killedId'] ?? null) ? (string) $nightResult['killedId'] : null;
         $saved = (bool) ($nightResult['saved'] ?? false);
 
         if ($killedId && ! $saved) {
-            $name = (string) ($room['players'][$killedId]['name'] ?? 'Unknown');
+            $name = (string) ($nightResult['killedName'] ?? 'Unknown');
 
             return (string) __('vampire.log.death_night', ['name' => $name]);
         }
@@ -361,6 +363,13 @@ class Room extends Component
             return;
         }
 
+        // The rule (no protecting the same player two nights running) lives in the service; say why the pick did nothing.
+        if ($this->lastProtectedId !== null && $targetId === $this->lastProtectedId) {
+            $this->error = (string) __('vampire.errors.doctor_same_target');
+
+            return;
+        }
+
         $rooms->doctorProtect($this->roomCode, $playerId, $targetId);
         $this->refreshRoom($rooms);
     }
@@ -486,7 +495,7 @@ class Room extends Component
 
         session()->forget($this->playerSessionKey());
 
-        return redirect()->route('games.vampire.index');
+        return redirect(Seo::route('games.vampire.index'));
     }
 
     public function openKickConfirm(string $id, string $name): void

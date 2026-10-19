@@ -78,7 +78,9 @@ final class ImposterRoomPresenter
             $myWord = $myRole === 'crew' ? $word : null;
 
             $starterId = (string) ($room['starterId'] ?? '');
-            $starterName = $starterId !== '' ? ((string) ($roomPlayers[$starterId]['name'] ?? '') ?: null) : null;
+            // The starter is always crew. With three players the other crew member would learn who the
+            // imposter is, so the name is not sent at all (the page also hides it, but the payload is public).
+            $starterName = $starterId !== '' && count($roomPlayers) !== 3 ? ((string) ($roomPlayers[$starterId]['name'] ?? '') ?: null) : null;
         }
 
         $revealedWord = null;

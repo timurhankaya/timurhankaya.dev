@@ -1,173 +1,76 @@
 <?php
 
+use App\Http\Controllers\FeedController;
+use App\Http\Controllers\LlmsController;
 use App\Http\Controllers\PostController;
-use App\Models\Post;
+use App\Http\Controllers\PreviewPostController;
+use App\Http\Controllers\SitemapController;
 use App\Services\Portfolio\PortfolioContentService;
+use App\Services\Portfolio\PortfolioProjects;
+use App\Support\IndexNow;
+use App\Support\LocalizedRoutes;
 use App\Support\Seo;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function (PortfolioContentService $portfolio) {
-    return view('pages.home', [
-        'content' => $portfolio->get(),
-    ]);
-})->name('home');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
+Route::get('/site.webmanifest', [SitemapController::class, 'manifest'])->name('manifest');
 
-Route::get('/contact', function (PortfolioContentService $portfolio) {
-    return view('pages.contact', [
-        'content' => $portfolio->get(),
-    ]);
-})->name('contact');
+Route::get('/admin/preview/posts/{id}', PreviewPostController::class)->whereNumber('id')->name('admin.posts.preview');
 
-Route::get('/cv', function () {
-    return view('pages.cv');
-})->name('cv');
+foreach (Seo::supportedLocales() as $locale) {
+    Route::prefix($locale === 'en' ? '' : $locale)->name($locale.'.')->group(function () use ($locale): void {
+        $path = fn (string $name): string => '/'.LocalizedRoutes::PATHS[$name][$locale];
+        $register = function (string $name, $action) use ($path, $locale) {
+            return Route::get($path($name), $action)->defaults('locale', $locale)->name($name);
+        };
+        $register('home', function (PortfolioContentService $portfolio, PortfolioProjects $projects) use ($locale) {
+            if (request()->query->has('lang')) {
+                return redirect(Seo::route('home'), 301);
+            }
+            if ($locale === 'en' && app()->getLocale() === 'tr') {
+                return redirect(Seo::route('home'), 302)->header('Vary', 'Accept-Language, Cookie')->header('Cache-Control', 'private, no-cache');
+            }
 
-Route::get('/robots.txt', function () {
-    $content = implode("\n", [
-        'User-agent: *',
-        'Allow: /',
-        '',
-        'Sitemap: '.route('sitemap'),
-    ])."\n";
+            return view('pages.home', ['content' => $portfolio->get(), 'featuredProjects' => $projects->featured()]);
+        });
+        $register('contact', fn (PortfolioContentService $portfolio) => view('pages.contact', ['content' => $portfolio->get()]));
+        $register('cv', fn () => view('pages.cv'));
+        $register('games.index', fn () => view('pages.games.index'));
+        foreach (['imposter', 'vampire'] as $game) {
+            $register('games.'.$game.'.index', fn () => view('pages.games.'.$game.'.index'));
+            $register('games.'.$game.'.room', fn (string $roomCode) => view('pages.games.'.$game.'.room', compact('roomCode')))->where('roomCode', '[A-Z0-9]{4,10}');
+        }
+        $register('blog.index', [PostController::class, 'index']);
+        $register('blog.show', [PostController::class, 'show']);
+        $register('case-studies.index', [PostController::class, 'caseIndex']);
+        $register('case-studies.show', [PostController::class, 'caseShow']);
+        $register('llms', LlmsController::class);
+        $register('feed', FeedController::class);
+        $register('preview.typography', function () {
+            abort_unless(app()->isLocal(), 404);
 
-    return response($content, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
-})->name('robots');
+            return response()->view('pages.article-preview')->header('X-Robots-Tag', 'noindex, nofollow');
+        });
+    });
+}
 
-Route::get('/sitemap.xml', function () {
-    $pages = [
-        [
-            'route' => 'home',
-            'lastmod' => Seo::lastModifiedForPaths([
-                resource_path('views/pages/home.blade.php'),
-                resource_path('content/portfolio.en.json'),
-                resource_path('content/portfolio.tr.json'),
-            ]),
-            'changefreq' => 'weekly',
-            'priority' => '1.0',
-        ],
-        [
-            'route' => 'contact',
-            'lastmod' => Seo::lastModifiedForPaths([
-                resource_path('views/pages/contact.blade.php'),
-                resource_path('content/portfolio.en.json'),
-                resource_path('content/portfolio.tr.json'),
-            ]),
-            'changefreq' => 'monthly',
-            'priority' => '0.8',
-        ],
-        [
-            'route' => 'cv',
-            'lastmod' => Seo::lastModifiedForPaths([
-                resource_path('views/pages/cv.blade.php'),
-            ]),
-            'changefreq' => 'monthly',
-            'priority' => '0.8',
-        ],
-        [
-            'route' => 'games.index',
-            'lastmod' => Seo::lastModifiedForPaths([
-                resource_path('views/pages/games/index.blade.php'),
-                resource_path('views/pages/games/imposter/index.blade.php'),
-                resource_path('views/pages/games/vampire/index.blade.php'),
-                resource_path('lang/en.json'),
-                resource_path('lang/tr.json'),
-            ]),
-            'changefreq' => 'weekly',
-            'priority' => '0.8',
-        ],
-        [
-            'route' => 'games.imposter.index',
-            'lastmod' => Seo::lastModifiedForPaths([
-                resource_path('views/pages/games/imposter/index.blade.php'),
-                resource_path('views/livewire/games/imposter/index.blade.php'),
-                resource_path('lang/en.json'),
-                resource_path('lang/tr.json'),
-            ]),
-            'changefreq' => 'weekly',
-            'priority' => '0.7',
-        ],
-        [
-            'route' => 'games.vampire.index',
-            'lastmod' => Seo::lastModifiedForPaths([
-                resource_path('views/pages/games/vampire/index.blade.php'),
-                resource_path('views/livewire/games/vampire/index.blade.php'),
-                resource_path('lang/en.json'),
-                resource_path('lang/tr.json'),
-            ]),
-            'changefreq' => 'weekly',
-            'priority' => '0.7',
-        ],
-        [
-            'route' => 'blog.index',
-            'lastmod' => Seo::normalizeDate(
-                Post::published()->max('updated_at') ?? Seo::lastModifiedForPaths([
-                    resource_path('views/pages/blog/index.blade.php'),
-                ]),
-            ),
-            'changefreq' => 'weekly',
-            'priority' => '0.7',
-        ],
-    ];
+// IndexNow proves ownership with a root-level file named after the key; any other name stays a 404.
+Route::get('/{indexNowKey}.txt', function (string $indexNowKey) {
+    $key = IndexNow::key();
+    abort_unless($key !== null && hash_equals($key, $indexNowKey), 404);
 
-    $items = collect($pages)
-        ->flatMap(function (array $page): array {
-            $url = route($page['route']);
-            $alternates = Seo::alternateUrls($url);
+    return response($key, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
+})->where('indexNowKey', '[A-Za-z0-9-]{8,128}');
 
-            return collect(Seo::supportedLocales())
-                ->map(fn (string $locale): array => [
-                    'loc' => Seo::localizedUrl($url, $locale),
-                    'lastmod' => $page['lastmod'],
-                    'changefreq' => $page['changefreq'],
-                    'priority' => $page['priority'],
-                    'alternates' => $alternates,
-                ])
-                ->all();
-        })
-        ->values()
-        ->all();
+// Resolve old bookmarks and mixed-language paths to their canonical translation.
+Route::get('/{legacyPath?}', function (?string $legacyPath = null) {
+    $segments = explode('/', trim($legacyPath ?? '', '/'));
+    $prefix = in_array($segments[0] ?? null, Seo::supportedLocales(), true) ? array_shift($segments) : null;
+    abort_unless(LocalizedRoutes::match(implode('/', $segments)) !== null, 404);
+    $locale = $prefix ?? Seo::currentLocale();
+    $permanent = $legacyPath !== null || in_array(request()->query('lang'), Seo::supportedLocales(), true);
 
-    $posts = Post::published()
-        ->orderByDesc('published_at')
-        ->get()
-        ->flatMap(function (Post $post): array {
-            $url = route('blog.show', $post);
-            $alternates = Seo::alternateUrls($url);
-            $lastmod = Seo::normalizeDate($post->updated_at ?? $post->published_at);
-
-            return collect(Seo::supportedLocales())
-                ->map(fn (string $locale): array => [
-                    'loc' => Seo::localizedUrl($url, $locale),
-                    'lastmod' => $lastmod,
-                    'changefreq' => 'monthly',
-                    'priority' => '0.6',
-                    'alternates' => $alternates,
-                ])
-                ->all();
-        })
-        ->values()
-        ->all();
-
-    return response()
-        ->view('sitemap.xml', ['items' => [...$items, ...$posts]], 200)
-        ->header('Content-Type', 'application/xml; charset=UTF-8');
-})->name('sitemap');
-
-Route::prefix('games')->name('games.')->group(function (): void {
-    Route::view('/', 'pages.games.index')->name('index');
-
-    Route::view('/imposter', 'pages.games.imposter.index')->name('imposter.index');
-    Route::view('/imposter/{roomCode}', 'pages.games.imposter.room')
-        ->where('roomCode', '[A-Z0-9]{4,10}')
-        ->name('imposter.room');
-
-    Route::view('/vampire', 'pages.games.vampire.index')->name('vampire.index');
-    Route::view('/vampire/{roomCode}', 'pages.games.vampire.room')
-        ->where('roomCode', '[A-Z0-9]{4,10}')
-        ->name('vampire.room');
-});
-
-Route::prefix('blog')->name('blog.')->group(function (): void {
-    Route::get('/', [PostController::class, 'index'])->name('index');
-    Route::get('/{post:slug}', [PostController::class, 'show'])->name('show');
-});
+    return redirect(Seo::localizedUrl(request()->fullUrl(), $locale), $permanent ? 301 : 302)
+        ->header('Vary', 'Accept-Language, Cookie')->header('Cache-Control', 'private, no-cache');
+})->where('legacyPath', '.*');

@@ -15,7 +15,7 @@ final class PortfolioContentService
         $resolvedLocale = in_array($resolvedLocale, ['tr', 'en'], true) ? $resolvedLocale : 'en';
 
         return Cache::remember(
-            'portfolio:content:'.$resolvedLocale,
+            'portfolio:content:v3:'.$resolvedLocale,
             now()->addMinutes(30),
             fn (): array => $this->load($resolvedLocale),
         );

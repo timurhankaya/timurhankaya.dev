@@ -1,8 +1,7 @@
 {
   "meta": {
-    "title": "Timurhan Kaya - Software Developer",
-    "description": "I build large-scale digital products, high-traffic systems, and long-lived platforms. I ship resilient architectures and end-to-end products in fintech, insurtech, and e-commerce.",
-    "keywords": "Timurhan Kaya, Backend Developer, Product Developer, Systems Architect, Laravel Developer, Vue.js Developer, PHP Developer, Istanbul Developer, Turkey, Wingie Enuygun, FinTech, Software Engineer"
+    "title": "Timurhan Kaya — Software Developer",
+    "description": "Software developer in Istanbul. I build corporate platforms, finance products and AI features, and I co-founded Monafy, a market research platform."
   },
   "hero": {
     "kicker": "build fast · think deep",
@@ -34,15 +33,13 @@
   "about": {
     "title": "About",
     "lead": "",
-    "p1": "Over the last 5 years, I've built products that are not only functional, but able to grow. My focus is on large-scale projects, clear architecture, production stability, and measurable business impact.",
-    "p2": "I primarily work with PHP/Laravel, Node.js, PostgreSQL, and Elasticsearch. From high-volume platforms like Enuygun Sigorta to real-time fintech products like Monafy, I've taken end-to-end responsibility on multiple large projects.",
-    "p3": "Outside of work, I keep building products. I created games like \"Word Imposter\" and \"Vampire Village\" for friends to use together, and I place them in my portfolio as a practical extension of product thinking, not just technical curiosity.",
+    "p1": "I’ve been building software since 2019. Across insurance, finance, and e-commerce, I’ve worked on everything from shaping an idea to keeping a product running in production.",
+    "p2": "At Wingie Enuygun Group, I work on high-traffic insurance products. I built Monafy, which I co-founded, end to end with AI and without writing the code by hand.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
       "Scuba Diving",
-      "Motorcycling",
-      "Adrenaline Sports"
+      "Motorcycling"
     ],
     "code": {
       "file": "TimurhanKaya.php",
@@ -91,74 +88,45 @@
     }
   },
   "skills": {
-    "title": "Skills",
+    "title": "Areas of work",
     "groups": [
       {
-        "id": "backend",
-        "title": "Backend Development",
+        "title": "AI & Automation",
         "items": [
           {
-            "label": "PHP / Laravel / Symfony",
-            "value": 95
+            "label": "AI-assisted development"
           },
           {
-            "label": "Node.js",
-            "value": 85
-          },
-          {
-            "label": "Go / Python",
-            "value": 75
-          },
-          {
-            "label": "REST APIs / RabbitMQ",
-            "value": 90
+            "label": "Language model and translation integrations"
           }
         ]
       },
       {
-        "id": "frontend",
-        "title": "Frontend Development",
+        "title": "Product & Architecture",
         "items": [
           {
-            "label": "Vue / Nuxt",
-            "value": 90
+            "label": "Product development and API design"
           },
           {
-            "label": "React / Next",
-            "value": 80
-          },
-          {
-            "label": "Tailwind / CSS Systems",
-            "value": 95
-          },
-          {
-            "label": "Figma → Code (Pixel Perfect)",
-            "value": 90
+            "label": "Finance and insurance systems"
           }
         ]
       },
       {
-        "id": "cloud",
-        "title": "Database & Cloud",
+        "title": "Delivery & Quality",
         "items": [
           {
-            "label": "MySQL / PostgreSQL / MongoDB",
-            "value": 90
+            "label": "Data flows and performance"
           },
           {
-            "label": "Redis / Elasticsearch",
-            "value": 85
-          },
-          {
-            "label": "GCP / Docker",
-            "value": 80
+            "label": "Code review, testing, and maintenance"
           }
         ]
       }
     ]
   },
   "experience": {
-    "title": "Experience & Tech Stack",
+    "title": "Experience",
     "items": [
       {
         "role": "Software Developer",
@@ -166,10 +134,11 @@
         "meta": "Full-time · Hybrid · Istanbul, Türkiye",
         "period": "Oct 2024 - Present",
         "bullets": [
-          "Building large-scale products and high-performance systems for millions of daily users",
-          "Architecting microservices and integrating complex APIs for next-gen insurance and fintech experiences",
-          "Designing solid comparison and reservation systems that users can rely on every day",
-          "Moving platforms forward on speed, scalability, and modern backend standards"]
+          "Developing insurance products on a high-traffic comparison platform",
+          "Working on service integrations and APIs for insurance and payment flows",
+          "Improving the comparison and purchase flows customers use every day",
+          "Working on backend performance and code quality"
+        ]
       },
       {
         "role": "Software Developer",
@@ -177,11 +146,12 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Oct 2020 - Oct 2024 · 4 yrs 1 mo",
         "bullets": [
-          "Led the development of award-winning insurance platforms serving thousands of active users",
-          "Managed the lifecycle of production applications using Laravel, Vue.js, and RabbitMQ",
+          "Built award-winning insurance platforms with thousands of active users",
+          "Shipped and maintained production applications built with Laravel, Vue.js and RabbitMQ",
           "Actively contributed to product development processes",
           "Mentored junior developers and guided team-level technical decisions",
-          "Turned Figma designs and complex business needs into high-performance, responsive product experiences"]
+          "Turned Figma designs and complex business needs into high-performance, responsive product experiences"
+        ]
       },
       {
         "role": "Jr. Software Developer",
@@ -189,9 +159,10 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Jun 2019 - Oct 2020 · 1 yr 5 mos",
         "bullets": [
-          "Started in web development through real-world projects",
-          "Learned quickly from senior developers while contributing to live products",
-          "Built a strong base in clean code, best practices, and agile workflows"]
+          "Started web development on live client projects",
+          "Contributed to live projects alongside senior developers",
+          "Picked up clean-code and agile working habits"
+        ]
       }
     ]
   },
@@ -209,18 +180,19 @@
     ]
   },
   "projects": {
-    "title": "Portfolio and Projects",
+    "title": "Selected work",
     "description": "My work across enterprise platforms, product-led SaaS, and large-scale infrastructure. Not every project I touched is here, but I wrote them down so I won't forget them later.",
     "drawer_cta": "Explore All Projects",
     "sections": [
       {
-        "title": "Featured & High-Traffic Infrastructure",
+        "anchor": "featured",
+        "title": "Featured",
         "subtitle": "Solid, scalable, product-focused systems",
         "icon": "enterprise",
         "items": [
           {
             "name": "Enuygun Sigorta",
-            "description": "Insurance and comparison platform serving millions of users. Microservice architecture, real-time policy flow, and data optimization.",
+            "description": "An insurance quote comparison and policy purchase platform. I contribute to its development as part of Wingie Enuygun Group.",
             "stack": [
               "Symfony",
               "Next.js",
@@ -231,23 +203,25 @@
               "RabbitMQ",
               "MongoDB",
               "Redis",
-              "Fluentd"],
+              "Fluentd"
+            ],
             "url": "https://www.enuygunsigorta.com",
             "badge": "InsureTech",
-            "year": "2024– (5+ Yrs Domain Exp)",
+            "year": "2024–",
             "highlights": [
-              "Managed project logs and live operational flows",
-              "Tracked bottlenecks and applied performance improvements",
-              "Contributed technical input on product and process decisions",
-              "Applied scalable, maintainable engineering standards"
+              "Work on insurance comparison and purchase products.",
+              "Contribute to service integrations supporting product workflows.",
+              "Work on production performance, maintenance, and reliability."
             ],
             "highlights_title": "What I Am Doing",
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "enuygun-sigorta",
+            "hidden": true
           },
           {
             "name": "Tamamlayıcı Sağlık",
-            "description": "End-to-end health insurance comparison and sales platform for Genç Sigorta. ERP, CRM, and insurance integrations in one product.",
+            "description": "A health insurance comparison and sales platform for Genç Sigorta, with insurance integrations, ERP, and CRM in one product.",
             "stack": [
               "Laravel",
               "Node.js",
@@ -255,22 +229,25 @@
               "Tailwind CSS",
               "Elasticsearch",
               "MongoDB",
-              "Redis"],
+              "Redis"
+            ],
             "url": "https://www.tamamlayicisaglik.com",
             "badge": "InsureTech",
-            "year": "2020–2024 (4 Yrs InsureTech)",
+            "year": "2020–2024",
             "highlights": [
-              "Designed the platform architecture and moved it to production",
-              "Built real-time pricing and policy purchase integrations with 20+ insurance companies",
-              "Mentored the team on pixel-perfect implementation and design handoff",
-              "Shipped ERP and CRM modules for internal operations teams"
+              "Designed the architecture and brought the platform to production.",
+              "Integrated pricing and policy services from more than 20 insurers.",
+              "Mentored the team on interface implementation.",
+              "Built ERP and CRM modules for internal teams."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "tamamlayc-saglk",
+            "hidden": true
           },
           {
             "name": "Monafy",
-            "description": "AI-powered financial data analysis and stock market tracking platform. Real-time market data and KAP notification analysis.",
+            "description": "A market research platform for Borsa Istanbul and Nasdaq stocks, with market reports, a screener, watchlists, price alerts and an AI assistant.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -286,24 +263,26 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "Built real-time data flow with FMP and Yahoo Finance integrations",
-              "Developed a service that scrapes and summarizes KAP notifications",
-              "Implemented live notifications with Redis Pub/Sub and WebSockets",
-              "Shipped a highly available stack with Laravel 12, Docker, and a hybrid data layer"
+              "Built product flows for market, company, and financial data screens.",
+              "Worked on watchlists, price alerts, and subscription capabilities in the user experience.",
+              "Integrated Mona AI sessions and financial tools into API workflows.",
+              "Worked across the web client and clearly separated market, news, and AI services."
             ],
-            "context": "company",
-            "context_label": "Company"
+            "context": "founder",
+            "context_label": "Co-founder",
+            "key": "monafy"
           }
         ]
       },
       {
+        "anchor": "platforms",
         "title": "SaaS & Operational Platforms",
         "subtitle": "Corporate products that digitize operations",
         "icon": "agency",
         "items": [
           {
             "name": "eDanışman",
-            "description": "Rebuilding a SaaS product for Sistem Global that digitizes consulting workflows with a modern, scalable architecture.",
+            "description": "A SaaS product for Sistem Global, bringing consulting, appointment, and financial workflows together.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -311,20 +290,21 @@
               "Redis"
             ],
             "url": "https://edanisman.com",
-            "badge": "Corporate",
+            "badge": "Client work",
             "year": "2026",
             "highlights": [
-              "Built a SaaS architecture for digitizing consulting services",
-              "Developed fast appointment and financial flow management",
-              "Integrated an SSR-backed Nuxt.js frontend",
-              "Created a modular service architecture*"
+              "Built the SaaS architecture for consulting workflows.",
+              "Developed appointment and financial transaction flows.",
+              "Integrated a server-rendered Nuxt.js interface.",
+              "Created a modular service structure."
             ],
-            "context": "company",
-            "context_label": "Company"
+            "context": "freelance",
+            "context_label": "Freelance",
+            "key": "edanisman"
           },
           {
             "name": "Kommunity",
-            "description": "Events, content, and community management platform used across 85+ countries.",
+            "description": "An event and community platform used in more than 85 countries.",
             "stack": [
               "Laravel",
               "Node.js",
@@ -337,19 +317,21 @@
               "GCP"
             ],
             "url": "https://www.kommunity.com",
-            "badge": "Topluluk",
+            "badge": "Community",
             "year": "2020–2024",
             "highlights": [
-              "Managed technical operations for tech communities and conferences",
-              "Coordinated speaker screens, streaming infrastructure, and technical needs",
-              "Provided CMS and admin panel support through Laravel Nova"
+              "Managed technical operations for communities and conferences.",
+              "Coordinated speaker screens, streaming, and event infrastructure.",
+              "Contributed to content management and admin tools with Laravel Nova."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "kommunity",
+            "hidden": true
           },
           {
             "name": "Marpo",
-            "description": "AI-based news and content platform with a personalized feed.",
+            "description": "A news and content platform with AI-personalised feeds.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -360,17 +342,18 @@
             "badge": "Corporate",
             "year": "2023–2024",
             "highlights": [
-              "Built the backend infrastructure for the recommendation engine",
-              "Reduced feed latency with a Redis caching strategy",
-              "Set up an SSR-capable Nuxt.js frontend",
-              "Integrated news scrapers into an asynchronous queue architecture"
+              "Built the backend for the recommendation engine.",
+              "Reduced feed latency with Redis caching.",
+              "Set up the Nuxt.js interface and asynchronous news integrations."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "marpo",
+            "hidden": true
           },
           {
             "name": "Transiyzi",
-            "description": "AI-powered localization management platform for software, apps, and games. A professional SaaS solution featuring GPT-3 and DeepL integration, CLI/API support, and seamless CI/CD integration.",
+            "description": "AI-assisted translation management for software and games, with file imports, CLI tools, and API access.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -382,17 +365,18 @@
             "badge": "Corporate",
             "year": "2022–2023",
             "highlights": [
-              "Developed the entire platform independently from scratch, covering both architecture and implementation",
-              "AI-powered machine translation infrastructure integrated with GPT-3, DeepL, Google, and Microsoft",
-              "Advanced import/export and management features for a wide range of file formats (.xml, .json, .xls, etc.)",
-              "Full compatibility with modern CI/CD workflows through CLI and REST API support"
+              "Built the platform’s architecture and application from scratch.",
+              "Integrated GPT-3, DeepL, Google, and Microsoft translation services.",
+              "Developed import and export support for formats including XML, JSON, and XLS.",
+              "Added CLI and REST API support for automation."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "transiyzi"
           },
           {
-            "name": "Moneo Render",
-            "description": "Dynamic rendering solution for JavaScript apps. Achieve higher SEO rankings and social media previews without breaking UX.",
+            "name": "Dynorender",
+            "description": "A service that pre-renders JavaScript applications for search engines and social previews.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -402,14 +386,15 @@
             "badge": "Corporate",
             "year": "2022–2023",
             "highlights": [
-              "Participated in developing the entire rendering engine and SaaS infrastructure independently from scratch."
+              "Developed the product: a Redis-backed prerender cache for JavaScript applications, and the SaaS dashboard around it."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "moneo-render"
           },
           {
             "name": "AbilityPool",
-            "description": "Corporate social responsibility and volunteering platform. Digital ecosystem that brings together the skills of company employees with non-governmental organizations.",
+            "description": "A platform connecting employees with volunteering and social responsibility projects.",
             "stack": [
               "Symfony",
               "Twig",
@@ -417,18 +402,20 @@
               "JavaScript"
             ],
             "url": "https://www.abilitypool.com",
-            "badge": "Kurumsal",
+            "badge": "Corporate",
             "year": "2023",
             "highlights": [
-              "Created the pixel-perfect design from Figma",
-              "Contributed to Symfony development and core logic"
+              "Implemented the interface from Figma designs.",
+              "Contributed to application logic with Symfony."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "abilitypool",
+            "hidden": true
           },
           {
             "name": "GetContact eSIM",
-            "description": "eSIM purchase and management platform for the GetContact app. Figma-accurate implementation.",
+            "description": "An interface for purchasing and managing eSIMs through GetContact.",
             "stack": [
               "Vue.js",
               "Tailwind CSS"
@@ -437,11 +424,13 @@
             "badge": "Corporate",
             "year": "2023",
             "highlights": [
-              "Created the pixel-perfect design from Figma",
-              "Developed the frontend business logic collaborated with the Teknasyon team"
+              "Implemented Figma designs.",
+              "Developed interface workflows with the Teknasyon team."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "getcontact-esim",
+            "hidden": true
           },
           {
             "name": "Palex ITS",
@@ -458,11 +447,14 @@
               "Assisted in designing the real-time logistics dashboard for field teams"
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "palex-its",
+            "hidden": true
           }
         ]
       },
       {
+        "anchor": "commerce",
         "title": "FinTech & E-Commerce",
         "subtitle": "Comparison engines and sales platforms",
         "icon": "freelance",
@@ -481,11 +473,13 @@
               "Helped build the data scraping pipeline and price comparison engine"
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "akrep",
+            "hidden": true
           },
           {
             "name": "Guille Marketplace",
-            "description": "Fast, easy order management and seller onboarding portal for restaurants and vendors. pixel-perfect.",
+            "description": "An onboarding and order management portal for restaurants and sellers.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -495,17 +489,19 @@
             "archived": true,
             "year": "2023–2024",
             "highlights": [
-              "Helped build the full seller onboarding portal from scratch, covering the entire application and approval flow",
-              "Modelled order management workflows and state transitions on the backend",
-              "Implemented Figma designs pixel-perfectly using Tailwind CSS and delivered a responsive UI",
-              "Added a real-time order tracking feature to streamline restaurant operations"
+              "Helped build the seller onboarding portal.",
+              "Modelled order workflows and state transitions.",
+              "Turned Figma designs into responsive interfaces.",
+              "Added real-time order tracking."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "guille-marketplace",
+            "hidden": true
           },
           {
             "name": "Moneo Aircraft",
-            "description": "An aircraft comparison and selection platform for the private aviation sector, based on technical data and budget criteria.",
+            "description": "An aircraft comparison platform based on technical specifications, range, and budget.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -515,12 +511,14 @@
             "badge": "FinTech",
             "year": "2023–2024",
             "highlights": [
-              "Developed a dynamic filtering and matching engine based on range, age, budget, and passenger capacity",
-              "Delivered a specialized dashboard interface for visual analysis and technical comparison of aviation data",
-              "Architected a high-precision, interactive dark-mode user experience for complex datasets"
+              "Built filters for range, age, budget, and passenger capacity.",
+              "Developed a dashboard for comparing technical data.",
+              "Created a data-focused dark interface."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "moneo-aircraft",
+            "hidden": true
           },
           {
             "name": "Herbalfit Ecosystem",
@@ -530,7 +528,7 @@
               "Bootstrap"
             ],
             "url": "https://herbalfithayat.com",
-            "badge": "E-Ticaret",
+            "badge": "E-commerce",
             "year": "2019–2020",
             "highlights": [
               "Helped build three independent e-commerce stores (Hayat, Sepet, Değişim) on a shared infrastructure",
@@ -538,11 +536,14 @@
               "Delivered responsive mobile-first designs using Bootstrap"
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "herbalfit",
+            "hidden": true
           }
         ]
       },
       {
+        "anchor": "other",
         "title": "Other & Personal",
         "subtitle": "Web3, Community, and side projects",
         "icon": "other",
@@ -563,7 +564,9 @@
               "Developed Referral and Star management systems"
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "cashflow-nft-phoenic-node",
+            "hidden": true
           },
           {
             "name": "Eagle Global Plastik",
@@ -573,7 +576,7 @@
               "Tailwind CSS"
             ],
             "url": "https://www.eagleglobalplastik.com",
-            "badge": "Kurumsal",
+            "badge": "Corporate",
             "archived": true,
             "year": "2021",
             "highlights": [
@@ -581,24 +584,27 @@
               "Implemented the design pixel-perfectly from Figma"
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "eagle-global-plastik",
+            "hidden": true
           },
           {
             "name": "Sera Ambalaj",
-            "description": "Corporate landing page for a leading box, label and packaging manufacturer. AI-assisted fast delivery.",
+            "description": "A corporate website for a packaging manufacturer, built with AI assistance.",
             "stack": [
               "Tailwind CSS"
             ],
             "url": "https://sera-ambalaj.com",
-            "badge": "Kurumsal",
+            "badge": "Corporate",
             "year": "2024",
             "highlights": [
-              "Rapid 2-3 hour corporate project developed using AI for friends."
+              "Built the site for friends in a few hours with AI assistance."
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "sera-ambalaj",
+            "hidden": true
           },
-
           {
             "name": "Moneo & Vispera",
             "description": "Corporate websites for Vispera (visual AI for retail) and Moneo (software development company).",
@@ -607,52 +613,56 @@
               "Tailwind CSS"
             ],
             "url": "https://vispera.co",
-            "badge": "Kurumsal",
+            "badge": "Corporate",
             "year": "2021–2022",
             "highlights": [
               "Helped build corporate websites for Vispera (visual AI for retail) and Moneo (software company)",
               "Implemented Figma designs pixel-perfectly with Tailwind CSS"
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "moneo-vispera",
+            "hidden": true
           },
           {
             "name": "Tech Conferences",
-            "description": "PHP Konf, SaaS Istanbul AI, Hepsiburada JS Konf event pages — pixel-perfect design.",
+            "description": "Programme, speaker, and registration pages for PHP Konf, SaaS Istanbul AI, and Hepsiburada JS Konf.",
             "stack": [
               "Tailwind CSS",
               "HTML"
             ],
             "url": "https://phpkonf.org",
-            "badge": "Topluluk",
+            "badge": "Community",
             "year": "2021–2024",
             "highlights": [
-              "Delivered pixel-perfect event sites for PHP Konf, SaaS Istanbul AI, and Hepsiburada JS Konf",
-              "Helped build a reusable template architecture covering speaker management, schedules, and registration",
-              "Shipped high-quality frontend for each conference on tight deadlines"
+              "Implemented event pages from Figma designs.",
+              "Helped build reusable programme, speaker, and registration components.",
+              "Delivered responsive pages for each conference."
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "tech-conferences"
           },
           {
             "name": "Rise Online Fan",
-            "description": "Fan and community page dedicated to the Rise Online game.",
+            "description": "A fan and community website for Rise Online players.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
             ],
             "url": "https://riseonlinefan.com",
-            "badge": "Topluluk",
+            "badge": "Community",
             "archived": true,
             "year": "2021",
             "highlights": [
-              "Assisted in designing and built a community fan page for Rise Online players",
-              "Helped build backend API infrastructure for player stats and dynamic content feeds"
-            ]
+              "Helped build a community site for Rise Online players.",
+              "Contributed backend APIs for player statistics and dynamic content."
+            ],
+            "key": "rise-online-fan"
           },
           {
             "name": "Yeniyıl Arkadaşım",
-            "description": "A user-friendly platform developed for New Year's gift exchanges and organization.",
+            "description": "A platform for organising New Year gift exchanges and matching participants.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -661,19 +671,26 @@
             "badge": "Community",
             "year": "2023",
             "highlights": [
-              "Implemented the pixel-perfect design directly from Figma",
-              "Contributed to the development of the draw algorithm and user matching system"
+              "Implemented the interface from Figma designs.",
+              "Contributed to the draw and participant matching logic."
             ],
             "links": [
-              { "label": "Triwizard Tournament", "url": "https://ucbuyucuturnuvasi.com" },
-              { "label": "Endless Fame", "url": "https://sonsuzsohret.com" }
+              {
+                "label": "Triwizard Tournament",
+                "url": "https://ucbuyucuturnuvasi.com"
+              },
+              {
+                "label": "Endless Fame",
+                "url": "https://sonsuzsohret.com"
+              }
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "yeniyl-arkadasm"
           },
           {
             "name": "Triwizard Tournament",
-            "description": "An interactive online tournament experience inspired by the Harry Potter universe.",
+            "description": "An online tournament experience inspired by the Harry Potter universe.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -682,18 +699,22 @@
             "badge": "Community",
             "year": "2021",
             "highlights": [
-              "Delivered pixel-perfect designs for campaign and gamification mechanics",
-              "Interactive user experience supported by side projects like Endless Fame"
+              "Implemented interfaces for tournament and campaign flows.",
+              "Built interactions for the tournament and related campaigns."
             ],
             "links": [
-              { "label": "Endless Fame", "url": "https://sonsuzsohret.com" }
+              {
+                "label": "Endless Fame",
+                "url": "https://sonsuzsohret.com"
+              }
             ],
             "context": "company",
-            "context_label": "Company"
+            "context_label": "Company",
+            "key": "triwizard-tournament"
           },
           {
             "name": "Word Imposter",
-            "description": "A high-social interaction word guessing and spy finding game developed for friend groups. A modern and fun gaming experience.",
+            "description": "A browser game where friends use word clues to find the imposter in their group.",
             "stack": [
               "Laravel",
               "Livewire",
@@ -703,15 +724,14 @@
             "badge": "Game",
             "year": "2026",
             "highlights": [
-              "Built real-time multiplayer game mechanics from scratch using Laravel Livewire",
-              "Lobby settings: Host can kick players and add password protection to the lobby",
-              "Maximum 6 player limit can be set, with round logic managed via a state machine",
-              "Integrated into the personal portfolio site to showcase technical skills through an interactive experience"
+              "Built multiplayer game flows with Laravel and Livewire.",
+              "Implemented password-protected lobbies, player management, and round logic.",
+              "Integrated the game into my personal site."
             ],
             "context": "personal",
-            "context_label": "Personal"
+            "context_label": "Personal",
+            "key": "word-imposter"
           },
-
           {
             "name": "Vietnamees Foodies",
             "description": "Vietnamese food franchise mobile application.",
@@ -727,7 +747,46 @@
               "Participated in developing Sapaad and Loyalty system integrations"
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "vietnamees-foodies",
+            "hidden": true
+          },
+          {
+            "key": "smart-global",
+            "name": "Smart Global",
+            "description": "A bilingual corporate web experience for valuation and advisory services.",
+            "year": "2026",
+            "stack": [
+              "Next.js",
+              "TypeScript",
+              "Tailwind",
+              "TR / EN"
+            ],
+            "url": "https://smartglobalval.co.uk",
+            "badge": "Client work",
+            "highlights": [
+              "A specialist services website should help people find the right service and make contact. It needs consistent content and credibility in both languages.",
+              "The site organises English and Turkish content under localised URLs and a shared visual identity. Services, sectors, and contact pages form a direct navigation flow.",
+              "The work covers corporate pages, bilingual content, responsive interfaces, and contact enquiries. It provides a consistent foundation for extending pages and content."
+            ]
+          },
+          {
+            "key": "vampir-koylu",
+            "name": "Vampir Köylü",
+            "description": "A multiplayer browser game built around night and day phases, different roles, and shared decisions.",
+            "year": "2026",
+            "stack": [
+              "Laravel",
+              "Livewire",
+              "State transitions"
+            ],
+            "url": null,
+            "badge": "Personal project",
+            "highlights": [
+              "I wanted friends to join one room and play with hidden roles. What players can do and see changes as the game progresses.",
+              "The lobby and role assignment lead to night actions, day voting, and result tracking. Roles such as doctor, detective, and hunter introduce different rules. Each phase needs a consistent transition to the next.",
+              "I separated role assignment, night resolution, and win conditions into focused responsibilities. Public player state stays separate from hidden role information. This keeps the interface simple and makes individual rules easier to verify."
+            ]
           }
         ]
       }
@@ -754,11 +813,12 @@
     ]
   },
   "contact": {
-    "title": "Send a Direct Email.",
-    "description": "Let's skip the contact forms. If you need a new module, a large-scale product, or a platform to sustain, send the scope, goals, and technical constraints directly, and I'll get back to you with a clear development plan.",
+    "title": "Let’s talk.",
+    "description": "Have an idea, a question, or something to share? Send me a note.",
+    "meta_description": "Contact Timurhan Kaya, software developer in Istanbul, about a product, a freelance project or a technical question. Email, LinkedIn and GitHub.",
     "email_label": "Email",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",
-    "cta": "Shoot an Email"
+    "cta": "Send an email"
   }
 }

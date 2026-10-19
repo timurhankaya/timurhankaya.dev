@@ -6,6 +6,7 @@ use App\Enums\ImposterRoomStatus;
 use App\Services\Imposter\ImposterRoomService;
 use App\Support\GameIdentity;
 use App\Support\Games\ImposterRoomPresenter;
+use App\Support\Seo;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -284,7 +285,7 @@ class Room extends Component
 
         session()->forget($this->playerSessionKey());
 
-        return redirect()->route('games.imposter.index');
+        return redirect(Seo::route('games.imposter.index'));
     }
 
     public function openKickConfirm(string $id, string $name): void

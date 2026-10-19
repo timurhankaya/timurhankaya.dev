@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\SetLocale;
+use App\Support\Seo;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        URL::defaults(['locale' => Seo::fallbackLocale()]);
+        // Canonical, hreflang and sitemap addresses must stay https even when TLS ends at a proxy in front of PHP.
+        if ($this->app->isProduction()) {
+            URL::forceScheme('https');
+        }
+        Livewire::addPersistentMiddleware([SetLocale::class]);
         $this->useRequestHostForViteInDev();
     }
 

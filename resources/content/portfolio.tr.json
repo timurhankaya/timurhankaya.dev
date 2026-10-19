@@ -1,8 +1,7 @@
 {
   "meta": {
-    "title": "Timurhan Kaya - Software Developer",
-    "description": "Büyük ölçekli dijital ürünler, yüksek trafikli sistemler ve uzun ömürlü platformlar geliştiriyorum. Fintech, insurtech ve e-ticaret alanlarında dayanıklı mimariler kurup uçtan uca ürünler teslim ediyorum.",
-    "keywords": "Timurhan Kaya, Software Developer, Backend Geliştirici, Ürün Geliştirici, Sistem Mimarı, Laravel Geliştirici, Vue.js Geliştirici, PHP Developer, İstanbul Developer, Türkiye, Wingie Enuygun, FinTech, InsureTech, Yazılım Mimarı"
+    "title": "Timurhan Kaya — Yazılım Geliştirici",
+    "description": "İstanbul’da yazılım geliştiriciyim. Kurumsal platformlar, finans ürünleri ve yapay zekâ özellikleri geliştiriyorum; Monafy’nin kurucu ortağıyım."
   },
   "hero": {
     "kicker": "hızlı üret · derin düşün · ince işçilik",
@@ -34,15 +33,13 @@
   "about": {
     "title": "Hakkımda",
     "lead": "",
-    "p1": "Son 5 yılda, sadece çalışan değil aynı zamanda büyüyen ürünler geliştirdim. Odağım; büyük ölçekli projeleri net bir mimariyle kurmak, üretimde güvenle yaşatmak ve iş tarafına ölçülebilir değer bırakmak.",
-    "p2": "Ağırlıklı olarak PHP/Laravel, Node.js, PostgreSQL ve Elasticsearch ile çalışıyorum. Enuygun Sigorta gibi yüksek hacimli platformlardan, Monafy gibi gerçek zamanlı Fintech ürünlerine kadar birçok büyük projede uçtan uca sorumluluk aldım.",
-    "p3": "İş dışında da ürün üretmeye devam ediyorum. \"Word Imposter\" ve \"Vampir Köylü\" gibi oyunları arkadaşlarla birlikte kullanmak için geliştirdim; bunu da portföyümde teknik meraktan öte, ürün geliştirme pratiğinin bir parçası olarak konumluyorum.",
+    "p1": "2019’dan bu yana yazılım geliştiriyorum. Sigorta, finans ve e-ticaret ürünlerinde; ilk fikrin şekillenmesinden sistemin canlıda çalışmasına kadar farklı sorumluluklar aldım.",
+    "p2": "Wingie Enuygun Group’ta yüksek trafikli sigorta ürünleri üzerinde çalışıyorum. Kurucu ortağı olduğum Monafy’yi ise uçtan uca, kodu elle yazmadan yapay zekâyla geliştirdim.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
       "Tüplü Dalış",
-      "Motosiklet",
-      "Adrenalin Sporları"
+      "Motosiklet"
     ],
     "code": {
       "file": "TimurhanKaya.php",
@@ -91,67 +88,38 @@
     }
   },
   "skills": {
-    "title": "Yetenekler",
+    "title": "Çalışma alanları",
     "groups": [
       {
-        "id": "backend",
-        "title": "Backend",
+        "title": "AI & Otomasyon",
         "items": [
           {
-            "label": "PHP / Laravel / Symfony",
-            "value": 95
+            "label": "AI destekli geliştirme"
           },
           {
-            "label": "Node.js",
-            "value": 85
-          },
-          {
-            "label": "Go / Python",
-            "value": 75
-          },
-          {
-            "label": "REST API / RabbitMQ",
-            "value": 90
+            "label": "Dil modeli ve çeviri servisi entegrasyonları"
           }
         ]
       },
       {
-        "id": "frontend",
-        "title": "Frontend",
+        "title": "Ürün & Mimari",
         "items": [
           {
-            "label": "Vue / Nuxt",
-            "value": 90
+            "label": "Ürün geliştirme ve API tasarımı"
           },
           {
-            "label": "React / Next",
-            "value": 80
-          },
-          {
-            "label": "Tailwind / CSS Sistemleri",
-            "value": 95
-          },
-          {
-            "label": "Figma → Kod (Pixel Perfect)",
-            "value": 90
+            "label": "Finans ve sigorta sistemleri"
           }
         ]
       },
       {
-        "id": "cloud",
-        "title": "DB & Cloud",
+        "title": "Üretim & Kalite",
         "items": [
           {
-            "label": "MySQL / PostgreSQL / MongoDB",
-            "value": 90
+            "label": "Veri akışları ve performans"
           },
           {
-            "label": "Redis / Elasticsearch",
-            "value": 85
-          },
-          {
-            "label": "GCP / Docker",
-            "value": 80
+            "label": "Kod inceleme, test ve bakım"
           }
         ]
       }
@@ -166,10 +134,11 @@
         "meta": "Tam zamanlı · Hibrit · İstanbul, Türkiye",
         "period": "Ekim 2024 - Şu An",
         "bullets": [
-          "Milyonlarca günlük kullanıcıya hizmet eden büyük ölçekli ürünler ve yüksek performanslı sistemler geliştiriyorum",
-          "Yeni nesil sigorta ve fintech deneyimleri için mikroservis mimarileri ve karmaşık API entegrasyonları tasarlıyorum",
-          "Kullanıcıların her gün güvenle kullanabileceği sağlam karşılaştırma ve sigorta sistemleri oluşturuyorum",
-          "Platformları modern backend standartları, hız ve ölçeklenebilirlik ekseninde ileri taşıyorum"]
+          "Yüksek trafikli bir karşılaştırma platformunda sigorta ürünleri geliştiriyorum",
+          "Sigorta ve ödeme akışları için servis entegrasyonları ve API'ler üzerinde çalışıyorum",
+          "Müşterilerin her gün kullandığı karşılaştırma ve satın alma akışlarını iyileştiriyorum",
+          "Backend tarafında performans ve kod kalitesi üzerinde çalışıyorum"
+        ]
       },
       {
         "role": "Software Developer",
@@ -177,11 +146,12 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Ekim 2020 - Ekim 2024 · 4 yıl 1 ay",
         "bullets": [
-          "Binlerce aktif kullanıcıya hizmet veren ödüllü sigorta platformlarının geliştirilmesine öncülük ettim",
-          "Laravel, Vue.js ve RabbitMQ ile production uygulamaların yaşam döngüsünü yönettim",
+          "Binlerce aktif kullanıcısı olan ödüllü sigorta platformlarını geliştirdim",
+          "Laravel, Vue.js ve RabbitMQ ile geliştirdiğim uygulamaları canlıya aldım ve bakımını yaptım",
           "Ürün geliştirme süreçlerinde aktif rol aldım",
           "Junior geliştiricilere mentorluk yaptım ve ekip içi teknik kararları yönlendirdim",
-          "Figma tasarımlarını yüksek performanslı, responsive ürün deneyimlerine dönüştürdüm"]
+          "Figma tasarımlarını yüksek performanslı, responsive ürün deneyimlerine dönüştürdüm"
+        ]
       },
       {
         "role": "Jr. Software Developer",
@@ -189,9 +159,10 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Haziran 2019 - Ekim 2020 · 1 yıl 5 ay",
         "bullets": [
-          "Web geliştirmeye gerçek dünya projeleriyle başladım",
-          "Canlı projelere katkı verirken senior geliştiricilerden öğrenerek hızlandım",
-          "Temiz kod, best practice ve çevik çalışma alışkanlıklarını oturttum"]
+          "Web geliştirmeye canlı müşteri projelerinde başladım",
+          "Kıdemli geliştiricilerin yanında canlı projelere katkı verdim",
+          "Temiz kod ve çevik çalışma alışkanlıkları edindim"
+        ]
       }
     ]
   },
@@ -209,18 +180,19 @@
     ]
   },
   "projects": {
-    "title": "Portfolyo ve Projeler",
+    "title": "Seçili çalışmalar",
     "description": "Kurumsal platformlar, ürün odaklı SaaS'lar ve büyük ölçekli altyapılarda yaptığım işler. Hepsi ve unuttuklarım olmasa da, ileride referans olsun diye burada topladım.",
     "drawer_cta": "Tüm Projeleri İncele",
     "sections": [
       {
-        "title": "Öne Çıkanlar & Yüksek Trafikli Altyapılar",
+        "anchor": "featured",
+        "title": "Öne çıkanlar",
         "subtitle": "Sağlam, ölçeklenebilir ve ürün odaklı sistemler",
         "icon": "enterprise",
         "items": [
           {
             "name": "Enuygun Sigorta",
-            "description": "Milyonlarca kullanıcıya hizmet veren sigorta ve karşılaştırma platformu. Mikroservis mimarisi, gerçek zamanlı poliçe akışı ve veri optimizasyonu.",
+            "description": "Kasko, trafik ve sağlık sigortası tekliflerini karşılaştırma ve poliçe satın alma platformu. Wingie Enuygun Group bünyesinde geliştirilmesine katkı sağlıyorum.",
             "stack": [
               "Symfony",
               "Next.js",
@@ -231,23 +203,25 @@
               "RabbitMQ",
               "MongoDB",
               "Redis",
-              "Fluentd"],
+              "Fluentd"
+            ],
             "url": "https://www.enuygunsigorta.com",
             "badge": "InsureTech",
-            "year": "2024– (5+ Yıl Domain Tecrübesi)",
+            "year": "2024–",
             "highlights": [
-              "Proje log takibi ve canlı operasyon akışlarını yönettim",
-              "Darboğaz takibi yapıp performans iyileştirmeleri uyguladım",
-              "Ürün ve süreç kararlarına teknik katkı sağladım",
-              "Ölçeklenebilir ve sürdürülebilir kod standartlarını uyguladım"
+              "Sigorta karşılaştırma ve satın alma ürünlerinin geliştirilmesinde çalışıyorum.",
+              "Ürün akışlarını destekleyen servis entegrasyonlarına katkı sağlıyorum.",
+              "Canlı sistemlerin performansı, bakımı ve sürdürülebilirliği üzerinde çalışıyorum."
             ],
             "highlights_title": "Ne Yapıyorum?",
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "enuygun-sigorta",
+            "hidden": true
           },
           {
             "name": "Tamamlayıcı Sağlık",
-            "description": "Genç Sigorta için sağlık sigortası karşılaştırma ve satış platformunu uçtan uca geliştirdim. ERP, CRM ve sigorta entegrasyonlarını tek üründe topladım.",
+            "description": "Genç Sigorta için geliştirdiğim sağlık sigortası karşılaştırma ve satış platformu. Sigorta entegrasyonları, ERP ve CRM tek üründe.",
             "stack": [
               "Laravel",
               "Node.js",
@@ -255,22 +229,25 @@
               "Tailwind CSS",
               "Elasticsearch",
               "MongoDB",
-              "Redis"],
+              "Redis"
+            ],
             "url": "https://www.tamamlayicisaglik.com",
             "badge": "InsureTech",
-            "year": "2020–2024 (4 Yıl InsureTech)",
+            "year": "2020–2024",
             "highlights": [
-              "Platform mimarisini tasarlayıp production seviyesine taşıdım",
-              "20+ sigorta şirketiyle gerçek zamanlı fiyat ve poliçe entegrasyonları geliştirdim",
-              "Pixel perfect tasarım uygulamalarında mentorluk yaptım",
-              "ERP ve CRM modüllerini iç operasyon ekipleri için tasarladım"
+              "Platformun mimarisini tasarladım ve canlı kullanıma aldım.",
+              "20’den fazla sigorta şirketiyle fiyat ve poliçe entegrasyonları geliştirdim.",
+              "Tasarım uygulamalarında ekibe mentorluk yaptım.",
+              "İç operasyon ekipleri için ERP ve CRM modülleri tasarladım."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "tamamlayc-saglk",
+            "hidden": true
           },
           {
             "name": "Monafy",
-            "description": "Yapay zeka destekli finansal veri analiz ve borsa takip platformu. Gerçek zamanlı piyasa verileri ve KAP bildirim analizi sunar.",
+            "description": "Borsa İstanbul ve Nasdaq hisseleri için piyasa raporu, hisse tarama, izleme listesi, fiyat alarmı ve yapay zekâ asistanı sunan piyasa araştırma platformu.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -286,24 +263,26 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "FMP ve Yahoo Finance entegrasyonlarıyla gerçek zamanlı veri akışı kurdum",
-              "KAP bildirimlerini tarayan ve AI ile özetleyen özel servis geliştirdim",
-              "Redis Pub/Sub ve WebSocket ile canlı bildirim sistemi kurdum",
-              "Laravel 12, Docker ve hibrit veri katmanı ile yüksek erişilebilir altyapı oluşturdum"
+              "Piyasa, şirket detayı ve finansal veri ekranlarının ürün akışlarını geliştirdim.",
+              "İzleme listeleri, fiyat uyarıları ve abonelik haklarının kullanıcı deneyimine bağlanması üzerinde çalıştım.",
+              "Mona AI oturumlarını ve finansal veri araçlarını API akışına entegre ettim.",
+              "Web istemcisi ile piyasa, haber ve AI servisleri arasında sorumlulukları ayrılmış bir yapı üzerinde çalıştım."
             ],
-            "context": "company",
-            "context_label": "Şirket"
+            "context": "founder",
+            "context_label": "Kurucu ortak",
+            "key": "monafy"
           }
         ]
       },
       {
+        "anchor": "platforms",
         "title": "SaaS & Operasyonel Platformlar",
         "subtitle": "İş süreçlerini dijitalleştiren kurumsal ürünler",
         "icon": "agency",
         "items": [
           {
             "name": "eDanışman",
-            "description": "Sistem Global için danışmanlık süreçlerini dijitalleştiren SaaS ürünü. Modern ve ölçeklenebilir mimariyle yeniden geliştiriyorum.",
+            "description": "Sistem Global’in danışmanlık, randevu ve finans süreçlerini bir araya getiren SaaS ürünü.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -311,20 +290,21 @@
               "Redis"
             ],
             "url": "https://edanisman.com",
-            "badge": "Kurumsal",
+            "badge": "Müşteri çalışması",
             "year": "2026",
             "highlights": [
-              "Danışmanlık hizmetlerini dijitalleştiren SaaS mimarisi kurdum",
-              "Hızlı randevu ve finansal akış yönetimi geliştirdim",
-              "Nuxt.js ile SSR destekli frontend mimarisini entegre ettim",
-              "Modüler servis yapısı oluşturdum*"
+              "Danışmanlık süreçleri için SaaS mimarisi kurdum.",
+              "Randevu ve finansal işlem akışlarını geliştirdim.",
+              "Nuxt.js ile sunucuda işlenen arayüzü entegre ettim.",
+              "Modüler bir servis yapısı oluşturdum."
             ],
-            "context": "company",
-            "context_label": "Şirket"
+            "context": "freelance",
+            "context_label": "Freelance",
+            "key": "edanisman"
           },
           {
             "name": "Kommunity",
-            "description": "Etkinlik, içerik ve topluluk yönetimi platformu. 85+ ülkede kullanıldı.",
+            "description": "85’ten fazla ülkede kullanılan etkinlik ve topluluk yönetimi platformu.",
             "stack": [
               "Laravel",
               "Node.js",
@@ -340,16 +320,18 @@
             "badge": "Topluluk",
             "year": "2020–2024",
             "highlights": [
-              "Teknoloji toplulukları ve konferanslarında teknik operasyonları yönettim",
-              "Konuşmacı sunum ekranları, yayın altyapıları ve teknik ihtiyaçları koordine ettim",
-              "Laravel Nova ile CMS ve idari panel geliştirme desteği sağladım"
+              "Topluluk ve konferansların teknik operasyonlarını yönettim.",
+              "Sunum ekranlarını, yayın altyapısını ve etkinliklerin teknik ihtiyaçlarını koordine ettim.",
+              "Laravel Nova ile içerik yönetimi ve yönetim paneli geliştirmeye katkı sağladım."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "kommunity",
+            "hidden": true
           },
           {
             "name": "Marpo",
-            "description": "Yapay zeka tabanlı haber ve içerik platformu. Kişiselleştirilmiş haber akışı sunar.",
+            "description": "Yapay zekâyla kişiselleştirilmiş haber ve içerik akışı sunan platform.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -360,17 +342,18 @@
             "badge": "Kurumsal",
             "year": "2023–2024",
             "highlights": [
-              "Kişiselleştirilmiş içerik akışı sunan öneri motorunun backend altyapısını geliştirdim",
-              "Redis tabanlı önbellekleme ile feed gecikmesini azalttım",
-              "Nuxt.js ile SSR destekli frontend mimarisini kurdum",
-              "Haber kaynaklarını asenkron kuyruk mimarisiyle entegre ettim"
+              "Öneri motorunun sunucu tarafını geliştirdim.",
+              "Redis önbelleğiyle haber akışının gecikmesini azalttım.",
+              "Nuxt.js arayüzünü ve asenkron haber kaynağı entegrasyonlarını kurdum."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "marpo",
+            "hidden": true
           },
           {
             "name": "Transiyzi",
-            "description": "Yazılım, uygulama ve oyunlar için AI destekli yerelleştirme (localization) yönetim platformu. GPT-3 ve DeepL entegrasyonu ile otomatik çeviri, CLI ve API desteği ile CI/CD süreçlerine tam entegrasyon sunan profesyonel bir SaaS çözümü.",
+            "description": "Yazılım ve oyunlar için yapay zekâ destekli çeviri yönetimi. Dosya aktarımı, CLI ve API üzerinden geliştirme süreçlerine bağlanır.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -382,17 +365,18 @@
             "badge": "Kurumsal",
             "year": "2022–2023",
             "highlights": [
-              "Mimariden kodlamaya kadar tüm platformu tek başıma sıfırdan geliştirdim",
-              "GPT-3, DeepL, Google ve Microsoft Translate ile yapay zeka destekli otomatik çeviri altyapısı",
-              "Pek çok farklı dosya formatı (.xml, .json, .xls vb.) için gelişmiş import/export ve yönetim özellikleri",
-              "CLI ve REST API desteği ile modern yazılım geliştirme süreçlerine (CI/CD) tam uyumluluk"
+              "Platformun mimarisini ve uygulamasını sıfırdan geliştirdim.",
+              "GPT-3, DeepL, Google ve Microsoft çeviri servislerini entegre ettim.",
+              "XML, JSON ve XLS gibi dosyalar için içe ve dışa aktarma özellikleri geliştirdim.",
+              "CLI ve REST API ile otomasyon desteği sağladım."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "transiyzi"
           },
           {
-            "name": "Moneo Render",
-            "description": "JavaScript uygulamaları için dinamik rendering çözümü. Yüksek SEO sıralaması ve sosyal medya önizlemeleri için SPA prerender servisi.",
+            "name": "Dynorender",
+            "description": "JavaScript uygulamalarını arama motorları ve sosyal medya önizlemeleri için önceden işleyen servis.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -402,14 +386,15 @@
             "badge": "Kurumsal",
             "year": "2022–2023",
             "highlights": [
-              "Rendering motorunu ve SaaS altyapısının tamamını sıfırdan, tek başıma geliştirilmesine katkı sağladım."
+              "Ürünü geliştirdim: JavaScript uygulamaları için Redis destekli bir önceden işleme önbelleği ve çevresindeki SaaS paneli."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "moneo-render"
           },
           {
             "name": "AbilityPool",
-            "description": "Amaç odaklı işletmeler ve kurumlar için gönüllülük ve sosyal sorumluluk platformu.",
+            "description": "Çalışanları gönüllülük ve sosyal sorumluluk projeleriyle buluşturan platform.",
             "stack": [
               "Symfony",
               "Tailwind CSS"
@@ -418,15 +403,17 @@
             "badge": "Kurumsal",
             "year": "2022–2023",
             "highlights": [
-              "Figma'dan gelen tasarımı pixel-perfect olarak hayata geçirdim",
-              "Symfony ile kod geliştirme süreçlerine ve core mantığa katkı sağladım"
+              "Figma tasarımlarını arayüze dönüştürdüm.",
+              "Symfony ile uygulama mantığının geliştirilmesine katkı sağladım."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "abilitypool",
+            "hidden": true
           },
           {
             "name": "GetContact eSIM",
-            "description": "GetContact uygulaması için eSIM satın alma ve yönetim platformu. Figma'dan birebir tasarım uygulaması.",
+            "description": "GetContact için eSIM satın alma ve yönetim arayüzü.",
             "stack": [
               "Vue.js",
               "Tailwind CSS"
@@ -435,15 +422,17 @@
             "badge": "Kurumsal",
             "year": "2023",
             "highlights": [
-              "Figma'dan gelen tasarımı pixel-perfect olarak hayata geçirdim",
-              "Teknasyon ekibi ile birlikte frontend business logic kurgularını geliştirdim"
+              "Figma tasarımlarını arayüze uyguladım.",
+              "Teknasyon ekibiyle birlikte arayüzdeki işlem akışlarını geliştirdim."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "getcontact-esim",
+            "hidden": true
           },
           {
             "name": "Palex ITS",
-            "description": "Palet teslimat ve operasyon takip uygulaması. Saha ekipleri için gerçek zamanlı lojistik yönetimi.",
+            "description": "Saha ekiplerinin palet teslimatlarını ve lojistik operasyonlarını takip ettiği uygulama.",
             "stack": [
               "Laravel"
             ],
@@ -452,23 +441,26 @@
             "archived": true,
             "year": "2021–2022",
             "highlights": [
-              "Saha ekiplerine yönelik palet teslimat takip sistemini Laravel ile geliştirilmesine katkı sağladım",
-              "Gerçek zamanlı durum güncellemelerini API üzerinden mobil istemcilere aktaran altyapıyı kurdum",
-              "Operasyonel raporlama modülleri geliştirerek yöneticilere teslimat performansı görünürlüğü sağladım"
+              "Laravel ile teslimat takip sisteminin geliştirilmesine katkı sağladım.",
+              "Durum güncellemelerini mobil uygulamalara aktaran API yapısını kurdum.",
+              "Teslimat performansı için operasyon raporları geliştirdim."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "palex-its",
+            "hidden": true
           }
         ]
       },
       {
+        "anchor": "commerce",
         "title": "FinTech & E-Ticaret",
         "subtitle": "Karşılaştırma motorları ve satış odaklı platformlar",
         "icon": "freelance",
         "items": [
           {
             "name": "Akrep",
-            "description": "E-ticaret fiyat karşılaştırma platformu. Yüzlerce mağazadan anlık fiyat takibi ve ürün listeleme.",
+            "description": "Mağazalar arasındaki fiyat farklarını ve ürünleri karşılaştıran e-ticaret platformu.",
             "stack": [
               "Laravel"
             ],
@@ -476,15 +468,17 @@
             "badge": "FinTech",
             "year": "2022–2023",
             "highlights": [
-              "İlk yazılım projem (Laravel'i burada öğrendim)",
-              "Veri çekme pipeline'larını ve fiyat karşılaştırma motorunu geliştirilmesine katkı sağladım"
+              "Laravel’i öğrendiğim ilk yazılım projemdi.",
+              "Veri toplama akışlarına ve fiyat karşılaştırma motoruna katkı sağladım."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "akrep",
+            "hidden": true
           },
           {
             "name": "Guille Marketplace",
-            "description": "Restoran ve satıcılar için hızlı, kolay sipariş yönetimi ve satıcı katılım (onboarding) portalı. Figma'dan birebir tasarım uygulaması.",
+            "description": "Restoran ve satıcıların başvuru ve sipariş süreçlerini yönettiği portal.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -494,17 +488,19 @@
             "archived": true,
             "year": "2023–2024",
             "highlights": [
-              "Satıcı başvuru ve onboarding sürecini baştan sona kapsayan portal altyapısını sıfırdan geliştirilmesine katkı sağladım",
-              "Sipariş yönetim akışlarını ve durum geçişlerini (state machine) modelleyerek backend iş mantığını uygulamaya aldım",
-              "Figma tasarımlarını Tailwind CSS ile birebir kodlayarak responsive arayüzü teslim ettim",
-              "Restoran operasyonlarını kolaylaştıracak gerçek zamanlı sipariş takip özelliği ekledim"
+              "Satıcı başvuru portalının geliştirilmesine katkı sağladım.",
+              "Sipariş akışlarını ve durum geçişlerini modelledim.",
+              "Figma tasarımlarını farklı ekranlara uyumlu arayüzlere dönüştürdüm.",
+              "Canlı sipariş takibi ekledim."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "guille-marketplace",
+            "hidden": true
           },
           {
             "name": "Moneo Aircraft",
-            "description": "Özel havacılık sektörü için geliştirilmiş, teknik verilere ve bütçe kriterlerine göre uçak karşılaştırma ve seçim platformu.",
+            "description": "Özel havacılık için teknik veriler, menzil ve bütçeye göre uçak karşılaştırma platformu.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -514,23 +510,26 @@
             "badge": "FinTech",
             "year": "2023–2024",
             "highlights": [
-              "Menzil, yaş, bütçe ve yolcu kapasitesi gibi kriterlere göre dinamik filtreleme ve eşleştirme motorunu hayata geçirdim",
-              "Havacılık verilerinin görsel analizi ve teknik karşılaştırma süreçleri için özelleşmiş bir dashboard arayüzü sundum",
-              "Karanlık mod odaklı, yüksek hassasiyetli ve interaktif bir kullanıcı deneyimi kurguladım"
+              "Menzil, yaş, bütçe ve yolcu kapasitesine göre filtreleme geliştirdim.",
+              "Teknik verilerin karşılaştırıldığı bir gösterge paneli oluşturdum.",
+              "Veri odaklı, karanlık temalı bir arayüz hazırladım."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "moneo-aircraft",
+            "hidden": true
           }
         ]
       },
       {
+        "anchor": "other",
         "title": "Diğer Çalışmalar & Kişisel",
         "subtitle": "Web3, Topluluk ve devam eden diğer projeler",
         "icon": "other",
         "items": [
           {
             "name": "Cashflow NFT & Phoenic Node",
-            "description": "NFT satış ve yönetim platformları. Web3 cüzdan entegrasyonu ve akıllı kontrat tabanlı satış akışları.",
+            "description": "Web3 cüzdanları ve akıllı sözleşmelerle çalışan NFT satış ve yönetim platformları.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -539,16 +538,18 @@
             "badge": "Web3",
             "year": "2022",
             "highlights": [
-              "Web3 cüzdan bağlantısı (MetaMask) ve kimlik doğrulama akışlarını Laravel backend ile entegre ettim",
-              "Akıllı kontrat tabanlı NFT mint ve satış süreçlerini yöneten API katmanını geliştirilmesine katkı sağladım",
-              "Phoenic Node için node operatörlerine yönelik gösterge paneli (dashboard) arayüzünü hayata geçirdim"
+              "Cüzdan bağlantısı ve kimlik doğrulama akışlarını entegre ettim.",
+              "NFT satış API’lerinin geliştirilmesine katkı sağladım.",
+              "Node operatörlerinin yönetim panelini geliştirdim."
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "cashflow-nft-phoenic-node",
+            "hidden": true
           },
           {
             "name": "Sera Ambalaj",
-            "description": "Kutu, etiket, koli ve kargo kutusu üretiminde faaliyet gösteren firma için kurumsal landing page. AI destekli hızlı geliştirme projesi.",
+            "description": "Bir ambalaj üreticisi için yapay zekâ desteğiyle hazırladığım kurumsal web sitesi.",
             "stack": [
               "Tailwind CSS"
             ],
@@ -556,15 +557,16 @@
             "badge": "Kurumsal",
             "year": "2024",
             "highlights": [
-              "Arkadaşlarım için yapay zeka desteğiyle 2-3 saatte tamamladığım kurumsal çalışma."
+              "Arkadaşlarım için hazırladığım siteyi yapay zekâ desteğiyle birkaç saatte tamamladım."
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "sera-ambalaj",
+            "hidden": true
           },
-
           {
             "name": "Moneo & Vispera",
-            "description": "Perakende sektörü için yapay zeka destekli görsel analiz platformu (Vispera) ve yazılım şirketi (Moneo) için kurumsal web siteleri.",
+            "description": "Yazılım şirketi Moneo ve perakendeye yönelik görsel analiz ürünleri geliştiren Vispera’nın kurumsal siteleri.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -573,16 +575,18 @@
             "badge": "Kurumsal",
             "year": "2021–2022",
             "highlights": [
-              "Vispera'nın AI ürün portföyünü ve demo akışlarını tanıtan kurumsal web sitesini sıfırdan geliştirilmesine katkı sağladım",
-              "Moneo şirket web sitesini yeniden yapılandırarak güncel hizmet ve referans içerikleriyle güncelledim",
-              "Laravel altyapısı üzerinde dinamik içerik yönetimi yapıları kurdum"
+              "Vispera’nın ürünlerini tanıtan web sitesinin geliştirilmesine katkı sağladım.",
+              "Moneo’nun web sitesini hizmetler ve referanslarla güncelledim.",
+              "Laravel ile içerik yönetimi yapıları kurdum."
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "moneo-vispera",
+            "hidden": true
           },
           {
             "name": "Herbalfit Ekosistemi",
-            "description": "Özel ürün satışlarına yönelik çoklu e-ticaret platformları (Hayat, Sepet, Değişim). Bağımsız mağaza mimarisi.",
+            "description": "Hayat, Sepet ve Değişim mağazaları için ortak altyapı üzerinde çalışan e-ticaret siteleri.",
             "stack": [
               "Laravel",
               "Bootstrap"
@@ -591,17 +595,18 @@
             "badge": "E-Ticaret",
             "year": "2019–2020",
             "highlights": [
-              "Birbirinden bağımsız çalışan üç e-ticaret mağazasını tek bir Laravel kod tabanından yöneten çok kiracılı (multi-tenant) mimari kurdum",
-              "Ürün yönetimi, sipariş akışı ve ödeme entegrasyonlarını baştan sona geliştirilmesine katkı sağladım",
-              "Bootstrap tabanlı responsive arayüzleri her mağazanın marka kimliğine uygun şekilde özelleştirdim",
-              "Junior seviyede edindiğim ilk büyük ölçekli e-ticaret deneyimini bu projede kazandım"
+              "Üç bağımsız mağazayı ortak bir Laravel altyapısıyla yöneten yapıyı kurdum.",
+              "Ürün, sipariş ve ödeme akışlarının geliştirilmesine katkı sağladım.",
+              "Her mağaza için farklı ekranlara uyumlu arayüzler hazırladım."
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "herbalfit",
+            "hidden": true
           },
           {
             "name": "Eagle Global Plastik",
-            "description": "Plastik ambalaj sektöründe faaliyet gösteren firma için kurumsal tanıtım sitesi.",
+            "description": "Plastik ambalaj üreticisinin ürün ve hizmetlerini tanıtan kurumsal web sitesi.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -611,16 +616,18 @@
             "archived": true,
             "year": "2021",
             "highlights": [
-              "Firma ürünlerini ve hizmetlerini tanıtan kurumsal web sitesini Laravel ve Tailwind CSS ile geliştirilmesine katkı sağladım",
-              "SEO yapısını ve sayfa hızını optimize ederek arama motorlarında görünürlük sağladım",
-              "İçerik güncellemelerini kolaylaştıracak yönetim paneli ekledim"
+              "Kurumsal sitenin geliştirilmesine katkı sağladım.",
+              "Sayfa hızını ve arama motoru görünürlüğünü iyileştirdim.",
+              "İçerik güncellemeleri için yönetim paneli ekledim."
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "eagle-global-plastik",
+            "hidden": true
           },
           {
             "name": "Teknoloji Konferansları",
-            "description": "PHP Konf, SaaS İstanbul AI, Hepsiburada JS Konf etkinlik sayfaları. Figma'dan birebir tasarım uygulaması.",
+            "description": "PHP Konf, SaaS İstanbul AI ve Hepsiburada JS Konf için program, konuşmacı ve kayıt sayfaları.",
             "stack": [
               "Tailwind CSS",
               "HTML"
@@ -629,14 +636,15 @@
             "badge": "Topluluk",
             "year": "2021–2023",
             "highlights": [
-              "PHP Konf, SaaS İstanbul AI ve Hepsiburada JS Konf için Figma tasarımlarından birebir etkinlik sayfaları geliştirilmesine katkı sağladım",
-              "Tailwind CSS ile yüksek performanslı, mobil uyumlu statik sayfalar oluşturarak etkinlik kayıt trafiğini karşıladım",
-              "Konferans programı, konuşmacı profilleri ve kayıt akışları için modüler bileşen yapısı kurdum"
-            ]
+              "Etkinliklerin Figma tasarımlarını web sayfalarına dönüştürmeye katkı sağladım.",
+              "Mobil uyumlu etkinlik sayfaları hazırladım.",
+              "Program, konuşmacı ve kayıt akışları için ortak bileşenler geliştirdim."
+            ],
+            "key": "tech-conferences"
           },
           {
             "name": "Yeniyıl Arkadaşım",
-            "description": "Yılbaşı çekilişleri ve hediyeleşme organizasyonları için geliştirilmiş kullanıcı dostu bir platform.",
+            "description": "Yılbaşı hediye çekilişleri ve eşleştirmeler için geliştirilen platform.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -645,19 +653,26 @@
             "badge": "Topluluk",
             "year": "2023",
             "highlights": [
-              "Figma'dan gelen tasarımı birebir (pixel-perfect) hayata geçirdim",
-              "Çekiliş algoritması ve kullanıcı eşleştirme sisteminin geliştirilmesine katkı sağladım"
+              "Figma tasarımlarını arayüze uyguladım.",
+              "Çekiliş ve kullanıcı eşleştirme sistemine katkı sağladım."
             ],
             "links": [
-              { "label": "Üç Büyücü Turnuvası", "url": "https://ucbuyucuturnuvasi.com" },
-              { "label": "Sonsuz Şöhret", "url": "https://sonsuzsohret.com" }
+              {
+                "label": "Üç Büyücü Turnuvası",
+                "url": "https://ucbuyucuturnuvasi.com"
+              },
+              {
+                "label": "Sonsuz Şöhret",
+                "url": "https://sonsuzsohret.com"
+              }
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "yeniyl-arkadasm"
           },
           {
             "name": "Üç Büyücü Turnuvası",
-            "description": "Harry Potter evreninden esinlenen, interaktif bir online turnuva deneyimi.",
+            "description": "Harry Potter evreninden esinlenen çevrimiçi turnuva deneyimi.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -666,18 +681,22 @@
             "badge": "Topluluk",
             "year": "2021",
             "highlights": [
-              "Figma'dan gelen tasarımı pixel-perfect olarak hayata geçirdim",
-              "Sonsuz Şöhret gibi kampanya kurgularıyla desteklenen interaktif kullanıcı deneyimi"
+              "Figma tasarımlarını arayüze dönüştürdüm.",
+              "Turnuva ve bağlantılı kampanyaların etkileşimlerini uyguladım."
             ],
             "links": [
-              { "label": "Sonsuz Şöhret", "url": "https://sonsuzsohret.com" }
+              {
+                "label": "Sonsuz Şöhret",
+                "url": "https://sonsuzsohret.com"
+              }
             ],
             "context": "company",
-            "context_label": "Şirket"
+            "context_label": "Şirket",
+            "key": "triwizard-tournament"
           },
           {
             "name": "Rise Online Fan",
-            "description": "Rise Online oyununa adanmış fan ve topluluk sayfası.",
+            "description": "Rise Online oyuncularına yönelik hayran ve topluluk sitesi.",
             "stack": [
               "Laravel",
               "Tailwind CSS"
@@ -687,13 +706,14 @@
             "archived": true,
             "year": "2022",
             "highlights": [
-              "Oyun topluluğuna yönelik içerik ve tartışma platformunu Laravel ile geliştirilmesine katkı sağladım",
-              "Tailwind CSS ile hızlı prototipleme yaparak ürünü kısa sürede yayına aldım"
-            ]
+              "Topluluk sitesinin Laravel ile geliştirilmesine katkı sağladım.",
+              "Arayüzü hazırlayıp yayına alınmasına destek oldum."
+            ],
+            "key": "rise-online-fan"
           },
           {
             "name": "Word Imposter",
-            "description": "Arkadaş grupları için geliştirilmiş, sosyal etkileşimi yüksek bir kelime tahmin ve casus bulma oyunu. Modern ve eğlenceli bir oyun deneyimi.",
+            "description": "Arkadaş grupları için kelime ipuçlarıyla aranızdaki casusu bulduğunuz tarayıcı oyunu.",
             "stack": [
               "Laravel",
               "Livewire",
@@ -703,18 +723,17 @@
             "badge": "Oyun",
             "year": "2026",
             "highlights": [
-              "Gerçek zamanlı çok oyunculu oyun mekaniklerini Laravel Livewire kullanarak sıfırdan geliştirdim",
-              "Lobi ayarları: Lobi sahibi (host) oyuncu atabilir ve lobiye şifre koruması ekleyebilir",
-              "Oyun için maksimum 6 oyuncu sınırı belirlenebilir ve tur döngüsü durum makinesi ile yönetilir",
-              "Kişisel portföy sitesine entegre ederek teknik yetkinliği eğlenceli bir deneyimle sundum"
+              "Çok oyunculu oyun akışını Laravel ve Livewire ile geliştirdim.",
+              "Şifreli lobi, oyuncu yönetimi ve tur akışını kurdum.",
+              "Oyunu kişisel siteme entegre ettim."
             ],
             "context": "personal",
-            "context_label": "Kişisel"
+            "context_label": "Kişisel",
+            "key": "word-imposter"
           },
-
           {
             "name": "Vietnamees Foodies",
-            "description": "Vietnam yemekleri franchise mobil uygulaması.",
+            "description": "Vietnam mutfağı sunan bir restoran zincirinin mobil uygulaması.",
             "stack": [
               "Laravel"
             ],
@@ -723,11 +742,50 @@
             "archived": true,
             "year": "2021",
             "highlights": [
-              "Projeyi başka bir ekipten devralarak çalışır hale getirdim",
-              "Sapaad ve Loyalty (Sadakat) sistemi entegrasyonlarını geliştirilmesine katkı sağladım"
+              "Projeyi başka bir ekipten devralıp çalışır duruma getirdim.",
+              "Sapaad ve sadakat sistemi entegrasyonlarına katkı sağladım."
             ],
             "context": "freelance",
-            "context_label": "Freelance"
+            "context_label": "Freelance",
+            "key": "vietnamees-foodies",
+            "hidden": true
+          },
+          {
+            "key": "smart-global",
+            "name": "Smart Global",
+            "description": "Değerleme ve danışmanlık hizmetleri için iki dilli kurumsal web deneyimi.",
+            "year": "2026",
+            "stack": [
+              "Next.js",
+              "TypeScript",
+              "Tailwind",
+              "TR / EN"
+            ],
+            "url": "https://smartglobalval.co.uk",
+            "badge": "Müşteri çalışması",
+            "highlights": [
+              "Uzmanlık gerektiren bir hizmeti anlatan site, ziyaretçinin doğru hizmeti bulmasını ve iletişime geçmesini kolaylaştırmalı. İki dilde de aynı güveni ve içerik tutarlılığını korumalı.",
+              "İngilizce ve Türkçe içerikler, dile uygun adresler ve ortak görsel kimlik altında düzenleniyor. Hizmetler, sektörler ve iletişim arasında doğrudan bir gezinme akışı kuruluyor.",
+              "Çalışma; kurumsal sayfaları, iki dilli içerik yapısını, farklı ekranlara uyumlu arayüzü ve iletişim talebi akışını kapsıyor. Yeni sayfa ve içeriklerin aynı yapı içinde genişletilebilmesine odaklanıyor."
+            ]
+          },
+          {
+            "key": "vampir-koylu",
+            "name": "Vampir Köylü",
+            "description": "Gece ve gündüz evreleri, farklı roller ve ortak kararlarla ilerleyen çok oyunculu tarayıcı oyunu.",
+            "year": "2026",
+            "stack": [
+              "Laravel",
+              "Livewire",
+              "State transitions"
+            ],
+            "url": null,
+            "badge": "Kişisel proje",
+            "highlights": [
+              "Bir arkadaş grubunun aynı odaya girip gizli rollerle oynayabileceği bir deneyim kurmak istedim. Oyun ilerledikçe herkesin ne yapabildiği ve ne görebildiği değişiyor.",
+              "Lobi ve rol dağıtımını gece aksiyonları, gündüz oylaması ve sonuç takibi izliyor. Doktor, dedektif ve avcı gibi roller farklı kurallar gerektiriyor; her evre bir sonraki adıma tutarlı biçimde geçmeli.",
+              "Rol dağıtımını, gece sonuçlarını ve kazanma koşullarını ayrı sorumluluklar halinde düzenledim. Oyunculara açık durum ile gizli rol bilgisini ayırdım. Bu yapı, arayüzü sade tutarken oyun kurallarını ayrı ayrı doğrulamayı kolaylaştırıyor."
+            ]
           }
         ]
       }
@@ -754,11 +812,12 @@
     ]
   },
   "contact": {
-    "title": "Doğrudan E-Posta Gönder.",
-    "description": "Formlarla vakit kaybetmeyelim. Yeni bir modül, büyük ölçekli bir ürün ya da sürdürülecek bir platform varsa kapsamı, hedefleri ve teknik kısıtları doğrudan yazın; net bir development planıyla döneyim.",
+    "title": "Konuşalım.",
+    "description": "Bir fikir paylaşmak, soru sormak ya da tanışmak için bana yazabilirsin.",
+    "meta_description": "Bir ürün, freelance proje ya da teknik bir soru için İstanbul'daki yazılım geliştirici Timurhan Kaya'ya yaz. E-posta, LinkedIn ve GitHub burada.",
     "email_label": "E-posta",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",
-    "cta": "E-Posta Gönder"
+    "cta": "E-posta gönder"
   }
 }

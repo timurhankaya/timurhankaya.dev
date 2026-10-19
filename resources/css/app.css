@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import "./fonts.css";
+@import "./brand.css";
+@import "./games.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,20 +13,20 @@
 
 @theme {
     --font-sans:
-        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Geist", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
     --font-mono:
-        "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
-    --font-display: "Chakra Petch", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
     :root {
         --cyber-ink: 9 9 11;
-        --cyber-accent: 217 70 239; /* Fuchsia 500 */
-        --cyber-sky: 14 165 233;   /* Sky 500 */
+        --cyber-accent: 255 122 26;
+        --cyber-sky: 255 170 96;
         --cyber-violet: 167 139 250;
         --cyber-lime: 163 230 53;
     }
@@ -157,34 +162,6 @@
         }
     }
 
-    .window-scanline {
-        background: linear-gradient(
-            to bottom,
-            transparent,
-            rgba(34, 211, 238, 0.1),
-            transparent
-        );
-        background-size: 100% 28px;
-        opacity: 0.16;
-        mix-blend-mode: screen;
-        animation: scanline-move 7s linear infinite;
-    }
-
-    @keyframes scanline-move {
-        from {
-            background-position: 0 0;
-        }
-        to {
-            background-position: 0 280px;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .window-scanline {
-            animation: none;
-        }
-    }
-
     /* Subtle grain layer (use on pseudo elements / overlays) */
     .cyber-grain {
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
@@ -194,90 +171,10 @@
         pointer-events: none;
     }
 
-    /* Imposter: calmer, game-first backdrop (single accent color). */
-    .imposter-stage {
-        background-image:
-            radial-gradient(
-                820px circle at 28% 18%,
-                rgba(var(--cyber-sky), 0.16),
-                transparent 58%
-            ),
-            radial-gradient(
-                900px circle at 72% 82%,
-                rgba(var(--cyber-accent), 0.08),
-                transparent 60%
-            );
-        mask-image: radial-gradient(
-            ellipse at center,
-            black 55%,
-            transparent 95%
-        );
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .imposter-stage {
-            background-image:
-                radial-gradient(
-                    820px circle at 28% 18%,
-                    rgba(var(--cyber-sky), 0.18),
-                    transparent 58%
-                ),
-                radial-gradient(
-                    900px circle at 72% 82%,
-                    rgba(var(--cyber-accent), 0.1),
-                    transparent 60%
-                );
-        }
-    }
-
-    .imposter-vignette {
-        background: radial-gradient(
-            ellipse at center,
-            transparent 35%,
-            rgba(0, 0, 0, 0.55) 100%
-        );
-        opacity: 0.22;
-        mix-blend-mode: multiply;
-        pointer-events: none;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .imposter-vignette {
-            opacity: 0.34;
-        }
-    }
-
-    /* Interactive glow halo (JS sets --mx/--my as percentages). */
+    /* Word Imposter arena: --mx/--my come from initImposterArena in app.js; games.css draws the lamp. */
     .imposter-arena {
         --mx: 50%;
-        --my: 35%;
-        background-image:
-            radial-gradient(
-                520px circle at var(--mx) var(--my),
-                rgba(var(--cyber-sky), 0.14),
-                transparent 60%
-            ),
-            radial-gradient(
-                900px circle at 50% 115%,
-                rgba(9, 9, 11, 0.45),
-                transparent 70%
-            );
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .imposter-arena {
-            background-image:
-                radial-gradient(
-                    560px circle at var(--mx) var(--my),
-                    rgba(var(--cyber-sky), 0.16),
-                    transparent 62%
-                ),
-                radial-gradient(
-                    900px circle at 50% 115%,
-                    rgba(0, 0, 0, 0.62),
-                    transparent 72%
-                );
-        }
+        --my: 30%;
     }
 
     /* Hero: multi-color atmospheric backdrop */
@@ -453,93 +350,5 @@
             animation: none;
             display: none;
         }
-    }
-
-    /* Vampire: atmospheric stages */
-    .vampire-stage-night {
-        background-image: 
-            radial-gradient(
-                920px circle at 50% 15%,
-                rgba(99, 102, 241, 0.22),
-                transparent 70%
-            ),
-            radial-gradient(
-                1000px circle at 50% 85%,
-                rgba(15, 23, 42, 0.45),
-                transparent 70%
-            );
-        animation: vampire-pulse 10s ease-in-out infinite;
-    }
-
-    .vampire-stage-day {
-        background-image: 
-            radial-gradient(
-                920px circle at 50% -10%,
-                rgba(251, 191, 36, 0.18),
-                transparent 65%
-            ),
-            radial-gradient(
-                1000px circle at 50% 115%,
-                rgba(24, 24, 27, 0.05),
-                transparent 70%
-            );
-    }
-
-    .vampire-stage-voting {
-        background-image: 
-            radial-gradient(
-                920px circle at 50% 30%,
-                rgba(239, 68, 68, 0.15),
-                transparent 75%
-            ),
-            linear-gradient(
-                to top,
-                rgba(127, 29, 29, 0.1),
-                transparent
-            );
-        animation: vampire-alert 3s ease-in-out infinite;
-    }
-
-    @keyframes vampire-pulse {
-        0%, 100% { opacity: 0.8; }
-        50% { opacity: 1; }
-    }
-
-    @keyframes vampire-alert {
-        0%, 100% { opacity: 0.85; }
-        50% { opacity: 1; }
-    }
-
-    .vampire-phase-banner {
-        font-family: var(--font-display);
-        text-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Event log separators */
-    .vampire-log-separator {
-        position: relative;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        margin-top: 1.25rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .vampire-log-separator::before,
-    .vampire-log-separator::after {
-        content: "";
-        height: 1px;
-        flex-grow: 1;
-        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
-    }
-
-    .vampire-log-separator span {
-        padding: 0 1rem;
-        font-family: var(--font-mono);
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: rgba(255, 255, 255, 0.4);
     }
 }

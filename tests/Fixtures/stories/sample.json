@@ -1,0 +1,49 @@
+[
+    {
+        "type": "case_study",
+        "slug": "fixture-incident",
+        "project_key": "monafy",
+        "sort_order": 10,
+        "published_at": "2026-10-01",
+        "case_meta": {
+            "project_name": "Monafy",
+            "context": "employment",
+            "period": "2025–",
+            "technologies": [
+                "Laravel"
+            ],
+            "url": "https://monafy.com",
+            "links": []
+        },
+        "tr": {
+            "title": "Fiyatlar kapanışta kayboluyordu",
+            "excerpt": "Canlı fiyatlar kapanışa doğru durdu.",
+            "content": "<p>Bir akşam fiyatlar durdu.</p><h2>Tablo şişmişti</h2><p>Ayrıntı.</p>",
+            "meta_title": "Kapanışta kaybolan fiyatlar"
+        },
+        "en": {
+            "title": "Prices vanished at the close",
+            "excerpt": "Live prices stopped near the close.",
+            "content": "<p>One evening prices stopped.</p><h2>The table had bloated</h2><p>Detail.</p>",
+            "meta_title": "Prices that vanished at the close"
+        }
+    },
+    {
+        "type": "article",
+        "slug": "fixture-draft-article",
+        "project_key": null,
+        "sort_order": 100,
+        "published_at": "2026-10-02",
+        "draft": true,
+        "tr": {
+            "title": "Bir taslak yazı",
+            "excerpt": "Taslak.",
+            "content": "<p>Taslak içerik.</p>"
+        },
+        "en": {
+            "title": "A draft article",
+            "excerpt": "Draft.",
+            "content": "<p>Draft content.</p>"
+        }
+    }
+]

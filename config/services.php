@@ -35,4 +35,20 @@ return [
         ],
     ],
 
+    'bing_webmaster' => [
+        'verification' => env('BING_SITE_VERIFICATION'),
+    ],
+
+    'search_console' => [
+        'verification' => env('SEARCH_CONSOLE_VERIFICATION'),
+    ],
+
+    'yandex_webmaster' => [
+        'verification' => env('YANDEX_VERIFICATION'),
+    ],
+
+    'indexnow' => [
+        'key' => env('INDEXNOW_KEY'),
+    ],
+
 ];

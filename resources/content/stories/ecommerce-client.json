@@ -1,0 +1,37 @@
+[
+    {
+        "type": "case_study",
+        "slug": "paytr-callback-could-not-empty-the-cart",
+        "project_key": "e-commerce",
+        "sort_order": 10,
+        "published_at": "2026-10-19",
+        "case_meta": {
+            "project_name": "E-ticaret altyapısı",
+            "project_name_en": "E-commerce platform",
+            "context": "client",
+            "period": "",
+            "technologies": [
+                "Laravel",
+                "PHP",
+                "PayTR",
+                "MySQL",
+                "Redis",
+                "Laravel Horizon"
+            ],
+            "url": null,
+            "links": []
+        },
+        "tr": {
+            "title": "PayTR callback’i session taşımadığı için sepeti boşaltamıyordu",
+            "excerpt": "Sepet session’da duruyor, bildirim ise çerezsiz geliyor. Aynı callback, hash’i yanlış olan bir isteğin siparişi onaylamasına da izin veriyordu.",
+            "content": "<p>Bir firmanın online mağazasında kartla ödeme başarılı olsa bile sepet dolu kalacaktı: sepeti PayTR’nin callback isteğinde boşaltıyordum, ancak o isteği müşterinin tarayıcısı değil PayTR’nin sunucusu gönderdiği için müşterinin kendi session’ına hiç ulaşamıyordu. Boşaltma işini müşterinin kendi tarayıcısının açtığı sipariş sayfasına taşıdım. Callback’i bu kadar yakından okuyunca hash’i tutmayan bir isteğin de siparişi onaylayabildiğini gördüm.</p><h2>Callback ile yönlendirme birbirinden bağımsız iki istek</h2><p>Sepet müşterinin session’ında duruyor, veritabanında yok. Checkout siparişi “ödeme bekliyor” durumuyla ve rastgele bir numarayla oluşturuyor, tarayıcı da PayTR’nin gömülü ödeme formunu açıyor. Ödeme bitince birbirinden bağımsız iki şey oluyor.</p><p>PayTR’nin sunucusu sitenin callback adresine sipariş numarasını, sonucu, tutarı ve bir hash’i POST ediyor, cevap olarak düz metin OK bekliyor. Ayrıca müşterinin tarayıcısını, ödeme başarılıysa sipariş sayfasına, başarısızsa checkout’a gönderiyor.</p><p>Callback müşterinin isteği değil. PayTR’nin sunucusu onu müşterinin session çerezi olmadan gönderiyor ve uygulama o istek için yeni, boş bir session açıyor. O session’dan sepeti silmek ya da sipariş sayfası okusun diye oraya “sipariş başarılı” işareti yazmak, müşterinin göreceği hiçbir şeyi değiştirmiyor. Kodum callback’i sıradan bir tarayıcı isteği saymıştı.</p><h2>Sipariş numarası checkout’ta session’a yazılıyor</h2><p>Checkout isteği müşteriye ait; bu yüzden sipariş numarasını ödeme formuna yönlendirmeden hemen önce session’a o istekte yazıyorum. Sipariş sayfasının adresindeki numara kayıtlı olanla eşleşirse sayfa sepeti boşaltıp numarayı siliyor. Başarısız ödemede tarayıcı o sayfaya hiç gelmiyor, sepet yerinde kalıyor.</p><p>Numara tam sayı olarak üretiliyor ama adreste string geliyor; tipi de denetleyen bir karşılaştırma, taraflardan biri çevrilmedikçe hiç eşleşmiyor. Sayfa ödeme durumuna bakmıyor, çünkü sepeti boşaltmak müşteri için bir kolaylık. Siparişin durumuna yalnızca callback karar veriyor.</p><p>İlk sormam gereken şey, her isteği kimin gönderdiğiydi. Callback’i PayTR’nin sunucusu gönderiyor, başarı adresini müşterinin tarayıcısı açıyor ve müşterinin session’ına yalnızca ikincisi dokunabiliyor.</p><h2>Hash’i tutmayan istek, durumu “success” ise siparişi onaylıyordu</h2><p>Ödeme bekleyen bir siparişte hash’i tutmayan bir istek durdurulmuyordu ve durum alanında “success” yazıyorsa sipariş onaylanıyordu. İki sorundan ciddi olanı buydu.</p><p>Kontroller sabit bir sırayla çalışıyor, hash en başta. Hash tutmazsa istek loglanıyor ve işlem duruyor; PayTR’ye bildirimin işlendiğini söyleyecek OK gönderilmiyor. Ödemesi zaten sonuçlanmış bir siparişe yalnızca OK dönüyor, böylece tekrarlanan bildirimler onayı ikinci kez çalıştıramıyor.</p><p>Mağazanın sepet ve checkout testleri yalnızca ana sayfayı çağırıyordu, bu yüzden bu iki sorundan hiçbiri bir testi kırmazdı.</p>",
+            "meta_title": "PayTR callback’i session taşımaz, sepeti boşaltamaz"
+        },
+        "en": {
+            "title": "The PayTR callback carries no session, so it cannot empty a cart",
+            "excerpt": "The cart sits in the session, and the notification arrives without a cookie. The same callback also let a request with a wrong hash approve an order.",
+            "content": "<p>The cart on a client’s online shop was bound to stay full after a successful card payment, because I emptied it in PayTR’s payment callback, which comes from PayTR’s server and never carries the customer’s session. I moved the emptying to the order page the customer’s own browser opens. Reading the callback that closely also showed that a request with a wrong hash could approve an order.</p><h2>The callback and the redirect are two separate requests</h2><p>The cart lived in the customer’s session, not in the database. At checkout the shop created the order as waiting for payment with a random number, and the browser loaded PayTR’s embedded payment form. Then two unrelated things happened.</p><p>PayTR’s server posts the order number, the result, the amount and a hash to the site’s callback URL and expects the plain text OK in return. Separately, it sends the customer’s browser to the order page if the payment succeeded, or back to checkout if it failed.</p><p>The callback is not the customer’s request. PayTR’s server sends it without the customer’s session cookie, so the application opens a new, empty session for it.</p><p>Emptying the cart in that session, or writing an “order succeeded” flag there for the order page to read, changes nothing the customer will see. My code had treated the callback as one more browser request.</p><h2>The order number is stored in the session at checkout</h2><p>The checkout request belongs to the customer, so it stores the order number in the session just before redirecting to the payment form.</p><p>When the number in the order page’s URL matches the stored one, the page empties the cart and forgets the number. A failed payment never reaches that page, so the cart stays.</p><p>The number is created as an integer but arrives in the URL as a string, so a strict comparison never matches unless one side is converted. The page does not look at the payment status. Emptying the cart is a convenience, and the callback alone decides the order’s state.</p><p>The question I should have asked first was who sends each request. PayTR’s server sends the callback, the customer’s browser opens the success URL, and only the second can reach the customer’s session.</p><h2>A wrong hash did not stop an order from being approved</h2><p>For an order still waiting for payment, a request with a wrong hash was not stopped, and if its status field said “success”, the order was approved. It was the more serious of the two problems.</p><p>The checks run in a fixed order with the hash first. A mismatch is logged and stops everything, without the OK that would tell PayTR the notification was handled. An order that is already settled gets OK and nothing else, so repeated notifications cannot approve it twice.</p><p>Neither problem would have failed a test. The shop’s cart and checkout tests only request the home page.</p>",
+            "meta_title": "PayTR callback has no session, so it cannot empty a cart"
+        }
+    }
+]

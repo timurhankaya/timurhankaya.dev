@@ -1,0 +1,40 @@
+[
+    {
+        "type": "case_study",
+        "slug": "kafka-consumer-offsets-in-postgresql",
+        "project_key": "monafy",
+        "sort_order": 10,
+        "published_at": "2026-10-19",
+        "case_meta": {
+            "project_name": "Monafy",
+            "context": "founder",
+            "technologies": [
+                "Kafka",
+                "librdkafka",
+                "PostgreSQL"
+            ],
+            "url": "https://monafy.com",
+            "links": [
+                {
+                    "label": {
+                        "tr": "Metodoloji: kaynaklar ve gecikmeler",
+                        "en": "Methodology: sources and delays"
+                    },
+                    "url": "https://monafy.com/methodology/"
+                }
+            ]
+        },
+        "tr": {
+            "title": "Kafka istemcisi başarısız mesajı commit etti, offset PostgreSQL’de",
+            "excerpt": "30.000 mesajlık testin ortasında öldürülen consumer ne mesaj kaybetti ne de birini iki kez işledi. Bedeli, reddedilen tek satırın bütün batch’i bekletmesi.",
+            "content": "<p>Monafy’nin fiyat consumer’ları Kafka okuma konumunu PostgreSQL’de, yazdıkları verinin transaction’ında tutuyor. Bu kararı, Kafka istemci kütüphanesinin kaynağını okuyunca verdik: kütüphane handler başarısız olsa da mesajın offset’ini commit ediyordu. 30.000 test mesajının ortasında bir consumer’ı öldürüp kalanını ikinci bir süreçle işlettiğimizde tabloda tam 30.000 satır ve 30.000 farklı id vardı.</p><p>Eskiden birkaç servis fiyatı aynı sağlayıcıdan kendi yöntemiyle çekiyordu; birinde düzelttiğimiz hata diğerlerine geçmiyordu. Fiyatları tek bir servis event olarak yayınlıyor, diğer servisler Kafka’dan okuyor; fiyatın bu yolda nerede beklediğini <a href=\"/tr/yazilar/how-we-removed-the-price-stream-bottleneck\">ayrı bir yazıda</a> ölçtüm.</p><h2>Başarısız mesajı da tüketilmiş sayan bir kütüphane</h2><p>Kütüphanenin committer’ı bir başarı bayrağı alıyordu ama onu yok sayıyordu: handler’ı hata veren mesaj da diğerleri gibi commit ediliyordu. Handler’ın exception’ı da yutuluyordu. Consumer sıradaki mesaja geçip gidiyordu.</p><p>Bu, bizim için çoğu consumer’dakinden büyük bir sorundu. Uyguladığımız her değişiklik yeni bir sequence numarası alıyor; ürünün başka parçaları bu numarayı kayıtlı bir cursor’la karşılaştırıp altında kalan event’leri atıyor. Veri yazımıyla offset yazımı arasındaki bir çökme, event’leri ya yeni sequence numaralarıyla yeniden işletirdi ya da kaybettirirdi.</p><h2>Okuma konumu verinin transaction’ına taşındı</h2><p>Kütüphanenin consume döngüsünü tuttuk, doğruluğa karar veren parçaları değiştirdik. Offset’leri kendimiz commit ediyoruz, handler hatalarını yutmak yerine yeniden fırlatıyoruz.</p><p>Bir batch ile kayıtlı konum tek transaction’da yazılıyor, yani ya ikisi birden kaydediliyor ya da hiçbiri, ve yeniden başlayan her consumer Kafka’nın commit edilmiş saydığı yere değil bu konuma bakarak devam ediyor. Kafka’daki offset de yazılıyor ama veritabanı commit’inden sonra ve yalnızca lag araçları okuyabilsin diye.</p><pre><code class=\"language-sql\">BEGIN;\n\n-- konum satırını kilitle, aynı anda tek worker ilerletsin\nSELECT next_offset FROM consumer_positions\n WHERE consumer = 'prices' AND partition_id = 3\n   FOR UPDATE;\n\n-- batch’i veriye uygula\nINSERT INTO prices (symbol, price, sequence) VALUES (...);\n\n-- konumu aynı transaction’da ilerlet\nUPDATE consumer_positions SET next_offset = 1042\n WHERE consumer = 'prices' AND partition_id = 3;\n\nCOMMIT;</code></pre><h2>Reddedilen tek satır batch’i durduruyor, takılan consumer sağlıklı görünebiliyor</h2><p>Bir batch ya tamamen uygulanıyor ya hiç. Veritabanının reddettiği tek bir satır bütün batch’i geri alıyor ve neden giderilene kadar o akışı bekletiyor. Bu üretimde yaşandı. Neden düzelince consumer kayıtlı konumundan yetişti ve kimsenin tek bir mesajı yeniden yayınlaması gerekmedi.</p><p>Kayıtlı konum bir takılmayı görünür kılmıyor. Başka bir consumer grup üyeliğini kaybedip mesaj uygulamayı bıraktı, süreci ise çalışıyor görünmeye devam etti. Onu ilgisiz bir veri düzeltmesini doğrularken fark ettik; yeniden başlatma onu da kayıtlı konumundan yetiştirdi.</p>",
+            "meta_title": "Kafka istemcisi hatayı commit etti, offset PostgreSQL’de"
+        },
+        "en": {
+            "title": "Kafka client committed failed messages, so offsets moved to PostgreSQL",
+            "excerpt": "In a 30,000-message test, a consumer killed halfway neither lost nor repeated a message. The cost is one refused row holding back its whole batch.",
+            "content": "<p>Monafy’s price consumers keep their Kafka read position in PostgreSQL, in the same transaction as the data they write. The source of our Kafka client library showed why: it committed a message’s offset whether or not the handler had succeeded. Killing a consumer part-way through 30,000 test messages and letting a second process finish left exactly 30,000 rows with 30,000 distinct ids.</p><p>Several services used to fetch prices from the same provider, each in its own way, and a fix made in one never reached the others. One service publishes the prices as events and the rest read them from Kafka. <a href=\"/writing/how-we-removed-the-price-stream-bottleneck\">Another article</a> measures where a price waits along that path.</p><h2>A library that recorded failed messages as consumed</h2><p>The library’s committer received a success flag and ignored it, so a message whose handler had failed was committed like any other. The handler’s exception was swallowed too. The consumer carried on with the next message.</p><p>That mattered more to us than it would to most consumers. Every change we apply gets a new sequence number, and other parts of the product compare it with a stored cursor and drop any event below it. A crash between the data write and the offset write would therefore either replay events under new sequence numbers or lose them.</p><h2>The read position moves into the data’s transaction</h2><p>We kept the library’s consume loop and replaced the parts that decide correctness. Our code commits the offsets and rethrows handler failures instead of swallowing them.</p><p>A batch and the stored position are written in one transaction, so both are saved or neither is, and a restarted consumer resumes from that position rather than from whatever Kafka believes was committed. Kafka’s own offset is still written, after the database commit, only so that lag tooling can read it.</p><pre><code class=\"language-sql\">BEGIN;\n\n-- lock the position row, so one worker at a time advances it\nSELECT next_offset FROM consumer_positions\n WHERE consumer = 'prices' AND partition_id = 3\n   FOR UPDATE;\n\n-- apply the batch to the data\nINSERT INTO prices (symbol, price, sequence) VALUES (...);\n\n-- move the position in the same transaction\nUPDATE consumer_positions SET next_offset = 1042\n WHERE consumer = 'prices' AND partition_id = 3;\n\nCOMMIT;</code></pre><h2>One refused row stops a batch, and a stalled consumer can look healthy</h2><p>A batch is all or nothing. One row the database refuses rolls the whole batch back and holds up that stream until the cause is fixed. That happened in production. After the fix the consumer caught up from its stored position and nobody had to republish a message.</p><p>A stored position does not make a stall visible. Another consumer stopped applying after it lost its group membership, yet its process still showed as running. We found it while verifying an unrelated data fix, and a restart caught it up from the stored position too.</p>",
+            "meta_title": "Kafka client committed failures, so offsets use PostgreSQL"
+        }
+    }
+]

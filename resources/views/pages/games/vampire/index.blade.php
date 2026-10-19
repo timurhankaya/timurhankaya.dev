@@ -1,8 +1,8 @@
 @php
     $gameUrl = \App\Support\Seo::route('games.vampire.index');
     $seo = [
-        'title' => __('vampire.title').' — '.__('portfolio.nav.games'),
-        'description' => __('vampire.subtitle'),
+        'title' => __('vampire.metaTitle'),
+        'description' => __('vampire.metaDescription'),
         'canonical' => $gameUrl,
         'image' => 'og-vampire.png',
     ];
@@ -10,45 +10,63 @@
 
 @extends('layouts.app')
 
-@section('title', __('vampire.title').' — '.__('portfolio.nav.games'))
+@section('title', __('vampire.metaTitle'))
 
+@php
+    $trail = [[__('brand.home_crumb'), \App\Support\Seo::route('home')], [__('portfolio.nav.games'), \App\Support\Seo::route('games.index')], [__('vampire.title'), $gameUrl]];
+@endphp
 @push('head')
-    @php
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@graph' => [
-                [
-                    '@type' => 'WebPage',
-                    'name' => __('vampire.title'),
-                    'url' => $gameUrl,
-                    'description' => __('vampire.subtitle'),
-                ],
-                [
-                    '@type' => 'Game',
-                    'name' => __('vampire.title'),
-                    'url' => $gameUrl,
-                    'description' => __('vampire.subtitle'),
-                    'playMode' => 'MultiPlayer',
-                ],
-            ],
-        ];
-    @endphp
-    <script type="application/ld+json">{!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    {!! \App\Support\StructuredData::script(
+        \App\Support\StructuredData::webPage('WebPage', $gameUrl, __('vampire.title'), __('vampire.subtitle'), [
+            'mainEntity' => ['@id' => $gameUrl.'#game'],
+            'breadcrumb' => ['@id' => $gameUrl.'#breadcrumb'],
+        ]),
+        \App\Support\StructuredData::game($gameUrl, __('vampire.title'), __('vampire.subtitle'), 'og-vampire.png', 4, ['Party game', 'Social deduction', 'Hidden role']),
+        \App\Support\StructuredData::breadcrumbs($gameUrl, $trail),
+        \App\Support\StructuredData::person(),
+        \App\Support\StructuredData::website(),
+    ) !!}
 @endpush
 
 @section('content')
-    <section class="pb-16 pt-[calc(4rem+env(safe-area-inset-top)+2rem)]">
-        <div class="max-w-3xl reveal" data-reveal>
-            <div class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-4 py-2 font-mono text-[11px] font-semibold tracking-wide text-zinc-700 backdrop-blur dark:border-white/10 dark:bg-zinc-950/35 dark:text-zinc-300">
-                <span class="inline-flex h-2 w-2 rounded-full bg-red-400 shadow-[0_0_0_4px_rgba(248,113,113,0.16)]"></span>
-                {{ __('vampire.kicker') }}
-            </div>
-            <h1 class="cyber-title mt-6 text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-5xl dark:text-white">{{ __('vampire.title') }}</h1>
-            <p class="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
-                {{ __('vampire.subtitle') }}
-            </p>
+    <div class="vk-sky" data-sky="lobby" aria-hidden="true"><span class="vk-sky-layer vk-sky-lobby"></span></div>
+    <x-games.doodles game="vampire" lite phase="lobby" />
+    <x-breadcrumbs :trail="$trail" />
+    <header class="brand-page-header game-hero">
+        <div class="game-hero-copy">
+            <p class="brand-label">{{ __('vampire.kicker') }}</p>
+            <h1 class="brand-display">{{ __('vampire.title') }}</h1>
         </div>
+        <p class="game-hero-lead">{{ __('vampire.subtitle') }}</p>
+        <div class="game-hero-art game-nightfall" aria-hidden="true">
+            <span class="game-nightfall-moon"></span>
+            <span class="game-nightfall-star" style="top: 30px; left: 44%">✦</span>
+            <span class="game-nightfall-star" style="top: 96px; left: 62%; font-size: 9px">✦</span>
+            <span class="game-nightfall-star" style="top: 132px; left: 22%; font-size: 8px">✦</span>
+            <x-games.icon name="bat" />
+            <span class="game-nightfall-village"><svg viewBox="0 0 320 64" preserveAspectRatio="none"><path fill="currentColor" d="M0 64V44h22V30l14-12 14 12v14h18V36l10-8 10 8v8h26V22l18-16 18 16v22h20V34l12-10 12 10v10h22V28l16-14 16 14v16h24V38l9-7 9 7v6h20v20Z"/></svg></span>
+        </div>
+    </header>
 
-        <livewire:games.vampire.index />
+    <livewire:games.vampire.index />
+
+    <section class="game-guide" aria-labelledby="vampire-roles">
+        <h2 id="vampire-roles">{{ __('games.roles_title') }}</h2>
+        <ul class="game-roles">
+            <li class="is-vampire"><x-games.icon name="vampire" /><h3>{{ __('vampire.roles.vampir') }}</h3><p>{{ __('games.vampire_roles.vampire') }}</p></li>
+            <li><x-games.icon name="villager" /><h3>{{ __('vampire.roles.koylu') }}</h3><p>{{ __('games.vampire_roles.villager') }}</p></li>
+            <li><x-games.icon name="doctor" /><h3>{{ __('vampire.roles.doktor') }}</h3><p>{{ __('games.vampire_roles.doctor') }}</p></li>
+            <li><x-games.icon name="detective" /><h3>{{ __('vampire.roles.dedektif') }}</h3><p>{{ __('games.vampire_roles.detective') }}</p></li>
+            <li><x-games.icon name="hunter" /><h3>{{ __('vampire.roles.avci') }}</h3><p>{{ __('games.vampire_roles.hunter') }}</p></li>
+        </ul>
+    </section>
+
+    <section class="game-guide" aria-labelledby="vampire-steps">
+        <h2 id="vampire-steps">{{ __('vampire.howToPlay') }}</h2>
+        <ol class="game-steps game-steps-text">
+            @foreach ([__('vampire.rulesLine1'), __('vampire.rulesLine2'), __('vampire.rulesLine3'), __('vampire.rulesLine4')] as $rule)
+                <li><p>{{ $rule }}</p></li>
+            @endforeach
+        </ol>
     </section>
 @endsection

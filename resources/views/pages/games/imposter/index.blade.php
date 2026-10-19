@@ -1,8 +1,8 @@
 @php
     $gameUrl = \App\Support\Seo::route('games.imposter.index');
     $seo = [
-        'title' => __('imposter.title').' — '.__('portfolio.nav.games'),
-        'description' => __('imposter.subtitle'),
+        'title' => __('imposter.metaTitle'),
+        'description' => __('imposter.metaDescription'),
         'canonical' => $gameUrl,
         'image' => 'og-imposter.png',
     ];
@@ -10,45 +10,54 @@
 
 @extends('layouts.app')
 
-@section('title', __('imposter.title').' — '.__('portfolio.nav.games'))
+@section('title', __('imposter.metaTitle'))
 
+@php
+    $trail = [[__('brand.home_crumb'), \App\Support\Seo::route('home')], [__('portfolio.nav.games'), \App\Support\Seo::route('games.index')], [__('imposter.title'), $gameUrl]];
+@endphp
 @push('head')
-    @php
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@graph' => [
-                [
-                    '@type' => 'WebPage',
-                    'name' => __('imposter.title'),
-                    'url' => $gameUrl,
-                    'description' => __('imposter.subtitle'),
-                ],
-                [
-                    '@type' => 'Game',
-                    'name' => __('imposter.title'),
-                    'url' => $gameUrl,
-                    'description' => __('imposter.subtitle'),
-                    'playMode' => 'MultiPlayer',
-                ],
-            ],
-        ];
-    @endphp
-    <script type="application/ld+json">{!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    {!! \App\Support\StructuredData::script(
+        \App\Support\StructuredData::webPage('WebPage', $gameUrl, __('imposter.title'), __('imposter.subtitle'), [
+            'mainEntity' => ['@id' => $gameUrl.'#game'],
+            'breadcrumb' => ['@id' => $gameUrl.'#breadcrumb'],
+        ]),
+        \App\Support\StructuredData::game($gameUrl, __('imposter.title'), __('imposter.subtitle'), 'og-imposter.png', 3, ['Party game', 'Word game', 'Social deduction']),
+        \App\Support\StructuredData::breadcrumbs($gameUrl, $trail),
+        \App\Support\StructuredData::person(),
+        \App\Support\StructuredData::website(),
+    ) !!}
 @endpush
 
 @section('content')
-    <section class="pb-16 pt-[calc(4rem+env(safe-area-inset-top)+2rem)]">
-        <div class="max-w-3xl reveal" data-reveal>
-            <div class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-4 py-2 font-mono text-[11px] font-semibold tracking-wide text-zinc-700 backdrop-blur dark:border-white/10 dark:bg-zinc-950/35 dark:text-zinc-300">
-                <span class="inline-flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_0_4px_rgba(34,211,238,0.16)]"></span>
-                {{ __('imposter.kicker') }}
-            </div>
-            <h1 class="cyber-title mt-6 text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-5xl dark:text-white">{{ __('imposter.title') }}</h1>
-            <p class="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
-                {{ __('imposter.subtitle') }}
-            </p>
+    <x-games.doodles game="imposter" lite />
+    <x-breadcrumbs :trail="$trail" />
+    <header class="brand-page-header game-hero">
+        <div class="game-hero-copy">
+            <p class="brand-label">{{ __('imposter.kicker') }}</p>
+            <h1 class="brand-display">{{ __('imposter.title') }}</h1>
         </div>
+        <p class="game-hero-lead">{{ __('imposter.subtitle') }}</p>
+        <div class="game-hero-art game-fan" aria-hidden="true">
+            <span class="game-fan-card">?</span><span class="game-fan-card">?</span><span class="game-fan-card">!</span>
+        </div>
+    </header>
 
-        <livewire:games.imposter.index />
+    <livewire:games.imposter.index />
+
+    <section class="game-guide" aria-labelledby="imposter-roles">
+        <h2 id="imposter-roles">{{ __('games.roles_title') }}</h2>
+        <ul class="game-roles">
+            <li class="is-crew"><x-games.icon name="crew" /><h3>{{ __('imposter.roleCrew') }}</h3><p>{{ __('games.imposter_roles.crew') }}</p></li>
+            <li class="is-imposter"><x-games.icon name="imposter" /><h3>{{ __('imposter.roleImposter') }}</h3><p>{{ __('games.imposter_roles.imposter') }}</p></li>
+        </ul>
+    </section>
+
+    <section class="game-guide" aria-labelledby="imposter-steps">
+        <h2 id="imposter-steps">{{ __('games.how_it_works') }}</h2>
+        <ol class="game-steps">
+            @foreach (['create', 'join', 'start', 'discuss', 'voteStart', 'reveal'] as $step)
+                <li><h3>{{ __('imposter.steps.'.$step.'.title') }}</h3><p>{{ __('imposter.steps.'.$step.'.body') }}</p></li>
+            @endforeach
+        </ol>
     </section>
 @endsection

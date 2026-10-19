@@ -1,7 +1,3 @@
-import './bootstrap';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
 document.documentElement.classList.add('js');
 
 const qs = (sel, root = document) => root.querySelector(sel);
@@ -21,55 +17,34 @@ function isReducedMotion() {
     return window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
 }
 
-function readJsonScript(id) {
-    const el = document.getElementById(id);
-    if (!(el instanceof HTMLScriptElement)) {
-        return null;
-    }
-
-    try {
-        return JSON.parse(el.textContent ?? 'null');
-    } catch {
-        return null;
-    }
-}
-
 function initReveal() {
-    if (isReducedMotion()) {
-        qsa('[data-reveal]').forEach((el) => el.classList.add('is-revealed'));
-        return;
-    }
-
     const items = qsa('[data-reveal]');
     if (items.length === 0) {
         return;
     }
 
-    gsap.registerPlugin(ScrollTrigger);
+    if (isReducedMotion() || !('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('is-revealed'));
+        return;
+    }
 
-    items.forEach((el) => {
-        gsap.fromTo(
-            el,
-            { opacity: 0, y: 16 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                clearProps: 'transform',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 86%',
-                    once: true,
-                },
-                onStart: () => el.classList.add('is-revealed'),
-            },
-        );
-    });
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { rootMargin: '0px 0px -14% 0px' },
+    );
+    items.forEach((el) => observer.observe(el));
 }
 
-async function copyText(text) {
-    const value = String(text ?? '').replaceAll('\\n', '\n');
+// `literal` keeps backslash sequences as typed (code samples); otherwise "\n" in data attributes becomes a newline.
+async function copyText(text, { literal = false } = {}) {
+    const value = literal ? String(text ?? '') : String(text ?? '').replaceAll('\\n', '\n');
     if (value === '') {
         return false;
     }
@@ -214,6 +189,8 @@ function initCommandPalette() {
     };
 
     const visibleCommands = () => commands.filter((btn) => !btn.hidden);
+    // Case- and accent-insensitive in both languages: "iletisim" finds "İletişim", "Is" finds "İş".
+    const fold = (text) => String(text ?? '').trim().toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ı/g, 'i');
 
     const setActive = (idx) => {
         const list = visibleCommands();
@@ -221,19 +198,30 @@ function initCommandPalette() {
             return;
         }
         activeIndex = Math.max(0, Math.min(idx, list.length - 1));
-        list.forEach((el, i) => el.classList.toggle('ring-2', i === activeIndex));
-        list.forEach((el, i) => el.classList.toggle('ring-cyan-400/60', i === activeIndex));
-        list.forEach((el, i) => el.classList.toggle('dark:ring-cyan-300/30', i === activeIndex));
+        list.forEach((el, i) => el.classList.toggle('is-active', i === activeIndex));
         list[activeIndex].scrollIntoView({ block: 'nearest' });
     };
 
     const filter = (q) => {
-        const query = String(q ?? '').trim().toLowerCase();
+        const query = fold(q);
         commands.forEach((btn) => {
-            const label = (btn.getAttribute('data-command-label') ?? btn.textContent ?? '').toLowerCase();
+            const label = fold(btn.getAttribute('data-command-label') ?? btn.textContent);
             btn.hidden = query !== '' && !label.includes(query);
-            btn.classList.remove('ring-2', 'ring-cyan-400/60', 'dark:ring-cyan-300/30');
+            btn.classList.remove('is-active');
         });
+        // A group whose every command is filtered out hides its heading too.
+        qsa('[data-command-palette-list]', root).forEach((list) => {
+            const empty = qsa('[data-command]', list).every((btn) => btn.hidden);
+            list.hidden = empty;
+            if (list.previousElementSibling?.classList.contains('brand-palette-group')) {
+                list.previousElementSibling.hidden = empty;
+            }
+        });
+        const none = commands.every((btn) => btn.hidden);
+        const emptyNote = qs('[data-command-palette-empty]', root);
+        if (emptyNote) {
+            emptyNote.hidden = !none;
+        }
         setActive(0);
     };
 
@@ -351,309 +339,6 @@ function initCommandPalette() {
             setOpen(false);
         }
     });
-}
-
-function initHeroTyping() {
-    const target = qs('#hero-typing-title');
-    if (!(target instanceof HTMLElement)) {
-        return;
-    }
-
-    const payload = readJsonScript('portfolio-home-data');
-    const titles = Array.isArray(payload?.heroTitles) ? payload.heroTitles.filter((t) => typeof t === 'string') : [];
-    if (titles.length === 0) {
-        return;
-    }
-
-    if (isReducedMotion()) {
-        target.textContent = titles[0] ?? '';
-        return;
-    }
-
-    let titleIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-    let timer = null;
-
-    const step = () => {
-        const full = titles[titleIndex] ?? '';
-
-        if (!deleting) {
-            charIndex = Math.min(full.length, charIndex + 1);
-        } else {
-            charIndex = Math.max(0, charIndex - 1);
-        }
-
-        target.textContent = full.slice(0, charIndex);
-
-        const isDoneTyping = !deleting && charIndex >= full.length;
-        const isDoneDeleting = deleting && charIndex <= 0;
-
-        if (isDoneTyping) {
-            deleting = true;
-            timer = window.setTimeout(step, 1100);
-            return;
-        }
-
-        if (isDoneDeleting) {
-            deleting = false;
-            titleIndex = (titleIndex + 1) % titles.length;
-            timer = window.setTimeout(step, 240);
-            return;
-        }
-
-        timer = window.setTimeout(step, deleting ? 32 : 46);
-    };
-
-    step();
-
-    window.addEventListener(
-        'beforeunload',
-        () => {
-            if (timer) {
-                window.clearTimeout(timer);
-            }
-        },
-        { once: true },
-    );
-}
-
-function initHeroCanvas() {
-    const canvas = qs('#hero-canvas');
-    if (!(canvas instanceof HTMLCanvasElement)) {
-        return;
-    }
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
-        return;
-    }
-
-    const reduced = isReducedMotion();
-    const prefersDark = () => window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false;
-
-    let raf = 0;
-    let w = 0;
-    let h = 0;
-    let dpr = 1;
-    let points = [];
-
-    const resize = () => {
-        const rect = canvas.getBoundingClientRect();
-        dpr = Math.min(2, window.devicePixelRatio || 1);
-        w = Math.max(1, Math.floor(rect.width));
-        h = Math.max(1, Math.floor(rect.height));
-        canvas.width = Math.floor(w * dpr);
-        canvas.height = Math.floor(h * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        const count = reduced ? 22 : Math.min(90, Math.floor((w * h) / 18000));
-        points = Array.from({ length: count }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-        }));
-    };
-
-    const tick = () => {
-        raf = window.requestAnimationFrame(tick);
-
-        ctx.clearRect(0, 0, w, h);
-
-        const dark = prefersDark();
-        const ink = dark ? 'rgba(244,244,245,0.45)' : 'rgba(9,9,11,0.45)';
-        const c1 = dark ? 'rgba(217,70,239,0.12)' : 'rgba(217,70,239,0.06)'; // Fuchsia
-        const c2 = dark ? 'rgba(14,165,233,0.10)' : 'rgba(14,165,233,0.05)'; // Sky
-
-        const g = ctx.createRadialGradient(w * 0.2, h * 0.2, 0, w * 0.2, h * 0.2, Math.max(w, h) * 0.7);
-        g.addColorStop(0, c1);
-        g.addColorStop(0.6, 'rgba(0,0,0,0)');
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, w, h);
-
-        const g2 = ctx.createRadialGradient(w * 0.8, h * 0.8, 0, w * 0.8, h * 0.8, Math.max(w, h) * 0.7);
-        g2.addColorStop(0, c2);
-        g2.addColorStop(0.6, 'rgba(0,0,0,0)');
-        ctx.fillStyle = g2;
-        ctx.fillRect(0, 0, w, h);
-
-        const maxDist = 120;
-        for (const p of points) {
-            if (!reduced) {
-                p.x += p.vx;
-                p.y += p.vy;
-            }
-
-            if (p.x < -20) p.x = w + 20;
-            if (p.x > w + 20) p.x = -20;
-            if (p.y < -20) p.y = h + 20;
-            if (p.y > h + 20) p.y = -20;
-        }
-
-        ctx.lineWidth = 1;
-        for (let i = 0; i < points.length; i++) {
-            for (let j = i + 1; j < points.length; j++) {
-                const a = points[i];
-                const b = points[j];
-                const dx = a.x - b.x;
-                const dy = a.y - b.y;
-                const dist = Math.hypot(dx, dy);
-                if (dist > maxDist) continue;
-
-                const alpha = (1 - dist / maxDist) * (dark ? 0.20 : 0.12);
-                ctx.strokeStyle = dark ? `rgba(217,70,239,${alpha})` : `rgba(14,165,233,${alpha})`;
-                ctx.beginPath();
-                ctx.moveTo(a.x, a.y);
-                ctx.lineTo(b.x, b.y);
-                ctx.stroke();
-            }
-        }
-
-        ctx.fillStyle = ink;
-        for (const p of points) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    };
-
-    resize();
-    tick();
-
-    const ro = new ResizeObserver(() => resize());
-    ro.observe(canvas);
-
-    window.addEventListener(
-        'beforeunload',
-        () => {
-            window.cancelAnimationFrame(raf);
-            ro.disconnect();
-        },
-        { once: true },
-    );
-}
-
-function initCodeWindow() {
-    const container = qs('#code-typing-container');
-    if (!(container instanceof HTMLElement)) {
-        return;
-    }
-
-    const payload = readJsonScript('portfolio-home-data');
-    const lines = Array.isArray(payload?.codeLines) ? payload.codeLines.filter((t) => typeof t === 'string') : [];
-    if (lines.length === 0) {
-        return;
-    }
-
-    const status = qs('#terminal-status-text');
-    if (status instanceof HTMLElement) {
-        status.textContent = 'System Ready';
-    }
-
-    const KEYWORDS = new Set([
-        'class',
-        'final',
-        'readonly',
-        'extends',
-        'implements',
-        'declare',
-        'public',
-        'private',
-        'protected',
-        'use',
-        'function',
-        'return',
-        'new',
-        'static',
-        'array',
-        'string',
-        'int',
-        'bool',
-        'true',
-        'false',
-        'null',
-    ]);
-
-    const colorizeLine = (line) => {
-        const frag = document.createDocumentFragment();
-        const src = String(line ?? '');
-        const re =
-            /("([^"\\]|\\.)*"|'([^'\\]|\\.)*'|\$[A-Za-z_][A-Za-z0-9_]*|\b[A-Za-z_][A-Za-z0-9_]*\b|->|::|\{|\}|\(|\)|\[|\]|;|:|,)/g;
-
-        let last = 0;
-        for (const match of src.matchAll(re)) {
-            const idx = match.index ?? 0;
-            if (idx > last) {
-                frag.appendChild(document.createTextNode(src.slice(last, idx)));
-            }
-
-            const token = match[0] ?? '';
-            const span = document.createElement('span');
-
-            if (token.startsWith('"') || token.startsWith("'")) {
-                span.className = 'text-emerald-300';
-            } else if (token.startsWith('$')) {
-                span.className = 'text-fuchsia-300';
-            } else if (KEYWORDS.has(token)) {
-                span.className = 'text-sky-300';
-            } else if (token === '->' || token === '::') {
-                span.className = 'text-cyan-300';
-            } else if ('{}()[];:,.'.includes(token)) {
-                span.className = 'text-zinc-100/70';
-            } else {
-                span.className = 'text-zinc-100/90';
-            }
-
-            span.textContent = token;
-            frag.appendChild(span);
-            last = idx + token.length;
-        }
-
-        if (last < src.length) {
-            frag.appendChild(document.createTextNode(src.slice(last)));
-        }
-
-        return frag;
-    };
-
-    const renderLine = (raw) => {
-        const line = String(raw ?? '');
-        const el = document.createElement('div');
-        el.className = 'min-h-[1.2em] whitespace-pre-wrap wrap-break-word';
-        el.appendChild(colorizeLine(line));
-        return el;
-    };
-
-    container.innerHTML = '';
-
-    if (isReducedMotion()) {
-        lines.forEach((l) => container.appendChild(renderLine(l)));
-        return;
-    }
-
-    let i = 0;
-    const push = () => {
-        const line = lines[i];
-        if (typeof line !== 'string') {
-            return;
-        }
-
-        const el = renderLine(line);
-        container.appendChild(el);
-        container.scrollTop = container.scrollHeight;
-
-        gsap.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
-
-        i++;
-        if (i >= lines.length) {
-            return;
-        }
-
-        window.setTimeout(push, 70);
-    };
-
-    window.setTimeout(push, 260);
 }
 
 function initModals() {
@@ -941,6 +626,7 @@ function initMobileNav() {
         if (e.key === 'Escape') {
             e.preventDefault();
             setOpen(false);
+            qs('[data-mobile-nav-toggle]')?.focus();
         }
     });
 
@@ -963,73 +649,6 @@ function initMobileNav() {
     });
 
     setOpen(false);
-}
-
-function initProjectDrawer() {
-    const drawer = document.getElementById('project-drawer');
-    const backdrop = document.getElementById('drawer-backdrop');
-    const surface = document.getElementById('drawer-surface');
-    const closeBtn = document.getElementById('close-drawer');
-    const body = document.body;
-
-    if (!drawer || !closeBtn) return;
-
-    const setOpen = (open) => {
-        if (open) {
-            drawer.classList.remove('hidden');
-            body.classList.add('overflow-hidden');
-            requestAnimationFrame(() => {
-                backdrop?.classList.add('opacity-100');
-                backdrop?.classList.remove('opacity-0');
-                surface?.classList.remove('translate-x-full');
-                surface?.classList.add('translate-x-0');
-            });
-        } else {
-            backdrop?.classList.remove('opacity-100');
-            backdrop?.classList.add('opacity-0');
-            surface?.classList.remove('translate-x-0');
-            surface?.classList.add('translate-x-full');
-
-            setTimeout(() => {
-                drawer.classList.add('hidden');
-                body.classList.remove('overflow-hidden');
-            }, 500);
-        }
-    };
-
-    document.addEventListener('click', (e) => {
-        const btn = e.target instanceof Element ? e.target.closest('.js-open-portfolio-drawer') : null;
-        if (btn) {
-            e.preventDefault();
-            setOpen(true);
-
-            // Close command palette if open
-            const cp = document.getElementById('command-palette');
-            if (cp && !cp.classList.contains('hidden')) {
-                const closeCP = cp.querySelector('[data-command-palette-close]');
-                if (closeCP instanceof HTMLElement) closeCP.click();
-            }
-        }
-    });
-
-    closeBtn.addEventListener('click', () => setOpen(false));
-    backdrop?.addEventListener('click', () => setOpen(false));
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !drawer.classList.contains('hidden')) {
-            setOpen(false);
-        }
-    });
-
-    // Check hash on load and change
-    const checkHash = () => {
-        if (window.location.hash === '#portfolio') {
-            setOpen(true);
-        }
-    };
-
-    checkHash();
-    window.addEventListener('hashchange', checkHash);
 }
 
 function initHashScroll() {
@@ -1059,6 +678,136 @@ function initHashScroll() {
     window.setTimeout(scroll, 520);
 }
 
+function initProjectDialogs() {
+    qsa('[data-project-dialog-open]').forEach((button) => {
+        const dialog = document.getElementById(button.dataset.projectDialogOpen);
+        if (!(dialog instanceof HTMLDialogElement)) return;
+        button.addEventListener('click', () => dialog.showModal());
+        dialog.addEventListener('click', (event) => {
+            if (event.target !== dialog) return;
+            const bounds = dialog.getBoundingClientRect();
+            if (event.clientX < bounds.left || event.clientX > bounds.right ||
+                event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+        });
+    });
+}
+
+// Contents lists follow the reader: the last section whose heading passed under the sticky nav is marked current.
+function initToc() {
+    qsa('[data-toc]').forEach((toc) => {
+        const links = qsa('a[href^="#"]', toc);
+        const targets = links.map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))));
+        if (!targets.some(Boolean)) {
+            return;
+        }
+        let frame = 0;
+        const update = () => {
+            frame = 0;
+            const line = (qs('.brand-nav')?.offsetHeight ?? 0) + 32;
+            let current = -1;
+            targets.forEach((target, index) => {
+                if (target && target.getBoundingClientRect().top - line <= 1) {
+                    current = index;
+                }
+            });
+            // At the very bottom the last section counts as read even if its heading never reached the line.
+            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+                current = targets.length - 1;
+            }
+            links.forEach((link, index) => {
+                if (index === current) {
+                    link.setAttribute('aria-current', 'location');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+        };
+        const schedule = () => {
+            if (!frame) {
+                frame = window.requestAnimationFrame(update);
+            }
+        };
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
+        update();
+    });
+}
+
+// Code component copy button: copies the code without its line numbers and confirms in place.
+function initCodeCopy() {
+    document.addEventListener('click', async (event) => {
+        const button = event.target instanceof Element ? event.target.closest('[data-copy-code]') : null;
+        const code = button?.closest('.brand-code')?.querySelector('pre code');
+        if (!button || !code) {
+            return;
+        }
+        const clone = code.cloneNode(true);
+        clone.querySelectorAll('.hl-gutter').forEach((gutter) => gutter.remove());
+        if (await copyText(clone.textContent, { literal: true })) {
+            const label = button.textContent;
+            button.textContent = button.dataset.copiedLabel ?? label;
+            button.dataset.copied = '';
+            window.setTimeout(() => {
+                button.textContent = label;
+                delete button.dataset.copied;
+            }, 1600);
+        }
+    });
+}
+
+// Desktop nav menus: hover opens for mouse users; click, Enter and Space toggle; Escape and focus leaving close.
+function initNavMenus() {
+    qsa('[data-nav-menu]').forEach((menu) => {
+        const trigger = qs('button[aria-controls]', menu);
+        if (!(trigger instanceof HTMLButtonElement)) {
+            return;
+        }
+        const setOpen = (open) => {
+            menu.toggleAttribute('data-open', open);
+            trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        trigger.addEventListener('click', (event) => {
+            // A mouse click while hovering keeps the menu open instead of closing what hover just opened.
+            if (event.detail > 0 && menu.matches(':hover')) {
+                setOpen(true);
+                return;
+            }
+            setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+        });
+        menu.addEventListener('mouseenter', () => setOpen(true));
+        menu.addEventListener('mouseleave', () => setOpen(false));
+        menu.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setOpen(false);
+                trigger.focus();
+            }
+        });
+        menu.addEventListener('focusout', (event) => {
+            if (!menu.contains(event.relatedTarget)) {
+                setOpen(false);
+            }
+        });
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target)) {
+                setOpen(false);
+            }
+        });
+    });
+}
+
+function initLocaleLinks() {
+    qsa('[data-locale-switch]').forEach((link) => {
+        link.addEventListener('click', () => {
+            const destination = new URL(link.href);
+            const id = decodeURIComponent((window.location.hash ?? '').slice(1));
+            // Anchors are localized (#hakkimda / #about); the section names its twin in data-anchor-alt.
+            const alt = id ? document.getElementById(id)?.dataset.anchorAlt : null;
+            destination.hash = alt ? `#${alt}` : window.location.hash;
+            link.href = destination.href;
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('touchstart', () => {}, { passive: true });
     safeInit('reveal', initReveal, () => {
@@ -1068,11 +817,12 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit('copyButtons', initCopyButtons);
     safeInit('commandPalette', initCommandPalette);
     safeInit('mobileNav', initMobileNav);
-    safeInit('projectDrawer', initProjectDrawer);
     safeInit('modals', initModals);
+    safeInit('projectDialogs', initProjectDialogs);
+    safeInit('localeLinks', initLocaleLinks);
     safeInit('imposterArena', initImposterArena);
-    safeInit('heroCanvas', initHeroCanvas);
-    safeInit('heroTyping', initHeroTyping);
-    safeInit('codeWindow', initCodeWindow);
     safeInit('hashScroll', initHashScroll);
+    safeInit('navMenus', initNavMenus);
+    safeInit('codeCopy', initCodeCopy);
+    safeInit('toc', initToc);
 });

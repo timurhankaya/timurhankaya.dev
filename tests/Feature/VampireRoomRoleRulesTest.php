@@ -523,3 +523,41 @@ function firstPlayerIdWhere(array $players, callable $predicate): string
 
     throw new RuntimeException('No player matched the predicate.');
 }
+
+it('tells the doctor why last night\'s patient cannot be picked again', function () {
+    Cache::flush();
+    $rooms = app(VampireRoomService::class);
+    $ctx = createFourPlayerVampireRoomWithDoctor($rooms);
+    $players = (array) $rooms->getRoom($ctx['code'])['players'];
+    $vampireId = firstPlayerIdWhere($players, fn ($p) => ($p['alignment'] ?? null) === 'vampire');
+    $doctorId = firstPlayerIdWhere($players, fn ($p) => ($p['role'] ?? null) === VampireRole::Doctor->value);
+    [$v1] = array_keys(array_filter($players, fn ($p) => ($p['role'] ?? null) === VampireRole::Villager->value));
+
+    $rooms->castNightVote($ctx['code'], $vampireId, $v1);
+    $rooms->doctorProtect($ctx['code'], $doctorId, $v1);
+    $rooms->resolveDawn($ctx['code'], $ctx['hostPlayerId']);
+    advanceDayWithoutElimination($rooms, $ctx['code'], $ctx['hostPlayerId']);
+
+    session()->put('vampire.player.'.$ctx['code'], $doctorId);
+    $component = Livewire::test('games.vampire.room', ['roomCode' => $ctx['code']])->call('doctorProtect', $v1);
+
+    expect($component->get('error'))->toBe(__('vampire.errors.doctor_same_target'))
+        ->and($rooms->getRoom($ctx['code'])['doctorProtects'])->toBeNull();
+});
+
+it('announces at dawn who died, from the same data every player receives', function () {
+    Cache::flush();
+    $rooms = app(VampireRoomService::class);
+    $ctx = createFourPlayerVampireRoomWithDoctor($rooms);
+    $players = (array) $rooms->getRoom($ctx['code'])['players'];
+    $vampireId = firstPlayerIdWhere($players, fn ($p) => ($p['alignment'] ?? null) === 'vampire');
+    [$v1] = array_keys(array_filter($players, fn ($p) => ($p['role'] ?? null) === VampireRole::Villager->value));
+
+    session()->put('vampire.player.'.$ctx['code'], $ctx['hostPlayerId']);
+    $component = Livewire::test('games.vampire.room', ['roomCode' => $ctx['code']])->call('refreshRoom');
+    $rooms->castNightVote($ctx['code'], $vampireId, $v1);
+    $rooms->resolveDawn($ctx['code'], $ctx['hostPlayerId']);
+    $component->call('refreshRoom');
+
+    expect($component->get('notification.message'))->toBe(__('vampire.log.death_night', ['name' => $players[$v1]['name']]));
+});

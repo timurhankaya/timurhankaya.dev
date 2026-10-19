@@ -26,7 +26,14 @@ final class VampireRoomPresenter
         $myRole = is_string($myPlayer['role'] ?? null) ? (string) $myPlayer['role'] : null;
         $myAlignment = is_string($myPlayer['alignment'] ?? null) ? (string) $myPlayer['alignment'] : null;
 
+        // What the detective has learned and what the doctor protected last are secrets of those roles:
+        // everything in this payload is serialized to the browser, so other roles must never receive it.
+        $myRoleEnum = VampireRole::tryFrom($myRole ?? '');
+        $isDetective = $myRoleEnum === VampireRole::Detective;
+        $isDoctor = $myRoleEnum === VampireRole::Doctor;
         $interrogatedIds = array_values(array_map('strval', (array) ($room['interrogatedIds'] ?? [])));
+        // Roles become public only when the game is over (the final roles panel).
+        $gameOver = ($room['status'] ?? null) === VampireRoomStatus::GameOver->value;
         $players = [];
         foreach ($roomPlayers as $player) {
             $players[] = [
@@ -40,7 +47,8 @@ final class VampireRoomPresenter
                 'isVampire' => $myPlayerId !== null
                     && VampireRole::tryFrom((string) ($roomPlayers[$myPlayerId]['role'] ?? ''))?->isVampireTeam() === true
                     && VampireRole::tryFrom((string) ($player['role'] ?? ''))?->isVampireTeam() === true,
-                'interrogated' => in_array((string) ($player['id'] ?? ''), $interrogatedIds, true),
+                'interrogated' => $isDetective && in_array((string) ($player['id'] ?? ''), $interrogatedIds, true),
+                'revealedRole' => $gameOver && is_string($player['role'] ?? null) ? (string) $player['role'] : null,
             ];
         }
 
@@ -116,8 +124,8 @@ final class VampireRoomPresenter
             'detectiveResult' => VampireRole::tryFrom($myRole ?? '') === VampireRole::Detective && is_string($room['detectiveResult'] ?? null)
                 ? (string) $room['detectiveResult']
                 : null,
-            'detectiveInvestigationResults' => $detectiveInvestigationResults,
-            'lastProtectedId' => is_string($room['lastProtectedId'] ?? null) ? (string) $room['lastProtectedId'] : null,
+            'detectiveInvestigationResults' => $isDetective ? $detectiveInvestigationResults : [],
+            'lastProtectedId' => $isDoctor && is_string($room['lastProtectedId'] ?? null) ? (string) $room['lastProtectedId'] : null,
             'nightVoteCounts' => $myAlignment === 'vampire' ? $nightVoteCounts : [],
             'nightResult' => $nightResult,
             'dayVoteCounts' => $dayVoteCounts,

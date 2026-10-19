@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\Post;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -37,14 +38,9 @@ final class Seo
             : self::fallbackLocale();
     }
 
+    /** The brand in titles, Open Graph and schema; fixed so a server's APP_NAME (e.g. "… Dev") never leaks into results. */
     public static function siteName(): string
     {
-        $configured = trim((string) config('app.name', ''));
-
-        if ($configured !== '' && $configured !== 'Laravel') {
-            return $configured;
-        }
-
         return 'Timurhan Kaya';
     }
 
@@ -55,8 +51,8 @@ final class Seo
             : self::currentLocale();
 
         return $resolvedLocale === 'tr'
-            ? self::siteName().' - Yazilim Gelistirici'
-            : self::siteName().' - Software Developer';
+            ? self::siteName().' — Yazılım Geliştirici'
+            : self::siteName().' — Software Developer';
     }
 
     public static function defaultDescription(?string $locale = null): string
@@ -66,8 +62,8 @@ final class Seo
             : self::currentLocale();
 
         return $resolvedLocale === 'tr'
-            ? 'Buyuk olcekli urunler, yuksek trafikli sistemler ve oyun deneyimleri gelistiren yazilim gelistirici portfoyu.'
-            : 'Software developer portfolio focused on large-scale products, high-traffic systems, and multiplayer game experiments.';
+            ? 'İstanbul’da yazılım geliştirici Timurhan Kaya’nın sitesi: kurumsal platformlar, finans ürünleri, yapay zekâ özellikleri, yazılar ve parti oyunları.'
+            : 'Timurhan Kaya is a software developer in Istanbul building corporate platforms, finance products and AI features. Writing, case studies and party games.';
     }
 
     /**
@@ -75,44 +71,12 @@ final class Seo
      */
     public static function route(string $name, array $parameters = [], ?string $locale = null, bool $absolute = true): string
     {
-        $parameters['lang'] = $locale ?? self::currentLocale();
-
-        return route($name, $parameters, $absolute);
+        return LocalizedRoutes::route($name, $parameters, $locale ?? self::currentLocale(), $absolute);
     }
 
     public static function localizedUrl(?string $url = null, ?string $locale = null): string
     {
-        $resolvedUrl = $url ?: url()->current();
-        $resolvedLocale = in_array($locale, self::SUPPORTED_LOCALES, true)
-            ? $locale
-            : self::currentLocale();
-
-        $parts = parse_url($resolvedUrl);
-
-        if ($parts === false) {
-            return $resolvedUrl;
-        }
-
-        $query = [];
-
-        if (isset($parts['query'])) {
-            parse_str($parts['query'], $query);
-        }
-
-        $query['lang'] = $resolvedLocale;
-        ksort($query);
-
-        $scheme = isset($parts['scheme']) ? $parts['scheme'].'://' : '';
-        $user = $parts['user'] ?? '';
-        $pass = isset($parts['pass']) ? ':'.$parts['pass'] : '';
-        $auth = $user !== '' ? $user.$pass.'@' : '';
-        $host = $parts['host'] ?? '';
-        $port = isset($parts['port']) ? ':'.$parts['port'] : '';
-        $path = $parts['path'] ?? '';
-        $queryString = http_build_query($query);
-        $fragment = isset($parts['fragment']) ? '#'.$parts['fragment'] : '';
-
-        return "{$scheme}{$auth}{$host}{$port}{$path}".($queryString !== '' ? "?{$queryString}" : '').$fragment;
+        return LocalizedRoutes::translateUrl($url ?: url()->current(), in_array($locale, self::SUPPORTED_LOCALES, true) ? $locale : self::currentLocale());
     }
 
     /**
@@ -179,6 +143,64 @@ final class Seo
         }
 
         return Carbon::createFromTimestamp($timestamps->max())->toAtomString();
+    }
+
+    /**
+     * Most recent content change to a page's own files or to any published post, whichever is later.
+     * Lets hub pages (home, listings) report a lastmod that tracks real content changes, not deploys.
+     *
+     * @param  list<string>  $paths
+     */
+    public static function contentLastModified(array $paths = [], bool $includePosts = true): ?string
+    {
+        $paths = array_values(array_filter($paths, 'is_string'));
+        // Keyed by project-relative paths: release directories change on every deploy.
+        $key = sha1(implode('|', array_map(fn (string $path): string => str_replace(base_path(), '', $path), $paths)));
+        $candidates = collect([ContentStamp::lastChanged($key, $paths)])->filter();
+        if ($includePosts && ($latest = Post::published()->max('updated_at'))) {
+            $candidates->push(Carbon::parse($latest));
+        }
+
+        return $candidates->max()?->toAtomString();
+    }
+
+    /** Meta descriptions beyond ~160 characters are cut by search results, so end on a word boundary. */
+    public static function metaDescription(?string $text, int $limit = 160): string
+    {
+        return self::clip((string) $text, $limit);
+    }
+
+    /** Multibyte-safe shortening at a word boundary (a hard cut only when no space is near the end), ending in an ellipsis. */
+    public static function clip(string $text, int $limit): string
+    {
+        $plain = trim((string) preg_replace('/\s+/u', ' ', strip_tags($text)));
+        if (mb_strlen($plain) <= $limit) {
+            return $plain;
+        }
+        $cut = mb_substr($plain, 0, $limit - 1);
+        $space = mb_strrpos($cut, ' ');
+        if ($space !== false && $space > $limit * 0.6) {
+            $cut = mb_substr($cut, 0, $space);
+        }
+
+        return preg_replace('/[\s,;:.\-–—]+$/u', '', $cut).'…';
+    }
+
+    /**
+     * Real dimensions and MIME type for images served from this site; null when they cannot be read.
+     *
+     * @return array{width: int, height: int, type: string}|null
+     */
+    public static function imageMeta(string $imageUrl): ?array
+    {
+        $path = public_path(ltrim((string) parse_url($imageUrl, PHP_URL_PATH), '/'));
+        $host = parse_url($imageUrl, PHP_URL_HOST);
+        if (($host !== null && $host !== parse_url((string) url('/'), PHP_URL_HOST)) || ! is_file($path)) {
+            return null;
+        }
+        $info = @getimagesize($path);
+
+        return $info ? ['width' => $info[0], 'height' => $info[1], 'type' => $info['mime']] : null;
     }
 
     public static function descriptionFromHtml(?string $html, int $limit = 160): string

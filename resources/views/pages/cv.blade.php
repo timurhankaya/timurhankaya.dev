@@ -1,5 +1,5 @@
 @php
-    $locale = request()->query('lang', app()->getLocale());
+    $locale = app()->getLocale();
     if (!in_array($locale, ['en', 'tr'])) {
         $locale = 'en';
     }
@@ -40,7 +40,7 @@
         ->take(4)
         ->map(fn (array $item): array => [
             'name' => $tx(data_get($item, 'name')),
-            'tag' => $tx(data_get($item, 'badge')) ?: $tx(data_get($item, 'context_label')),
+            'tag' => $tx(data_get($item, 'badge')),
             'desc' => $tx(data_get($item, 'description')),
             'stack' => implode(' · ', array_filter(array_map($tx, array_values((array) data_get($item, 'stack', []))))),
         ])
@@ -53,7 +53,6 @@
             'items' => collect((array) data_get($group, 'items', []))
                 ->map(fn (array $item): array => [
                     'label' => $tx(data_get($item, 'label')),
-                    'value' => (int) data_get($item, 'value', 0),
                 ])
                 ->values()
                 ->all(),
@@ -69,14 +68,6 @@
         ->values()
         ->all();
 
-    $recognitionItems = collect((array) data_get($content, 'recognition.items', []))
-        ->map(fn (array $item): array => [
-            'name' => $tx(data_get($item, 'title')),
-            'tag' => $tx(data_get($item, 'tag')),
-            'body' => $tx(data_get($item, 'body')),
-        ])
-        ->values()
-        ->all();
 
     $profileParts = array_filter([
         $tx(data_get($content, 'about.p1')),
@@ -101,52 +92,39 @@
         'skill_groups' => $skillGroups,
         'edu_title' => $tx(data_get($content, 'education.title')),
         'education_items' => $educationItems,
-        'rec_title' => $tx(data_get($content, 'recognition.title')),
-        'rec_items' => $recognitionItems,
         'int_title' => $tx(data_get($content, 'about.interests')),
         'interests' => array_map($tx, array_values((array) data_get($content, 'about.hobbies', []))),
     ];
 
     $cvUrl = \App\Support\Seo::route('cv', [], $locale);
-    $alternateUrls = \App\Support\Seo::alternateUrls(route('cv'));
+    $alternateUrls = \App\Support\Seo::alternateUrls(\App\Support\Seo::route('cv'));
     $cvDescription = $t['profile_text'] !== '' ? $t['profile_text'] : $tx(data_get($content, 'meta.description'));
-    $cvJsonLd = [
-        '@context' => 'https://schema.org',
-        '@graph' => [
-            [
-                '@type' => 'ProfilePage',
-                'name' => $t['meta_title'],
-                'url' => $cvUrl,
-                'description' => $cvDescription,
-            ],
-            [
-                '@type' => 'Person',
-                'name' => 'Timurhan Kaya',
-                'url' => \App\Support\Seo::route('home', [], $locale),
-                'jobTitle' => $t['role'],
-                'description' => $cvDescription,
-                'email' => 'mailto:kayacekovic@gmail.com',
-                'knowsAbout' => collect($t['skill_groups'])
-                    ->flatMap(fn (array $group): array => array_map(fn (array $item): string => $item['label'], $group['items']))
-                    ->values()
-                    ->all(),
-                'sameAs' => [
-                    'https://www.linkedin.com/in/timurhan-kaya/',
-                    'https://github.com/kayacekovic',
-                ],
-            ],
-        ],
-    ];
+    $cvSkills = collect($t['skill_groups'])
+        ->flatMap(fn (array $group): array => array_map(fn (array $item): string => $item['label'], $group['items']))
+        ->values()
+        ->all();
+    $cvJsonLd = \App\Support\StructuredData::script(
+        \App\Support\StructuredData::webPage('ProfilePage', $cvUrl, $t['meta_title'], \App\Support\Seo::metaDescription($cvDescription), [
+            'mainEntity' => ['@id' => \App\Support\StructuredData::personId()],
+            'breadcrumb' => ['@id' => $cvUrl.'#breadcrumb'],
+        ]),
+        \App\Support\StructuredData::breadcrumbs($cvUrl, [[__('brand.home_crumb', [], $locale), \App\Support\Seo::route('home', [], $locale)], [$t['meta_title'], $cvUrl]]),
+        [...\App\Support\StructuredData::person($locale), 'jobTitle' => $t['role'], 'description' => $cvDescription, 'email' => 'kayacekovic@gmail.com', 'knowsAbout' => $cvSkills],
+        \App\Support\StructuredData::website($locale),
+    );
 @endphp
 <!DOCTYPE html>
 <html lang="{{ $locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ url('/site.webmanifest') }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ __('brand.feed_title') }}" href="{{ \App\Support\Seo::route('feed') }}">
     <title>{{ $t['meta_title'] }}</title>
-    <meta name="description" content="{{ $cvDescription }}">
+    <meta name="description" content="{{ \App\Support\Seo::metaDescription($cvDescription) }}">
     <meta name="author" content="Timurhan Kaya">
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     <link rel="canonical" href="{{ $cvUrl }}">
@@ -155,45 +133,42 @@
     @endforeach
     <meta property="og:type" content="profile">
     <meta property="og:title" content="{{ $t['meta_title'] }}">
-    <meta property="og:description" content="{{ $cvDescription }}">
+    <meta property="og:description" content="{{ \App\Support\Seo::metaDescription($cvDescription) }}">
     <meta property="og:url" content="{{ $cvUrl }}">
     <meta property="og:image" content="{{ \App\Support\Seo::imageUrl('og-cv.png') }}">
     <meta property="og:site_name" content="{{ \App\Support\Seo::siteName() }}">
     <meta property="og:locale" content="{{ \App\Support\Seo::ogLocale($locale) }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $t['meta_title'] }}">
-    <meta name="twitter:description" content="{{ $cvDescription }}">
+    <meta name="twitter:description" content="{{ \App\Support\Seo::metaDescription($cvDescription) }}">
     <meta name="twitter:image" content="{{ \App\Support\Seo::imageUrl('og-cv.png') }}">
-    <script type="application/ld+json">{!! json_encode($cvJsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="screen">
+    {!! $cvJsonLd !!}
+    <link rel="stylesheet" href="{{ asset('fonts/typography.css') }}">
     <style>
         :root {
-            --ink: #111113;
-            --ink-secondary: #3c3c43;
-            --ink-muted: #6e6e7a;
-            --accent: #0a84ff;
-            --accent-soft: #e8f2ff;
+            --ink: #131418;
+            --ink-secondary: #42464f;
+            --ink-muted: #626874;
+            --accent: #ff7a1a;
+            --accent-soft: #fff0e5;
             --surface: #ffffff;
-            --surface-alt: #f5f5f7;
-            --border: #d2d2d7;
-            --border-light: #e8e8ed;
-            --skill-bar: #0a84ff;
+            --surface-alt: #f4f5f7;
+            --border: #d4d7dd;
+            --border-light: #e7e9ed;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             font-size: 12.5px;
-            -webkit-print-color-adjust: economy;
-            print-color-adjust: economy;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
         body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--ink);
-            background: #e5e5ea;
+            background: #0a0a0b;
             line-height: 1.45;
         }
 
@@ -261,7 +236,7 @@
         }
 
         .contact-item .label {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.62rem;
             font-weight: 600;
             color: var(--ink-muted);
@@ -299,7 +274,7 @@
         .section:last-child { margin-bottom: 0; }
 
         .section-title {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.78rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -340,7 +315,7 @@
         }
 
         .exp-period {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.7rem;
             font-weight: 500;
             color: var(--ink-muted);
@@ -415,27 +390,6 @@
             font-weight: 500;
         }
 
-        .skill-pct {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--ink-muted);
-        }
-
-        .skill-bar-track {
-            width: 100%;
-            height: 1.4mm;
-            background: var(--surface-alt);
-            border-radius: 1mm;
-            margin-top: 0.5mm;
-            overflow: hidden;
-        }
-
-        .skill-bar-fill {
-            height: 100%;
-            border-radius: 1mm;
-            background: var(--skill-bar);
-        }
-
         /* ---- Education ---- */
         .edu-item { margin-bottom: 1.8mm; }
         .edu-item:last-child { margin-bottom: 0; }
@@ -452,23 +406,8 @@
             margin-top: 0.1mm;
         }
 
-        /* ---- Recognition ---- */
-        .recognition-item { margin-bottom: 1.6mm; }
-        .recognition-item:last-child { margin-bottom: 0; }
-
-        .recognition-title-row {
-            display: flex;
-            align-items: baseline;
-            gap: 1.2mm;
-        }
-
-        .recognition-name {
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
         .tag {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.6rem;
             font-weight: 600;
             color: var(--accent);
@@ -476,12 +415,6 @@
             padding: 0.2mm 1.4mm;
             border-radius: 0.6mm;
             white-space: nowrap;
-        }
-
-        .recognition-body {
-            font-size: 0.75rem;
-            color: var(--ink-muted);
-            line-height: 1.3;
         }
 
         /* ---- Projects ---- */
@@ -501,7 +434,7 @@
         }
 
         .project-stack {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.62rem;
             color: var(--ink-muted);
             margin-top: 0.3mm;
@@ -558,7 +491,7 @@
                 font-variation-settings: normal;
                 font-feature-settings: normal;
             }
-            .section-title, .skill-pct, .tag, .exp-period, .contact-item .label {
+            .section-title, .tag, .exp-period, .contact-item .label {
                 font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace !important;
                 font-variation-settings: normal;
                 font-feature-settings: normal;
@@ -575,7 +508,7 @@
             border: none;
             padding: 14px 28px;
             border-radius: 12px;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Geist', sans-serif;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -676,8 +609,7 @@
                     <div class="skill-group-title">{{ $group['title'] }}</div>
                     @foreach($group['items'] as $item)
                     <div class="skill-item">
-                        <div class="skill-label-row"><span class="skill-label">{{ $item['label'] }}</span><span class="skill-pct">{{ $item['value'] }}%</span></div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:{{ $item['value'] }}%"></div></div>
+                        <span class="skill-label">{{ $item['label'] }}</span>
                     </div>
                     @endforeach
                 </div>
@@ -694,15 +626,6 @@
                 @endforeach
             </div>
 
-            <div class="section">
-                <div class="section-title">{{ $t['rec_title'] }}</div>
-                @foreach($t['rec_items'] as $rec)
-                <div class="recognition-item">
-                    <div class="recognition-title-row"><span class="recognition-name">{{ $rec['name'] }}</span><span class="tag">{{ $rec['tag'] }}</span></div>
-                    <p class="recognition-body">{{ $rec['body'] }}</p>
-                </div>
-                @endforeach
-            </div>
 
             <div class="section">
                 <div class="section-title">{{ $t['int_title'] }}</div>
