@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\LlmsController;
 use App\Http\Controllers\PostController;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
 Route::get('/site.webmanifest', [SitemapController::class, 'manifest'])->name('manifest');
+// One address for both languages; the form sends its locale and the visitor returns to their page.
+Route::post('/contact-requests', [ContactRequestController::class, 'store'])->middleware('throttle:contact')->name('contact.store');
 
 Route::get('/admin/preview/posts/{id}', PreviewPostController::class)->whereNumber('id')->name('admin.posts.preview');
 

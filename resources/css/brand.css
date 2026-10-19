@@ -8,6 +8,8 @@
     --surface: #141518;
     --heading: "Syne", sans-serif;
     --mono: "IBM Plex Mono", monospace;
+    /* One gap between home sections; the logo strip uses it too, so the space above and below it matches. */
+    --section-space: 100px;
     /* Every overlay (project details, command palette, game sheets, QR) shares this lighter scrim and edge; corners stay square like the rest of the site. */
     --modal-line: #ffffff17;
     --modal-scrim: rgb(6 6 8 / .58);
@@ -24,7 +26,9 @@
 .brand-site :is(section[id], div[id="skills"]) { scroll-margin-top: 110px; }
 .brand-site a { -webkit-tap-highlight-color: transparent; }
 .brand-main, .brand-nav-inner, .brand-footer, .brand-mobile-menu { width: min(100% - 96px, 1184px); margin-inline: auto; }
-.brand-nav { position: sticky; top: 0; z-index: 100; background: rgb(10 10 11 / .83); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
+/* Frosted bar: light enough for the page to show through, blurred and saturated so the links stay readable over the orange card. */
+.brand-nav { position: sticky; top: 0; z-index: 100; background: rgb(10 10 11 / .62); backdrop-filter: saturate(160%) blur(20px); -webkit-backdrop-filter: saturate(160%) blur(20px); border-bottom: 1px solid var(--line); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .brand-nav { background: rgb(10 10 11 / .96); } }
 .brand-nav-inner { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .brand-logo { font: 600 34px/1 var(--mono); letter-spacing: -4px; padding-right: 5px; }
 .brand-logo span { color: var(--accent); }
@@ -82,7 +86,7 @@
 .brand-status { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex: none; margin-top: 8px; }
 .brand-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 32px; min-height: 46px; padding: 12px 20px; background: var(--accent); color: #0a0a0b; font-size: 14px; font-weight: 600; transition: background .2s, color .2s; }
 .brand-button:hover { background: #ff984d; color: #0a0a0b; }
-.brand-section { padding-top: 100px; }
+.brand-section { padding-top: var(--section-space); }
 .brand-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 45px; margin-bottom: 30px; }
 .brand-section-heading > p { max-width: 345px; color: var(--muted); font-size: 13px; line-height: 1.8; }
 .brand-section-number { color: var(--accent); margin-right: 18px; }
@@ -191,6 +195,44 @@
 .brand-cv-aside { padding: 30px; background: var(--surface); align-self: start; }
 .brand-cv-aside h2 { font-family: var(--heading); font-size: 32px; font-weight: 500; letter-spacing: -.045em; }
 .brand-cv-aside p { font-size: 13px; line-height: 1.8; color: var(--muted); margin-block: 15px 25px; }
+/* Contact form: square fields on the page ground, chips for choices, errors in a warm red that reads on black. */
+.brand-contact-aside { display: grid; gap: 32px; align-self: start; }
+.brand-contact-aside > h2 { color: var(--muted); }
+.brand-form { display: grid; gap: 26px; scroll-margin-top: 110px; }
+.brand-form-head h2 { font-family: var(--heading); font-size: clamp(28px, 3.4vw, 38px); font-weight: 500; letter-spacing: -.045em; }
+.brand-form-head p, .brand-form-foot p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-top: 8px; }
+.brand-form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.brand-form fieldset[hidden] { display: none; }
+.brand-form legend, .brand-field > .brand-label { display: block; color: var(--muted); margin-bottom: 12px; }
+.brand-form small { text-transform: none; letter-spacing: 0; color: var(--muted); }
+.brand-form-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.brand-form fieldset.brand-form-project { display: grid; gap: 18px; padding: 22px; border: 1px solid var(--line); background: var(--surface); }
+/* A legend sits on a fieldset's border by default; floating it keeps it inside the panel. */
+.brand-form-project > legend { float: left; width: 100%; margin-bottom: 0; }
+.brand-form-question { font-size: 14px; color: var(--ink); }
+.brand-chip { position: relative; display: inline-flex; cursor: pointer; }
+.brand-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.brand-chip span { display: inline-block; padding: 10px 14px; border: 1px solid var(--line); font-size: 14px; line-height: 1.3; color: var(--muted); transition: border-color .2s, color .2s, background .2s; }
+.brand-chip:hover span { border-color: var(--muted); color: var(--ink); }
+.brand-chip input:checked + span { border-color: var(--accent); color: var(--ink); background: rgb(255 122 26 / .1); }
+.brand-chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
+.brand-form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.brand-field { display: block; min-width: 0; }
+.brand-field :is(input, select, textarea) { display: block; width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; font-size: 15px; line-height: 1.5; transition: border-color .2s; }
+.brand-field textarea { min-height: 170px; resize: vertical; }
+.brand-field :is(input, select, textarea)::placeholder { color: #7d828c; }
+.brand-field :is(input, select, textarea):hover { border-color: #3a3d44; }
+.brand-field :is(input, select, textarea):focus { outline: none; border-color: var(--accent); }
+.brand-field [aria-invalid="true"] { border-color: #ff8a7a; }
+.brand-form-error { display: block; margin-top: 8px; color: #ff8a7a; font-size: 13px; }
+.brand-form-alert { padding: 14px 16px; border: 1px solid #ff8a7a; color: #ffb3a8; font-size: 14px; }
+.brand-form-sent { padding: 18px 20px; border: 1px solid var(--accent); background: rgb(255 122 26 / .08); }
+.brand-form-sent p:first-child { font-weight: 600; color: var(--ink); }
+.brand-form-sent p + p { margin-top: 4px; color: var(--muted); font-size: 14px; }
+.brand-form-foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 6px; border-top: 1px solid var(--line); }
+.brand-form-foot p { max-width: 360px; margin-top: 18px; }
+.brand-form-foot .brand-button { margin-top: 18px; flex-shrink: 0; }
+.brand-form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .brand-post { display: grid; grid-template-columns: 160px 1fr 35px; gap: 30px; padding-block: 34px; border-top: 1px solid var(--line); }
 .brand-post time { color: var(--muted); padding-top: 7px; }
 .brand-post h2 { font-size: 26px; font-weight: 500; letter-spacing: -.04em; }
@@ -236,7 +278,7 @@
     .brand-hero-bottom { padding-block: 20px; }
     .brand-hero-bottom p { font-size: 11px; gap: 8px; }
     .brand-button { padding-inline: 14px; gap: 20px; font-size: 13px; }
-    .brand-section { padding-top: 65px; }
+    .brand-site { --section-space: 65px; }
     .brand-section-heading { display: block; margin-bottom: 25px; }
     .brand-section-heading > p { margin-top: 17px; max-width: 360px; }
     .brand-project-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -266,6 +308,10 @@
     .brand-footer-bottom > div { gap: 10px; flex-wrap: wrap; justify-content: end; }
     .brand-page-header { padding-top: 45px; margin-bottom: 35px; }
     .brand-contact-page { grid-template-columns: 1fr; gap: 30px; }
+    .brand-form-row { grid-template-columns: 1fr; }
+    .brand-form fieldset.brand-form-project { padding: 16px; }
+    .brand-form-foot { display: block; }
+    .brand-form-foot .brand-button { width: 100%; }
     .brand-contact-row a { font-size: 15px; }
     .brand-post { grid-template-columns: 1fr 25px; gap: 10px 20px; }
     .brand-post time { grid-column: 1 / -1; }
@@ -822,7 +868,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 /* Brands strip on the projects page: white marks at rest; on hover a light tile shows each logo in its own colours. */
-.brand-logos { margin-top: 38px; }
+.brand-logos { margin-top: var(--section-space); }
 /* Lines between tiles come from the 1px gap over the line colour, so any count of logos lays out cleanly. */
 .brand-logos ul { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
 .brand-logos li { background: var(--paper); }

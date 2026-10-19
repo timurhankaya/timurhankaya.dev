@@ -149,12 +149,12 @@
                 <article class="brand-service"><span class="brand-label">0{{ $loop->iteration }} /</span><h3>{{ $service['title'] }}</h3><p>{{ $service['body'] }}</p></article>
             @endforeach
         </div>
-        <div class="brand-services-bottom"><p>{{ __('brand.project_invite') }}</p><a class="brand-button" href="mailto:kayacekovic@gmail.com?subject={{ rawurlencode(__('brand.project_subject')) }}&amp;body={{ rawurlencode(__('brand.project_prompt')) }}">{{ __('brand.project_cta') }} <x-arrow /></a></div>
+        <div class="brand-services-bottom"><p>{{ __('brand.project_invite') }}</p><a class="brand-button" href="{{ \App\Support\Seo::route('contact', ['topic' => 'project']) }}#form">{{ __('brand.project_cta') }} <x-arrow /></a></div>
     </section>
 
     <section {!! \App\Support\Anchors::attributes('contact') !!} class="brand-section brand-contact">
         <p class="brand-label"><span class="brand-section-number">06 /</span> {{ __('portfolio.nav.contact') }}</p>
-        <div class="brand-contact-heading"><h2 class="brand-display">{{ __('brand.contact') }}</h2><a class="brand-button" href="{{ \App\Support\Seo::route('contact') }}">{{ __('brand.contact_cta') }} <x-arrow /></a></div>
+        <div class="brand-contact-heading"><h2 class="brand-display">{{ __('brand.contact') }}</h2><a class="brand-button" href="{{ \App\Support\Seo::route('contact') }}#form">{{ __('brand.contact_cta') }} <x-arrow /></a></div>
         <div class="brand-contact-bottom">
             <p>{{ __('brand.contact_intro') }}</p>
         </div>

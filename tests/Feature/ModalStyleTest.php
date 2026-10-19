@@ -81,3 +81,11 @@ it('gives every modal the same softer scrim', function (string $file, string $se
     ['games.css', '.game-dialog-scrim'],
     ['games.css', '.vk-notice-scrim'],
 ]);
+
+it('frosts the navigation bar so the page shows through it blurred', function () {
+    $rule = cssRule('brand.css', '.brand-nav');
+    preg_match('/background:\s*rgb\(\d+ \d+ \d+ \/ (\.\d+)\)/', $rule, $alpha);
+
+    expect($rule)->toMatch('/(?<!-webkit-)backdrop-filter:[^;]*blur\(\d+px\)/')->toMatch('/-webkit-backdrop-filter:[^;]*blur\(\d+px\)/')
+        ->and((float) ($alpha[1] ?? 1))->toBeLessThanOrEqual(.7);
+});

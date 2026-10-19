@@ -12,11 +12,11 @@ it('tells how Monafy was built and drops the hobby paragraph', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('kodu elle yazmadan yapay zekâyla geliştirdim')->not->toContain('%0,01')->not->toContain('Cloudflare')
-        ->toContain('Wingie Enuygun Group’ta yüksek trafikli sigorta ürünleri üzerinde çalışıyorum.')->not->toContain('İş dışında da üretmeyi seviyorum')
+    expect($tr)->toContain('yapay zekâ ajanlarıyla, kodu elle yazmadan geliştirdim')->not->toContain('%0,01')->not->toContain('Cloudflare')
+        ->toContain('Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum.')->not->toContain('İş dışında da üretmeyi seviyorum')
         ->not->toContain('finansal veri ve yapay zekâyla çalıştım')->not->toContain('arkadaşlarımla oynamak için yaptığım oyunlar')
         ->and($en)->toContain('without writing the code by hand')->not->toContain('0.01%')
-        ->toContain('At Wingie Enuygun Group, I work on high-traffic insurance products.')->not->toContain('I like making things outside work')
+        ->toContain('At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day.')->not->toContain('I like making things outside work')
         ->not->toContain('Away from the screen');
     expect(preg_match('~<div class="brand-about-copy">\s*(?:<p>[^<]+</p>\s*)*<p>\s*</p>~', $tr))->toBe(0);
 });
@@ -85,17 +85,17 @@ it('keeps the site copy short and plain', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('Ürün geliştiriyorum.')
+    expect($tr)->toContain('İnsanların her gün kullandığı ürünler geliştiriyorum.')
         ->toContain('Aynı zamanda Monafy’nin kurucu ortağıyım.')
         ->toContain('İstanbul’da yaşıyorum. Yazılımın yanı sıra finans piyasalarını ve girişimciliği takip ediyorum.')
-        ->toContain('İnce işçilikle yapılmış, güzel ve kullanması kolay ürünler geliştiririm.')
+        ->toContain('İyi tasarlanmış, özenle işlenmiş ve kullanması kolay ürünler geliştiriyorum.')->not->toContain('aynı özeni gösteririm')
         ->toContain('Özenli mühendislik, kalıcı ürünler.')
         ->not->toContain('Boş zamanlarımda arkadaşlarla')->not->toContain('Kendi ürünlerim, müşteri işleri')
         ->not->toContain('brand-craft-line')->not->toContain('Finans ve yeni iş fikirleriyle')->not->toContain('İnce işçilik, güzel ürünler.')
         ->not->toContain('Ürünü bir bütün olarak düşünürüm.')->not->toContain('sahada, su altında')
         ->not->toContain('Kod · Ürün · Merak')->not->toContain('Derin düşünme')->not->toContain('beni en çok heyecanlandıran')
         ->not->toContain('arkasındaki case study')
-        ->and($en)->toContain('I build products.')->toContain('I also co-founded Monafy.')
+        ->and($en)->toContain('I build products people use every day.')->toContain('I also co-founded Monafy.')
         ->toContain('Based in Istanbul. Beyond software, I follow financial markets and startups.')
         ->toContain('Careful engineering, lasting products.')
         ->not->toContain('small games to play with friends')->not->toContain('My own products, client work')
@@ -142,11 +142,12 @@ it('words the experience bullets plainly, without claiming to have led', functio
     $tr = $this->get('/tr')->assertOk()->getContent().$this->get('/tr/ozgecmis')->assertOk()->getContent();
     $en = $this->get('/cv')->assertOk()->getContent();
 
-    expect($tr)->toContain('Binlerce aktif kullanıcısı olan ödüllü sigorta platformlarını geliştirdim')
-        ->toContain('Kıdemli geliştiricilerin yanında canlı projelere katkı verdim')
+    expect($tr)->toContain('Binlerce aktif kullanıcısı olan, ödüllü sigorta satış platformları geliştirdim')
+        ->toContain('Kommunity, Transiyzi ve Dynorender gibi SaaS ürünlerinde')->toContain('Kıdemli geliştiricilerle aynı projelerde özellik geliştirdim')
+        ->not->toContain('aktif rol aldım')->not->toContain('teknik kararları yönlendirdim')->not->toContain('yüksek performanslı')
         ->not->toContain('öncülük ettim')->not->toContain('yaşam döngüsünü yönettim')->not->toContain('gerçek dünya projeleriyle')
         ->not->toContain('best practice')->not->toContain('öğrenerek hızlandım')
-        ->and($en)->toContain('Built award-winning insurance platforms with thousands of active users')
+        ->and($en)->toContain('Built award-winning insurance sales platforms with thousands of active users')->not->toContain('Actively contributed')->not->toContain('high-performance')
         ->not->toContain('Led the development')->not->toContain('Managed the lifecycle')->not->toContain('real-world projects');
 });
 

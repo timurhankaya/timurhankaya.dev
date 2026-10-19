@@ -56,3 +56,12 @@ it('lines up the card rules whatever the description length', function () {
     expect($css)->toMatch('/^\.brand-project \{[^}]*display: flex;[^}]*flex-direction: column;/m')
         ->toMatch('/^\.brand-project-description \{[^}]*flex-grow: 1;/m');
 });
+
+it('spaces the logo strip like the gap before the next section', function () {
+    $css = file_get_contents(resource_path('css/brand.css'));
+
+    expect($css)->toMatch('/^\.brand-logos \{[^}]*margin-top: var\(--section-space\)/m')
+        ->toMatch('/^\.brand-section \{[^}]*padding-top: var\(--section-space\)/m')
+        ->toMatch('/^\.brand-site \{[^}]*--section-space: 100px/m')
+        ->not->toContain('.brand-section { padding-top: 65px; }');
+});

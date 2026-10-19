@@ -826,3 +826,12 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit('codeCopy', initCodeCopy);
     safeInit('toc', initToc);
 });
+
+// Contact form: the project details only matter for a project, so they follow the chosen topic.
+document.querySelectorAll('[data-contact-form]').forEach((form) => {
+    const project = form.querySelector('[data-project-fields]');
+    if (!project) return;
+    const sync = () => { project.hidden = form.querySelector('input[name="topic"]:checked')?.value !== 'project'; };
+    form.addEventListener('change', (event) => { if (event.target.name === 'topic') sync(); });
+    sync();
+});

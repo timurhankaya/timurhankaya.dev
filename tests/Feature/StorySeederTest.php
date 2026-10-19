@@ -66,3 +66,22 @@ it('skips a slug that already exists, even a trashed one, and says so instead of
 
     expect(Post::withTrashed()->where('slug', 'taken-slug')->count())->toBe(1)->and(Post::where('slug', 'free-slug')->count())->toBe(1);
 });
+
+it('syncs the text of an already published story from its json without touching its address or date', function () {
+    $dir = storiesDir([storyEntry(['slug' => 'live-story', 'draft' => false])]);
+    $this->seed(StorySeeder::class);
+    $published = Post::where('slug', 'live-story')->firstOrFail()->published_at;
+    file_put_contents($dir.'/stories.json', json_encode([storyEntry(['slug' => 'live-story', 'draft' => false,
+        'tr' => ['title' => 'Yeni başlık', 'meta_title' => 'Arama başlığı', 'content' => '<p>Yeni içerik.</p>'],
+        'en' => ['title' => 'New title', 'meta_title' => 'Search title'],
+    ]), storyEntry(['slug' => 'untouched'])]));
+
+    $this->artisan('stories:sync', ['slug' => ['live-story']])->expectsOutputToContain('synced: live-story')->assertSuccessful();
+    $post = Post::where('slug', 'live-story')->firstOrFail();
+
+    expect($post->title)->toBe('Yeni başlık')->and($post->metaTitle('tr'))->toBe('Arama başlığı')->and($post->content)->toBe('<p>Yeni içerik.</p>')
+        ->and($post->text('title', 'en'))->toBe('New title')->and($post->metaTitle('en'))->toBe('Search title')
+        ->and($post->published_at->equalTo($published))->toBeTrue()
+        ->and(Post::where('slug', 'untouched')->exists())->toBeFalse();
+    $this->artisan('stories:sync', ['slug' => ['missing-story']])->expectsOutputToContain('not found: missing-story')->assertFailed();
+});

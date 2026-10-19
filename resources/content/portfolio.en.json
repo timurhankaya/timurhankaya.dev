@@ -34,7 +34,7 @@
     "title": "About",
     "lead": "",
     "p1": "I’ve been building software since 2019. Across insurance, finance, and e-commerce, I’ve worked on everything from shaping an idea to keeping a product running in production.",
-    "p2": "At Wingie Enuygun Group, I work on high-traffic insurance products. I built Monafy, which I co-founded, end to end with AI and without writing the code by hand.",
+    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I built Monafy, which I co-founded, end to end with AI agents and without writing the code by hand.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
@@ -146,11 +146,11 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Oct 2020 - Oct 2024 · 4 yrs 1 mo",
         "bullets": [
-          "Built award-winning insurance platforms with thousands of active users",
-          "Shipped and maintained production applications built with Laravel, Vue.js and RabbitMQ",
-          "Actively contributed to product development processes",
-          "Mentored junior developers and guided team-level technical decisions",
-          "Turned Figma designs and complex business needs into high-performance, responsive product experiences"
+          "Built award-winning insurance sales platforms with thousands of active users",
+          "Worked on insurer integrations and ERP and CRM connections for health insurance products",
+          "Developed and maintained SaaS products such as Kommunity, Transiyzi and Dynorender with Laravel, Vue.js and RabbitMQ",
+          "Turned Figma designs into responsive interfaces",
+          "Mentored junior developers and contributed to technical decisions"
         ]
       },
       {
@@ -160,8 +160,8 @@
         "period": "Jun 2019 - Oct 2020 · 1 yr 5 mos",
         "bullets": [
           "Started web development on live client projects",
-          "Contributed to live projects alongside senior developers",
-          "Picked up clean-code and agile working habits"
+          "Built features alongside senior developers on the same projects",
+          "Learned to write clean code and to work in an agile team"
         ]
       }
     ]

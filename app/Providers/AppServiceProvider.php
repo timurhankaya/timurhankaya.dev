@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use App\Http\Middleware\SetLocale;
 use App\Support\Seo;
+use App\Support\VisitorIp;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
         Livewire::addPersistentMiddleware([SetLocale::class]);
+        RateLimiter::for('contact', fn (Request $request) => Limit::perHour(5)->by(VisitorIp::of($request)));
         $this->useRequestHostForViteInDev();
     }
 

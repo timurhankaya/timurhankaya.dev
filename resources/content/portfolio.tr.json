@@ -34,7 +34,7 @@
     "title": "Hakkımda",
     "lead": "",
     "p1": "2019’dan bu yana yazılım geliştiriyorum. Sigorta, finans ve e-ticaret ürünlerinde; ilk fikrin şekillenmesinden sistemin canlıda çalışmasına kadar farklı sorumluluklar aldım.",
-    "p2": "Wingie Enuygun Group’ta yüksek trafikli sigorta ürünleri üzerinde çalışıyorum. Kurucu ortağı olduğum Monafy’yi ise uçtan uca, kodu elle yazmadan yapay zekâyla geliştirdim.",
+    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Kurucu ortağı olduğum Monafy’yi ise baştan sona yapay zekâ ajanlarıyla, kodu elle yazmadan geliştirdim.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
@@ -146,11 +146,11 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Ekim 2020 - Ekim 2024 · 4 yıl 1 ay",
         "bullets": [
-          "Binlerce aktif kullanıcısı olan ödüllü sigorta platformlarını geliştirdim",
-          "Laravel, Vue.js ve RabbitMQ ile geliştirdiğim uygulamaları canlıya aldım ve bakımını yaptım",
-          "Ürün geliştirme süreçlerinde aktif rol aldım",
-          "Junior geliştiricilere mentorluk yaptım ve ekip içi teknik kararları yönlendirdim",
-          "Figma tasarımlarını yüksek performanslı, responsive ürün deneyimlerine dönüştürdüm"
+          "Binlerce aktif kullanıcısı olan, ödüllü sigorta satış platformları geliştirdim",
+          "Sağlık sigortası ürünlerinde sigorta şirketi entegrasyonları, ERP ve CRM bağlantıları üzerinde çalıştım",
+          "Kommunity, Transiyzi ve Dynorender gibi SaaS ürünlerinde Laravel, Vue.js ve RabbitMQ ile geliştirme ve bakım yaptım",
+          "Figma tasarımlarını responsive arayüzlere dönüştürdüm",
+          "Junior geliştiricilere mentorluk yaptım ve teknik kararlara katkı verdim"
         ]
       },
       {
@@ -159,9 +159,9 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Haziran 2019 - Ekim 2020 · 1 yıl 5 ay",
         "bullets": [
-          "Web geliştirmeye canlı müşteri projelerinde başladım",
-          "Kıdemli geliştiricilerin yanında canlı projelere katkı verdim",
-          "Temiz kod ve çevik çalışma alışkanlıkları edindim"
+          "Web geliştirmeye canlıdaki müşteri projelerinde başladım",
+          "Kıdemli geliştiricilerle aynı projelerde özellik geliştirdim",
+          "Temiz kod yazmayı ve çevik bir ekipte çalışmayı öğrendim"
         ]
       }
     ]
