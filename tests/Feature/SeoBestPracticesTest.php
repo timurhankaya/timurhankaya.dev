@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 uses(RefreshDatabase::class);
@@ -35,6 +36,24 @@ it('sends an address with a trailing slash to the one without it', function (str
 
     expect($response->getStatusCode())->toBe(301)->and($response->headers->get('Location'))->toBe('http://localhost'.$to);
 })->with([['/writing/', '/writing'], ['/tr/yazilar/?page=2', '/tr/yazilar?page=2'], ['/tr/', '/tr']]);
+
+it('ships a static robots.txt identical to what the app serves in production', function () {
+    // The web server answers /robots.txt from disk, so the file must match the route's production output.
+    URL::forceRootUrl('https://timurhankaya.dev');
+    URL::forceScheme('https');
+
+    expect(public_path('robots.txt'))->toBeFile()
+        ->and(file_get_contents(public_path('robots.txt')))->toBe($this->get('/robots.txt')->assertOk()->getContent())
+        ->toContain("\nSitemap: https://timurhankaya.dev/sitemap.xml\n");
+});
+
+it('writes robots.txt for the configured site address with one command', function () {
+    $target = storage_path('framework/testing/robots.txt');
+    @unlink($target);
+
+    $this->artisan('seo:robots', ['--path' => $target, '--url' => 'https://example.test'])->assertSuccessful();
+    expect(file_get_contents($target))->toContain('Sitemap: https://example.test/sitemap.xml')->toContain('Disallow: /admin');
+});
 
 it('keeps the brand name whatever APP_NAME the server sets', function () {
     config(['app.name' => 'Timurhan Kaya Dev']);
