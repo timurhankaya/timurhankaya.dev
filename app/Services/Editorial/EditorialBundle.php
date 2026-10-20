@@ -3,6 +3,7 @@
 namespace App\Services\Editorial;
 
 use App\Enums\PostType;
+use App\Support\MonafyLinks;
 use App\Support\StoryStyle;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -94,6 +95,13 @@ final class EditorialBundle
                         $this->require($node->nodeName === 'a' && (bool) preg_match('~^(?:https://[^\\s]+|/(?!/)[^\\s]*|#[A-Za-z0-9_-]+)$~', $attribute->value), 'The story contains an unsafe link.');
                         if (str_starts_with($attribute->value, 'https://')) {
                             $this->publicUrl($attribute->value);
+                            $parts = parse_url($attribute->value);
+                            if (in_array(strtolower($parts['host'] ?? ''), ['monafy.com', 'www.monafy.com'], true)) {
+                                $path = $parts['path'] ?? '/';
+                                $this->require(($locale === 'tr' ? str_starts_with($path, '/tr/') : $path !== '/' && $path !== '' && ! preg_match('~^/tr(?:/|$)~', $path))
+                                    && MonafyLinks::localized($attribute->value, $locale) === $attribute->value,
+                                    'Monafy links must use a direct destination in the story language, not the language-negotiating homepage.');
+                            }
                         }
                     }
                 }

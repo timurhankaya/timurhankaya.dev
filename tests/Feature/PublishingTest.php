@@ -88,7 +88,7 @@ it('validates and localizes related case links', function () {
     $case = caseStudy(['slug' => 'linked-story']);
     $meta = $case->case_meta;
     $case->update(['case_meta' => [...$meta, 'links' => [['label' => ['tr' => 'Fiyatlar', 'en' => 'Pricing'], 'url' => 'https://monafy.com/pricing'], ['label' => ['tr' => 'Sadece TR'], 'url' => 'https://monafy.com']]]]);
-    expect($case->fresh()->caseLinks('en'))->toBe([['label' => 'Pricing', 'url' => 'https://monafy.com/pricing'], ['label' => 'Sadece TR', 'url' => 'https://monafy.com']]);
+    expect($case->fresh()->caseLinks('en'))->toBe([['label' => 'Pricing', 'url' => 'https://monafy.com/pricing/'], ['label' => 'Sadece TR', 'url' => 'https://monafy.com/features/']]);
     $this->get('/case-studies/linked-story')->assertOk()->assertSee('https://monafy.com/pricing', false)->assertSee('Pricing');
     foreach ([['label' => ['tr' => 'x'], 'url' => 'javascript:alert(1)'], ['label' => ['de' => 'x'], 'url' => 'https://monafy.com']] as $link) {
         expect(fn () => $case->fresh()->update(['case_meta' => [...$meta, 'links' => [$link]]]))->toThrow(ValidationException::class);

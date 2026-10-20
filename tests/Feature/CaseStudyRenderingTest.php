@@ -42,9 +42,9 @@ it('links an article to its project on the page and in structured data', functio
 
     $html = $this->get('/writing/monafy-article')->assertOk()->getContent();
 
-    expect($html)->toMatch('~<aside class="brand-article-aside">.*href="https://monafy\.com"[^>]*>Monafy~s')
+    expect($html)->toMatch('~<aside class="brand-article-aside">.*href="https://monafy\.com/features/"[^>]*>Monafy~s')
         ->not->toContain('nofollow')
-        ->toContain('"about":{"@type":"Thing","name":"Monafy","url":"https://monafy.com"}');
+        ->toContain('"about":{"@type":"Thing","name":"Monafy","url":"https://monafy.com/features/"}');
 });
 
 it('publishes an anonymous case study without a period and shows no empty year', function () {

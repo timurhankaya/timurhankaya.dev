@@ -49,7 +49,7 @@ Her dilde başlık, özet, meta_title, meta_description ve kendine ait kısa, a�
 
 ## 4. Bağlantı ve görsel anlatımı seç
 
-İlgili yerde Monafy’nin rapor, ülke piyasası, fon, sözlük ve metodoloji sayfalarına açıklayıcı bağlantılar ekle. Dili ve hedefin kapsamını eşleştir: Türkiye sayfasına “Türkiye ve ABD” bağlantısı verme. Her hedefi canlıda doğrula. Fon sayfası kapalıysa çalışan NAV/TEFAS sözlüğü gibi ilgili bir hedef seç. Kullanıcı hesabı gerektiren veya 404 dönen sayfaya yönlendirme. Bağlantı sayısı kotası ve tekrar eden anahtar kelime kullanma.
+İlgili yerde Monafy’nin rapor, ülke piyasası, fon, sözlük ve metodoloji sayfalarına açıklayıcı bağlantılar ekle. Dili ve hedefin kapsamını eşleştir: Türkiye sayfasına “Türkiye ve ABD” bağlantısı verme. Her hedefi yönlendirmeleri takip etmeden ilk GET yanıtında doğrula: 301/302/307/308 bağlantılarını son canonical adresle değiştir. Son sayfanın 200 dönmesi tek başına yeterli değildir. Monafy hedefinde HTML dilini de kontrol et; tarayıcının farklı dil tercihiyle de yazının dilinde kalmalı. Dile göre yönlenen kök anasayfa yerine genel ürün bağlantısında /features/ veya /tr/ozellikler/ kullan. Gövde kadar vaka yan panelindeki proje ve ilgili kaynak bağlantılarını da kontrol et. Fon sayfası kapalıysa çalışan NAV/TEFAS sözlüğü gibi ilgili bir hedef seç. Kullanıcı hesabı gerektiren veya 404 dönen sayfaya yönlendirme. Bağlantı sayısı kotası ve tekrar eden anahtar kelime kullanma.
 
 Yazının ana kararlarını az sayıda kısa strong vurguyla görünür kıl. Akış için brand-flow, ilişkili parçalar için brand-layers, seçenekler için responsive tablo, kritik sınır için brand-prose-callout veya blockquote kullan. Her bileşeni her yazıya doldurma. Diyagram tek başına bilgi taşımasın; metin de anlaşılır kalsın.
 

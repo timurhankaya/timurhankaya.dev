@@ -2,6 +2,8 @@
 
 namespace App\Services\Portfolio;
 
+use App\Support\MonafyLinks;
+
 final class ProjectCatalog
 {
     /** Keys for work told without naming the client; they group stories but have no portfolio card. */
@@ -23,6 +25,6 @@ final class ProjectCatalog
         $project = collect(app(PortfolioContentService::class)->get()['projects']['sections'])
             ->flatMap(fn (array $section): array => $section['items'])->firstWhere('key', $key);
 
-        return filled($project['url'] ?? null) ? ['name' => (string) $project['name'], 'url' => (string) $project['url']] : null;
+        return filled($project['url'] ?? null) ? ['name' => (string) $project['name'], 'url' => MonafyLinks::localized((string) $project['url'], app()->getLocale())] : null;
     }
 }

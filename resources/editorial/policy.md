@@ -24,7 +24,7 @@ Every material claim needs private source evidence. Distinguish code behavior, o
 
 Use general, helpful titles and natural TR/EN prose. Avoid repeated co-founder/engineer introductions; the site bio carries the role. First-person claims describe verified contributions. General market wording is Türkiye ve ABD borsaları / Turkish and US stock markets. Keep natural summaries, descriptive locale-specific slugs and short paragraphs. StoryStyle ranges are house conventions, not ranking rules; never pad to meet a quota.
 
-Use relevant public Monafy links that match language and scope. Verify destinations and do not link private, missing or disabled product pages. Use existing emphasis, callout, flow/layer, responsive table and quote components where they clarify meaning. Selected technical pieces may include one short, illustrative code sample rewritten without private identifiers or implementation secrets.
+Use relevant public Monafy links that match language and scope. Verify the first GET response without following redirects, not only the final 200. Replace redirected destinations with their direct canonical URLs and confirm the Monafy HTML language matches the story even with the opposite browser-language preference. Use explicit product pages instead of the language-negotiating root homepage. Apply this to body, project and related case links; do not link private, missing or disabled product pages. Use existing emphasis, callout, flow/layer, responsive table and quote components where they clarify meaning. Selected technical pieces may include one short, illustrative code sample rewritten without private identifiers or implementation secrets.
 
 ## Validation and publication
 

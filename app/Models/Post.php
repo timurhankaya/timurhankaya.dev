@@ -6,6 +6,7 @@ use App\Enums\PostType;
 use App\Services\Publishing\PostPublication;
 use App\Support\CodeBlocks;
 use App\Support\IndexNow;
+use App\Support\MonafyLinks;
 use App\Support\Seo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -127,7 +128,7 @@ class Post extends Model
         return collect((array) data_get($this->case_meta, 'links', []))->map(function ($link) use ($locale): array {
             $label = data_get($link, 'label');
 
-            return ['label' => (string) (is_array($label) ? (collect([$label[$locale] ?? null, ...array_values($label)])->first(fn ($text) => is_string($text) && trim($text) !== '') ?? '') : $label), 'url' => (string) data_get($link, 'url')];
+            return ['label' => (string) (is_array($label) ? (collect([$label[$locale] ?? null, ...array_values($label)])->first(fn ($text) => is_string($text) && trim($text) !== '') ?? '') : $label), 'url' => MonafyLinks::localized((string) data_get($link, 'url'), $locale)];
         })->filter(fn (array $link): bool => $link['label'] !== '' && $link['url'] !== '')->values()->all();
     }
 
@@ -146,7 +147,13 @@ class Post extends Model
      */
     public function caseMeta(?string $locale = null): array
     {
-        return ['project_name' => $this->projectName($locale)] + (array) $this->case_meta;
+        $locale ??= app()->getLocale();
+        $meta = ['project_name' => $this->projectName($locale)] + (array) $this->case_meta;
+        if (filled($meta['url'] ?? null)) {
+            $meta['url'] = MonafyLinks::localized($meta['url'], $locale);
+        }
+
+        return $meta;
     }
 
     public function text(string $field, ?string $locale = null): string
