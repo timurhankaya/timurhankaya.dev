@@ -68,12 +68,16 @@ it('allows several case studies per project and keeps them in reading order', fu
     $this->get('/case-studies/first-look')->assertOk()->assertDontSee('rel="prev"', false)->assertSee('rel="next"', false);
 });
 
-it('filters the case index by project and ignores unknown or malformed filters', function () {
+it('shows every project without a filter and redirects retired project-filter addresses', function () {
     caseStudy(['title' => 'A deeper look', 'slug' => 'a-deeper-look']);
     caseStudy(['title' => 'Another project story', 'slug' => 'another-project-story', 'project_key' => 'herbalfit', 'case_meta' => ['project_name' => 'Herbalfit']]);
-    expect(mainContent($this->get('/case-studies?project=monafy')->assertOk()->getContent()))->toContain('A deeper look')->not->toContain('Another project story');
-    $this->get('/case-studies?project=nope')->assertOk()->assertSee('A deeper look')->assertSee('Another project story');
-    $this->get('/case-studies?project[]=x')->assertOk();
+    foreach (['/case-studies', '/tr/vaka-incelemeleri'] as $path) {
+        expect(mainContent($this->get($path)->assertOk()->getContent()))->toContain('A deeper look')->toContain('Another project story')
+            ->not->toContain('brand-project-filter')->not->toContain('?project=');
+        foreach (['project=monafy', 'project=nope', 'project[]=x', 'project=', 'project=monafy&page=2'] as $query) {
+            $this->get($path.'?'.$query)->assertStatus(301)->assertRedirect(url($path));
+        }
+    }
 });
 
 it('restores a deleted case study without conflicting with a sibling', function () {

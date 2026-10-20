@@ -36,15 +36,14 @@ it('gives every public page one h1, a short title, a description within limits, 
     expect($problems)->toBe([]);
 });
 
-it('keeps paginated and project-filtered listings self-canonical', function () {
+it('keeps pagination self-canonical and redirects the retired project filter', function () {
     foreach (range(1, 11) as $n) {
         portfolioPost(['title' => "Article $n", 'slug' => "article-$n", 'published_at' => now()->subDays($n)]);
     }
     caseStudy(['slug' => 'filtered-case']);
     $page2 = $this->get('/writing?page=2')->assertOk()->getContent();
     expect(pageMeta($page2)['canonical'])->toEndWith('/writing?page=2')->and($page2)->toContain('rel="prev"');
-    $filtered = $this->get('/case-studies?project=monafy')->assertOk()->getContent();
-    expect(pageMeta($filtered)['canonical'])->toEndWith('/case-studies?project=monafy');
+    $this->get('/case-studies?project=monafy')->assertStatus(301)->assertRedirect(url('/case-studies'));
 });
 
 it('adds the Search Console verification tag only when configured', function () {

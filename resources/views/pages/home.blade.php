@@ -48,7 +48,7 @@
             <h1 class="brand-name">Timurhan<br><span>Kaya<span class="brand-period">.</span></span></h1>
             <div class="brand-hero-note">
                 <p class="brand-hero-intro">{{ __('brand.intro') }}</p>
-                <a class="brand-text-link" href="#{{ \App\Support\Anchors::id('portfolio') }}">{{ __('brand.explore') }} <x-arrow dir="se" /></a>
+                <a class="brand-text-link" href="#{{ \App\Support\Anchors::id('portfolio') }}">{{ __('brand.explore') }} <x-arrow dir="s" /></a>
             </div>
         </div>
         <div class="brand-hero-bottom">

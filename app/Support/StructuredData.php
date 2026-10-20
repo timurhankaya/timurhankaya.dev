@@ -200,7 +200,7 @@ final class StructuredData
                 $node['isPartOf'] = [
                     '@type' => 'CreativeWorkSeries',
                     'name' => __('brand.series_label', ['project' => $post->projectName($locale)]),
-                    'url' => Seo::route('case-studies.index', ['project' => $post->project_key], $locale),
+                    'url' => Seo::route('case-studies.index', [], $locale),
                 ];
             }
         }

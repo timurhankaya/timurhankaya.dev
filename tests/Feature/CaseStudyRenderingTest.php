@@ -70,7 +70,7 @@ it('lists Monafy first and labels anonymous work by its public name', function (
 
     $html = $this->get('/case-studies')->assertOk()->getContent();
 
-    expect($html)->not->toContain('isimsiz')->toContain('B2B SaaS platform <span>1</span>')
+    expect($html)->not->toContain('isimsiz')->toContain('>B2B SaaS platform</h2>')
         ->and(strpos($html, '/case-studies/monafy-story'))->toBeLessThan(strpos($html, '/case-studies/saas-story'))
         ->and(strpos($html, '/case-studies/saas-story'))->toBeLessThan(strpos($html, '/case-studies/game-story'));
 });

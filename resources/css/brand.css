@@ -37,9 +37,10 @@
 .brand-nav-inner { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .brand-logo { font: 600 34px/1 var(--mono); letter-spacing: -4px; padding-right: 5px; }
 .brand-logo span { color: var(--accent); }
-.brand-nav-links { display: flex; align-items: center; gap: 30px; margin-left: auto; }
+.brand-nav-links { display: flex; align-self: stretch; align-items: stretch; gap: 30px; margin-left: auto; }
 .brand-nav-links a, .brand-nav-actions a, .brand-menu-toggle { font-size: 14px; font-weight: 500; }
 .brand-nav-links a { padding-block: 14px; }
+.brand-nav-links > a { display: flex; align-items: center; }
 .brand-nav-links a:hover, .brand-footer a:hover { color: var(--accent); }
 .brand-nav-actions { display: flex; gap: 23px; align-items: center; }
 .brand-language { color: var(--muted); text-decoration: underline; text-underline-offset: 4px; }
@@ -52,13 +53,12 @@
 .brand-mobile-menu a.brand-mobile-sub { padding-left: 18px; border-top-style: dashed; }
 .brand-mobile-menu a[aria-current="page"] { color: var(--accent); }
 /* "Writing" menu: two separate pages under one trigger. Opens on hover, click and keyboard. */
-.brand-nav-group { position: relative; }
+.brand-nav-group { position: relative; display: flex; align-items: stretch; }
 .brand-nav-trigger { display: inline-flex; align-items: center; gap: 6px; padding-block: 14px; font-size: 14px; font-weight: 500; color: inherit; cursor: pointer; background: none; border: 0; }
 .brand-nav-group[data-current] > .brand-nav-trigger { color: var(--accent); }
 .brand-nav-chevron { width: 14px; height: 14px; transition: transform .25s cubic-bezier(.2, 0, 0, 1); }
-.brand-nav-panel { position: absolute; top: 100%; left: -22px; width: 330px; padding: 8px; border: 1px solid var(--line); box-shadow: 0 24px 50px rgb(0 0 0 / .45);
+.brand-nav-panel { position: absolute; top: 100%; left: -22px; width: 330px; padding: 8px; border: 1px solid var(--line); border-top: 0; box-shadow: 0 24px 50px rgb(0 0 0 / .45);
     opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .2s, transform .2s cubic-bezier(.2, 0, 0, 1), visibility 0s .2s; }
-.brand-nav-panel::before { content: ""; position: absolute; inset: -14px 0 auto; height: 14px; }
 .brand-nav-group:is(:hover, [data-open]) .brand-nav-panel, html:not(.js) .brand-nav-group:focus-within .brand-nav-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
 .brand-nav-group:is(:hover, [data-open]) .brand-nav-chevron { transform: rotate(180deg); }
 .brand-nav-links .brand-nav-panel a { display: grid; gap: 4px; padding: 14px 16px; border-left: 2px solid transparent; transition: background .2s, border-color .2s; }
@@ -467,10 +467,6 @@
     .brand-project-dialog[open], .brand-project-dialog[open]::backdrop, .brand-palette-scrim, .brand-palette-panel { animation: none; }
 }
 body:has(.brand-project-dialog[open]) { overflow: hidden; }
-.brand-collection-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 38px; }
-.brand-collection-nav a { display: inline-flex; align-items: center; gap: 18px; padding: 12px 15px; border: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.6; }
-.brand-collection-nav a:hover { border-color: var(--accent); color: var(--ink); }
-.brand-collection-nav a span { font-family: var(--mono); color: var(--accent); font-size: 11px; }
 /* Playable, editorial game covers. */
 .brand-games-header { position: relative; }
 .brand-game-note { display: flex; align-items: center; gap: 12px; color: var(--muted); margin-top: 30px; font-size: 11px; }
@@ -613,8 +609,6 @@ body:has(.brand-project-dialog[open]) { overflow: hidden; }
     .brand-contact-bottom > p { flex-basis: 100%; }
     .brand-contact-heading { flex-wrap: wrap; gap: 22px; }
     .brand-project-dialog { padding: 20px 20px 22px; }
-    .brand-collection-nav { gap: 6px; margin-top: 28px; }
-    .brand-collection-nav a { font-size: 11px; padding: 9px 11px; }
     .brand-game-note { line-height: 1.9; align-items: baseline; }
     .brand-game-note .brand-status { flex: none; }
     .brand-game-drawing { height: 205px; }
@@ -685,15 +679,14 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     .brand-label, .brand-hero-top, .brand-footer-bottom, .brand-project-heading > span, .brand-job-period, .brand-job-meta,
     .brand-case-facts dt, .brand-story-copy > .brand-label, .brand-case-breadcrumb > .brand-label, .brand-game-top .brand-label,
     .brand-game-note, .brand-case-pager .brand-label, .brand-project-art-label,
-    .brand-project-art-bottom, .brand-approach-number, .brand-project-filter a span, .brand-collection-nav a span,
+    .brand-project-art-bottom, .brand-approach-number,
     .brand-game-copy .brand-game-category, .brand-post div > .brand-label { font-size: 11px; }
     .brand-series li::before, .brand-case-toc a span { font-size: 11px; }
-    .brand-collection-nav a { font-size: 12px; }
     .brand-site :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="hidden"]), select, textarea) { font-size: 16px; }
 }
 @media (pointer: coarse) {
     .brand-site :is(.brand-nav-actions a, .brand-menu-toggle, .brand-footer a, .brand-project-visit, .brand-text-link,
-        .brand-case-toc a, .brand-series a, .brand-case-links a, .brand-collection-nav a, .brand-contribution-button,
+        .brand-case-toc a, .brand-series a, .brand-case-links a, .brand-contribution-button,
         .brand-case-writing a, .brand-mobile-menu a) { min-height: 44px; }
     .brand-site :is(.brand-nav-actions a, .brand-footer-bottom a, .brand-project-visit, .brand-series a) { display: inline-flex; align-items: center; }
     .brand-footer-bottom > div { gap: 4px 18px; }
@@ -754,7 +747,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     .brand-contact-heading .brand-button { min-height: 44px; padding: 10px 14px; gap: 10px; font-size: 13px; }
 }
 
-.brand-collection-nav a[aria-current="page"] { color: var(--accent); border-color: var(--accent); }
 .brand-preview-notice { padding: 18px 20px; border: 1px solid var(--accent); color: var(--accent); font: 11px/1.8 var(--mono); margin-top: 25px; }
 .brand-story-cover-image { padding: 0; }
 .brand-story-cover-image img { width: 100%; height: 245px; object-fit: cover; }
@@ -787,7 +779,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .brand-case-writing a { display: flex; justify-content: space-between; gap: 20px; padding-block: 16px; border-bottom: 1px solid var(--line); font-family: var(--heading); font-size: 19px; line-height: 1.4; letter-spacing: -.03em; }
 .brand-case-writing a > .brand-arrow { color: var(--accent); }
 .brand-case-writing a:hover { color: var(--accent); }
-.brand-project-filter a span { font-family: var(--mono); font-size: 11px; color: var(--accent); }
 .brand-case-group .brand-section-heading { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 32px; align-items: end; }
 .brand-case-group .brand-section-heading > div > .brand-label { color: var(--muted); }
 .brand-case-group .brand-section-heading .brand-display { font-size: clamp(32px, 4vw, 48px); margin-top: 14px; }
@@ -807,7 +798,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 /* Mobile minimums for the series block: the 11px floor above must survive these later declarations. */
 @media (max-width: 760px) {
-    .brand-case-pager .brand-label, .brand-project-filter a span, .brand-series li::before { font-size: 11px; }
+    .brand-case-pager .brand-label, .brand-series li::before { font-size: 11px; }
 }
 
 /* Diagrams inside case studies (see docs/superpowers/notes/writing-voice.md for the markup).

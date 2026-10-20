@@ -1,8 +1,5 @@
 @php
     $caseIndex = $caseIndex ?? false;
-    $project = $project ?? null;
-    $projectCounts = $projectCounts ?? collect();
-    $projectNames = $projectNames ?? [];
     $listingUrl = \App\Support\Seo::route($caseIndex ? 'case-studies.index' : 'blog.index');
     $seo = ['title' => $listing['title'], 'description' => $listing['description'], 'canonical' => $listing['canonical'], 'image' => 'og-blog.png'];
     $casePosts = $posts->getCollection()->filter(fn ($post) => $post->type === \App\Enums\PostType::CaseStudy);
@@ -29,12 +26,6 @@
         <p class="brand-label">{{ $caseIndex ? __('brand.case_type') : __('brand.blog') }}</p>
         <h1 class="brand-display">{{ $caseIndex ? __('brand.case_collection_title') : __('brand.writing_title') }}</h1>
         <p>{{ $caseIndex ? __('brand.case_collection_intro') : __('brand.writing_intro') }}</p>
-        @if ($caseIndex && $projectCounts->count() > 1)
-            <nav class="brand-collection-nav brand-project-filter" aria-label="{{ __('brand.all_projects') }}">
-                <a href="{{ \App\Support\Seo::route('case-studies.index') }}" @if (!$project) aria-current="page" @endif>{{ __('brand.all_projects') }} <span>{{ $projectCounts->sum() }}</span></a>
-                @foreach ($projectCounts as $key => $total)<a href="{{ \App\Support\Seo::route('case-studies.index', ['project' => $key]) }}" @if ($project === $key) aria-current="page" @endif>{{ $projectNames[$key] ?? $key }} <span>{{ $total }}</span></a>@endforeach
-            </nav>
-        @endif
     </header>
     @if ($casePosts->isNotEmpty())
         @foreach ($casePosts->groupBy(fn ($post) => $post->project_key ?? $post->slug) as $group)

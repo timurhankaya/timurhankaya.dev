@@ -15,7 +15,7 @@ function headLinks(string $html): array
 it('keeps junk query parameters out of listing canonicals and hreflang links', function () {
     portfolioPost();
     caseStudy();
-    foreach (['/writing?utm_source=x', '/writing?page=1', '/writing?type=nope', '/case-studies?project=bogus', '/tr/yazilar?utm_source=x', '/tr/vaka-incelemeleri?fbclid=1'] as $url) {
+    foreach (['/writing?utm_source=x', '/writing?page=1', '/writing?type=nope', '/tr/yazilar?utm_source=x', '/tr/vaka-incelemeleri?fbclid=1'] as $url) {
         $links = headLinks($this->get($url)->assertOk()->getContent());
         expect($links)->not->toBeEmpty();
         foreach ($links as $link) {
@@ -33,22 +33,21 @@ it('returns 404 for a listing page past the last one and points rel=prev of page
     $this->get('/tr/yazilar?page=2')->assertOk()->assertSee('<link rel="prev" href="'.url('/tr/yazilar').'">', false);
 });
 
-it('gives filtered and paginated listings their own title, description and structured-data url', function () {
+it('gives paginated listings their own metadata and keeps the case collection unfiltered', function () {
     foreach (range(1, 11) as $n) {
         portfolioPost(['title' => "Article $n", 'slug' => "article-$n", 'published_at' => now()->subDays($n)]);
     }
     caseStudy(['slug' => 'monafy-incident']);
     $base = pageMeta($this->get('/case-studies')->getContent());
-    $filtered = pageMeta($this->get('/case-studies?project=monafy')->getContent());
-    expect($filtered['title'])->not->toBe($base['title'])->toContain('Monafy')
-        ->and($filtered['description'])->not->toBe($base['description'])->toContain('Monafy');
+    $this->get('/case-studies?project=monafy')->assertStatus(301)->assertRedirect(url('/case-studies'));
+    expect($base['canonical'])->toBe(url('/case-studies'));
     $page2 = pageMeta($this->get('/writing?page=2')->getContent());
     expect($page2['title'])->toContain('page 2')->and($page2['description'])->not->toBe(pageMeta($this->get('/writing')->getContent())['description']);
     expect(pageMeta($this->get('/tr/yazilar?page=2')->getContent())['title'])->toContain('sayfa 2');
 
-    preg_match('~<script type="application/ld\+json">(.*?)</script>~s', $this->get('/case-studies?project=monafy')->getContent(), $ld);
+    preg_match('~<script type="application/ld\+json">(.*?)</script>~s', $this->get('/case-studies')->getContent(), $ld);
     $page = collect(json_decode($ld[1], true)['@graph'])->firstWhere('@type', 'CollectionPage');
-    expect($page['url'])->toEndWith('/case-studies?project=monafy')->and($page['@id'])->toEndWith('/case-studies?project=monafy#webpage');
+    expect($page['url'])->toEndWith('/case-studies')->and($page['@id'])->toEndWith('/case-studies#webpage');
 });
 
 it('shortens descriptions and titles without breaking multibyte characters', function () {

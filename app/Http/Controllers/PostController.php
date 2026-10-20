@@ -21,7 +21,7 @@ class PostController extends Controller
             default => null,
         };
         if ($target !== null) {
-            return redirect(Seo::route($target, $request->except(['type', 'lang'])), 301);
+            return redirect(Seo::route($target, $request->except(['type', 'lang', 'project'])), 301);
         }
 
         $posts = Post::published()->where('type', PostType::Article)->latest('published_at')->paginate(10);
@@ -29,50 +29,43 @@ class PostController extends Controller
 
         return view('pages.blog.index', [
             'posts' => $posts, 'type' => PostType::Article, 'caseIndex' => false,
-            'listing' => $this->listing('blog.index', $posts, null, null, __('brand.blog'), __('brand.blog_meta_title'), __('brand.blog_meta_description')),
+            'listing' => $this->listing('blog.index', $posts, __('brand.blog_meta_title'), __('brand.blog_meta_description')),
         ]);
     }
 
-    public function caseIndex(Request $request, ProjectCatalog $catalog)
+    public function caseIndex(Request $request)
     {
-        $project = $request->query('project');
-        $names = $catalog->options();
-        $project = is_string($project) && isset($names[$project]) ? $project : null;
-        $rank = array_flip(ProjectCatalog::STORY_ORDER);
-        $counts = Post::published()->where('type', PostType::CaseStudy)->whereNotNull('project_key')
-            ->selectRaw('project_key, count(*) as total')->groupBy('project_key')->pluck('total', 'project_key')
-            ->sortBy(fn (int $total, string $key): int => $rank[$key] ?? PHP_INT_MAX);
-        // Visitors see the name the stories use (anonymous work has no client name); the catalog label is for the admin.
-        $labels = Post::published()->where('type', PostType::CaseStudy)->whereIn('project_key', $counts->keys())->get()
-            ->unique('project_key')->mapWithKeys(fn (Post $post): array => [$post->project_key => $post->projectName() ?: $names[$post->project_key]])->all();
+        if ($request->query->has('project')) {
+            return redirect(Seo::route('case-studies.index'), 301);
+        }
+
         $order = collect(ProjectCatalog::STORY_ORDER)->map(fn (string $key, int $i): string => 'WHEN ? THEN '.$i)->implode(' ');
-        $posts = Post::published()->where('type', PostType::CaseStudy)->when($project, fn ($query) => $query->where('project_key', $project))
+        $posts = Post::published()->where('type', PostType::CaseStudy)
             ->orderByRaw('CASE project_key '.$order.' ELSE '.count(ProjectCatalog::STORY_ORDER).' END', ProjectCatalog::STORY_ORDER)
-            ->orderBy('sort_order')->orderBy('published_at')->orderBy('id')->paginate(24)->appends(array_filter(['project' => $project]));
+            ->orderBy('sort_order')->orderBy('published_at')->orderBy('id')->paginate(24);
         abort_if($posts->currentPage() > max(1, $posts->lastPage()), 404);
 
         return view('pages.blog.index', [
-            'posts' => $posts, 'type' => PostType::CaseStudy, 'caseIndex' => true, 'project' => $project, 'projectCounts' => $counts, 'projectNames' => $labels,
-            'listing' => $this->listing('case-studies.index', $posts, $project, $project ? ($labels[$project] ?? $names[$project]) : null, __('brand.case_type'), __('brand.case_meta_title'), __('brand.case_meta_description')),
+            'posts' => $posts, 'type' => PostType::CaseStudy, 'caseIndex' => true,
+            'listing' => $this->listing('case-studies.index', $posts, __('brand.case_meta_title'), __('brand.case_meta_description')),
         ]);
     }
 
     /**
-     * Canonical, title, description and prev/next for a listing. Only `project` and `page` ever
+     * Canonical, title, description and prev/next for a listing. Only `page` ever
      * reach the address, so tracking parameters and out-of-range values never become indexable URLs.
      *
      * @return array{canonical: string, title: string, description: string, prev: ?string, next: ?string}
      */
-    private function listing(string $route, LengthAwarePaginator $posts, ?string $project, ?string $projectName, string $label, string $metaTitle, string $metaDescription): array
+    private function listing(string $route, LengthAwarePaginator $posts, string $metaTitle, string $metaDescription): array
     {
         $page = $posts->currentPage();
-        $url = fn (int $n): string => Seo::route($route, array_filter(['project' => $project, 'page' => $n > 1 ? $n : null]));
-        $title = ($projectName ? $projectName.' — '.$label : $metaTitle).($page > 1 ? ' ('.mb_strtolower(__('brand.page_n', ['n' => $page])).')' : '');
-        $description = $projectName ? __('brand.case_project_intro', ['project' => $projectName]) : $metaDescription;
+        $url = fn (int $n): string => Seo::route($route, array_filter(['page' => $n > 1 ? $n : null]));
+        $title = $metaTitle.($page > 1 ? ' ('.mb_strtolower(__('brand.page_n', ['n' => $page])).')' : '');
 
         return [
             'canonical' => $url($page), 'title' => $title,
-            'description' => $page > 1 ? $description.' '.__('brand.page_n', ['n' => $page]).'.' : $description,
+            'description' => $page > 1 ? $metaDescription.' '.__('brand.page_n', ['n' => $page]).'.' : $metaDescription,
             'prev' => $page > 1 ? $url($page - 1) : null, 'next' => $posts->hasMorePages() ? $url($page + 1) : null,
         ];
     }

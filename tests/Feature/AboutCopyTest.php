@@ -156,7 +156,8 @@ it('keeps the games section short and descriptive', function () {
 
     expect($tr)->toContain('Oyun geceleri için.')
         ->toContain('Aynı odadaki arkadaşlarınla telefondan oynayacağın çok oyunculu oyunlar.')
-        ->toContain('Bir kelime, masada bir Imposter.')
+        ->toContain('Kelimeyi açık etmeden ipuçları verin.')
+        ->not->toContain('Bir kelime, masada bir Imposter.')
         ->toContain('geceyi sistem yönetir, moderatör gerekmez.')
         ->not->toContain('kelimeyi bilmeyeni oylayın')->not->toContain('Boş zamanlarımda yaptığım')
         ->not->toContain('Herkes aynı kelimeyi bilir, biri hariç.')->not->toContain('gündüz köy oylamayla şüpheliyi seçer')
