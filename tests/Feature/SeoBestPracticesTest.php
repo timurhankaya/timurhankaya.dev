@@ -252,6 +252,28 @@ it('gives each story a share card with its own title, and a generic one otherwis
     expect($story->ogImage('tr'))->toBe('og/stories/what-is-monafy-tr.png')->and(public_path($story->ogImage('en')))->toBeFile()
         ->and($unknown->ogImage('en'))->toBe('og-blog-post.png');
     $html = $this->get($story->publicUrl('en'))->assertOk()->getContent();
-    expect($html)->toContain('<meta property="og:image" content="'.asset('og/stories/what-is-monafy-en.png').'">')
-        ->and(collect(ldNodes($html))->firstWhere('@type', 'BlogPosting')['image'])->toBe([asset('og/stories/what-is-monafy-en.png')]);
+    $imageUrl = Seo::imageUrl($story->ogImage('en'), 'en');
+    expect($html)->toContain('<meta property="og:image" content="'.$imageUrl.'">')
+        ->and(collect(ldNodes($html))->firstWhere('@type', 'BlogPosting')['image'])->toBe([$imageUrl]);
+});
+
+it('changes a story share image URL only when its contents change', function () {
+    $card = 'og/stories/cache-version-check-en.png';
+    $file = public_path($card);
+    $contents = file_get_contents(public_path('og/stories/what-is-monafy-en.png'));
+    try {
+        file_put_contents($file, $contents);
+        $original = Seo::imageUrl($card, 'en');
+        expect($original)->toBe(asset($card).'?v='.substr(hash('sha256', $contents), 0, 12))
+            ->and(Seo::imageMeta($original))->toMatchArray(['width' => 1200, 'height' => 630, 'type' => 'image/png']);
+
+        touch($file, time() - 60);
+        expect(Seo::imageUrl($card, 'en'))->toBe($original);
+
+        file_put_contents($file, $contents."\n");
+        expect(Seo::imageUrl($card, 'en'))->not->toBe($original)
+            ->and(Seo::imageUrl('og-blog.png', 'en'))->toBe(asset('og-blog.png'));
+    } finally {
+        @unlink($file);
+    }
 });
