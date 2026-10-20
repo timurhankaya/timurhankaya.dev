@@ -588,6 +588,7 @@ function initMobileNav() {
     const setOpen = (next) => {
         open = next;
         menu.classList.toggle('hidden', !open);
+        qs('[data-mobile-nav-backdrop]')?.classList.toggle('hidden', !open);
         const t = qs('[data-mobile-nav-toggle]');
         if (t) {
             t.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -646,6 +647,10 @@ function initMobileNav() {
         if (!clickedToggle && !clickedMenu) {
             setOpen(false);
         }
+    });
+
+    window.matchMedia('(min-width: 761px)').addEventListener('change', (event) => {
+        if (event.matches) setOpen(false);
     });
 
     setOpen(false);

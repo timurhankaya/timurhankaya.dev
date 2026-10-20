@@ -25,10 +25,14 @@
 .brand-site :is(a, button, summary, input):focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .brand-site :is(section[id], div[id="skills"]) { scroll-margin-top: 110px; }
 .brand-site a { -webkit-tap-highlight-color: transparent; }
-.brand-main, .brand-nav-inner, .brand-footer, .brand-mobile-menu { width: min(100% - 96px, 1184px); margin-inline: auto; }
-/* Frosted bar: light enough for the page to show through, blurred and saturated so the links stay readable over the orange card. */
-.brand-nav { position: sticky; top: 0; z-index: 100; background: rgb(10 10 11 / .62); backdrop-filter: saturate(160%) blur(20px); -webkit-backdrop-filter: saturate(160%) blur(20px); border-bottom: 1px solid var(--line); }
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .brand-nav { background: rgb(10 10 11 / .96); } }
+.brand-main, .brand-nav-inner, .brand-footer, .brand-mobile-menu nav { width: min(100% - 96px, 1184px); margin-inline: auto; }
+/* Separate surfaces let each panel blur the page without a parent backdrop root. */
+.brand-nav { --nav-height: 86px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line); }
+.brand-nav::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.brand-nav::before, .brand-mobile-menu, .brand-nav-panel { background: rgb(10 10 11 / .86); backdrop-filter: saturate(140%) blur(24px); -webkit-backdrop-filter: saturate(140%) blur(24px); }
+.brand-nav-backdrop { position: fixed; inset: var(--nav-height) 0 0; z-index: -2; background: rgb(6 6 8 / .48); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); touch-action: none; }
+.brand-mobile-menu { position: absolute; inset: 100% 0 auto; width: 100%; max-height: calc(100dvh - var(--nav-height)); overflow-y: auto; overscroll-behavior: contain; border-bottom: 1px solid var(--line); box-shadow: 0 24px 50px rgb(0 0 0 / .35); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .brand-nav::before, .brand-mobile-menu, .brand-nav-panel { background: rgb(10 10 11 / .98); } }
 .brand-nav-inner { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .brand-logo { font: 600 34px/1 var(--mono); letter-spacing: -4px; padding-right: 5px; }
 .brand-logo span { color: var(--accent); }
@@ -51,7 +55,7 @@
 .brand-nav-trigger { display: inline-flex; align-items: center; gap: 6px; padding-block: 14px; font-size: 14px; font-weight: 500; color: inherit; cursor: pointer; background: none; border: 0; }
 .brand-nav-group[data-current] > .brand-nav-trigger { color: var(--accent); }
 .brand-nav-chevron { width: 14px; height: 14px; transition: transform .25s cubic-bezier(.2, 0, 0, 1); }
-.brand-nav-panel { position: absolute; top: 100%; left: -22px; width: 330px; padding: 8px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 24px 50px rgb(0 0 0 / .45);
+.brand-nav-panel { position: absolute; top: 100%; left: -22px; width: 330px; padding: 8px; border: 1px solid var(--line); box-shadow: 0 24px 50px rgb(0 0 0 / .45);
     opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .2s, transform .2s cubic-bezier(.2, 0, 0, 1), visibility 0s .2s; }
 .brand-nav-panel::before { content: ""; position: absolute; inset: -14px 0 auto; height: 14px; }
 .brand-nav-group:is(:hover, [data-open]) .brand-nav-panel, html:not(.js) .brand-nav-group:focus-within .brand-nav-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
@@ -246,8 +250,8 @@
 .brand-reading-page .blog-content { font-family: "Geist", sans-serif; color: var(--muted); }
 .brand-reading-page .blog-content :is(h1,h2,h3,h4,h5,h6) { color: var(--ink); }
 .brand-reading-page .blog-content a { color: var(--accent); }
-@media (min-width: 961px) {
-    .brand-mobile-menu { display: none; }
+@media (min-width: 761px) {
+    .brand-mobile-menu, .brand-nav-backdrop { display: none; }
 }
 @media (max-width: 1000px) {
     .brand-hero-grid { grid-template-columns: 1fr 240px; gap: 30px; }
@@ -261,7 +265,8 @@
     .brand-contact-page { gap: 40px; }
 }
 @media (max-width: 760px) {
-    .brand-main, .brand-nav-inner, .brand-footer, .brand-mobile-menu { width: calc(100% - 40px); }
+    .brand-main, .brand-nav-inner, .brand-footer, .brand-mobile-menu nav { width: calc(100% - 40px); }
+    .brand-nav { --nav-height: 72px; }
     .brand-nav-inner { min-height: 72px; gap: 15px; }
     .brand-nav-links { display: none; }
     .brand-nav-actions { gap: 18px; }

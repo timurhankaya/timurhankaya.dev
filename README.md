@@ -146,36 +146,41 @@ images intended for publication. Filament styling is separate from public-site C
 
 ## Local editorial automation
 
-The local Codex task reads `resources/editorial/policy.md`. It scans merged Monafy
-service/package commits, selects a useful original topic, writes a private bilingual
-bundle and publishes it on this site. External LinkedIn and DEV.to files are drafts
-only. General market copy uses “Türkiye ve ABD borsaları” / “Turkish and US stock
-markets”. No new model API key is required for the local Codex task.
+The local Codex task reads `resources/editorial/policy.md`. It currently runs in
+**draft review mode**: merged Monafy changes can become private bilingual drafts,
+but nothing new is published. The owner must approve examples and explicitly enable
+automatic publication before that changes. A single draft approval does not authorize
+future automatic posts. LinkedIn and DEV.to outputs remain unpublished drafts.
+
+The task runs daily at 10:00 Europe/Istanbul on this computer while Codex is open.
+It inspects merged source, unhandled scan backlog and existing writing. Only a meaningful
+product feature or substantial reusable engineering decision qualifies. Maintenance,
+small fixes, SEO changes and repeated topics are skipped. There is no content quota;
+no strong topic means no new draft and no notification.
 
 ```bash
 php artisan editorial:collect
 php artisan editorial:validate storage/app/private/editorial/bundles/topic.json
 php artisan editorial:publish storage/app/private/editorial/bundles/topic.json --dry-run
-php artisan editorial:publish storage/app/private/editorial/bundles/topic.json
 ```
 
-Configure `EDITORIAL_SOURCE_ROOT`, `EDITORIAL_SSH_HOST`, `EDITORIAL_REMOTE_PATH`
-and, if needed, `EDITORIAL_REMOTE_PHP` in the ignored local `.env`. The SSH identity
-must already have access to the correct production app. Only the sealed public
-payload travels over SSH stdin; source evidence stays local. The production command
-is `editorial:import` and is deliberately not exposed as a public HTTP endpoint.
+Keep `EDITORIAL_PUBLISH_ENABLED=false` in the ignored local `.env` while approval is
+pending (also the config default). The real publish command refuses to read a bundle
+or contact production when this switch is off. Do not change it in a scheduled run.
+Review files belong under `storage/app/private/editorial/review/<topic_key>/`;
+private evidence and cursors stay under `storage/app/private/editorial`.
 
-The official local scheduled task runs daily at 10:00 Europe/Istanbul. The computer
-and Codex app must be running. Scan artifacts and cursors live under
-`storage/app/private/editorial`; unhandled scans remain available as backlog.
-Production enforces two new bilingual stories per rolling seven days. Repeating
-an unchanged bundle returns the existing publication; it never rewrites admin edits.
-Removed posts remain suppressed and count toward the original seven-day window.
-If a connection fails, retry the same bundle. Never change its topic key to force
-another publication. Unpublish or soft-delete incorrect output through `/admin`.
+For a future approved publication setup, configure `EDITORIAL_SOURCE_ROOT`,
+`EDITORIAL_SSH_HOST`, `EDITORIAL_REMOTE_PATH` and optionally `EDITORIAL_REMOTE_PHP`.
+Only sealed public content travels over SSH stdin to `editorial:import`; source
+references stay private. The import has no public HTTP endpoint. Production allows
+at most two new bilingual stories per rolling seven days, including removed posts;
+this is a cap, not a posting target. Repeated bundles are idempotent, admin edits are
+preserved and removed publications stay suppressed. Unpublish or soft-delete incorrect
+output through `/admin`.
 
-After successful live checks, receipts and localized LinkedIn/DEV.to drafts are
-written to `storage/app/private/editorial/published/<topic_key>/`. They have not been
-sent anywhere. A quiet scan creates no status notification; successful publication,
-failure or required user action produces one concise update. Automated checks and
-AI editorial review do not constitute human review or guarantee search placement.
+Once publication is explicitly enabled and live checks succeed, receipts and share
+drafts are written under `storage/app/private/editorial/published/<topic_key>/`.
+External drafts have not been sent anywhere and do not create backlinks by themselves.
+Automated checks and AI editorial review do not constitute human review or guarantee
+search placement. No new model API key is required for the local Codex task.

@@ -162,3 +162,14 @@ it('fingerprints the commit set independently of cited files and repository spel
         (new Process(['rm', '-rf', $root]))->mustRun();
     }
 });
+
+it('blocks publication before reading a bundle or contacting production until owner approval', function () {
+    $this->app['env'] = 'local';
+    config(['editorial.publish_enabled' => false]);
+
+    $this->artisan('editorial:publish', ['file' => '/missing/unapproved-bundle.json'])
+        ->expectsOutputToContain('Publication is disabled pending owner approval')
+        ->assertFailed();
+
+    expect(DB::table('editorial_publications')->count())->toBe(0);
+});

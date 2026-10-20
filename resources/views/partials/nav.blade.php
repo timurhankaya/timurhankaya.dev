@@ -33,6 +33,7 @@
             <button class="brand-menu-toggle" type="button" aria-controls="brand-mobile-menu" aria-expanded="false" data-mobile-nav-toggle>{{ __('brand.menu') }} <span aria-hidden="true">☰</span></button>
         </div>
     </div>
+    <div class="brand-nav-backdrop hidden" data-mobile-nav-backdrop aria-hidden="true"></div>
     <div id="brand-mobile-menu" class="brand-mobile-menu hidden" data-mobile-nav>
         <nav aria-label="{{ __('brand.navigation') }}">
             @foreach ($before as [$url, $label])<a href="{{ $url }}">{{ $label }} <x-arrow /></a>@endforeach

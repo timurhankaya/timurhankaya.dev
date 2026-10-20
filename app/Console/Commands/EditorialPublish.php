@@ -22,6 +22,9 @@ class EditorialPublish extends Command
             if (! app()->isLocal()) {
                 throw new RuntimeException('Publishing must be initiated from the local environment.');
             }
+            if (! $this->option('dry-run') && ! config('editorial.publish_enabled')) {
+                throw new RuntimeException('Publication is disabled pending owner approval. Prepare and validate drafts only.');
+            }
             $private = json_decode(file_get_contents($this->argument('file')), true, flags: JSON_THROW_ON_ERROR);
             $public = $bundles->prepare($private);
             if ($this->option('dry-run')) {
