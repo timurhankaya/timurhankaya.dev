@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Enums\PostType;
 use App\Models\Post;
 
 final class LocalizedRoutes
@@ -29,7 +30,7 @@ final class LocalizedRoutes
         unset($parameters['locale'], $parameters['lang']);
         if (isset($parameters['post'])) {
             $parameters['slug'] = $parameters['post'] instanceof Post
-                ? $parameters['post']->slug : $parameters['post'];
+                ? $parameters['post']->publicSlug($locale) : $parameters['post'];
             unset($parameters['post']);
         }
 
@@ -85,6 +86,13 @@ final class LocalizedRoutes
         $path = implode('/', $segments);
         $match = self::match($path);
         if ($match !== null) {
+            if (isset($match['parameters']['slug'])) {
+                $post = Post::published()->withPublicSlug(rawurldecode($match['parameters']['slug']))->first();
+                if ($post) {
+                    $match['name'] = $post->type === PostType::CaseStudy ? 'case-studies.show' : 'blog.show';
+                    $match['parameters']['slug'] = $post->publicSlug($locale);
+                }
+            }
             $path = self::PATHS[$match['name']][$locale];
             foreach ($match['parameters'] as $key => $value) {
                 $path = str_replace('{'.$key.'}', $value, $path);

@@ -13,7 +13,7 @@ use Illuminate\Console\Command;
  */
 class SyncStories extends Command
 {
-    protected $signature = 'stories:sync {slug* : Slugs of the stories to update}';
+    protected $signature = 'stories:sync {slug* : Slugs of the stories to update} {--include-launch : Allow explicitly named launch-story content to update an existing post}';
 
     protected $description = 'Copy the text of existing stories from their JSON files (overwrites admin edits to those fields)';
 
@@ -22,6 +22,10 @@ class SyncStories extends Command
         $stories = collect(glob((StorySeeder::$path ?? resource_path('content/stories')).'/*.json') ?: [])
             ->flatMap(fn (string $file): array => json_decode(file_get_contents($file), true, flags: JSON_THROW_ON_ERROR))
             ->keyBy('slug');
+        if ($this->option('include-launch')) {
+            $launch = json_decode(file_get_contents(resource_path('editorial/launch-story.json')), true, flags: JSON_THROW_ON_ERROR);
+            $stories->put($launch['slug'], $launch);
+        }
         $failed = false;
         foreach ($this->argument('slug') as $slug) {
             $story = $stories->get($slug);
@@ -41,7 +45,7 @@ class SyncStories extends Command
                 'project_key' => $story['project_key'] ?? null,
                 'sort_order' => $story['sort_order'] ?? 100,
                 'case_meta' => $post->type === PostType::CaseStudy ? $story['case_meta'] : null,
-                'translations' => [...(array) $post->translations, 'en' => $story['en']],
+                'translations' => [...(array) $post->translations, 'en' => array_diff_key($story['en'], ['slug' => true])],
             ])->save();
             $this->info('synced: '.$slug);
         }

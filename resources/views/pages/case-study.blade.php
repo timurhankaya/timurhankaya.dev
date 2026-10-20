@@ -5,7 +5,7 @@
     $next = $next ?? null;
     $writing = $writing ?? collect();
     $links = $post->caseLinks();
-    $seo = ['title' => $post->metaTitle(), 'description' => $post->metaDescription(), 'canonical' => $post->publicUrl(), 'image' => $post->ogImage(), 'type' => 'article', 'published_time' => $post->published_at, 'modified_time' => $post->updated_at, 'noindex' => (bool) ($isPreview ?? false)];
+    $seo = ['title' => $post->metaTitle(), 'description' => $post->metaDescription(), 'canonical' => $post->publicUrl(), 'alternates' => $post->alternateUrls(), 'image' => $post->ogImage(), 'type' => 'article', 'published_time' => $post->published_at, 'modified_time' => $post->updated_at, 'noindex' => (bool) ($isPreview ?? false)];
 @endphp
 @extends('layouts.app')
 @section('title', $seo['title'])

@@ -32,7 +32,7 @@ class PostForm
             Section::make('Yayın ayarları')->schema([
                 Select::make('type')->label('İçerik türü')->options(PostType::class)->default('article')->required()->live()
                     ->disabled(fn (?Post $record) => $record?->first_published_at !== null),
-                TextInput::make('slug')->label('Kalıcı adres')->required()->maxLength(255)->unique(ignoreRecord: true)
+                TextInput::make('slug')->label('Kalıcı içerik anahtarı')->helperText('Eski bağlantılar için de korunur. Dil adreslerini aşağıdaki sekmelerde belirleyebilirsin.')->required()->maxLength(255)->unique(ignoreRecord: true)
                     ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')->disabled(fn (?Post $record) => $record?->first_published_at !== null),
                 DateTimePicker::make('published_at')->label('Yayın tarihi')->seconds(false)->helperText('Boş bırak: taslak. İleri tarih: zamanlanmış yayın.'),
                 FileUpload::make('cover_image')->label('Kapak görseli')->disk('public')->directory('content/covers')->visibility('public')
@@ -40,10 +40,16 @@ class PostForm
             ])->columns(2)->columnSpanFull(),
             Tabs::make('Diller')->tabs([
                 Tab::make('Türkçe · Ana içerik')->schema([
+                    TextInput::make('slug_tr')->label('Türkçe adres')->maxLength(255)->unique(ignoreRecord: true)
+                        ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')->helperText('Boşsa kalıcı içerik anahtarı kullanılır. İlk yayından sonra değişmez.')
+                        ->disabled(fn (?Post $record) => $record?->first_published_at !== null),
                     TextInput::make('title')->label('Başlık')->required()->maxLength(255)->live(onBlur: true)
                         ->afterStateUpdated(function (Set $set, Get $get, ?string $state, ?Post $record): void {
                             if (! $record && blank($get('slug'))) {
-                                $set('slug', Str::slug($state ?? ''));
+                                $set('slug', Str::slug($state ?? '', '-', 'tr'));
+                            }
+                            if (! $record?->first_published_at && blank($get('slug_tr'))) {
+                                $set('slug_tr', Str::slug($state ?? '', '-', 'tr'));
                             }
                         }),
                     Textarea::make('excerpt')->label('Özet')->rows(3)->maxLength(2000)->required(fn (Get $get) => filled($get('published_at'))),
@@ -54,7 +60,15 @@ class PostForm
                     ]),
                 ]),
                 Tab::make('English · Optional')->schema([
-                    TextInput::make('translations.en.title')->label('Title')->maxLength(255),
+                    TextInput::make('slug_en')->label('English URL slug')->maxLength(255)->unique(ignoreRecord: true)
+                        ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')->helperText('Leave empty to use the permanent content key. Fixed after first publication.')
+                        ->disabled(fn (?Post $record) => $record?->first_published_at !== null),
+                    TextInput::make('translations.en.title')->label('Title')->maxLength(255)->live(onBlur: true)
+                        ->afterStateUpdated(function (Set $set, Get $get, ?string $state, ?Post $record): void {
+                            if (! $record?->first_published_at && blank($get('slug_en'))) {
+                                $set('slug_en', Str::slug($state ?? ''));
+                            }
+                        }),
                     Textarea::make('translations.en.excerpt')->label('Summary')->rows(3)->maxLength(2000),
                     $editor('translations.en.content')->label('Content')->helperText('Eksik alanlar ana içerikten alınır.'),
                     Section::make('Search result (SEO)')->description('Leave empty to use the title and summary.')->collapsed()->columnSpanFull()->schema([

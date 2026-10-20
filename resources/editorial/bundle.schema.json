@@ -70,6 +70,11 @@
             },
             "meta_description": {
               "type": "string"
+            },
+            "slug": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "maxLength": 255
             }
           }
         },
@@ -98,6 +103,11 @@
             },
             "meta_description": {
               "type": "string"
+            },
+            "slug": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "maxLength": 255
             }
           }
         }

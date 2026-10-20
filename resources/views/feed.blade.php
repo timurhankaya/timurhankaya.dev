@@ -13,7 +13,7 @@
         <item>
             <title>{{ $post->text('title', $locale) }}</title>
             <link>{{ $post->publicUrl($locale) }}</link>
-            <guid isPermaLink="true">{{ $post->publicUrl($locale) }}</guid>
+            <guid isPermaLink="true">{{ $post->feedGuid($locale) }}</guid>
             <pubDate>{{ $post->published_at->toRssString() }}</pubDate>
             <dc:creator>Timurhan Kaya</dc:creator>
             <category>{{ $post->type === \App\Enums\PostType::CaseStudy ? __('brand.case_type') : __('brand.type_article') }}</category>

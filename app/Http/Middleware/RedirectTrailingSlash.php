@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\LocalizedRoutes;
+use App\Support\Seo;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +21,13 @@ class RedirectTrailingSlash
             return $next($request);
         }
         $query = $request->getQueryString();
+        $segments = explode('/', trim($path, '/'));
+        $locale = in_array($segments[0] ?? '', Seo::supportedLocales(), true) ? array_shift($segments) : null;
+        if (LocalizedRoutes::match(implode('/', $segments)) !== null) {
+            $locale ??= in_array($request->query('lang'), Seo::supportedLocales(), true) ? $request->query('lang') : 'en';
+
+            return redirect(Seo::localizedUrl($request->fullUrl(), $locale), 301);
+        }
 
         return redirect()->to(rtrim($path, '/').($query !== null ? '?'.$query : ''), 301);
     }

@@ -8,6 +8,7 @@
         'title' => $post->metaTitle(),
         'description' => $post->metaDescription() ?: $postDescription,
         'canonical' => $postUrl,
+        'alternates' => $post->alternateUrls(),
         'image' => $post->ogImage(),
         'type' => 'article',
         'noindex' => (bool) ($isPreview ?? false),

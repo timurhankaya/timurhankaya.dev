@@ -14,7 +14,7 @@ final class PostPublication
 {
     public function validate(Post $post): void
     {
-        if ($post->exists && $post->getOriginal('first_published_at') !== null && $post->isDirty(['slug', 'type'])) {
+        if ($post->exists && $post->getOriginal('first_published_at') !== null && $post->isDirty(['slug', 'slug_tr', 'slug_en', 'type'])) {
             throw ValidationException::withMessages(['slug' => __('brand.immutable_post')]);
         }
         $rawType = $post->getAttributes()['type'] ?? 'article';
@@ -26,6 +26,8 @@ final class PostPublication
         $rules = [
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'slug_tr' => ['nullable', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('posts', 'slug_tr')->ignore($post->id)],
+            'slug_en' => ['nullable', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('posts', 'slug_en')->ignore($post->id)],
             'type' => [Rule::enum(PostType::class)],
             'project_key' => ['nullable', Rule::in(array_keys(app(ProjectCatalog::class)->options()))],
             'excerpt' => [$publishing ? 'required' : 'nullable', 'string', 'max:2000'],
@@ -58,6 +60,11 @@ final class PostPublication
         $data['case_meta'] = $post->case_meta;
         $data['translations'] = $post->translations;
         Validator::make($data, $rules)->validate();
+        foreach (['slug', 'slug_tr', 'slug_en'] as $field) {
+            if ($post->{$field} && Post::withTrashed()->whereKeyNot($post->id ?? 0)->withPublicSlug($post->{$field})->exists()) {
+                throw ValidationException::withMessages([$field => 'This address is reserved by another story.']);
+            }
+        }
         if ($publishing && trim(strip_tags(Str::sanitizeHtml($post->content ?? ''))) === '') {
             throw ValidationException::withMessages(['content' => __('brand.content_required')]);
         }

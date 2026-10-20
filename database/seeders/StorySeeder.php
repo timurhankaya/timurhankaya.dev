@@ -32,6 +32,8 @@ class StorySeeder extends Seeder
                 Post::create([
                     'title' => $story['tr']['title'],
                     'slug' => $story['slug'],
+                    'slug_tr' => $story['tr']['slug'] ?? null,
+                    'slug_en' => $story['en']['slug'] ?? null,
                     'excerpt' => $story['tr']['excerpt'],
                     // English keeps its own meta_title inside the translation.
                     'meta_title' => $story['tr']['meta_title'] ?? null,
@@ -41,7 +43,7 @@ class StorySeeder extends Seeder
                     'project_key' => $story['project_key'] ?? null,
                     'sort_order' => $story['sort_order'] ?? 100,
                     'case_meta' => $type === PostType::CaseStudy ? $story['case_meta'] : null,
-                    'translations' => ['en' => $story['en']],
+                    'translations' => ['en' => array_diff_key($story['en'], ['slug' => true])],
                     'published_at' => ($story['draft'] ?? false) ? null : Carbon::parse($story['published_at'])->setTime(9, 0),
                 ]);
                 // A rewritten story retires the rows it replaces (soft delete, restorable from the admin panel).

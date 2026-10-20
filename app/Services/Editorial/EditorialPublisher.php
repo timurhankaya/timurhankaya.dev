@@ -33,7 +33,9 @@ final class EditorialPublisher
             $post = Post::create([
                 'type' => $story['type'], 'slug' => $story['slug'], 'project_key' => $story['project_key'],
                 'sort_order' => $story['sort_order'] ?? 100, 'case_meta' => $story['case_meta'] ?? null,
-                ...$story['tr'], 'translations' => ['en' => $story['en']], 'published_at' => now(),
+                'slug_tr' => $story['tr']['slug'] ?? null, 'slug_en' => $story['en']['slug'] ?? null,
+                ...array_diff_key($story['tr'], ['slug' => true]),
+                'translations' => ['en' => array_diff_key($story['en'], ['slug' => true])], 'published_at' => now(),
             ]);
             DB::table('editorial_publications')->insert([
                 'topic_key' => $bundle['topic_key'], 'bundle_id' => $bundle['id'], 'source_fingerprint' => $bundle['source_fingerprint'],

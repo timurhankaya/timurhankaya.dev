@@ -6,6 +6,7 @@ use App\Http\Controllers\LlmsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PreviewPostController;
 use App\Http\Controllers\SitemapController;
+use App\Models\Post;
 use App\Services\Portfolio\PortfolioContentService;
 use App\Services\Portfolio\PortfolioProjects;
 use App\Support\IndexNow;
@@ -70,7 +71,11 @@ Route::get('/{indexNowKey}.txt', function (string $indexNowKey) {
 Route::get('/{legacyPath?}', function (?string $legacyPath = null) {
     $segments = explode('/', trim($legacyPath ?? '', '/'));
     $prefix = in_array($segments[0] ?? null, Seo::supportedLocales(), true) ? array_shift($segments) : null;
-    abort_unless(LocalizedRoutes::match(implode('/', $segments)) !== null, 404);
+    $match = LocalizedRoutes::match(implode('/', $segments));
+    abort_unless($match !== null, 404);
+    if (isset($match['parameters']['slug'])) {
+        abort_unless(Post::published()->withPublicSlug(rawurldecode($match['parameters']['slug']))->exists(), 404);
+    }
     $locale = $prefix ?? Seo::currentLocale();
     $permanent = $legacyPath !== null || in_array(request()->query('lang'), Seo::supportedLocales(), true);
 

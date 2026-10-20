@@ -65,14 +65,15 @@ final class EditorialBundle
             'story.sort_order' => ['sometimes', 'integer', 'between:0,65535'],
             'story.case_meta' => ['sometimes', 'array:project_name,project_name_en,context,period,technologies,url,links'],
             'story.case_meta.context' => ['sometimes', 'in:founder'],
-            'story.tr' => ['required', 'array:title,excerpt,content,meta_title,meta_description'],
-            'story.en' => ['required', 'array:title,excerpt,content,meta_title,meta_description'],
+            'story.tr' => ['required', 'array:title,slug,excerpt,content,meta_title,meta_description'],
+            'story.en' => ['required', 'array:title,slug,excerpt,content,meta_title,meta_description'],
         ])->validate();
         $expected = self::seal($bundle['topic_key'], $bundle['story'], $bundle['source_fingerprint']);
         $this->require(hash_equals($expected['id'], $bundle['id']), 'The bundle checksum does not match its contents.');
         $story = $bundle['story'];
         foreach (['tr', 'en'] as $locale) {
             Validator::make($story[$locale], [
+                'slug' => ['sometimes', 'required', 'string', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'max:200'],
                 'title' => ['required', 'string', 'max:70'], 'excerpt' => ['required', 'string', 'max:500'],
                 'content' => ['required', 'string', 'max:50000'], 'meta_title' => ['required', 'string', 'max:60'],
                 'meta_description' => ['required', 'string', 'min:40', 'max:160'],

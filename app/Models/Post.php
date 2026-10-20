@@ -23,7 +23,7 @@ class Post extends Model
     /** Language of the primary columns; every other language lives in `translations`. */
     public const PRIMARY_LOCALE = 'tr';
 
-    protected $fillable = ['title', 'slug', 'cover_image', 'excerpt', 'meta_title', 'meta_description', 'content', 'published_at', 'type', 'project_key', 'sort_order', 'case_meta', 'translations'];
+    protected $fillable = ['title', 'slug', 'slug_tr', 'slug_en', 'cover_image', 'excerpt', 'meta_title', 'meta_description', 'content', 'published_at', 'type', 'project_key', 'sort_order', 'case_meta', 'translations'];
 
     protected $attributes = ['type' => 'article', 'content' => '', 'sort_order' => 100];
 
@@ -83,6 +83,27 @@ class Post extends Model
     public function scopePublished(Builder $query): Builder
     {
         return $query->whereNotNull('published_at')->where('published_at', '<=', now());
+    }
+
+    /** Canonical slugs and the permanent, original content key share one reserved namespace. */
+    public function scopeWithPublicSlug(Builder $query, string $slug): Builder
+    {
+        return $query->where(fn (Builder $query) => $query->where('slug', $slug)->orWhere('slug_tr', $slug)->orWhere('slug_en', $slug));
+    }
+
+    public function publicSlug(?string $locale = null): string
+    {
+        $locale ??= Seo::currentLocale();
+
+        return (string) ($this->getAttribute('slug_'.$locale) ?: $this->slug);
+    }
+
+    /** @return array<string, string> */
+    public function alternateUrls(): array
+    {
+        $urls = collect(Seo::supportedLocales())->mapWithKeys(fn (string $locale): array => [$locale => $this->publicUrl($locale)])->all();
+
+        return [...$urls, 'x-default' => $this->publicUrl(Seo::fallbackLocale())];
     }
 
     /** Published case studies of one project, in reading order. */
@@ -163,6 +184,12 @@ class Post extends Model
     }
 
     public function publicUrl(?string $locale = null): string
+    {
+        return Seo::route($this->type === PostType::CaseStudy ? 'case-studies.show' : 'blog.show', ['slug' => $this->publicSlug($locale)], $locale);
+    }
+
+    /** Preserve existing RSS item identity when its canonical language URL changes. */
+    public function feedGuid(string $locale): string
     {
         return Seo::route($this->type === PostType::CaseStudy ? 'case-studies.show' : 'blog.show', ['slug' => $this->slug], $locale);
     }

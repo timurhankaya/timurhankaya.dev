@@ -34,11 +34,12 @@ final class Sitemap
 
         $items = collect($pages)->flatMap(fn (?string $lastmod, string $route): array => self::perLocale(Seo::route($route), $lastmod))->all();
 
-        $posts = Post::published()->orderByDesc('published_at')->get()->flatMap(fn (Post $post): array => self::perLocale(
-            $post->publicUrl(),
-            Seo::normalizeDate($post->updated_at ?? $post->published_at),
-            $post->cover_image ? [$post->coverUrl()] : [],
-        ))->all();
+        $posts = Post::published()->orderByDesc('published_at')->get()->flatMap(fn (Post $post): array => collect(Seo::supportedLocales())->map(fn (string $locale): array => [
+            'loc' => $post->publicUrl($locale),
+            'lastmod' => Seo::normalizeDate($post->updated_at ?? $post->published_at),
+            'alternates' => $post->alternateUrls(),
+            'images' => $post->cover_image ? [$post->coverUrl()] : [],
+        ])->all())->all();
 
         return [...$items, ...$posts];
     }

@@ -79,8 +79,8 @@ class PostController extends Controller
 
     public function show(string $slug, PostContent $content)
     {
-        $post = Post::published()->where('slug', $slug)->firstOrFail();
-        if ($post->type === PostType::CaseStudy) {
+        $post = Post::published()->withPublicSlug($slug)->firstOrFail();
+        if ($post->type === PostType::CaseStudy || $slug !== $post->publicSlug()) {
             return redirect($post->publicUrl(), 301);
         }
 
@@ -89,7 +89,10 @@ class PostController extends Controller
 
     public function caseShow(string $slug, PostContent $content)
     {
-        $post = Post::published()->where('type', PostType::CaseStudy)->where('slug', $slug)->firstOrFail();
+        $post = Post::published()->where('type', PostType::CaseStudy)->withPublicSlug($slug)->firstOrFail();
+        if ($slug !== $post->publicSlug()) {
+            return redirect($post->publicUrl(), 301);
+        }
         $series = $post->storySeries();
         $position = $series->search(fn (Post $story): bool => $story->is($post));
 
