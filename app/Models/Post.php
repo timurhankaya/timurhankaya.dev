@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use function Illuminate\Support\defer;
@@ -53,6 +54,11 @@ class Post extends Model
                 defer(fn () => IndexNow::submit($post->indexNowUrls()));
             }
         });
+    }
+
+    public function isAutomated(): bool
+    {
+        return DB::table('editorial_publications')->where('post_id', $this->id)->exists();
     }
 
     public function isPublic(): bool

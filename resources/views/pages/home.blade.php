@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="brand-hero-bottom">
-            <p><span class="brand-status" aria-hidden="true"></span><span>{{ __('brand.currently') }} <strong>Wingie Enuygun Group</strong><br><span class="brand-role">Software Developer</span></span></p>
+            <p><span class="brand-status" aria-hidden="true"></span><span>{{ __('brand.currently') }} <strong>Wingie Enuygun Group</strong><br><span class="brand-role">{{ __('brand.employment_role') }}</span></span></p>
             <a class="brand-button" href="{{ \App\Support\Seo::route('cv') }}" target="_blank" rel="noopener">{{ __('brand.cv') }} <x-arrow /></a>
         </div>
     </header>

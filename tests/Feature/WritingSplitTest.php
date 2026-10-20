@@ -32,7 +32,7 @@ it('keeps the project description on its card and leaves its case studies to the
     caseStudy(['title' => 'The report that never arrived', 'slug' => 'the-report-that-never-arrived', 'excerpt' => 'A daily report stopped without an error.', 'sort_order' => 20]);
     $grid = Str::between($this->get('/')->assertOk()->getContent(), '<div class="brand-project-grid">', '<section class="brand-logos"');
 
-    expect($grid)->toContain('A market research platform for Borsa Istanbul and Nasdaq stocks')
+    expect($grid)->toContain('A research platform for Turkish and US stock markets')
         ->not->toContain('Prices vanished at the close')->not->toContain('The report that never arrived')->not->toContain('Case study · 2');
     $this->get('/case-studies')->assertSee('Prices vanished at the close')->assertSee('The report that never arrived');
 });

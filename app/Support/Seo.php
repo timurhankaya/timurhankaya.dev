@@ -51,8 +51,8 @@ final class Seo
             : self::currentLocale();
 
         return $resolvedLocale === 'tr'
-            ? self::siteName().' — Yazılım Geliştirici'
-            : self::siteName().' — Software Developer';
+            ? self::siteName().' — Yazılım ve AI Mühendisi'
+            : self::siteName().' — Software & AI Engineer';
     }
 
     public static function defaultDescription(?string $locale = null): string
@@ -62,8 +62,8 @@ final class Seo
             : self::currentLocale();
 
         return $resolvedLocale === 'tr'
-            ? 'İstanbul’da yazılım geliştirici Timurhan Kaya’nın sitesi: kurumsal platformlar, finans ürünleri, yapay zekâ özellikleri, yazılar ve parti oyunları.'
-            : 'Timurhan Kaya is a software developer in Istanbul building corporate platforms, finance products and AI features. Writing, case studies and party games.';
+            ? 'Timurhan Kaya, yazılım ve AI mühendisi ve Monafy’nin kurucu ortağı. Ürün geliştirme, AI ajanları, teknik yazılar ve vaka incelemeleri.'
+            : 'Timurhan Kaya, software & AI engineer and Monafy co-founder in Istanbul. Product development, AI agents, engineering articles and case studies.';
     }
 
     /**

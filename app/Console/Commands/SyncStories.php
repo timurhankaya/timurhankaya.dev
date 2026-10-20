@@ -35,6 +35,7 @@ class SyncStories extends Command
             $post->fill([
                 'title' => $story['tr']['title'],
                 'meta_title' => $story['tr']['meta_title'] ?? null,
+                'meta_description' => $story['tr']['meta_description'] ?? null,
                 'excerpt' => $story['tr']['excerpt'],
                 'content' => $story['tr']['content'],
                 'project_key' => $story['project_key'] ?? null,

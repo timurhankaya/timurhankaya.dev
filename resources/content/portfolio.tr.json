@@ -1,20 +1,19 @@
 {
   "meta": {
-    "title": "Timurhan Kaya — Yazılım Geliştirici",
-    "description": "İstanbul’da yazılım geliştiriciyim. Kurumsal platformlar, finans ürünleri ve yapay zekâ özellikleri geliştiriyorum; Monafy’nin kurucu ortağıyım."
+    "title": "Timurhan Kaya — Yazılım ve AI Mühendisi",
+    "description": "Yazılım ve AI mühendisi, Monafy’nin kurucu ortağı. Ürün geliştirme, AI ajanları ve Türkiye ve ABD borsaları için finans teknolojileri üzerine çalışıyorum."
   },
   "hero": {
-    "kicker": "hızlı üret · derin düşün · ince işçilik",
+    "kicker": "ürün geliştir · bağlamı tasarla · sonucu doğrula",
     "greeting": "Merhaba, ben",
     "name": "Timurhan Kaya",
-    "title": "Wingie Enuygun Group’ta Software Developer",
+    "title": "Yazılım ve AI Mühendisi · Kurucu ortak",
     "titles": [
-      "Software Developer",
-      "Büyük Ölçekli Ürünler & Platformlar",
-      "Fintech, Insuretech, E-ticaret ve daha fazlası",
-      "Yüksek trafik altında çalışan sistemler"
+      "Yazılım ve AI Mühendisi · Kurucu ortak",
+      "AI ajanlarıyla ürün geliştirme",
+      "Prompt ve context engineering"
     ],
-    "description": "Milyonlarca isteği taşıyan, iş tarafını hızlandıran ve büyümeye hazır ürünler geliştiriyorum.",
+    "description": "Ürün fikrini mimariye, AI ajanlarıyla geliştirmeye ve canlı kullanıma taşıyorum.",
     "cta_contact": "İletişime Geç",
     "cta_portfolio": "Çalışmalarımı İncele"
   },
@@ -22,19 +21,19 @@
     "loc_label": "Konum",
     "loc_value": "İstanbul, Türkiye",
     "role_label": "Rol",
-    "role_value": "Software Developer",
+    "role_value": "Yazılım ve AI Mühendisi · Kurucu ortak",
     "exp_label": "Deneyim",
     "exp_value": ":years+ yıl"
   },
   "sidecard": {
     "now_title": "Şu an",
-    "now_body": "Wingie Enuygun Group'ta Software Developer — yüksek hacimli ürünler ve büyük ölçekli platformlar geliştiriyorum."
+    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi kurucu ortağı olarak geliştiriyorum."
   },
   "about": {
     "title": "Hakkımda",
     "lead": "",
-    "p1": "2019’dan bu yana yazılım geliştiriyorum. Sigorta, finans ve e-ticaret ürünlerinde; ilk fikrin şekillenmesinden sistemin canlıda çalışmasına kadar farklı sorumluluklar aldım.",
-    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Kurucu ortağı olduğum Monafy’yi ise baştan sona yapay zekâ ajanlarıyla, kodu elle yazmadan geliştirdim.",
+    "p1": "2019’dan bu yana sigorta, finans ve e-ticaret ürünleri geliştiriyorum. İşin ürün kararlarından servis entegrasyonlarına, arayüzlerden canlı sistemlerin bakımına kadar farklı aşamalarında çalıştım.",
+    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
@@ -51,7 +50,7 @@
         "final readonly class TimurhanKaya extends Developer implements ArchitectInterface",
         "{",
         "    public function __construct(",
-        "        public string $role = 'Product Developer',",
+        "        public string $role = 'Software & AI Engineer',",
         "        public string $location = 'Istanbul, TR',",
         "        public int $experienceYears = :years,",
         "    ) {}",
@@ -85,41 +84,42 @@
         "    }",
         "}"
       ]
-    }
+    },
+    "p3": "Monafy’yi yapay zekâ ajanlarıyla, kodu elle yazmadan geliştirdim. Benim işim ürünü ve mimariyi tasarlamak, ajanlara doğru bağlamı vermek ve çıkan işi doğrulamak. Prompt ve context engineering’i bu sürecin parçası olarak kullanıyor; model yanıtlarını ürün verisine bağlayan entegrasyonlar kuruyorum."
   },
   "skills": {
     "title": "Çalışma alanları",
     "groups": [
       {
-        "title": "AI & Otomasyon",
+        "title": "AI sistemleri",
         "items": [
           {
-            "label": "AI destekli geliştirme"
+            "label": "Prompt ve context engineering"
           },
           {
-            "label": "Dil modeli ve çeviri servisi entegrasyonları"
+            "label": "Araç kullanan AI ajanları ve LLM entegrasyonları"
           }
         ]
       },
       {
-        "title": "Ürün & Mimari",
+        "title": "Ürün geliştirme",
         "items": [
           {
-            "label": "Ürün geliştirme ve API tasarımı"
+            "label": "Ürün mimarisi ve API tasarımı"
           },
           {
-            "label": "Finans ve sigorta sistemleri"
+            "label": "SaaS, finans ve sigorta platformları"
           }
         ]
       },
       {
-        "title": "Üretim & Kalite",
+        "title": "Geliştirme süreci",
         "items": [
           {
-            "label": "Veri akışları ve performans"
+            "label": "Kodlama ajanlarıyla geliştirme"
           },
           {
-            "label": "Kod inceleme, test ve bakım"
+            "label": "Kod inceleme, test ve canlı doğrulama"
           }
         ]
       }
@@ -129,7 +129,7 @@
     "title": "Deneyim",
     "items": [
       {
-        "role": "Software Developer",
+        "role": "Yazılım Geliştirici",
         "company": "Wingie Enuygun Group",
         "meta": "Tam zamanlı · Hibrit · İstanbul, Türkiye",
         "period": "Ekim 2024 - Şu An",
@@ -141,7 +141,7 @@
         ]
       },
       {
-        "role": "Software Developer",
+        "role": "Yazılım Geliştirici",
         "company": "MONEO YAZILIM A.Ş.",
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Ekim 2020 - Ekim 2024 · 4 yıl 1 ay",
@@ -154,7 +154,7 @@
         ]
       },
       {
-        "role": "Jr. Software Developer",
+        "role": "Junior Yazılım Geliştirici",
         "company": "MONEO YAZILIM A.Ş.",
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Haziran 2019 - Ekim 2020 · 1 yıl 5 ay",
@@ -181,7 +181,7 @@
   },
   "projects": {
     "title": "Seçili çalışmalar",
-    "description": "Kurumsal platformlar, ürün odaklı SaaS'lar ve büyük ölçekli altyapılarda yaptığım işler. Hepsi ve unuttuklarım olmasa da, ileride referans olsun diye burada topladım.",
+    "description": "Kurucu ortağı olduğum ürünler ve geliştirilmesine katkı verdiğim platformlar. Her projede üstlendiğim rolü ve verdiğim teknik kararları burada anlatıyorum.",
     "drawer_cta": "Tüm Projeleri İncele",
     "sections": [
       {
@@ -247,7 +247,7 @@
           },
           {
             "name": "Monafy",
-            "description": "Borsa İstanbul ve Nasdaq hisseleri için piyasa raporu, hisse tarama, izleme listesi, fiyat alarmı ve yapay zekâ asistanı sunan piyasa araştırma platformu.",
+            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Kurucu ortağı olarak ürününü ve teknik yapısını geliştiriyorum.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -263,10 +263,10 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "Piyasa, şirket detayı ve finansal veri ekranlarının ürün akışlarını geliştirdim.",
-              "İzleme listeleri, fiyat uyarıları ve abonelik haklarının kullanıcı deneyimine bağlanması üzerinde çalıştım.",
-              "Mona AI oturumlarını ve finansal veri araçlarını API akışına entegre ettim.",
-              "Web istemcisi ile piyasa, haber ve AI servisleri arasında sorumlulukları ayrılmış bir yapı üzerinde çalıştım."
+              "Ürün akışlarını ve servisler arasındaki mimariyi tasarlıyor, kodlama ajanlarıyla geliştirme sürecini yönetiyorum.",
+              "Mona AI’ı finansal veri araçlarına bağlayan oturum ve API entegrasyonlarını geliştirdim.",
+              "Piyasa raporlarında kaynak veriyi, prompt kurallarını ve yayın kontrollerini aynı akışta birleştirdim.",
+              "İzleme listeleri, fiyat uyarıları ve abonelik erişimini ürün deneyimine bağlıyorum."
             ],
             "context": "founder",
             "context_label": "Kurucu ortak",
@@ -814,7 +814,7 @@
   "contact": {
     "title": "Konuşalım.",
     "description": "Bir fikir paylaşmak, soru sormak ya da tanışmak için bana yazabilirsin.",
-    "meta_description": "Bir ürün, freelance proje ya da teknik bir soru için İstanbul'daki yazılım geliştirici Timurhan Kaya'ya yaz. E-posta, LinkedIn ve GitHub burada.",
+    "meta_description": "Timurhan Kaya ile yazılım, AI sistemleri veya bir ürün fikri üzerine iletişime geç. Monafy kurucu ortağı; İstanbul merkezli yazılım ve AI mühendisi.",
     "email_label": "E-posta",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",

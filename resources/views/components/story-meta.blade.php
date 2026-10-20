@@ -12,3 +12,5 @@
     @if ($published)<time datetime="{{ $published->toDateString() }}">{{ $published->translatedFormat('j F Y') }}</time>@endif
     @if ($updated)<span>{{ __('brand.updated') }} <time datetime="{{ $updated->toDateString() }}">{{ $updated->translatedFormat('j F Y') }}</time></span>@endif
 </p>
+
+@if ($post->isAutomated())<p class="brand-editorial-note">{{ __('brand.ai_publication_note') }}</p>@endif

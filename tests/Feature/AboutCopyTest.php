@@ -85,9 +85,9 @@ it('keeps the site copy short and plain', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('İnsanların her gün kullandığı ürünler geliştiriyorum.')
+    expect($tr)->toContain('Ürünü tasarlıyor, AI ile geliştiriyorum.')
         ->toContain('Aynı zamanda Monafy’nin kurucu ortağıyım.')
-        ->toContain('İstanbul’da yaşıyorum. Yazılımın yanı sıra finans piyasalarını ve girişimciliği takip ediyorum.')
+        ->toContain('İstanbul’da yazılım ve AI mühendisi, Monafy’de kurucu ortağım. Finans piyasaları ve girişimcilikle ilgileniyorum.')
         ->toContain('İyi tasarlanmış, özenle işlenmiş ve kullanması kolay ürünler geliştiriyorum.')->not->toContain('aynı özeni gösteririm')
         ->toContain('Özenli mühendislik, kalıcı ürünler.')
         ->not->toContain('Boş zamanlarımda arkadaşlarla')->not->toContain('Kendi ürünlerim, müşteri işleri')
@@ -95,8 +95,8 @@ it('keeps the site copy short and plain', function () {
         ->not->toContain('Ürünü bir bütün olarak düşünürüm.')->not->toContain('sahada, su altında')
         ->not->toContain('Kod · Ürün · Merak')->not->toContain('Derin düşünme')->not->toContain('beni en çok heyecanlandıran')
         ->not->toContain('arkasındaki case study')
-        ->and($en)->toContain('I build products people use every day.')->toContain('I also co-founded Monafy.')
-        ->toContain('Based in Istanbul. Beyond software, I follow financial markets and startups.')
+        ->and($en)->toContain('I design products and build with AI.')->toContain('I also co-founded Monafy,')
+        ->toContain('Software &amp; AI engineer in Istanbul and co-founder of Monafy. I follow financial markets and startups.')
         ->toContain('Careful engineering, lasting products.')
         ->not->toContain('small games to play with friends')->not->toContain('My own products, client work')
         ->not->toContain('Fine craft, beautiful products.')
@@ -156,8 +156,8 @@ it('keeps the games section short and descriptive', function () {
 
     expect($tr)->toContain('Oyun geceleri için.')
         ->toContain('Aynı odadaki arkadaşlarınla telefondan oynayacağın çok oyunculu oyunlar.')
-        ->toContain('Herkes gizli kelimeyi görür, Imposter görmez.')
-        ->toContain('Oyunu sistem yönettiği için moderatöre gerek kalmaz.')
+        ->toContain('Bir kelime, masada bir Imposter.')
+        ->toContain('geceyi sistem yönetir, moderatör gerekmez.')
         ->not->toContain('kelimeyi bilmeyeni oylayın')->not->toContain('Boş zamanlarımda yaptığım')
         ->not->toContain('Herkes aynı kelimeyi bilir, biri hariç.')->not->toContain('gündüz köy oylamayla şüpheliyi seçer')
         ->not->toContain('İşin bir de oyun tarafı var.')->not->toContain('bulabilir misin?')

@@ -35,6 +35,7 @@ class StorySeeder extends Seeder
                     'excerpt' => $story['tr']['excerpt'],
                     // English keeps its own meta_title inside the translation.
                     'meta_title' => $story['tr']['meta_title'] ?? null,
+                    'meta_description' => $story['tr']['meta_description'] ?? null,
                     'content' => $story['tr']['content'],
                     'type' => $type,
                     'project_key' => $story['project_key'] ?? null,

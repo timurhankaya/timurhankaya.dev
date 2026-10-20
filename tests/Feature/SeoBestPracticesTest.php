@@ -180,7 +180,7 @@ it('names the site, ties Monafy to its co-founder and credits articles by name',
 
     expect($home->firstWhere('@type', 'WebSite')['alternateName'])->toContain('tkaya')
         ->and($home->firstWhere('@type', 'Organization'))->toMatchArray(['name' => 'Monafy', 'url' => 'https://monafy.com', 'founder' => ['@id' => StructuredData::personId()]])
-        ->and($home->firstWhere('@type', 'ProfilePage')['name'])->toBe('Timurhan Kaya — Yazılım Geliştirici')
+        ->and($home->firstWhere('@type', 'ProfilePage')['name'])->toBe('Timurhan Kaya — Yazılım ve AI Mühendisi')
         ->and($article['author'])->toMatchArray(['@id' => StructuredData::personId(), 'name' => 'Timurhan Kaya']);
 });
 
@@ -195,8 +195,8 @@ it('writes titles for what people search and descriptions that fill the snippet'
     $paths = ['/', '/writing', '/case-studies', '/games', '/games/imposter', '/games/vampire', '/tr', '/tr/yazilar', '/tr/vaka-incelemeleri', '/tr/oyunlar', '/tr/oyunlar/kelime-casusu', '/tr/oyunlar/vampir-koylu'];
     $snippets = collect($paths)->mapWithKeys(fn (string $path): array => [$path => searchSnippet($this->get($path)->assertOk()->getContent())]);
 
-    expect($snippets['/'][0])->toBe('Timurhan Kaya — Software Developer')
-        ->and($snippets['/tr'][0])->toBe('Timurhan Kaya — Yazılım Geliştirici')
+    expect($snippets['/'][0])->toBe('Timurhan Kaya — Software & AI Engineer')
+        ->and($snippets['/tr'][0])->toBe('Timurhan Kaya — Yazılım ve AI Mühendisi')
         ->and($snippets['/tr/yazilar'][0])->toBe('Blog: yazılım ve ürün geliştirme notları — Timurhan Kaya')
         ->and($snippets['/case-studies'][0])->toBe('Case studies: problems I solved on real projects — Timurhan Kaya')
         ->and($snippets['/tr/oyunlar/vampir-koylu'][0])->toBe('Vampir Köylü: telefondan, moderatörsüz oyna — Timurhan Kaya')

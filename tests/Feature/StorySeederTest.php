@@ -85,3 +85,12 @@ it('syncs the text of an already published story from its json without touching 
         ->and(Post::where('slug', 'untouched')->exists())->toBeFalse();
     $this->artisan('stories:sync', ['slug' => ['missing-story']])->expectsOutputToContain('not found: missing-story')->assertFailed();
 });
+
+it('imports and synchronizes the primary language SEO description', function () {
+    $dir = storiesDir([storyEntry(['slug' => 'description-story', 'tr' => ['meta_description' => 'İlk SEO açıklaması.']])]);
+    $this->seed(StorySeeder::class);
+    expect(Post::where('slug', 'description-story')->firstOrFail()->meta_description)->toBe('İlk SEO açıklaması.');
+    file_put_contents($dir.'/stories.json', json_encode([storyEntry(['slug' => 'description-story', 'tr' => ['meta_description' => 'Güncel SEO açıklaması.']])]));
+    $this->artisan('stories:sync', ['slug' => ['description-story']])->assertSuccessful();
+    expect(Post::where('slug', 'description-story')->firstOrFail()->meta_description)->toBe('Güncel SEO açıklaması.');
+});

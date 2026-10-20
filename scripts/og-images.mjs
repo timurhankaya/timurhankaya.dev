@@ -22,16 +22,17 @@ for (const card of spec.cards) {
 }
 
 const kinds = { article: { en: 'Blog', tr: 'Blog' }, case_study: { en: 'Case study', tr: 'Case study' } };
-for (const file of readdirSync(path.join(root, 'resources/content/stories')).filter((name) => name.endsWith('.json'))) {
-    for (const story of read(`resources/content/stories/${file}`)) {
-        for (const lang of languages) {
+const storyFiles = readdirSync(path.join(root, 'resources/content/stories')).filter((name) => name.endsWith('.json'));
+const stories = storyFiles.flatMap((file) => read(`resources/content/stories/${file}`));
+stories.push(read('resources/editorial/launch-story.json'));
+for (const story of stories) {
+    for (const lang of languages) {
             // Anonymous client work keeps its anonymous project label; Monafy is named.
             const project = (lang === 'en' ? story.case_meta?.project_name_en : null) ?? story.case_meta?.project_name ?? (story.project_key === 'monafy' ? 'Monafy' : null);
             jobs.push({
                 out: `public/og/stories/${story.slug}-${lang}.png`,
                 card: { lang, kind: 'title', label: [kinds[story.type][lang], project].filter(Boolean).join(' / '), title: story[lang].title, role: spec.role[lang] },
             });
-        }
     }
 }
 

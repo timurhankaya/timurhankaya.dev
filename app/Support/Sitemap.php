@@ -16,16 +16,16 @@ final class Sitemap
     {
         $views = fn (string ...$names): array => array_map(fn (string $name): string => resource_path('views/'.$name.'.blade.php'), $names);
         $content = [resource_path('content/portfolio.en.json'), resource_path('content/portfolio.tr.json')];
-        $lang = [resource_path('lang/en.json'), resource_path('lang/tr.json')];
+        $lang = [resource_path('lang/en.json'), resource_path('lang/tr.json'), resource_path('lang/en/brand.php'), resource_path('lang/tr/brand.php')];
         $cases = Post::published()->where('type', PostType::CaseStudy)->max('updated_at');
         $articles = Post::published()->where('type', PostType::Article)->max('updated_at');
 
         // lastmod only moves when the page's own content (or the posts it lists) changed.
         $pages = [
-            'home' => Seo::contentLastModified([...$content, ...$views('pages/home')]),
+            'home' => Seo::contentLastModified([...$content, ...$lang, ...$views('pages/home', 'partials/brand-games')]),
             'case-studies.index' => Seo::normalizeDate($cases) ?? Seo::contentLastModified($views('pages/blog/index'), false),
             'blog.index' => Seo::normalizeDate($articles) ?? Seo::contentLastModified($views('pages/blog/index'), false),
-            'games.index' => Seo::contentLastModified([...$lang, ...$views('pages/games/index')], false),
+            'games.index' => Seo::contentLastModified([...$lang, ...$views('pages/games/index', 'partials/brand-games')], false),
             'games.imposter.index' => Seo::contentLastModified([...$lang, ...$views('pages/games/imposter/index')], false),
             'games.vampire.index' => Seo::contentLastModified([...$lang, ...$views('pages/games/vampire/index')], false),
             'contact' => Seo::contentLastModified([...$content, ...$views('pages/contact')], false),

@@ -143,3 +143,39 @@ rules: `docs/superpowers/notes/seo-meta-audit.md`, `docs/superpowers/notes/ai-vi
 The HTML specimen under `/tr/onizleme/icerik-ornekleri` is a local-only design example,
 separate from editorial content. Uploaded covers are public files; use them only for
 images intended for publication. Filament styling is separate from public-site CSS.
+
+## Local editorial automation
+
+The local Codex task reads `resources/editorial/policy.md`. It scans merged Monafy
+service/package commits, selects a useful original topic, writes a private bilingual
+bundle and publishes it on this site. External LinkedIn and DEV.to files are drafts
+only. General market copy uses “Türkiye ve ABD borsaları” / “Turkish and US stock
+markets”. No new model API key is required for the local Codex task.
+
+```bash
+php artisan editorial:collect
+php artisan editorial:validate storage/app/private/editorial/bundles/topic.json
+php artisan editorial:publish storage/app/private/editorial/bundles/topic.json --dry-run
+php artisan editorial:publish storage/app/private/editorial/bundles/topic.json
+```
+
+Configure `EDITORIAL_SOURCE_ROOT`, `EDITORIAL_SSH_HOST`, `EDITORIAL_REMOTE_PATH`
+and, if needed, `EDITORIAL_REMOTE_PHP` in the ignored local `.env`. The SSH identity
+must already have access to the correct production app. Only the sealed public
+payload travels over SSH stdin; source evidence stays local. The production command
+is `editorial:import` and is deliberately not exposed as a public HTTP endpoint.
+
+The official local scheduled task runs daily at 10:00 Europe/Istanbul. The computer
+and Codex app must be running. Scan artifacts and cursors live under
+`storage/app/private/editorial`; unhandled scans remain available as backlog.
+Production enforces two new bilingual stories per rolling seven days. Repeating
+an unchanged bundle returns the existing publication; it never rewrites admin edits.
+Removed posts remain suppressed and count toward the original seven-day window.
+If a connection fails, retry the same bundle. Never change its topic key to force
+another publication. Unpublish or soft-delete incorrect output through `/admin`.
+
+After successful live checks, receipts and localized LinkedIn/DEV.to drafts are
+written to `storage/app/private/editorial/published/<topic_key>/`. They have not been
+sent anywhere. A quiet scan creates no status notification; successful publication,
+failure or required user action produces one concise update. Automated checks and
+AI editorial review do not constitute human review or guarantee search placement.

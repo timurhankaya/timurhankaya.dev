@@ -1,20 +1,19 @@
 {
   "meta": {
-    "title": "Timurhan Kaya — Software Developer",
-    "description": "Software developer in Istanbul. I build corporate platforms, finance products and AI features, and I co-founded Monafy, a market research platform."
+    "title": "Timurhan Kaya — Software & AI Engineer",
+    "description": "Software & AI engineer and Monafy co-founder in Istanbul. I build software products, AI agents and financial tools for Turkish and US stock markets."
   },
   "hero": {
-    "kicker": "build fast · think deep",
+    "kicker": "build products · design context · verify outcomes",
     "greeting": "Hi, I'm",
     "name": "Timurhan Kaya",
-    "title": "Software Developer at Wingie Enuygun Group",
+    "title": "Software & AI Engineer · Co-founder",
     "titles": [
-      "Software Developer",
-      "Large-Scale Products & Platforms",
-      "Fintech, Insuretech and much more",
-      "Systems running under heavy traffic"
+      "Software & AI Engineer · Co-founder",
+      "Building products with AI agents",
+      "Prompt and context engineering"
     ],
-    "description": "Building products that carry millions of requests, move the business faster, and are ready to scale.",
+    "description": "I take products from an idea through architecture, development with AI agents and production.",
     "cta_contact": "Shoot an Email",
     "cta_portfolio": "Explore My Work"
   },
@@ -22,19 +21,19 @@
     "loc_label": "Location",
     "loc_value": "Istanbul, Turkey",
     "role_label": "Role",
-    "role_value": "Software Developer",
+    "role_value": "Software & AI Engineer · Co-founder",
     "exp_label": "Experience",
     "exp_value": ":years+ yrs"
   },
   "sidecard": {
     "now_title": "Now",
-    "now_body": "Software Developer at Wingie Enuygun Group — building high-volume products and large-scale platforms."
+    "now_body": "Software developer at Wingie Enuygun Group and co-founder building Monafy."
   },
   "about": {
     "title": "About",
     "lead": "",
-    "p1": "I’ve been building software since 2019. Across insurance, finance, and e-commerce, I’ve worked on everything from shaping an idea to keeping a product running in production.",
-    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I built Monafy, which I co-founded, end to end with AI agents and without writing the code by hand.",
+    "p1": "Since 2019, I have built software for insurance, finance and e-commerce. My work spans product decisions, service integrations, interfaces and the upkeep of production systems.",
+    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I also co-founded Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
@@ -51,7 +50,7 @@
         "final readonly class TimurhanKaya extends Developer implements ArchitectInterface",
         "{",
         "    public function __construct(",
-        "        public string $role = 'Product Developer',",
+        "        public string $role = 'Software & AI Engineer',",
         "        public string $location = 'Istanbul, TR',",
         "        public int $experienceYears = :years,",
         "    ) {}",
@@ -85,41 +84,42 @@
         "    }",
         "}"
       ]
-    }
+    },
+    "p3": "I built Monafy with AI agents, without writing the code by hand. I design the product and architecture, give agents the context they need and verify their work. Prompt and context engineering are part of that process, alongside integrations that connect model responses to product data."
   },
   "skills": {
     "title": "Areas of work",
     "groups": [
       {
-        "title": "AI & Automation",
+        "title": "AI systems",
         "items": [
           {
-            "label": "AI-assisted development"
+            "label": "Prompt and context engineering"
           },
           {
-            "label": "Language model and translation integrations"
+            "label": "Tool-using AI agents and LLM integrations"
           }
         ]
       },
       {
-        "title": "Product & Architecture",
+        "title": "Product engineering",
         "items": [
           {
-            "label": "Product development and API design"
+            "label": "Product architecture and API design"
           },
           {
-            "label": "Finance and insurance systems"
+            "label": "SaaS, finance and insurance platforms"
           }
         ]
       },
       {
-        "title": "Delivery & Quality",
+        "title": "Development workflow",
         "items": [
           {
-            "label": "Data flows and performance"
+            "label": "Development with coding agents"
           },
           {
-            "label": "Code review, testing, and maintenance"
+            "label": "Code review, testing and production verification"
           }
         ]
       }
@@ -181,7 +181,7 @@
   },
   "projects": {
     "title": "Selected work",
-    "description": "My work across enterprise platforms, product-led SaaS, and large-scale infrastructure. Not every project I touched is here, but I wrote them down so I won't forget them later.",
+    "description": "Products I co-founded and platforms I helped build, with the role I played and the engineering decisions behind the work.",
     "drawer_cta": "Explore All Projects",
     "sections": [
       {
@@ -247,7 +247,7 @@
           },
           {
             "name": "Monafy",
-            "description": "A market research platform for Borsa Istanbul and Nasdaq stocks, with market reports, a screener, watchlists, price alerts and an AI assistant.",
+            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As co-founder, I build the product and its technical foundation.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -263,10 +263,10 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "Built product flows for market, company, and financial data screens.",
-              "Worked on watchlists, price alerts, and subscription capabilities in the user experience.",
-              "Integrated Mona AI sessions and financial tools into API workflows.",
-              "Worked across the web client and clearly separated market, news, and AI services."
+              "I design product flows and service architecture, and direct development with coding agents.",
+              "I built the session and API integrations connecting Mona AI to financial data tools.",
+              "I connected source data, prompt rules and publication checks in the market-report workflow.",
+              "I connect watchlists, price alerts and subscription access to the product experience."
             ],
             "context": "founder",
             "context_label": "Co-founder",
@@ -815,7 +815,7 @@
   "contact": {
     "title": "Let’s talk.",
     "description": "Have an idea, a question, or something to share? Send me a note.",
-    "meta_description": "Contact Timurhan Kaya, software developer in Istanbul, about a product, a freelance project or a technical question. Email, LinkedIn and GitHub.",
+    "meta_description": "Contact Timurhan Kaya, software & AI engineer and Monafy co-founder in Istanbul, about a product, AI integration or collaboration.",
     "email_label": "Email",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",
