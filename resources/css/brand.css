@@ -26,11 +26,12 @@
 .brand-site :is(section[id], div[id="skills"]) { scroll-margin-top: 110px; }
 .brand-site a { -webkit-tap-highlight-color: transparent; }
 .brand-main, .brand-nav-inner, .brand-footer, .brand-mobile-menu nav { width: min(100% - 96px, 1184px); margin-inline: auto; }
-/* Separate surfaces let each panel blur the page without a parent backdrop root. */
+/* Separate surfaces let each panel blur the page without a parent backdrop root.
+   Keep the standard filter last so production optimization preserves both aliases. */
 .brand-nav { --nav-height: 86px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line); }
 .brand-nav::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.brand-nav::before, .brand-mobile-menu, .brand-nav-panel { background: rgb(10 10 11 / .86); backdrop-filter: saturate(140%) blur(24px); -webkit-backdrop-filter: saturate(140%) blur(24px); }
-.brand-nav-backdrop { position: fixed; inset: var(--nav-height) 0 0; z-index: -2; background: rgb(6 6 8 / .48); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); touch-action: none; }
+.brand-nav::before, .brand-mobile-menu, .brand-nav-panel { background: rgb(10 10 11 / .86); -webkit-backdrop-filter: saturate(140%) blur(24px); backdrop-filter: saturate(140%) blur(24px); }
+.brand-nav-backdrop { position: fixed; inset: var(--nav-height) 0 0; z-index: -2; background: rgb(6 6 8 / .48); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); touch-action: none; }
 .brand-mobile-menu { position: absolute; inset: 100% 0 auto; width: 100%; max-height: calc(100dvh - var(--nav-height)); overflow-y: auto; overscroll-behavior: contain; border-bottom: 1px solid var(--line); box-shadow: 0 24px 50px rgb(0 0 0 / .35); }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .brand-nav::before, .brand-mobile-menu, .brand-nav-panel { background: rgb(10 10 11 / .98); } }
 .brand-nav-inner { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
