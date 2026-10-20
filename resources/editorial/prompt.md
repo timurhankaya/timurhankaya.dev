@@ -43,6 +43,10 @@ Her önemli iddiayı özel kanıt dosyasında repo, tam SHA ve dosyayla eşleşt
 
 Genel ve açıklayıcı bir başlık seç. Monafy bağlantısını gövdede kur; her başlığı marka veya iç modül adıyla başlatma. İlk paragraf okuyucunun sorusuna doğrudan girsin. Paragraflar kısa, ara başlıklar bölüme özgü olsun. Gereksiz “kurucu ortak olarak”, “AI mühendisi olarak” ve kendini tanıtma cümleleri ekleme; kimlik bilgisi site biyografisinde yeterli. Birinci kişi yalnız doğrulanmış katkıyı anlatırken kullanılsın.
 
+Başlık ve açıklamayı konu uzmanı olarak ayrıca düzenle. Önce metnin okuyucuya öğrettiği somut ayrımı tek cümlede belirle; birkaç başlık seçeneğini kendi içinde değerlendirip en açık olanı seç. Yalnız teknoloji adı ile “yapmak / yönetmek / iyileştirmek” fiilini birleştiren genel başlıklardan kaçın. Her başlığı soru biçimine de zorlama. Başlıkta gövdenin göstermediği bir olay, ölçülmüş kazanç veya kapsamlı garanti vaat etme. Örneğin fiyat gecikmesinde taşıma maliyeti ile bekleme süresini, fon getirisinde fiyat tarihi ile hesaplanan dönemi ayır.
+
+Kart özetini ve SEO açıklamasını ayrı yaz. Özet, ana bulguyu veya okuyucuya yarayan ayrımı doğrudan söylesin; “bu yazıda”, “nasıl yaptığımı anlatıyorum” veya “in this article” ile yer tüketmesin. SEO açıklaması sayfaya özgü kapsamı ve öğrenilecek noktayı doğal dille anlatsın. Başlığı tekrar etme, iki alanı varsayılan olarak aynı cümleyle doldurma. Karakter sayısı uğruna anlamı kırpma veya kelime doldurma.
+
 Türkçeyi doğal yaz; İngilizceyi kelime kelime çevirmek yerine aynı iddia ve sınırlarla yeniden kur. Genel piyasa ifadesi “Türkiye ve ABD borsaları” / “Turkish and US stock markets”. Elde olmayan veri için sıfır, sonuç için başarı oranı veya yorum için kesin nedensellik üretme.
 
 Her dilde başlık, özet, meta_title, meta_description ve kendine ait kısa, açıklayıcı slug hazırla. İngilizce adresi Türkçe sayfaya kopyalama. Yayımlanan adresler sabittir; mevcut yazının başlığı değiştiğinde slug’ını kendiliğinden değiştirme. Teknik SEO’nun sağladığı canonical/hreflang düzenini metin içine yeniden yazma.

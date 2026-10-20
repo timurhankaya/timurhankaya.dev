@@ -34,9 +34,12 @@ Articles run a little longer than case studies (500–1,000 English words). They
 
 ## Titles
 
-- Start from what the reader would have seen or asked. Sentence case. At most 70 characters. No colon, no "from … to …".
-- Good: "Fiyatlar ABD kapanışında neden düşüyordu?", "Günlük rapor bir gün boyunca neden yazılmadı?", "Why did the daily report not run for a day?"
-- Bad: "Building Mona: from keyword gates to a tool loop with guardrails", "One way in: Monafy's market-data pipeline", "Checking production every evening: verification, runbooks and deploy order"
+- Name the reader's concrete question or the decision that distinguishes this piece. Sentence case. At most 70 characters; provide a shorter search title when needed. No colon or "from … to …" pattern.
+- Read the body as a domain specialist before naming it. A latency article must distinguish transport from waiting; a financial article must preserve the measurement date and period. Do not imply a universal guarantee, a measured improvement or an incident that the body does not establish.
+- Compare a few candidate headlines privately, then choose the one that states the article's useful contribution most clearly. Do not publish the candidates or reuse a question/infinitive template across every title.
+- Good: "Canlı fiyatlar neden gecikir? Kafka hattında gecikme analizi", "Tek şablondan müşteriye özel SaaS iş akışları", "What a financial metric leaves unexplained".
+- Weak: "Kafka fiyat akışında gecikmeyi ölçmek ve azaltmak" (names activities without the finding), "Finansal göstergeleri anlaşılır kılan ürün kararları" (does not name what the reader will understand).
+- Published locale slugs stay fixed when a headline is edited.
 
 ## Body
 
@@ -56,7 +59,9 @@ Articles run a little longer than case studies (500–1,000 English words). They
 ## Summary line
 
 `excerpt` is the answer-first summary shown at the top of the page and used as the description fallback.
-One or two sentences that answer the title, 160 characters or fewer where possible.
+One or two sentences that give the finding or useful distinction, 160 characters or fewer where possible. Do not spend this space on "nasıl yaptığımı anlatıyorum", "bu yazıda" or "in this article"; state the substance directly.
+
+The meta description has a different job: identify the page's specific scope and what a searcher can learn. Write it separately from the excerpt rather than copying the same sentence by default. Include technical terms only when they explain the decision or match the reader's question. Keep each language natural, with the same factual boundaries. Character limits are display conventions, not ranking promises.
 
 ## Never
 
