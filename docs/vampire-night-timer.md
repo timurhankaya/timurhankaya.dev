@@ -24,6 +24,21 @@ aynı komutu süreç yöneticisi altında, çalışan sürümün `artisan` dosya
 Deploy sonrasında worker'ı yeniden başlat. `sync` bağlantısı gecikmeli işlemler
 için uygun değildir; Redis veya database gibi asenkron bir bağlantı kullan.
 
+Bu sitenin canlı sunucusunda süreç `forge` kullanıcısının ayrı Supervisor
+yapılandırmasıyla çalışır. Dosya:
+`/home/forge/timurhankaya.dev/storage/vampire-timers/supervisord.conf`.
+Durum kontrolü ve sonraki deploy'da yalnız bu worker'ı yeniden başlatma:
+
+```sh
+supervisorctl -c /home/forge/timurhankaya.dev/storage/vampire-timers/supervisord.conf status timurhankaya-vampire-timers
+supervisorctl -c /home/forge/timurhankaya.dev/storage/vampire-timers/supervisord.conf restart timurhankaya-vampire-timers
+```
+
+Kullanıcının crontab'ındaki `timurhankaya-vampire-timers` işaretli kontrol, süreç
+yöneticisi durmuşsa dakikada bir tekrar başlatır; mevcut diğer cron kayıtları
+korunur. Worker yalnız `vampire-timers` kuyruğunu tüketir. Log:
+`/home/forge/timurhankaya.dev/storage/logs/vampire-timers.log`.
+
 Worker gecikirse katılmış oyuncuların oda yenilemesi de aynı sunucu bitiş zamanını
 kontrol eder. Gece ekranındaki sayaç yalnız gösterimdir; istemci saati ve public
 Livewire alanları geceyi erken bitiremez. Gece yenilemesi arka plandaki sekmelerde
