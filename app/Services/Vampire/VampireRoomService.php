@@ -7,6 +7,7 @@ use App\Enums\VampireRole;
 use App\Enums\VampireRoomStatus;
 use App\Services\Games\CacheRoomService;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Str;
 
 final class VampireRoomService extends CacheRoomService
 {
@@ -130,6 +131,7 @@ final class VampireRoomService extends CacheRoomService
             $room['players'] = $this->assignRolesToPlayers($players, $config);
             $room['status'] = VampireRoomStatus::Night->value;
             $room['startedAt'] = CarbonImmutable::now()->toIso8601String();
+            $room['roundId'] = (string) Str::uuid();
             $room['winner'] = null;
             $room['gameOverAt'] = null;
             $room['history'] = [];
@@ -146,10 +148,14 @@ final class VampireRoomService extends CacheRoomService
     /**
      * @return array<string, mixed>|null
      */
-    public function castNightVote(string $code, string $playerId, string $targetId): ?array
+    public function castNightVote(string $code, string $playerId, string $targetId, ?array $expectedRoom = null): ?array
     {
-        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId): ?array {
+        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId, $expectedRoom): ?array {
             $room = $this->getRoom($code);
+            // Local simulation submits against a fresh snapshot; reject concurrent host/phase changes.
+            if ($expectedRoom !== null && $room !== $expectedRoom) {
+                return null;
+            }
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::Night->value) {
                 return $room;
@@ -224,10 +230,14 @@ final class VampireRoomService extends CacheRoomService
     /**
      * @return array<string, mixed>|null
      */
-    public function hunterShoot(string $code, string $playerId, string $targetId): ?array
+    public function hunterShoot(string $code, string $playerId, string $targetId, ?array $expectedRoom = null): ?array
     {
-        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId): ?array {
+        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId, $expectedRoom): ?array {
             $room = $this->getRoom($code);
+            // Local simulation submits against a fresh snapshot; reject concurrent host/phase changes.
+            if ($expectedRoom !== null && $room !== $expectedRoom) {
+                return null;
+            }
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::HunterLastShot->value) {
                 return $room;
@@ -283,10 +293,14 @@ final class VampireRoomService extends CacheRoomService
     /**
      * @return array<string, mixed>|null
      */
-    public function doctorProtect(string $code, string $playerId, string $targetId): ?array
+    public function doctorProtect(string $code, string $playerId, string $targetId, ?array $expectedRoom = null): ?array
     {
-        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId): ?array {
+        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId, $expectedRoom): ?array {
             $room = $this->getRoom($code);
+            // Local simulation submits against a fresh snapshot; reject concurrent host/phase changes.
+            if ($expectedRoom !== null && $room !== $expectedRoom) {
+                return null;
+            }
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::Night->value) {
                 return $room;
@@ -315,10 +329,14 @@ final class VampireRoomService extends CacheRoomService
     /**
      * @return array<string, mixed>|null
      */
-    public function detectiveQuery(string $code, string $playerId, string $targetId): ?array
+    public function detectiveQuery(string $code, string $playerId, string $targetId, ?array $expectedRoom = null): ?array
     {
-        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId): ?array {
+        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId, $expectedRoom): ?array {
             $room = $this->getRoom($code);
+            // Local simulation submits against a fresh snapshot; reject concurrent host/phase changes.
+            if ($expectedRoom !== null && $room !== $expectedRoom) {
+                return null;
+            }
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::Night->value) {
                 return $room;
@@ -395,10 +413,14 @@ final class VampireRoomService extends CacheRoomService
     /**
      * @return array<string, mixed>|null
      */
-    public function castDayVote(string $code, string $playerId, string $targetId): ?array
+    public function castDayVote(string $code, string $playerId, string $targetId, ?array $expectedRoom = null): ?array
     {
-        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId): ?array {
+        return $this->withRoomLock($code, function () use ($code, $playerId, $targetId, $expectedRoom): ?array {
             $room = $this->getRoom($code);
+            // Local simulation submits against a fresh snapshot; reject concurrent host/phase changes.
+            if ($expectedRoom !== null && $room !== $expectedRoom) {
+                return null;
+            }
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::DayVoting->value) {
                 return $room;

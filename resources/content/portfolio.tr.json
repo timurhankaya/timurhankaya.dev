@@ -3,6 +3,13 @@
     "title": "Timurhan Kaya — Yazılım ve AI Mühendisi",
     "description": "Yazılım ve AI mühendisi, Monafy’nin kurucu ortağı. Ürün geliştirme, AI ajanları ve Türkiye ve ABD borsaları için finans teknolojileri üzerine çalışıyorum."
   },
+  "cv": {
+    "role": "Yazılım ve AI Mühendisi",
+    "profile": "2019’dan beri sigorta, finans ve e-ticaret alanlarında yazılım geliştiriyorum. Wingie Enuygun Group’ta sigorta karşılaştırma ve satın alma akışları ile servis entegrasyonları üzerinde çalışıyorum. Ayrı bir ürün çalışması olarak Monafy’yi AI kodlama ajanlarıyla, kodu elle yazmadan geliştirdim. Ürün akışlarını ve servis mimarisini tasarlıyor, AI araçlarını finansal verilere bağlıyor, ajanlara gereken bağlamı veriyor ve çıkan işi doğruluyorum.",
+    "project_descriptions": {
+      "monafy": "Türkiye ve ABD borsaları için finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiren araştırma platformu. Ürün akışlarını ve servis mimarisini tasarlıyor, AI entegrasyonlarını ve kodlama ajanlarıyla geliştirme sürecini yönetiyorum."
+    }
+  },
   "hero": {
     "kicker": "ürün geliştir · bağlamı tasarla · sonucu doğrula",
     "greeting": "Merhaba, ben",

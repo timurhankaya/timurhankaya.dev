@@ -196,7 +196,7 @@
 .game-secret button:hover { color: var(--ink); }
 
 /* Sticky host controls keep the next step under the thumb. */
-.game-host-bar { position: sticky; bottom: 0; z-index: 30; display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 24px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--game-line); background: rgb(10 10 11 / .9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.game-host-bar { position: sticky; bottom: 0; z-index: 30; display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 24px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--game-line); background: rgb(10 10 11 / .9); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 .game-host-bar > .brand-label { flex-basis: 100%; color: var(--muted); display: flex; align-items: center; gap: 8px; }
 .game-host-bar .brand-button { flex: 1 1 220px; min-height: 52px; font-size: 15px; }
 .game-host-bar .game-btn { flex: 0 1 auto; min-height: 52px; }
@@ -358,6 +358,28 @@
 .vk-room .game-arena { background: transparent; }
 .vk-room .game-host-bar { background: rgb(8 8 11 / .82); }
 .vk-room[data-phase="day"] .game-host-bar, .vk-room[data-phase="verdict"] .game-host-bar { background: rgb(26 20 15 / .88); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .game-room .game-host-bar { background: #0a0a0b; }
+    .vk-room:is([data-phase="day"], [data-phase="verdict"]) .game-host-bar { background: #1a140f; }
+}
+
+/* Local host tools share the room's typography and control sizes. */
+.game-simulation { margin-bottom: 24px; border-style: dashed; }
+.game-simulation-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.game-simulation-note { margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.game-simulation-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; margin-top: 16px; }
+.game-simulation-count { display: grid; gap: 6px; color: var(--muted); font: 11px/1.5 var(--mono); }
+.game-simulation-count input { width: 88px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--game-line); border-radius: 6px; background: #ffffff06; color: var(--ink); font: 14px/1.5 var(--mono); }
+.game-simulation-controls .game-btn { min-height: 44px; }
+.game-simulation-controls :disabled { opacity: .4; cursor: not-allowed; }
+.game-simulation-light { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.game-simulation-toggle[aria-pressed="true"] .game-simulation-light { background: #a4dfb7; box-shadow: 0 0 8px #a4dfb744; }
+.game-simulation-status { margin-top: 16px; font-size: 13px; line-height: 1.65; }
+.game-simulation-note.is-mismatch { color: #f3c887; }
+@media (max-width: 760px) {
+    .game-simulation-controls .game-btn { flex: 1 1 140px; justify-content: center; }
+    .game-simulation-count { flex: 1 0 100%; }
+}
 .vk-room .game-seat, .vk-room .game-pick, .vk-room .game-tally-row { background: rgb(0 0 0 / .28); }
 .vk-room[data-phase="day"] .game-seat, .vk-room[data-phase="day"] .game-pick, .vk-room[data-phase="verdict"] .game-pick, .vk-room[data-phase="verdict"] .game-tally-row { background: rgb(255 236 210 / .04); }
 .vk-room .game-code span { background: rgb(0 0 0 / .35); }

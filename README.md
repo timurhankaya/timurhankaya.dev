@@ -82,6 +82,10 @@ npm run build
 
 ## Environment Notes
 
+Local hosts can add up to 12 bots to either game and play their moves manually
+or during room polling. Phase changes stay under host control. See
+[local game simulation](docs/local-game-simulation.md) for the workflow and limits.
+
 - Copy `.env.example` to `.env` if you do not use the setup script.
 - Configure database credentials in `.env`.
 - Optional: configure Redis if you want cache/session/queue improvements.

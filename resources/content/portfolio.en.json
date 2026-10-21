@@ -3,6 +3,13 @@
     "title": "Timurhan Kaya — Software & AI Engineer",
     "description": "Software & AI engineer and Monafy co-founder in Istanbul. I build software products, AI agents and financial tools for Turkish and US stock markets."
   },
+  "cv": {
+    "role": "Software & AI Engineer",
+    "profile": "Since 2019, I have built software for insurance, finance and e-commerce. At Wingie Enuygun Group, I develop insurance comparison and purchase flows and their service integrations. Separately, I built Monafy with AI coding agents, without writing the code by hand. I design its product flows and service architecture, connect AI tools to financial data, give agents the context they need and verify their work.",
+    "project_descriptions": {
+      "monafy": "A research platform combining financial data, market reports and an AI assistant for Turkish and US stock markets. I design product flows and service architecture, manage AI integrations and direct development with coding agents."
+    }
+  },
   "hero": {
     "kicker": "build products · design context · verify outcomes",
     "greeting": "Hi, I'm",

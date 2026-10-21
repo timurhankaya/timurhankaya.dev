@@ -2,6 +2,30 @@
 
 // Oyun ekranlarının yeniden tasarımıyla eklenen metinler. Eski oyun metinleri tr.json içinde (imposter.*, vampire.*, games.*).
 return [
+    'simulation' => [
+        'title' => 'Yerel test',
+        'bots' => ':count bot',
+        'description' => 'Botlar yalnız bu sayfa açıkken oynar. Oyunu başlatma, aşama geçişleri ve sonuçları açıklama sende.',
+        'count' => 'Bot sayısı',
+        'add' => 'Bot ekle',
+        'remove' => 'Botları kaldır',
+        'play' => 'Botları oynat',
+        'automatic' => 'Otomatik hamleler',
+        'on' => 'Açık',
+        'off' => 'Kapalı',
+        'roles' => ':players oyuncu / :roles rol.',
+        'role_mismatch' => 'Başlatmadan önce rol toplamını oyuncu sayısına eşitle. Bot eklemek rol ayarlarını değiştirmez.',
+        'reasons' => [
+            'host_action' => 'Oda sahibinin aşama kararını bekliyor.',
+            'ready' => 'Mevcut aşamadaki uygun botlar oynatılabilir.',
+            'paused' => 'Otomatik hamleler kapalı. Botları elle oynatabilirsin.',
+            'host_changed' => 'Oda sahibi değişti; otomatik hamleler durduruldu. Yeniden açabilirsin.',
+            'human_turn' => 'İnsan oyuncunun oyunu bekliyor.',
+            'no_targets' => 'Uygun hedef kalmadığı için bazı botlar bekliyor.',
+            'no_bots' => 'Lobide bot ekleyerek başlayabilirsin.',
+            'complete' => 'Bu aşamadaki uygun bot hamleleri tamamlandı. İnsan hamlesi veya oda sahibinin kararı bekleniyor.',
+        ],
+    ],
     'you' => 'Sen',
     'close' => 'Kapat',
     'players_count' => ':count oyuncu',

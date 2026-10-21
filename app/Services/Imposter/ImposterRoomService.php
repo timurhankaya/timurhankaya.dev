@@ -6,6 +6,7 @@ use App\Enums\ImposterRoomStatus;
 use App\Services\Games\CacheRoomService;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 final class ImposterRoomService extends CacheRoomService
 {
@@ -120,10 +121,14 @@ final class ImposterRoomService extends CacheRoomService
     /**
      * @return array<string, mixed>|null
      */
-    public function castVote(string $code, string $playerId, string $targetPlayerId): ?array
+    public function castVote(string $code, string $playerId, string $targetPlayerId, ?array $expectedRoom = null): ?array
     {
-        return $this->withRoomLock($code, function () use ($code, $playerId, $targetPlayerId): ?array {
+        return $this->withRoomLock($code, function () use ($code, $playerId, $targetPlayerId, $expectedRoom): ?array {
             $room = $this->getRoom($code);
+            // Local simulation submits against a fresh snapshot; reject concurrent host/phase changes.
+            if ($expectedRoom !== null && $room !== $expectedRoom) {
+                return null;
+            }
 
             if ($room === null || ($room['status'] ?? null) !== ImposterRoomStatus::Voting->value) {
                 return $room;
@@ -314,6 +319,7 @@ final class ImposterRoomService extends CacheRoomService
             $room['status'] = ImposterRoomStatus::Started->value;
             $room['starterId'] = $starterId;
             $room['startedAt'] = CarbonImmutable::now()->toIso8601String();
+            $room['roundId'] = (string) Str::uuid();
             $room['language'] = $language;
             $room['word'] = $word;
             $room['votingStartedAt'] = null;

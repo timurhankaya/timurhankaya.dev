@@ -11,12 +11,14 @@ const read = (file) => JSON.parse(readFileSync(path.join(root, file), 'utf8'));
 const spec = read('resources/og/cards.json');
 const languages = ['en', 'tr'];
 const jobs = [];
+// Optionally render just the changed cards: npm run og -- --only=og-cv,story-key
+const only = new Set((process.argv.find((arg) => arg.startsWith('--only='))?.slice(7) ?? '').split(',').filter(Boolean));
 
 for (const card of spec.cards) {
     for (const lang of languages) {
         jobs.push({
             out: `public/${card.file}${lang === 'en' ? '' : '-' + lang}.png`,
-            card: { lang, kind: card.kind ?? 'title', number: card.number, label: card.label?.[lang], title: card.title?.[lang], subtitle: card.subtitle?.[lang], role: spec.role[lang] },
+            card: { lang, kind: card.kind ?? 'title', number: card.number, label: card.label?.[lang], title: card.title?.[lang], subtitle: card.subtitle?.[lang], role: card.role?.[lang] ?? spec.role[lang] },
         });
     }
 }
@@ -45,9 +47,10 @@ const page = await browser.newPage();
 await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
 await page.goto(pathToFileURL(path.join(root, 'resources/og/card.html')).href, { waitUntil: 'networkidle0' });
 mkdirSync(path.join(root, 'public/og/stories'), { recursive: true });
-for (const job of jobs) {
+const selectedJobs = jobs.filter((job) => only.size === 0 || only.has(path.basename(job.out, '.png').replace(/-(en|tr)$/, '')));
+for (const job of selectedJobs) {
     await page.evaluate((card) => window.render(card), job.card);
     await page.screenshot({ path: path.join(root, job.out), type: 'png' });
 }
 await browser.close();
-console.log(`rendered ${jobs.length} share images`);
+console.log(`rendered ${selectedJobs.length} share images`);

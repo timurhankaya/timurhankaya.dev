@@ -3,16 +3,21 @@
 namespace App\Livewire\Games\Imposter;
 
 use App\Enums\ImposterRoomStatus;
+use App\Livewire\Games\Concerns\WithLocalSimulation;
 use App\Services\Imposter\ImposterRoomService;
 use App\Support\GameIdentity;
 use App\Support\Games\ImposterRoomPresenter;
 use App\Support\Seo;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Room extends Component
 {
+    use WithLocalSimulation;
+
+    #[Locked]
     public string $roomCode;
 
     public ImposterRoomStatus $status = ImposterRoomStatus::Loading;
@@ -117,6 +122,7 @@ class Room extends Component
 
     public function refreshRoom(ImposterRoomService $rooms): void
     {
+        $this->runAutomaticSimulation();
         $playerId = session()->get($this->playerSessionKey());
         $snapshot = app(ImposterRoomPresenter::class)->present(
             $rooms->getRoom($this->roomCode),

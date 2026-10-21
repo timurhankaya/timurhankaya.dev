@@ -114,8 +114,8 @@ final class Seo
             $path = is_file(public_path($variant)) ? $variant : $path;
         }
 
-        // Retitled story cards must not reuse a CDN's cached image of the old headline.
-        if (Str::startsWith($path, 'og/stories/') && is_file(public_path($path))) {
+        // Updated story and CV cards must not reuse a CDN's cached text.
+        if ((Str::startsWith($path, 'og/stories/') || in_array($path, ['og-cv.png', 'og-cv-tr.png'], true)) && is_file(public_path($path))) {
             return asset($path).'?v='.substr(hash_file('sha256', public_path($path)), 0, 12);
         }
 

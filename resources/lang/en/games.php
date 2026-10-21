@@ -2,6 +2,30 @@
 
 // Strings added with the game screen redesign. Older game strings live in en.json (imposter.*, vampire.*, games.*).
 return [
+    'simulation' => [
+        'title' => 'Local test',
+        'bots' => ':count bots',
+        'description' => 'Bots play while this page is open. You still start the game, change phases and reveal results.',
+        'count' => 'Bot count',
+        'add' => 'Add bots',
+        'remove' => 'Remove bots',
+        'play' => 'Play bots',
+        'automatic' => 'Automatic moves',
+        'on' => 'On',
+        'off' => 'Off',
+        'roles' => ':players players / :roles roles.',
+        'role_mismatch' => 'Match the role total to the player count before starting. Adding bots does not change role settings.',
+        'reasons' => [
+            'host_action' => 'Waiting for the host to change the phase.',
+            'ready' => 'Eligible bots can play in the current phase.',
+            'paused' => 'Automatic moves are off. You can play bots manually.',
+            'host_changed' => 'The host changed; automatic moves stopped. You can enable them again.',
+            'human_turn' => 'Waiting for a human player to vote.',
+            'no_targets' => 'Some bots are waiting because no eligible target remains.',
+            'no_bots' => 'Add bots in the lobby to begin.',
+            'complete' => 'Eligible bot moves for this phase are complete. Waiting for a human move or a host decision.',
+        ],
+    ],
     'you' => 'You',
     'close' => 'Close',
     'players_count' => '{1} :count player|[2,*] :count players',

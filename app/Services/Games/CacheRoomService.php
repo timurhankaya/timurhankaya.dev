@@ -50,10 +50,14 @@ abstract class CacheRoomService
     /**
      * @return array{playerId: string, room: array<string, mixed>}|null
      */
-    public function joinRoom(string $code, string $name, ?string $password = null, string $color = 'sky', string $emoji = '🎭'): ?array
+    public function joinRoom(string $code, string $name, ?string $password = null, string $color = 'sky', string $emoji = '🎭', ?array $expectedRoom = null): ?array
     {
-        return $this->withRoomLock($code, function () use ($code, $name, $password, $color, $emoji): ?array {
+        return $this->withRoomLock($code, function () use ($code, $name, $password, $color, $emoji, $expectedRoom): ?array {
             $room = $this->getRoom($code);
+
+            if ($expectedRoom !== null && $room !== $expectedRoom) {
+                return null;
+            }
 
             if ($room === null) {
                 return null;

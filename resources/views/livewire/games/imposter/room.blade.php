@@ -81,6 +81,8 @@
                 wire:poll.5s="refreshRoom"
             @endif
         >
+            @include('livewire.games.partials.simulation')
+
             @if ($status === \App\Enums\ImposterRoomStatus::Lobby)
                 {{-- Room code and the ways to share it --}}
                 <div class="game-code-block">

@@ -4,16 +4,21 @@ namespace App\Livewire\Games\Vampire;
 
 use App\Enums\VampireRole;
 use App\Enums\VampireRoomStatus;
+use App\Livewire\Games\Concerns\WithLocalSimulation;
 use App\Services\Vampire\VampireRoomService;
 use App\Support\GameIdentity;
 use App\Support\Games\VampireRoomPresenter;
 use App\Support\Seo;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Room extends Component
 {
+    use WithLocalSimulation;
+
+    #[Locked]
     public string $roomCode;
 
     public VampireRoomStatus $status = VampireRoomStatus::Loading;
@@ -133,6 +138,7 @@ class Room extends Component
 
     public function refreshRoom(VampireRoomService $rooms): void
     {
+        $this->runAutomaticSimulation();
         $playerId = session()->get($this->playerSessionKey());
         $room = $rooms->getRoom($this->roomCode);
         $snapshot = app(VampireRoomPresenter::class)->present(

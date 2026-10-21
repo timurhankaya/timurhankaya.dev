@@ -41,7 +41,7 @@
         ->map(fn (array $item): array => [
             'name' => $tx(data_get($item, 'name')),
             'tag' => $tx(data_get($item, 'badge')),
-            'desc' => $tx(data_get($item, 'description')),
+            'desc' => $tx(data_get($content, 'cv.project_descriptions.'.data_get($item, 'key'), data_get($item, 'description'))),
             'stack' => implode(' · ', array_filter(array_map($tx, array_values((array) data_get($item, 'stack', []))))),
         ])
         ->values()
@@ -68,22 +68,15 @@
         ->values()
         ->all();
 
-
-    $profileParts = array_filter([
-        $tx(data_get($content, 'about.p1')),
-        $tx(data_get($content, 'about.p2')),
-        $tx(data_get($content, 'about.p3')),
-    ]);
-
     $t = [
         'meta_title' => $tx(data_get($content, 'meta.title')),
         'print_btn' => $locale === 'tr' ? '⌘ PDF Olarak Kaydet' : '⌘ Save as PDF',
-        'role' => $tx(data_get($content, 'stats.role_value')),
+        'role' => $tx(data_get($content, 'cv.role')),
         'loc_label' => $tx(data_get($content, 'stats.loc_label')),
         'loc_value' => $tx(data_get($content, 'stats.loc_value')),
         'email_label' => $locale === 'tr' ? 'E-posta' : 'Email',
         'profile_title' => $tx(data_get($content, 'about.title')),
-        'profile_text' => implode(' ', $profileParts),
+        'profile_text' => $tx(data_get($content, 'cv.profile')),
         'exp_title' => $tx(data_get($content, 'experience.title')),
         'exp_items' => $experienceItems,
         'projects_title' => $tx(data_get($content, 'projects.title')),
@@ -110,7 +103,7 @@
         ]),
         \App\Support\StructuredData::breadcrumbs($cvUrl, [[__('brand.home_crumb', [], $locale), \App\Support\Seo::route('home', [], $locale)], [$t['meta_title'], $cvUrl]]),
         [...\App\Support\StructuredData::person($locale), 'jobTitle' => $t['role'], 'description' => $cvDescription, 'email' => 'kayacekovic@gmail.com', 'knowsAbout' => $cvSkills],
-        \App\Support\StructuredData::website($locale),
+        [...\App\Support\StructuredData::website($locale), 'description' => \App\Support\Seo::metaDescription($cvDescription)],
     );
 @endphp
 <!DOCTYPE html>
