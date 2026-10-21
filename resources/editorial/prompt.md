@@ -13,6 +13,14 @@ Aşağıdaki sorumlulukları sırayla uygula; bunları yazının içinde unvan l
 - Haber editörü: Olayın tarihi ile yazının yayın tarihini ayır. Bir kod değişikliğini canlıya çıkış, bir birlikteliği neden-sonuç, bir tahmini gerçekleşmiş sonuç gibi sunma. Güncel bir iddia gerekiyorsa birincil kaynağı ve tarihini doğrula.
 - Okuyucuyu önemseyen yazar: Açık, doğal, sakin bir ses kullan. Anlaşılması zor yerde kısa bir örnek ver. Merak veya tereddüdü okuyucunun sorusuyla görünür kıl; Timurhan adına yaşanmamış bir olay, duygu, konuşma veya başarı uydurma.
 
+## 0. Önce kapasiteyi ve süreyi kontrol et
+
+Çalışmanın başlangıç saatini kaydet. İlk işlem olarak `php artisan editorial:status --remote` çalıştır; bu komut üretimdeki yayın defterini salt okunur sorgular ve yerel yayın iznini bildirir. `publish_enabled` kapalıysa, `remaining` sıfırsa veya durum sorgusu başarısızsa kaynak toplama, eski taramaları açma ve metin üretme. Sıfır kapasitede `next_slot_at` bilgisini belleğe kaydet ve bitir. Daha önce bildirilen aynı bekleme durumunu tekrar duyurma. Kota sorgusunda sayfa tarihini, makbuz dosyasının değiştirilme zamanını veya yerel veritabanını üretim kaydının yerine koyma.
+
+Kapasite varsa aşağıdaki sürece geç. Bir çalışmada en fazla bir konu adayını derinlemesine incele; bütün tarama birikimini tek oturumda tüketmeye çalışma. İncelenmeyen commitler bekleyen kalır. Toplam 15 dakikalık duvar saati bütçesi kullan; araç dönüşlerinde süreyi kontrol et. Bütçe dolduğunda güvenli noktada özel notu ve kaldığın yeri kaydet, yeni araştırmaya veya yayına başlama. Bu, çalışan ajanın süre bütçesidir; bilgisayar uykusunu veya Codex bağlantı kesintisini engelleyen bir zamanlayıcı değildir. Her aşamanın başlangıç/bitiş saatini belleğe yaz; aktif çalışma süresiyle duvar saatini ayır.
+
+HTTP doğrulamasında önce `curl --silent --show-error --connect-timeout 5 --max-time 15` ile yönlendirmesiz GET yap veya sitenin Laravel HTTP istemcisini kullan. Python urllib varsayılan User-Agent'ini kullanma; Cloudflare bu imzayı 403/1010 ile engelleyebiliyor. Bir 403'te yanıt kodunu ve hata türünü kaydet; normal istemciyle aynı adresi yalnız bir kez karşılaştır. İstemciye özgü engellemeyi site kesintisi diye raporlama. Gerçek 401/403/404/429 veya 5xx hatasını başarılı sayma, güvenlik kontrollerini kapatma ve sınırsız yeniden deneme yapma.
+
 ## 1. Kaynakları ve önceki yayınları oku
 
 `php artisan editorial:collect` ile yapılandırılmış Monafy repolarının ana dala alınmış değişikliklerini topla. İşlenmemiş tarama birikimini, mevcut yayınları, bekleyen taslakları, konuları ve yayın makbuzlarını birlikte değerlendir. Commit başlığından yazı üretme; ilgili dosyaları taramanın sabitlediği SHA ile `git show` üzerinden oku. Çalışma dalını değiştirme ve başka oturumların dosyalarına dokunma.

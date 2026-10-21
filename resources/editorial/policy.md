@@ -28,6 +28,10 @@ Use relevant public Monafy links that match language and scope. Verify the first
 
 ## Validation and publication
 
+Before collection or research, run `editorial:status --remote` to read the production publication ledger. Stop if local publication permission is disabled, capacity is zero, or status is unavailable. Do not infer quota from live HTML dates, receipt modification times or the local database. Remember the next available slot and avoid repeating unchanged waiting notifications. Limit each eligible run to one deeply researched candidate and a 15-minute wall-clock budget checked between tool calls; persist unhandled backlog and phase timestamps. This budget cannot prevent host sleep or a suspended agent runtime.
+
+Use bounded direct GETs with curl or the Laravel HTTP client for public verification. Python urllib's default signature may receive Cloudflare 403/1010 while normal clients succeed. Compare once and distinguish a client-specific edge block from an application failure; never treat actual HTTP errors as success or disable security checks to make a check pass.
+
 Write bundles and readable review copies under storage/app/private/editorial. Keep evidence outside public HTML. Run editorial:validate, then editorial:publish only when qualified and authorized. One bounded correction is allowed for a concrete validation/source failure. Unresolved factual or privacy questions leave the package unpublished.
 
 The publish command transfers only the sealed public payload, verifies live pages and retains receipts. Retry the unchanged file after a connection failure. Never regenerate identifiers to force a new post. Verify both locale addresses and public metadata after publication, then prepare external drafts with actual canonical URLs. Do not claim an external draft creates a backlink or guarantee indexing/ranking.
