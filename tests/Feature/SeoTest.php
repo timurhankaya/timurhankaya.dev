@@ -128,6 +128,10 @@ it('describes pages with linked schema.org entities that parse as json', functio
             expect($value)->not->toBe('')->not->toBe([])->not->toBeNull();
         }
     }
+    if (in_array($path, ['/cv', '/tr/ozgecmis'], true)) {
+        $profile = collect($graph['@graph'])->firstWhere('@type', 'ProfilePage');
+        expect($profile['mainEntity']['@id'] ?? null)->toBe(StructuredData::personId());
+    }
 })->with([
     'home' => ['/', ['ProfilePage', 'Person', 'WebSite']],
     'contact' => ['/contact', ['ContactPage', 'BreadcrumbList']],
