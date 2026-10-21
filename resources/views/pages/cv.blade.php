@@ -96,13 +96,14 @@
         ->flatMap(fn (array $group): array => array_map(fn (array $item): string => $item['label'], $group['items']))
         ->values()
         ->all();
+    $cvPerson = [...\App\Support\StructuredData::person($locale), 'jobTitle' => $t['role'], 'description' => $cvDescription, 'email' => 'kayacekovic@gmail.com', 'knowsAbout' => $cvSkills];
     $cvJsonLd = \App\Support\StructuredData::script(
         \App\Support\StructuredData::webPage('ProfilePage', $cvUrl, $t['meta_title'], \App\Support\Seo::metaDescription($cvDescription), [
-            'mainEntity' => ['@id' => \App\Support\StructuredData::personId()],
+            'mainEntity' => $cvPerson,
             'breadcrumb' => ['@id' => $cvUrl.'#breadcrumb'],
         ]),
         \App\Support\StructuredData::breadcrumbs($cvUrl, [[__('brand.home_crumb', [], $locale), \App\Support\Seo::route('home', [], $locale)], [$t['meta_title'], $cvUrl]]),
-        [...\App\Support\StructuredData::person($locale), 'jobTitle' => $t['role'], 'description' => $cvDescription, 'email' => 'kayacekovic@gmail.com', 'knowsAbout' => $cvSkills],
+        $cvPerson,
         [...\App\Support\StructuredData::website($locale), 'description' => \App\Support\Seo::metaDescription($cvDescription)],
     );
 @endphp

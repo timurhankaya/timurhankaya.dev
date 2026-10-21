@@ -130,7 +130,11 @@ it('describes pages with linked schema.org entities that parse as json', functio
     }
     if (in_array($path, ['/cv', '/tr/ozgecmis'], true)) {
         $profile = collect($graph['@graph'])->firstWhere('@type', 'ProfilePage');
-        expect($profile['mainEntity']['@id'] ?? null)->toBe(StructuredData::personId());
+        expect($profile['mainEntity'])->toMatchArray([
+            '@type' => 'Person',
+            '@id' => StructuredData::personId(),
+            'name' => 'Timurhan Kaya',
+        ]);
     }
 })->with([
     'home' => ['/', ['ProfilePage', 'Person', 'WebSite']],
