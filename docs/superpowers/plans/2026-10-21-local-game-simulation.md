@@ -64,8 +64,8 @@
 - [x] Write an evidence-backed case on testing multiplayer flows locally, with a flow diagram and explicit network/human-behavior limits.
 - [x] Review domain accuracy, language, metadata and links against the implemented code.
 - [x] At finalization run complete tests, build, targeted browser flows and independent code review. Fix concrete failures and rerun relevant checks.
-- [ ] Commit and push only task changes; deploy atomically without clearing game caches. Import the new story through the existing seeder/publication path.
-- [ ] Verify production bot access is rejected, blur/CV work, and both case URLs/canonical/hreflang/OG/feed are correct.
+- [x] Commit and push only task changes; deploy atomically without clearing game caches. Import the new story through the existing seeder/publication path.
+- [x] Verify production bot access is rejected, blur/CV work, and both case URLs/canonical/hreflang/OG/feed are correct.
 
 ## Verification before release
 
@@ -79,3 +79,36 @@ both feeds returned the expected content.
 Independent review found one warm-cache CV schema defect. Two failing regression
 tests reproduced it; changing only the portfolio cache version fixed it, followed
 by the passing full suite. Existing game cache keys are preserved.
+
+## Release evidence
+
+21 October 2026: commit `1f5251e` pushed to `codex/local-game-simulation`.
+Release `20261021-local-game-simulation-1f5251e` cloned the latest live release,
+applied only this task’s files and applied the CV patch without overwriting
+concurrent ATS changes. Activation checked that the previous release was still
+current before switching the symlink. No game caches were cleared.
+
+Only this case was imported through a scoped StorySeeder directory. Live CV and
+case pages in both languages returned 200 with correct canonical/hreflang,
+versioned images and working game links. Sitemap and both feeds contain the case.
+Production server checks rejected all bot operations in both games before and
+after activation without changing the temporary verification rooms.
+
+## Execution decisions
+
+- Reused the working checkout on a new branch to preserve existing CV work;
+  unrelated environment, editorial and ATS changes were excluded from the commit.
+- Authored tests before implementation, but ran them only at finalization as the
+  user requested.
+- Used the existing shared active night phase for all night roles; no extra host
+  phase transitions were introduced.
+- Added optional snapshot guards to normal player actions and bot joins, so
+  concurrent host, roster or phase changes reject stale bot actions under the
+  existing room lock. Existing callers remain compatible.
+- Added a server-only round identifier to distinguish games started in the same
+  second, keeping replay protection scoped to the correct round.
+- Bumped only the portfolio content cache version for the new CV schema; active
+  game state and other caches remain intact.
+
+Case: `/case-studies/local-bots-for-multiplayer-testing` and
+`/tr/vaka-incelemeleri/yerel-botlarla-oyun-akisini-denemek`.
