@@ -2,6 +2,21 @@
 
 // Oyun ekranlarının yeniden tasarımıyla eklenen metinler. Eski oyun metinleri tr.json içinde (imposter.*, vampire.*, games.*).
 return [
+    'night_clock' => [
+        'label' => 'Şafağa kalan',
+        'duration' => 'Gece süresi 45 saniyedir.',
+        'description' => '45 saniyenin sonunda gece kararları otomatik işlenir. Seçimini süre dolmadan yap; hamle yapmazsan bu gece pas geçmiş olursun.',
+    ],
+    'night_preparations' => [
+        'title' => 'Geceye hazırlan',
+        'description' => 'Köy sessizleşiyor. Sabahı beklerken son hazırlıklarını yap.',
+        'door' => 'Kapıyı kontrol et',
+        'curtains' => 'Perdeyi kapat',
+        'candle' => 'Mumu söndür',
+        'progress' => 'Hazırlıklarını sessizce tamamlıyorsun.',
+        'complete' => 'Ev sessiz, ışıklar kapalı. Şafağı bekliyorsun.',
+        'note' => 'Bu hazırlıklar atmosfer içindir; koruma sağlamaz ve gece sonucunu değiştirmez.',
+    ],
     'simulation' => [
         'title' => 'Yerel test',
         'bots' => ':count bot',

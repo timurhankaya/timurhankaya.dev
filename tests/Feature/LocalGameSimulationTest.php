@@ -106,12 +106,23 @@ it('allows a dead hunter its final shot through the normal game service', functi
     $rooms->castNightVote($code, $ids[1], $ids[4]);
     $rooms->resolveDawn($code, $host);
     expect($rooms->getRoom($code)['status'])->toBe('hunter_last_shot');
+    expect($sim->status('vampire', $code, $host)['reason'])->toBe('ready');
     $sim->play('vampire', $code, $host);
     $after = $rooms->getRoom($code);
     expect(array_filter($after['players'], fn ($p) => ! $p['alive']))->toHaveCount(2);
     expect($after['status'])->not->toBe('hunter_last_shot');
     $sim->play('vampire', $code, $host);
     expect($rooms->getRoom($code))->toBe($after);
+});
+
+it('reports pending day votes as playable after the night has resolved', function () {
+    [$rooms, $code, $host, $sim] = simulationVampireRoles();
+    $rooms->resolveDawn($code, $host);
+    $rooms->startDay($code, $host);
+    $rooms->startDayVoting($code, $host);
+
+    expect($rooms->getRoom($code)['nightPhase'])->toBe('resolved');
+    expect($sim->status('vampire', $code, $host)['reason'])->toBe('ready');
 });
 
 it('runs automatic moves from refresh only while enabled and leaves phase controls manual', function (string $game) {

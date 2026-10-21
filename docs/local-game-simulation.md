@@ -13,8 +13,9 @@ oluştur. Oda sahibinin ekranında **Yerel test** paneli görünür. `APP_DEBUG`
    uygun botları çalıştırır. Word Imposter insanın oy sırasına geldiğinde bekler.
 4. İstersen **Otomatik hamleler** seçeneğini aç. Botlar açık sayfanın yenileme
    döngüsünde oynar. Bu seçenek varsayılan kapalıdır; sekme kapanınca çalışmaz.
-5. Aşama geçişlerini ve sonuç açıklamasını mevcut oda sahibi kontrollerinden
-   yap. Lobide **Botları kaldır** yalnız simülatörün eklediği botları kaldırır.
+5. Gece 45 saniye sonunda oyunun zamanlayıcısıyla otomatik sonuçlanır. Diğer
+   aşama geçişlerini mevcut oda sahibi kontrollerinden yap. Lobide **Botları
+   kaldır** yalnız simülatörün eklediği botları kaldırır.
 
 Vampir Köylü'nün mevcut tek aktif gece aşamasında vampir, doktor ve dedektif
 hamleleri yapılabilir. Gece sonuçlandırılınca bot yeni gece hamlesi yapmaz.
@@ -29,3 +30,6 @@ kilidinde sıralanır, her oyun işlemi ayrıca kendi oda kilidinde doğrulanır
 
 Bu araç oyun servislerinin akışını inceler. Ayrı gerçek tarayıcı oturumlarını,
 bağlantı kopmasını, ağ gecikmesini veya insanın blöf davranışını temsil etmez.
+
+Sunucu zamanlayıcısı ve kuyruk işlemi için [gece süresi](vampire-night-timer.md)
+belgesine bak. Gece hazırlıkları tüm yaşayan rollerde bulunur ve sonucu etkilemez.

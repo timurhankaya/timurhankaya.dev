@@ -27,6 +27,12 @@ class Room extends Component
 
     public ?string $nightPhaseStartedAt = null;
 
+    #[Locked]
+    public ?int $nightEndsAt = null;
+
+    #[Locked]
+    public int $serverNow = 0;
+
     public int $nightNumber = 0;
 
     public bool $isHost = false;
@@ -138,8 +144,12 @@ class Room extends Component
 
     public function refreshRoom(VampireRoomService $rooms): void
     {
-        $this->runAutomaticSimulation();
         $playerId = session()->get($this->playerSessionKey());
+        $room = $rooms->getRoom($this->roomCode);
+        if (is_string($playerId) && isset($room['players'][$playerId]) && ($room['status'] ?? null) === VampireRoomStatus::Night->value) {
+            $rooms->resolveExpiredNight($this->roomCode);
+        }
+        $this->runAutomaticSimulation();
         $room = $rooms->getRoom($this->roomCode);
         $snapshot = app(VampireRoomPresenter::class)->present(
             $room,

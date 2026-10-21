@@ -291,6 +291,13 @@ it('hunter last shot killing the last vampire ends the game for villagers', func
     expect($final['status'])->toBe('game_over');
     expect($final['winner'])->toBe('villagers');
     expect($final['players'][$vampireId]['alive'])->toBeFalse();
+
+    $shot = collect($final['history'])->firstWhere('key', 'vampire.log.hunter_kill');
+    foreach (['tr', 'en'] as $locale) {
+        $message = __($shot['key'], $shot['params'], $locale);
+        expect($message)->not->toBe($shot['key'])
+            ->and($message)->toContain($players[$vampireId]['name']);
+    }
 });
 
 it('hunter last shot killing a villager continues to dawn when parity does not end the game', function () {

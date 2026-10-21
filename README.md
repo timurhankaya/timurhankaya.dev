@@ -83,8 +83,12 @@ npm run build
 ## Environment Notes
 
 Local hosts can add up to 12 bots to either game and play their moves manually
-or during room polling. Phase changes stay under host control. See
+or during room polling. Bots leave phase decisions to the game rules and host. See
 [local game simulation](docs/local-game-simulation.md) for the workflow and limits.
+
+Vampire nights resolve automatically after 45 seconds. Run the `vampire-timers`
+queue worker for resolution even when all browser tabs are closed; see
+[night timer operations](docs/vampire-night-timer.md).
 
 - Copy `.env.example` to `.env` if you do not use the setup script.
 - Configure database credentials in `.env`.

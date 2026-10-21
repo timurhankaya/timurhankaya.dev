@@ -1,5 +1,5 @@
-/* Game screens: the site's black, orange and square language, with a mood per game.
-   Word Imposter plays with hidden cards; Vampir Köylü follows the sky from night to day. */
+/* Game screens keep the site's black, orange and graphite surfaces.
+   Roles and phase icons carry the game atmosphere. */
 .brand-site {
     --card-back: #22252b;
     --card-back-line: #555b66;
@@ -331,36 +331,28 @@
 .game-dialog-backdrop .game-seats { margin-top: 18px; }
 
 /* ---------- Vampir Köylü: the sky follows the phase ---------- */
-.vk-sky { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: #08090c; }
+.vk-sky { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--paper); }
 .vk-sky-layer { position: absolute; inset: 0; opacity: 0; transition: opacity 1.8s ease; }
-.vk-sky-night { background: radial-gradient(90% 55% at 82% -8%, #c9d4ea2b, transparent 62%), radial-gradient(110% 60% at 50% 112%, #6d0b18cc, #2a071000 70%), linear-gradient(#07080c, #0b070a); }
-.vk-sky-dawn { background: radial-gradient(120% 55% at 50% 108%, #ff9a5a73, #9a3d4a33 45%, transparent 75%), linear-gradient(#0d0c14, #1a1015); }
-.vk-sky-day { background: radial-gradient(100% 60% at 20% -12%, #ffd59a52, transparent 62%), radial-gradient(120% 70% at 50% 120%, #4a2e1a8c, transparent 70%), linear-gradient(#1d1813, #15110d); }
-.vk-sky-verdict { background: radial-gradient(100% 60% at 20% -12%, #ffd59a33, transparent 62%), radial-gradient(110% 60% at 50% 115%, #b3122a59, transparent 70%), linear-gradient(#1b1512, #120d0c); }
-.vk-sky-lobby { background: radial-gradient(80% 50% at 82% -6%, #c9d4ea1c, transparent 60%), radial-gradient(110% 50% at 50% 115%, #4a0a1440, transparent 70%), #09090b; }
+.vk-sky-layer { background: var(--paper); }
 .vk-sky[data-sky="night"] .vk-sky-night, .vk-sky[data-sky="dawn"] .vk-sky-dawn, .vk-sky[data-sky="day"] .vk-sky-day,
 .vk-sky[data-sky="verdict"] .vk-sky-verdict, .vk-sky[data-sky="lobby"] .vk-sky-lobby { opacity: 1; }
 .vk-orb { position: absolute; border-radius: 50%; transition: transform 2.2s var(--game-ease), opacity 1.6s ease; }
 .vk-moon { top: 110px; right: max(4vw, 24px); width: 120px; height: 120px; box-shadow: -26px 16px 0 0 #c9d4ea38; transform: rotate(-14deg); opacity: 0; }
-.vk-sun { top: 90px; left: max(6vw, 24px); width: 170px; height: 170px; background: radial-gradient(circle, #ffd59a26, transparent 68%); transform: translateY(60vh); opacity: 0; }
+.vk-sun { top: 90px; left: max(6vw, 24px); width: 170px; height: 170px; background: radial-gradient(circle, #ffffff0a, transparent 68%); transform: translateY(60vh); opacity: 0; }
 .vk-sky[data-sky="night"] .vk-moon, .vk-sky[data-sky="lobby"] .vk-moon { opacity: 1; }
 .vk-sky[data-sky="dawn"] .vk-moon { opacity: .35; transform: translateY(35vh) rotate(-14deg); }
 .vk-sky[data-sky="dawn"] .vk-sun { opacity: .7; transform: translateY(38vh); }
 .vk-sky[data-sky="day"] .vk-sun, .vk-sky[data-sky="verdict"] .vk-sun { opacity: 1; transform: none; }
 .vk-sky:not([data-sky="night"], [data-sky="lobby"], [data-sky="dawn"]) .vk-moon { transform: translateY(70vh) rotate(-14deg); }
 
-/* Phase palettes reach every panel in the room. */
-.vk-room { --game-panel: rgb(14 15 20 / .82); }
-.vk-room[data-phase="night"] { --game-line: #c9d4ea24; --game-tint: var(--moon); --game-panel: rgb(9 10 16 / .8); }
-.vk-room[data-phase="dawn"] { --game-line: #ffb37d33; --game-tint: var(--dawn); --game-panel: rgb(24 16 20 / .78); }
-.vk-room[data-phase="day"] { --game-line: #ffd59a33; --game-tint: var(--sun); --game-panel: rgb(42 33 24 / .72); }
-.vk-room[data-phase="verdict"] { --game-line: #ff9a8a33; --game-tint: #ffb3a6; --game-panel: rgb(38 26 22 / .74); }
-.vk-room .game-arena { background: transparent; }
-.vk-room .game-host-bar { background: rgb(8 8 11 / .82); }
-.vk-room[data-phase="day"] .game-host-bar, .vk-room[data-phase="verdict"] .game-host-bar { background: rgb(26 20 15 / .88); }
+/* The phase changes labels and accents, while the site's surfaces stay constant. */
+.vk-room { --game-panel: var(--surface); --game-line: var(--line); }
+.vk-room[data-phase="night"] { --game-tint: var(--moon); }
+.vk-room:is([data-phase="dawn"], [data-phase="day"], [data-phase="verdict"]) { --game-tint: var(--accent); }
+.vk-room .game-arena { background: var(--paper); }
+.vk-room .game-host-bar { background: rgb(10 10 11 / .9); }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .game-room .game-host-bar { background: #0a0a0b; }
-    .vk-room:is([data-phase="day"], [data-phase="verdict"]) .game-host-bar { background: #1a140f; }
 }
 
 /* Local host tools share the room's typography and control sizes. */
@@ -376,12 +368,22 @@
 .game-simulation-toggle[aria-pressed="true"] .game-simulation-light { background: #a4dfb7; box-shadow: 0 0 8px #a4dfb744; }
 .game-simulation-status { margin-top: 16px; font-size: 13px; line-height: 1.65; }
 .game-simulation-note.is-mismatch { color: #f3c887; }
+.vk-night-clock { display: grid; gap: 8px; padding: 16px 20px; margin-bottom: 16px; border: 1px solid var(--game-line); background: #ffffff04; }
+.vk-night-clock-time { display: flex; align-items: center; gap: 10px; }
+.vk-night-clock-time > .game-icon { width: 18px; height: 18px; }
+.vk-night-seconds { margin-left: auto; font: 22px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.vk-night-clock p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+.vk-night-clock.is-ending .vk-night-seconds { color: #f3c887; }
+.vk-night-preparations { margin-bottom: 20px; }
+.vk-preparation-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.vk-preparation-actions .game-btn { min-height: 48px; flex: 1 1 150px; justify-content: center; }
+.vk-preparation-actions .is-done { color: var(--muted); border-style: dashed; cursor: default; }
+.vk-preparation-result { margin-top: 14px; }
 @media (max-width: 760px) {
     .game-simulation-controls .game-btn { flex: 1 1 140px; justify-content: center; }
     .game-simulation-count { flex: 1 0 100%; }
 }
-.vk-room .game-seat, .vk-room .game-pick, .vk-room .game-tally-row { background: rgb(0 0 0 / .28); }
-.vk-room[data-phase="day"] .game-seat, .vk-room[data-phase="day"] .game-pick, .vk-room[data-phase="verdict"] .game-pick, .vk-room[data-phase="verdict"] .game-tally-row { background: rgb(255 236 210 / .04); }
+.vk-room .game-seat, .vk-room .game-pick, .vk-room .game-tally-row { background: var(--paper); }
 .vk-room .game-code span { background: rgb(0 0 0 / .35); }
 
 .vk-phase { display: grid; justify-items: center; gap: 8px; padding: 34px 20px 26px; text-align: center; border-bottom: 1px solid var(--game-line); animation: game-rise .9s var(--game-ease) both; }
@@ -550,7 +552,7 @@
 .game-turn .game-btn { flex: none; }
 
 /* Word Imposter: a dark card table under a lamp that follows the pointer. */
-.imp-room .game-arena { background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 30%), #ff7a1a0f, transparent 62%); }
+.imp-room .game-arena { background: var(--paper); }
 @media (max-width: 1000px) {
     .game-arena-split { grid-template-areas: none; }
     .game-arena-split > .game-main, .game-arena-split > .game-side { grid-area: auto; }
@@ -600,7 +602,7 @@
 .vk-verdict .brand-label { color: var(--game-tint); }
 .vk-verdict-blood { background: linear-gradient(160deg, #4a0b16, #1a0509); border-color: var(--blood); color: var(--ink); }
 .vk-verdict-blood .game-icon-lg, .vk-verdict-blood .brand-label { color: var(--blood-ink); }
-.vk-verdict-day { background: linear-gradient(160deg, #ffe2b8, #f4c58a); border-color: #ffe2b8; color: #1a120a; }
+.vk-verdict-day { background: var(--surface); border-color: var(--accent); color: var(--ink); }
 .game-verdict:not(.game-verdict-accent, .game-verdict-ink, .vk-verdict-day) p:not(.brand-label, .game-title) { color: #c6c9d0; }
 .vk-notice.is-sun .game-icon-lg { color: var(--sun); }
 .vk-notice.is-vote .game-icon-lg { color: #ffb3a6; }
@@ -632,10 +634,8 @@
 .vk-role .game-card-role { font-size: clamp(28px, 8vw, 38px); min-width: 0; overflow-wrap: normal; word-break: normal; hyphens: manual; text-wrap: balance; }
 .vk-role .game-card-role.is-long { font-size: clamp(22px, 6.6vw, 32px); }
 .vk-role .game-card-split > div { min-width: 0; }
-.vk-room:is([data-phase="day"], [data-phase="verdict"]) .vk-role .game-card:not(.is-vampire) { background: linear-gradient(160deg, #2e241a, #1d1813); border-color: #ffd59a40; }
-.vk-room:is([data-phase="day"], [data-phase="verdict"]) .vk-role .game-card:not(.is-vampire) .game-icon-lg { color: var(--sun); }
-.vk-room[data-phase="dawn"] .vk-role .game-card:not(.is-vampire) { background: linear-gradient(160deg, #22161c, #120d12); border-color: #ffb37d40; }
-.vk-room[data-phase="dawn"] .vk-role .game-card:not(.is-vampire) .game-icon-lg { color: var(--dawn); }
+.vk-room:is([data-phase="dawn"], [data-phase="day"], [data-phase="verdict"]) .vk-role .game-card:not(.is-vampire) { background: var(--surface); border-color: var(--line); }
+.vk-room:is([data-phase="dawn"], [data-phase="day"], [data-phase="verdict"]) .vk-role .game-card:not(.is-vampire) .game-icon-lg { color: var(--accent); }
 
 @media (min-width: 761px) {
     .game-host-bar { justify-content: flex-end; align-items: center; }

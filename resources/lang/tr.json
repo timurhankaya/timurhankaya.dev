@@ -357,6 +357,7 @@
     "vampire.log.hunter_last_shot_self": "Son hakkınızı kullanıyorsunuz. Birini seçin.",
     "vampire.log.hunter_last_shot_all": "Avcı son nefesinde birini işaret ediyor!",
     "vampire.log.hunter_killed": "Avcı son nefesinde :name kişisini vurdu!",
+    "vampire.log.hunter_kill": "Avcı son nefesinde :name kişisini vurdu!",
     "vampire.log.day_start": "Gündüz oldu. Köy meydanına toplanıyorsunuz.",
     "vampire.log.voting_start": "Oylama başladı! Şüpheliyi seçin.",
     "vampire.log.continue_game": "Vampir hâlâ aramızda. Oyun devam ediyor.",

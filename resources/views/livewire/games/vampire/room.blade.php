@@ -1,7 +1,7 @@
 @php
     $backUrl = \App\Support\Seo::route('games.vampire.index');
     $roomUrl = \App\Support\Seo::route('games.vampire.room', ['roomCode' => $roomCode]);
-    // The sky and every panel follow the phase: cold night, warm dawn and day, a red edge while the village votes.
+    // Phase icons change while the site's black and graphite surfaces stay constant.
     $phase = match ($status) {
         \App\Enums\VampireRoomStatus::Night => 'night',
         \App\Enums\VampireRoomStatus::Dawn, \App\Enums\VampireRoomStatus::HunterLastShot => 'dawn',
@@ -25,9 +25,6 @@
 <div class="game-room vk-room" data-phase="{{ $phase }}"
     x-data="{
         roleVisible: true,
-        phaseCountdown: 45,
-        phaseCountdownStarted: null,
-        phaseCountdownInterval: null,
         playBongg() {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -50,20 +47,6 @@
             } catch (e) {
                 console.error('Audio failed:', e);
             }
-        },
-        initPhaseCountdown(startedAt) {
-            if (!startedAt) return;
-            if (this.phaseCountdownInterval) clearInterval(this.phaseCountdownInterval);
-            this.phaseCountdownStarted = new Date(startedAt + 'Z').getTime();
-            this.phaseCountdown = 45;
-            this.phaseCountdownInterval = setInterval(() => {
-                const now = Date.now();
-                const elapsed = Math.floor((now - this.phaseCountdownStarted) / 1000);
-                this.phaseCountdown = Math.max(0, 45 - elapsed);
-                if (this.phaseCountdown <= 0) {
-                    clearInterval(this.phaseCountdownInterval);
-                }
-            }, 250);
         }
     }"
     x-on:play-bongg.window="playBongg()"
@@ -195,7 +178,9 @@
 
         <div
             class="game-arena"
-            @if ($status === \App\Enums\VampireRoomStatus::Lobby)
+            @if ($status === \App\Enums\VampireRoomStatus::Night)
+                wire:poll.1s.keep-alive="refreshRoom"
+            @elseif ($status === \App\Enums\VampireRoomStatus::Lobby)
                 wire:poll.2s="refreshRoom"
             @else
                 wire:poll.5s="refreshRoom"
@@ -569,6 +554,8 @@
 
                 {{-- Night Phase --}}
                 @elseif ($status === \App\Enums\VampireRoomStatus::Night)
+                    @include('livewire.games.partials.night-clock')
+                    @include('livewire.games.partials.night-preparations')
                     @php $nightActor = $myAlive && ($myAlignment === 'vampire' || in_array($myRole, [\App\Enums\VampireRole::Doctor->value, \App\Enums\VampireRole::Detective->value], true)); @endphp
                     @if (! $nightActor)
                         <div class="game-panel vk-closed">

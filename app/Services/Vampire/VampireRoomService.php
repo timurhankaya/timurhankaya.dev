@@ -5,6 +5,7 @@ namespace App\Services\Vampire;
 use App\Enums\VampireNightPhase;
 use App\Enums\VampireRole;
 use App\Enums\VampireRoomStatus;
+use App\Jobs\ResolveVampireNight;
 use App\Services\Games\CacheRoomService;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
@@ -39,6 +40,7 @@ final class VampireRoomService extends CacheRoomService
             'players' => [$hostPlayerId => $hostPlayer],
             'nightPhase' => null,
             'nightPhaseStartedAt' => null,
+            'nightEndsAt' => null,
             'nightNumber' => 0,
             'nightVotes' => [],
             'doctorProtects' => null,
@@ -140,6 +142,7 @@ final class VampireRoomService extends CacheRoomService
             $room = $this->prepareNightState($room, 1, true);
 
             $this->putRoom($code, $room);
+            $this->scheduleNightResolution($code, $room);
 
             return $room;
         });
@@ -159,6 +162,10 @@ final class VampireRoomService extends CacheRoomService
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::Night->value) {
                 return $room;
+            }
+
+            if (VampireNightClock::expired($room)) {
+                return $this->finishNight($code, $room);
             }
 
             $players = (array) ($room['players'] ?? []);
@@ -196,6 +203,7 @@ final class VampireRoomService extends CacheRoomService
                 return $room;
             }
 
+            $room['nightEndsAt'] ??= VampireNightClock::deadline($room);
             $room['nightPhase'] = VampireNightPhase::Resolved->value;
             $room['nightPhaseStartedAt'] = CarbonImmutable::now()->toIso8601String();
             $this->putRoom($code, $room);
@@ -216,15 +224,49 @@ final class VampireRoomService extends CacheRoomService
                 return $room;
             }
 
-            $room = $this->nightResolver->resolve($room);
-            if (($room['status'] ?? null) === VampireRoomStatus::HunterLastShot->value) {
-                $room['hunterLastShotSource'] = 'night';
+            return $this->finishNight($code, $room);
+        });
+    }
+
+    public function resolveExpiredNight(string $code, ?string $roundId = null, ?int $nightNumber = null, ?int $deadline = null): ?array
+    {
+        return $this->withRoomLock($code, function () use ($code, $roundId, $nightNumber, $deadline): ?array {
+            $room = $this->getRoom($code);
+            if ($room === null || $room['status'] !== VampireRoomStatus::Night->value) {
+                return $room;
+            }
+            if (($roundId !== null && ($room['roundId'] ?? null) !== $roundId)
+                || ($nightNumber !== null && $room['nightNumber'] !== $nightNumber)
+                || ($deadline !== null && VampireNightClock::deadline($room) !== $deadline)
+                || ! VampireNightClock::expired($room)) {
+                return $room;
             }
 
-            $this->putRoom($code, $room);
-
-            return $room;
+            return $this->finishNight($code, $room);
         });
+    }
+
+    private function finishNight(string $code, array $room): array
+    {
+        $room = $this->nightResolver->resolve($room);
+        $room['nightEndsAt'] = null;
+        if ($room['status'] === VampireRoomStatus::HunterLastShot->value) {
+            $room['hunterLastShotSource'] = 'night';
+        }
+        $this->putRoom($code, $room);
+
+        return $room;
+    }
+
+    private function scheduleNightResolution(string $code, array $room): void
+    {
+        if ($room['status'] !== VampireRoomStatus::Night->value) {
+            return;
+        }
+
+        ResolveVampireNight::dispatch($code, $room['roundId'], $room['nightNumber'], $room['nightEndsAt'])
+            ->onQueue('vampire-timers')
+            ->delay(CarbonImmutable::createFromTimestamp($room['nightEndsAt']));
     }
 
     /**
@@ -285,6 +327,7 @@ final class VampireRoomService extends CacheRoomService
 
             $room['hunterLastShotSource'] = null;
             $this->putRoom($code, $room);
+            $this->scheduleNightResolution($code, $room);
 
             return $room;
         });
@@ -304,6 +347,10 @@ final class VampireRoomService extends CacheRoomService
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::Night->value) {
                 return $room;
+            }
+
+            if (VampireNightClock::expired($room)) {
+                return $this->finishNight($code, $room);
             }
 
             $players = (array) ($room['players'] ?? []);
@@ -340,6 +387,10 @@ final class VampireRoomService extends CacheRoomService
 
             if ($room === null || ($room['status'] ?? null) !== VampireRoomStatus::Night->value) {
                 return $room;
+            }
+
+            if (VampireNightClock::expired($room)) {
+                return $this->finishNight($code, $room);
             }
 
             $players = (array) ($room['players'] ?? []);
@@ -558,6 +609,7 @@ final class VampireRoomService extends CacheRoomService
             }
 
             $this->putRoom($code, $room);
+            $this->scheduleNightResolution($code, $room);
 
             return $room;
         });
@@ -617,6 +669,7 @@ final class VampireRoomService extends CacheRoomService
             $room['startedAt'] = null;
             $room['nightPhase'] = null;
             $room['nightPhaseStartedAt'] = null;
+            $room['nightEndsAt'] = null;
             $room['nightNumber'] = 0;
             $room['nightVotes'] = [];
             $room['doctorProtects'] = null;
@@ -702,9 +755,11 @@ final class VampireRoomService extends CacheRoomService
      */
     private function prepareNightState(array $room, int $nightNumber, bool $resetProtection = false): array
     {
+        $room['roundId'] ??= (string) Str::uuid();
         $room['status'] = VampireRoomStatus::Night->value;
         $room['nightPhase'] = VampireNightPhase::Vampires->value;
         $room['nightPhaseStartedAt'] = CarbonImmutable::now()->toIso8601String();
+        $room['nightEndsAt'] = CarbonImmutable::now()->timestamp + VampireNightClock::DURATION_SECONDS;
         $room['nightNumber'] = $nightNumber;
         $room['nightVotes'] = [];
         $room['doctorProtects'] = null;

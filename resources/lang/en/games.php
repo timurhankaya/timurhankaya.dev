@@ -2,6 +2,21 @@
 
 // Strings added with the game screen redesign. Older game strings live in en.json (imposter.*, vampire.*, games.*).
 return [
+    'night_clock' => [
+        'label' => 'Until dawn',
+        'duration' => 'Each night lasts 45 seconds.',
+        'description' => 'Night decisions resolve automatically after 45 seconds. Choose before time runs out; skipping a move means passing for this night.',
+    ],
+    'night_preparations' => [
+        'title' => 'Prepare for the night',
+        'description' => 'The village grows quiet. Make your last preparations while you wait for morning.',
+        'door' => 'Check the door',
+        'curtains' => 'Close the curtains',
+        'candle' => 'Put out the candle',
+        'progress' => 'You quietly finish your preparations.',
+        'complete' => 'The house is quiet and the lights are out. You wait for dawn.',
+        'note' => 'These preparations add atmosphere; they offer no protection and do not change the night result.',
+    ],
     'simulation' => [
         'title' => 'Local test',
         'bots' => ':count bots',

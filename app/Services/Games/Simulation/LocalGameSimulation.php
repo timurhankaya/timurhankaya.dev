@@ -22,7 +22,7 @@ final class LocalGameSimulation
             $reason = $state['reason'];
             if ($reason !== 'host_changed' && $state['stage'] !== $this->stage($room)) {
                 $reason = $room['status'] === 'lobby' || ! in_array($room['status'], ['voting', 'night', 'day_voting', 'hunter_last_shot'], true)
-                    || ($room['nightPhase'] ?? null) === 'resolved' ? 'host_action' : 'ready';
+                    || ($room['status'] === 'night' && ($room['nightPhase'] ?? null) === 'resolved') ? 'host_action' : 'ready';
             }
 
             return [

@@ -4,6 +4,7 @@ namespace App\Support\Games;
 
 use App\Enums\VampireRole;
 use App\Enums\VampireRoomStatus;
+use App\Services\Vampire\VampireNightClock;
 
 final class VampireRoomPresenter
 {
@@ -106,6 +107,8 @@ final class VampireRoomPresenter
             'status' => $status,
             'nightPhase' => is_string($room['nightPhase'] ?? null) ? (string) $room['nightPhase'] : null,
             'nightPhaseStartedAt' => is_string($room['nightPhaseStartedAt'] ?? null) ? (string) $room['nightPhaseStartedAt'] : null,
+            'nightEndsAt' => $status === VampireRoomStatus::Night ? VampireNightClock::deadline($room) : null,
+            'serverNow' => now()->timestamp,
             'nightNumber' => (int) ($room['nightNumber'] ?? 0),
             'isHost' => $myPlayerId !== null && $myPlayerId === $hostPlayerId,
             'isJoined' => $isJoined,
@@ -158,6 +161,8 @@ final class VampireRoomPresenter
             'status' => VampireRoomStatus::Missing,
             'nightPhase' => null,
             'nightPhaseStartedAt' => null,
+            'nightEndsAt' => null,
+            'serverNow' => now()->timestamp,
             'nightNumber' => 0,
             'isHost' => false,
             'isJoined' => false,

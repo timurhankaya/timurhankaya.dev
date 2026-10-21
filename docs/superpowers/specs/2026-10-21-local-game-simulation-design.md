@@ -2,8 +2,24 @@
 
 Tarih: 21 Ekim 2026, Europe/Istanbul
 
-Durum: Kullanıcı kapsamı ve kontrollü simülasyon yaklaşımını onayladı. Bu yazılı
-tasarımın incelemesi bekleniyor; uygulama başlamadı.
+Durum: Uygulama ve botlarla tarayıcı doğrulaması tamamlandı. Kullanıcının devam
+talebiyle 45 saniyelik otomatik gece sonu ve gece hazırlıkları eklendi.
+
+## Devam talebi: gece süresi ve site tasarımı
+
+Kullanıcı gece süresini 45 saniye olarak onayladı. Bu normal oyun kuralı,
+simülasyondan bağımsız bir sunucu bitiş zamanı ve gecikmeli kuyruk işlemiyle
+uygulanır. Sekmeler kapalı olsa da çalışan kuyruk geceyi sonuçlandırır. Katılmış
+oyuncuların yenilemesi aynı bitiş zamanını kontrol eden yedektir. Eski tur/gece
+işlemleri ve geç gelen rol kararları yeni sonucu değiştiremez.
+
+Yaşayan tüm rollere aynı isteğe bağlı kapı, perde ve mum hazırlıkları gösterilir.
+Bunlar oyun sonucu veya koruma üretmez. Köylü de gece ekranında etkileşebilir;
+hazırlıkların bulunması rolünü açığa çıkarmaz.
+
+Kullanıcının tasarım düzeltmesiyle tüm aşamalarda mevcut siyah/grafit yüzeyler
+ve turuncu vurgular korunur; kahverengi gündüz yüzeyleri kaldırılır. Aşamalar
+metin ve simgelerle ayırt edilir. İşletim ayrıntıları: `docs/vampire-night-timer.md`.
 
 ## Amaç ve kabul edilen kapsam
 

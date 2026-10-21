@@ -344,6 +344,7 @@
     "vampire.log.hunter_last_shot_self": "Using your last shot. Choose someone.",
     "vampire.log.hunter_last_shot_all": "The hunter points at someone with their last breath!",
     "vampire.log.hunter_killed": "The hunter shot :name with their last breath!",
+    "vampire.log.hunter_kill": "The hunter shot :name with their last breath!",
     "vampire.log.day_start": "It is daytime. Gather in the village square.",
     "vampire.log.voting_start": "Voting has started! Choose the suspect.",
     "vampire.log.continue_game": "A vampire is still among us. The game continues.",
