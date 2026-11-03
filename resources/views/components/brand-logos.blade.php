@@ -6,13 +6,18 @@
         ['name' => 'Moneo', 'src' => 'images/logos/moneo.svg', 'url' => 'https://moneo.com.tr', 'size' => [122, 20]],
         ['name' => 'Sistem Global', 'src' => 'images/logos/sistemglobal.png', 'url' => 'https://www.sistemglobal.com.tr', 'tall' => true, 'size' => [68, 54]],
         ['name' => 'Smart Global', 'src' => 'images/logos/smart-global.svg', 'url' => 'https://smartglobalval.co.uk', 'size' => [160, 31]],
+        ['name' => 'eDanışman', 'src' => 'images/logos/edanisman.png', 'url' => 'https://www.edanisman.com/', 'size' => [388, 100]],
         ['name' => 'Basefy', 'src' => 'images/logos/basefy.png', 'url' => 'https://basefy.com', 'size' => [114, 34]],
     ];
 @endphp
 <section class="brand-logos" aria-label="{{ __('brand.logos_label') }}">
-    <ul>
-        @foreach ($logos as $logo)
-            <li><a class="brand-logo-tile" href="{{ $logo['url'] }}" target="_blank" rel="noopener" title="{{ $logo['name'] }}">@if ($logo['src'])<img @class(['is-tall' => $logo['tall'] ?? false]) src="{{ asset($logo['src']) }}" alt="{{ $logo['name'] }}" width="{{ $logo['size'][0] }}" height="{{ $logo['size'][1] }}" loading="lazy" decoding="async">@else<span class="brand-logo-wordmark">{{ $logo['name'] }}</span>@endif</a></li>
+    <div class="brand-logos-track">
+        @foreach ([false, true] as $duplicate)
+            <ul @if ($duplicate) aria-hidden="true" inert @endif>
+                @foreach ($logos as $logo)
+                    <li><a class="brand-logo-tile" href="{{ $logo['url'] }}" target="_blank" rel="noopener" title="{{ $logo['name'] }}">@if ($logo['src'])<img @class(['is-tall' => $logo['tall'] ?? false]) src="{{ asset($logo['src']) }}" alt="{{ $logo['name'] }}" width="{{ $logo['size'][0] }}" height="{{ $logo['size'][1] }}" loading="lazy" decoding="async">@else<span class="brand-logo-wordmark">{{ $logo['name'] }}</span>@endif</a></li>
+                @endforeach
+            </ul>
         @endforeach
-    </ul>
+    </div>
 </section>

@@ -70,7 +70,7 @@
         ->all();
 
     $t = [
-        'meta_title' => $tx(data_get($content, 'meta.title')),
+        'meta_title' => $tx(data_get($content, 'meta.title')).($locale === 'tr' ? ' | Özgeçmiş' : ' | CV'),
         'print_btn' => $locale === 'tr' ? '⌘ PDF Olarak Kaydet' : '⌘ Save as PDF',
         'role' => $tx(data_get($content, 'cv.role')),
         'loc_label' => $tx(data_get($content, 'stats.loc_label')),

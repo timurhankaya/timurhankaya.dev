@@ -188,8 +188,8 @@
     ]
   },
   "projects": {
-    "title": "Seçili çalışmalar",
-    "description": "Teknik kurucu ortağı olduğum ürünler ve geliştirilmesine katkı verdiğim platformlar. Her projede üstlendiğim rolü ve verdiğim teknik kararları burada anlatıyorum.",
+    "title": "Ürünlerden seçmeler",
+    "description": "30’dan fazla projeyi canlıya taşıdım. SaaS ürünleri ve yüksek trafikli platformlardaki katkımı, ürünü yayına taşıyan teknik kararlarla birlikte inceleyin.",
     "drawer_cta": "Tüm Projeleri İncele",
     "sections": [
       {
@@ -394,7 +394,7 @@
             "badge": "Kurumsal",
             "year": "2022–2023",
             "highlights": [
-              "Ürünü geliştirdim: JavaScript uygulamaları için Redis destekli bir önceden işleme önbelleği ve çevresindeki SaaS paneli."
+              "Bot isteklerini kaynak sunucuda doğru servise yönlendiren entegrasyonu ve işlenmiş HTML’i Redis’te saklayan önbelleği geliştirdim. Önbellek yenilemeyi ve kayıtları yönetmek için Laravel tabanlı SaaS panelini de oluşturdum."
             ],
             "context": "company",
             "context_label": "Şirket",

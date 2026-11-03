@@ -188,8 +188,8 @@
     ]
   },
   "projects": {
-    "title": "Selected work",
-    "description": "Products I co-founded and platforms I helped build, with the role I played and the engineering decisions behind the work.",
+    "title": "Products, platforms & systems",
+    "description": "I’ve taken 30+ projects live. Explore my contributions to SaaS products and high-traffic platforms, along with the engineering decisions that brought them to production.",
     "drawer_cta": "Explore All Projects",
     "sections": [
       {
@@ -394,7 +394,7 @@
             "badge": "Corporate",
             "year": "2022–2023",
             "highlights": [
-              "Developed the product: a Redis-backed prerender cache for JavaScript applications, and the SaaS dashboard around it."
+              "Built the integration that routes bot requests to the right service and the Redis cache that stores rendered HTML. I also developed the Laravel SaaS dashboard for managing cached pages and refresh settings."
             ],
             "context": "company",
             "context_label": "Company",

@@ -94,6 +94,7 @@
 .brand-section { padding-top: var(--section-space); }
 .brand-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 45px; margin-bottom: 30px; }
 .brand-section-heading > p { max-width: 345px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.brand-work-intro { max-width: 620px; margin-top: 13px; color: var(--muted); font-size: 14px; line-height: 1.75; }
 .brand-section-number { color: var(--accent); margin-right: 18px; }
 .brand-display { text-wrap: balance; font-family: var(--heading); font-weight: 500; font-size: clamp(36px, 4.8vw, 60px); line-height: 1.08; letter-spacing: -.055em; margin-top: 24px; }
 .brand-project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
@@ -857,7 +858,9 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* Brands strip on the projects page: white marks at rest; on hover a light tile shows each logo in its own colours. */
 .brand-logos { margin-top: var(--section-space); }
 /* Lines between tiles come from the 1px gap over the line colour, so any count of logos lays out cleanly. */
+.brand-logos-track { width: 100%; }
 .brand-logos ul { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+.brand-logos ul[aria-hidden="true"] { display: none; }
 .brand-logos li { background: var(--paper); }
 .brand-logo-tile { display: grid; place-items: center; height: 96px; padding: 18px; transition: background .25s; }
 .brand-logo-tile img { max-width: 78%; max-height: 34px; object-fit: contain; filter: brightness(0) invert(1); opacity: .62; transition: filter .25s, opacity .25s; }
@@ -867,11 +870,23 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .brand-logo-tile:is(:hover, :focus-visible) img { filter: none; opacity: 1; }
 .brand-logo-tile:is(:hover, :focus-visible) .brand-logo-wordmark { color: #0a0a0b; }
 @media (max-width: 760px) {
-    .brand-logos ul { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .brand-logos li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .brand-logos { overflow: hidden; }
+    .brand-logos-track { display: flex; width: max-content; animation: brand-logo-marquee 32s linear infinite; }
+    .brand-logos-track ul { display: flex; flex: none; width: max-content; margin-right: 1px; }
+    .brand-logos-track ul[aria-hidden="true"] { display: flex; }
+    .brand-logos li { flex: 0 0 clamp(152px, 48vw, 220px); }
     .brand-logo-tile { height: 80px; }
+    .brand-logos-track:is(:hover, :focus-within) { animation-play-state: paused; }
 }
-@media (prefers-reduced-motion: reduce) { .brand-logo-tile, .brand-logo-tile img, .brand-logo-wordmark { transition: none; } }
+@keyframes brand-logo-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+    .brand-logo-tile, .brand-logo-tile img, .brand-logo-wordmark { transition: none; }
+    .brand-logos-track { animation: none; }
+    .brand-logos ul[aria-hidden="true"] { display: none; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+    .brand-logos ul { max-width: 100%; overflow-x: auto; }
+}
 
 /* Status pages: one oversized code in the accent, the message, and ways back. */
 .brand-error-shell { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; width: min(1184px, 100%); margin-inline: auto; padding-inline: 24px; }

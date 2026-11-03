@@ -38,7 +38,7 @@ final class Sitemap
             'loc' => $post->publicUrl($locale),
             'lastmod' => Seo::normalizeDate($post->updated_at ?? $post->published_at),
             'alternates' => $post->alternateUrls(),
-            'images' => $post->cover_image ? [$post->coverUrl()] : [],
+            'images' => $post->cover_image ? [url($post->coverUrl())] : [],
         ])->all())->all();
 
         return [...$items, ...$posts];

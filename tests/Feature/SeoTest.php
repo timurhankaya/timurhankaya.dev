@@ -23,6 +23,20 @@ it('renders localized canonical and alternate links on the home page', function 
     expect($alternateTr[1] ?? null)->toEndWith('/tr');
 });
 
+it('gives localized CV pages a title distinct from the home page', function (string $path, string $expectedSuffix) {
+    $home = $this->get($path === '/cv' ? '/' : '/tr')->assertOk()->getContent();
+    $cv = $this->get($path)->assertOk()->getContent();
+
+    preg_match('/<title>(.*?)<\/title>/', $home, $homeTitle);
+    preg_match('/<title>(.*?)<\/title>/', $cv, $cvTitle);
+
+    expect($cvTitle[1] ?? null)->toEndWith($expectedSuffix)
+        ->and($cvTitle[1] ?? null)->not->toBe($homeTitle[1] ?? null);
+})->with([
+    'English CV' => ['/cv', '| CV'],
+    'Turkish CV' => ['/tr/ozgecmis', '| Özgeçmiş'],
+]);
+
 it('serves robots txt with an absolute sitemap url', function () {
     $response = $this->get('/robots.txt');
 

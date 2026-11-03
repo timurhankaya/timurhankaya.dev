@@ -37,6 +37,15 @@ it('lists a post as soon as it is published and drops it when unpublished or tra
     expect($this->get('/sitemap.xml')->getContent())->not->toContain('fresh-story');
 });
 
+it('writes absolute image locations for published post covers', function () {
+    caseStudy(['slug' => 'sitemap-cover', 'cover_image' => '/images/sitemap-cover.webp']);
+
+    $xml = $this->get('/sitemap.xml')->assertOk()->getContent();
+
+    expect($xml)->toContain('<image:loc>'.e(url('/images/sitemap-cover.webp')).'</image:loc>')
+        ->not->toContain('<image:loc>/images/sitemap-cover.webp</image:loc>');
+});
+
 it('answers a conditional request with 304 when nothing changed since', function () {
     caseStudy(['slug' => 'steady-story']);
     $first = $this->get('/sitemap.xml')->assertOk();

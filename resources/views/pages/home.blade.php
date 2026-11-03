@@ -59,7 +59,10 @@
 
     <section {!! \App\Support\Anchors::attributes('portfolio') !!} class="brand-section">
         <div class="brand-section-heading">
-            <h2 class="brand-label"><span class="brand-section-number">01 /</span> {{ __('brand.work') }}</h2>
+            <div>
+                <h2 class="brand-label"><span class="brand-section-number">01 /</span> {{ __('brand.work') }}</h2>
+                <p class="brand-work-intro">{{ __('brand.work_intro') }}</p>
+            </div>
         </div>
         <div class="brand-project-grid">
             @foreach ($featuredProjects as $project)
