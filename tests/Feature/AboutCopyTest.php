@@ -65,10 +65,10 @@ it('shows the brand logos on the home page without a heading', function () {
 
     expect($html)->toContain('class="brand-logos"')
         ->toContain('/images/logos/monafy.svg')->toContain('/images/logos/moneo.svg')->toContain('/images/logos/sistemglobal.png')->toContain('/images/logos/basefy.png')
-        ->toContain('/images/logos/smart-global.svg')
+        ->toContain('brand-logo-wordmark">Smart Global<')
         ->not->toContain('/images/logos/transiyzi.svg')->not->toContain('/images/logos/dynorender.png')
         ->not->toContain('>Birlikte çalıştığım markalar<');
-    foreach (['monafy.svg', 'moneo.svg', 'sistemglobal.png', 'smart-global.svg', 'basefy.png'] as $file) {
+    foreach (['monafy.svg', 'moneo.svg', 'sistemglobal.png', 'basefy.png'] as $file) {
         expect(public_path('images/logos/'.$file))->toBeFile();
     }
 });

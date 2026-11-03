@@ -5,7 +5,7 @@
         ['name' => 'Monafy', 'src' => 'images/logos/monafy.svg', 'url' => 'https://monafy.com', 'size' => [160, 34]],
         ['name' => 'Moneo', 'src' => 'images/logos/moneo.svg', 'url' => 'https://moneo.com.tr', 'size' => [122, 20]],
         ['name' => 'Sistem Global', 'src' => 'images/logos/sistemglobal.png', 'url' => 'https://www.sistemglobal.com.tr', 'tall' => true, 'size' => [68, 54]],
-        ['name' => 'Smart Global', 'src' => 'images/logos/smart-global.svg', 'url' => 'https://smartglobalval.co.uk', 'size' => [160, 31]],
+        ['name' => 'Smart Global', 'src' => null, 'url' => 'https://smartglobalval.co.uk'],
         ['name' => 'Basefy', 'src' => 'images/logos/basefy.png', 'url' => 'https://basefy.com', 'size' => [114, 34]],
     ];
 @endphp
