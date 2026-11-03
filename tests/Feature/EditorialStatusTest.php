@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 uses(RefreshDatabase::class);
 
+beforeEach(fn () => config(['editorial.quota_reset_at' => null]));
+
 it('reports available capacity without creating a publication', function () {
     $this->travelTo(now()->startOfSecond());
     config(['editorial.weekly_limit' => 2]);
@@ -45,4 +47,26 @@ it('refuses a remote status request with invalid connection settings', function 
     $this->app['env'] = 'local';
     config(['editorial.ssh_host' => '-invalid']);
     $this->artisan('editorial:status', ['--remote' => true])->assertFailed();
+});
+
+it('resets capacity without removing history and counts new publications at the reset boundary', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-23 15:00:00 UTC'));
+    config(['editorial.weekly_limit' => 4, 'editorial.quota_reset_at' => '2026-10-23T14:18:07+00:00']);
+    foreach (['2026-10-22 10:00:00', '2026-10-23 14:18:06', '2026-10-23 14:18:07'] as $i => $created) {
+        DB::table('editorial_publications')->insert([
+            'topic_key' => 'reset-'.$i, 'bundle_id' => hash('sha256', 'reset-bundle-'.$i),
+            'source_fingerprint' => hash('sha256', 'reset-source-'.$i),
+            'post_id' => null, 'created_at' => $created, 'updated_at' => $created,
+        ]);
+    }
+    expect(Artisan::call('editorial:status'))->toBe(0);
+    $result = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+    expect($result['recent_publications'])->toBe(1)
+        ->and($result['remaining'])->toBe(3)
+        ->and($result['next_slot_at'])->toBeNull()
+        ->and(DB::table('editorial_publications')->count())->toBe(3);
+
+    $this->travel(8)->days();
+    expect(Artisan::call('editorial:status'))->toBe(0);
+    expect(json_decode(Artisan::output(), true)['remaining'])->toBe(4);
 });

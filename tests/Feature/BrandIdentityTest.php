@@ -6,8 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 it('presents the localized AI and cofounder identity consistently', function () {
-    $this->get('/')->assertOk()->assertSee('Software &amp; AI Engineer', false)->assertSee('Co-founder');
-    $this->get('/tr')->assertOk()->assertSee('Yazılım ve AI Mühendisi')->assertSee('Kurucu ortak');
+    $this->get('/')->assertOk()->assertSee('Software &amp; AI Engineer', false)->assertSee('Tech Co-founder');
+    $this->get('/tr')->assertOk()->assertSee('Yazılım ve AI Mühendisi')->assertSee('Teknik kurucu ortak');
     expect(StructuredData::person('en')['jobTitle'])->toBe('Software & AI Engineer')
         ->and(StructuredData::person('tr')['jobTitle'])->toBe('Yazılım ve AI Mühendisi');
 });

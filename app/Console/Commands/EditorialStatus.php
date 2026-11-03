@@ -43,6 +43,9 @@ class EditorialStatus extends Command
                 $checked = CarbonImmutable::now();
                 $limit = (int) config('editorial.weekly_limit');
                 $recent = DB::table('editorial_publications')->where('created_at', '>', $checked->subDays(7));
+                if ($reset = config('editorial.quota_reset_at')) {
+                    $recent->where('created_at', '>=', CarbonImmutable::parse($reset));
+                }
                 $count = (clone $recent)->count();
                 $next = $count >= $limit
                     ? (clone $recent)->orderBy('created_at')->offset($count - $limit)->value('created_at')

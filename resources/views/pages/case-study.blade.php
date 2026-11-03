@@ -1,8 +1,6 @@
 @php
     $meta = $post->caseMeta();
     $series = $series ?? collect();
-    $previous = $previous ?? null;
-    $next = $next ?? null;
     $writing = $writing ?? collect();
     $links = $post->caseLinks();
     $seo = ['title' => $post->metaTitle(), 'description' => $post->metaDescription(), 'canonical' => $post->publicUrl(), 'alternates' => $post->alternateUrls(), 'image' => $post->ogImage(), 'type' => 'article', 'published_time' => $post->published_at, 'modified_time' => $post->updated_at, 'noindex' => (bool) ($isPreview ?? false)];
@@ -44,10 +42,6 @@
         </aside>
         <article class="brand-prose brand-case-article">{!! $articleHtml !!}</article>
     </div>
-    @if ($previous || $next)<nav class="brand-case-pager" aria-label="{{ __('brand.series_pager') }}">
-        @if ($previous)<a class="brand-case-prev" href="{{ $previous->publicUrl() }}" rel="prev"><span class="brand-label"><x-arrow dir="w" /> {{ __('brand.series_prev') }}</span><span>{{ $previous->text('title') }}</span></a>@else<span></span>@endif
-        @if ($next)<a class="brand-case-next" href="{{ $next->publicUrl() }}" rel="next"><span class="brand-label">{{ __('brand.series_next') }} <x-arrow dir="e" /></span><span>{{ $next->text('title') }}</span></a>@endif
-    </nav>@endif
     @if ($writing->isNotEmpty())<section class="brand-case-writing"><h2 class="brand-label">{{ __('brand.project_writing', ['project' => $meta['project_name'] ?? '']) }}</h2>@foreach ($writing as $article)<a href="{{ $article->publicUrl() }}"><span>{{ $article->text('title') }}</span><x-arrow /></a>@endforeach</section>@endif
     <section class="brand-case-invite"><div><p class="brand-label">{{ __('brand.work_together_nav') }}</p><h2 class="brand-display">{{ __('brand.case_cta') }}</h2></div><a class="brand-button" href="{{ \App\Support\Seo::route('contact', ['topic' => 'project']) }}#form">{{ __('brand.project_cta') }} <x-arrow /></a></section>
     @if ($related->isNotEmpty())<section class="brand-case-related"><h2 class="brand-label">{{ __('brand.case_next') }}</h2><div>@foreach ($related as $other)<a href="{{ $other->publicUrl() }}"><span class="brand-label">{{ $other->projectName() }}</span><h3>{{ $other->text('title') }}</h3><x-arrow /></a>@endforeach</div></section>@endif

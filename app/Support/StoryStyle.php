@@ -13,11 +13,11 @@ final class StoryStyle
     /** Results pages show about 60 characters; a longer headline carries a shorter meta_title for search. */
     public const MAX_SEARCH_TITLE = 60;
 
-    /** Turkish packs suffixes into words, so the same text runs about a fifth shorter than its English. */
-    public const CASE_WORDS = ['en' => [350, 600], 'tr' => [280, 500]];
+    /** Length ceilings only; a complete engineering decision does not need padding. */
+    public const CASE_MAX_WORDS = ['en' => 600, 'tr' => 500];
 
     /** Articles may run longer than case studies, but not much. */
-    public const ARTICLE_WORDS = ['en' => [500, 1000], 'tr' => [400, 850]];
+    public const ARTICLE_MAX_WORDS = ['en' => 1000, 'tr' => 850];
 
     /** Longest paragraph allowed, in words. */
     public const PARAGRAPH_WORDS = ['en' => 75, 'tr' => 60];
@@ -71,14 +71,19 @@ final class StoryStyle
                 $found[] = "$lang: meta_title has a colon";
             }
             foreach (self::BANNED[$lang] as $word) {
-                if (mb_stripos($title.' '.$text, $word) !== false) {
+                $contains = $word === 'unlock'
+                    ? preg_match('/(?<![\pL\pN_])unlock(?![\pL\pN_])/iu', $title.' '.$text)
+                    : mb_stripos($title.' '.$text, $word) !== false;
+                if ($contains) {
                     $found[] = "$lang: banned word “{$word}”";
                 }
             }
             $words = preg_match_all('/[\p{L}\p{N}][\p{L}\p{N}\'’-]*/u', $text);
-            [$kind, [$min, $max]] = $article ? ['article', self::ARTICLE_WORDS[$lang]] : ['case study', self::CASE_WORDS[$lang]];
-            if ($words < $min || $words > $max) {
-                $found[] = "$lang: $kind has $words words, expected $min-$max";
+            [$kind, $max] = $article ? ['article', self::ARTICLE_MAX_WORDS[$lang]] : ['case study', self::CASE_MAX_WORDS[$lang]];
+            if ($words === 0) {
+                $found[] = "$lang: story has no readable text";
+            } elseif ($words > $max) {
+                $found[] = "$lang: $kind has $words words, maximum $max";
             }
             preg_match_all('~<p\b[^>]*>(.*?)</p>~s', $html, $paragraphs);
             foreach ($paragraphs[1] as $paragraph) {

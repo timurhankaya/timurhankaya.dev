@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Timurhan Kaya — Yazılım ve AI Mühendisi",
-    "description": "Yazılım ve AI mühendisi, Monafy’nin kurucu ortağı. Ürün geliştirme, AI ajanları ve Türkiye ve ABD borsaları için finans teknolojileri üzerine çalışıyorum."
+    "description": "Yazılım ve AI mühendisi, Monafy’nin teknik kurucu ortağı. Ürün geliştirme, AI ajanları ve Türkiye ve ABD borsaları için finans teknolojileri üzerine çalışıyorum."
   },
   "cv": {
     "role": "Yazılım ve AI Mühendisi",
@@ -14,9 +14,9 @@
     "kicker": "ürün geliştir · bağlamı tasarla · sonucu doğrula",
     "greeting": "Merhaba, ben",
     "name": "Timurhan Kaya",
-    "title": "Yazılım ve AI Mühendisi · Kurucu ortak",
+    "title": "Yazılım ve AI Mühendisi · Teknik kurucu ortak",
     "titles": [
-      "Yazılım ve AI Mühendisi · Kurucu ortak",
+      "Yazılım ve AI Mühendisi · Teknik kurucu ortak",
       "AI ajanlarıyla ürün geliştirme",
       "Prompt ve context engineering"
     ],
@@ -28,19 +28,19 @@
     "loc_label": "Konum",
     "loc_value": "İstanbul, Türkiye",
     "role_label": "Rol",
-    "role_value": "Yazılım ve AI Mühendisi · Kurucu ortak",
+    "role_value": "Yazılım ve AI Mühendisi · Teknik kurucu ortak",
     "exp_label": "Deneyim",
     "exp_value": ":years+ yıl"
   },
   "sidecard": {
     "now_title": "Şu an",
-    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi kurucu ortağı olarak geliştiriyorum."
+    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi teknik kurucu ortağı olarak geliştiriyorum."
   },
   "about": {
     "title": "Hakkımda",
     "lead": "",
     "p1": "2019’dan bu yana sigorta, finans ve e-ticaret ürünleri geliştiriyorum. İşin ürün kararlarından servis entegrasyonlarına, arayüzlerden canlı sistemlerin bakımına kadar farklı aşamalarında çalıştım.",
-    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz.",
+    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
@@ -87,6 +87,7 @@
         "        return [",
         "            'github' => 'github.com/timurhankaya',",
         "            'linkedin' => 'linkedin.com/in/timurhan-kaya',",
+        "            'x' => 'x.com/_tkaya',",
         "        ];",
         "    }",
         "}"
@@ -188,7 +189,7 @@
   },
   "projects": {
     "title": "Seçili çalışmalar",
-    "description": "Kurucu ortağı olduğum ürünler ve geliştirilmesine katkı verdiğim platformlar. Her projede üstlendiğim rolü ve verdiğim teknik kararları burada anlatıyorum.",
+    "description": "Teknik kurucu ortağı olduğum ürünler ve geliştirilmesine katkı verdiğim platformlar. Her projede üstlendiğim rolü ve verdiğim teknik kararları burada anlatıyorum.",
     "drawer_cta": "Tüm Projeleri İncele",
     "sections": [
       {
@@ -254,7 +255,7 @@
           },
           {
             "name": "Monafy",
-            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Kurucu ortağı olarak ürününü ve teknik yapısını geliştiriyorum.",
+            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Teknik kurucu ortağı olarak ürün mimarisini tasarlıyor ve teknik geliştirme sürecini yönetiyorum.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -276,7 +277,7 @@
               "İzleme listeleri, fiyat uyarıları ve abonelik erişimini ürün deneyimine bağlıyorum."
             ],
             "context": "founder",
-            "context_label": "Kurucu ortak",
+            "context_label": "Teknik kurucu ortak",
             "key": "monafy"
           }
         ]
@@ -821,7 +822,7 @@
   "contact": {
     "title": "Konuşalım.",
     "description": "Bir fikir paylaşmak, soru sormak ya da tanışmak için bana yazabilirsin.",
-    "meta_description": "Timurhan Kaya ile yazılım, AI sistemleri veya bir ürün fikri üzerine iletişime geç. Monafy kurucu ortağı; İstanbul merkezli yazılım ve AI mühendisi.",
+    "meta_description": "Timurhan Kaya ile yazılım, AI sistemleri veya bir ürün fikri üzerine iletişime geç. Monafy teknik kurucu ortağı; İstanbul merkezli yazılım ve AI mühendisi.",
     "email_label": "E-posta",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",

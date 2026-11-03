@@ -3,8 +3,8 @@
 return [
     'ai_publication_note' => 'This article was prepared through an AI-assisted publishing workflow using project sources.',
     'employment_role' => 'Software Developer',
-    'personal' => 'Software & AI Engineer · Co-founder',
-    'intro' => 'Hi, I’m Timurhan. I build software products and AI systems. As Monafy’s co-founder, I design the product architecture and direct development with AI agents.',
+    'personal' => 'Software & AI Engineer · Tech Co-founder',
+    'intro' => 'Hi, I’m Timurhan. I build software products and AI systems. As Monafy’s tech co-founder, I design the product architecture and direct development with AI agents.',
     'currently' => 'Currently at',
     'based' => 'Istanbul, Türkiye',
     'explore' => 'Explore my work',
@@ -15,7 +15,7 @@ return [
     'visit' => 'Visit project',
     'about' => 'I design products and build with AI.',
     'about_label' => 'About',
-    'about_intro' => 'Software & AI engineer in Istanbul and co-founder of Monafy. I follow financial markets and startups.',
+    'about_intro' => 'Software & AI engineer in Istanbul and tech co-founder of Monafy. I follow financial markets and startups.',
     'tools' => 'How I build',
     'approach_items' => [
         [
@@ -188,7 +188,7 @@ return [
     'writing_empty' => 'No articles are published yet.',
     'writing_empty_link' => 'Read the case studies',
     'breadcrumb' => 'Breadcrumb',
-    'llms_intro' => 'Timurhan Kaya is a software & AI engineer in Istanbul and co-founder of Monafy. He builds products with coding agents, works on prompt and context engineering, and writes evidence-based engineering accounts.',
+    'llms_intro' => 'Timurhan Kaya is a software & AI engineer in Istanbul and tech co-founder of Monafy. He builds products with coding agents, works on prompt and context engineering, and writes evidence-based engineering accounts.',
     'llms_writing' => 'Writing',
     'llms_cases' => 'Case study',
     'llms_projects' => 'Projects',

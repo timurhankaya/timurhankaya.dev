@@ -96,6 +96,8 @@
 @endif
 
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@_tkaya">
+<meta name="twitter:creator" content="@_tkaya">
 <meta name="twitter:title" content="{{ $resolvedTitle }}">
 <meta name="twitter:description" content="{{ $resolvedDescription }}">
 <meta name="twitter:image" content="{{ $resolvedImage }}">

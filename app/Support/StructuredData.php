@@ -16,6 +16,8 @@ final class StructuredData
 
     public const GITHUB = 'https://github.com/timurhankaya';
 
+    public const X = 'https://x.com/_tkaya';
+
     public const EMPLOYER = 'Wingie Enuygun Group';
 
     public const MONAFY = 'https://monafy.com';
@@ -68,7 +70,7 @@ final class StructuredData
             'knowsAbout' => ['Software development', 'Laravel', 'PHP', 'Next.js', 'Nuxt', 'PostgreSQL', 'Redis', 'Fintech', 'AI agents', 'Prompt engineering', 'Context engineering', 'AI integrations'],
             'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Istanbul', 'addressCountry' => 'TR'],
             'knowsLanguage' => ['tr', 'en'],
-            'sameAs' => [self::LINKEDIN, self::GITHUB],
+            'sameAs' => [self::LINKEDIN, self::GITHUB, self::X],
         ];
     }
 

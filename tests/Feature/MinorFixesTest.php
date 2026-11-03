@@ -16,13 +16,13 @@ it('shows the publish date once on an article page', function () {
     expect(substr_count($this->get('/writing/dated-article')->assertOk()->getContent(), '<time '))->toBe(1);
 });
 
-it('labels the series list and the previous/next pager as two different navigation landmarks', function () {
+it('labels the series list without adding a previous or next pager', function () {
     caseStudy(['slug' => 'series-one', 'sort_order' => 10]);
     caseStudy(['slug' => 'series-two', 'sort_order' => 20, 'title' => 'Second']);
     $html = $this->get('/case-studies/series-one')->assertOk()->getContent();
     preg_match('~<nav class="brand-series" aria-label="([^"]+)"~', $html, $series);
-    preg_match('~<nav class="brand-case-pager" aria-label="([^"]+)"~', $html, $pager);
-    expect($series[1] ?? null)->not->toBeNull()->and($pager[1] ?? null)->not->toBeNull()->and($series[1])->not->toBe($pager[1]);
+    expect($series[1] ?? null)->not->toBeNull()
+        ->and($html)->not->toContain('brand-case-pager', 'rel="prev"', 'rel="next"');
 });
 
 it('names the section switcher as sections, not as a table of contents', function () {

@@ -38,7 +38,14 @@ it('rejects meta fields longer than the search result limits in either locale', 
 
 it('renders the meta fields in the title and description of case study and article pages', function () {
     caseStudy(['slug' => 'meta-case', 'meta_title' => 'Fiyatlar neden düştü', 'meta_description' => 'Açıklama metni.']);
-    portfolioPost(['slug' => 'meta-article', 'meta_title' => 'Neden worktree', 'meta_description' => 'Makale açıklaması.']);
+    $article = portfolioPost(['slug' => 'meta-article', 'content' => '<p>'.str_repeat('example ', 210).'</p>', 'meta_title' => 'Neden worktree', 'meta_description' => 'Makale açıklaması.', 'translations' => ['en' => ['title' => 'Reading metadata', 'content' => '<p>'.str_repeat('example ', 210).'</p>']]]);
     $this->get('/tr/vaka-incelemeleri/meta-case')->assertOk()->assertSee('<title>Fiyatlar neden düştü — Timurhan Kaya</title>', false)->assertSee('<meta name="description" content="Açıklama metni.">', false);
     $this->get('/tr/yazilar/meta-article')->assertOk()->assertSee('<title>Neden worktree — Timurhan Kaya</title>', false)->assertSee('<meta name="description" content="Makale açıklaması.">', false);
+    foreach (['tr' => '2 dk okuma', 'en' => '2 min read'] as $locale => $duration) {
+        $html = $this->get($article->publicUrl($locale))->assertOk()->getContent();
+        preg_match('~<header class="brand-case-header brand-article-header">(.*?)</header>~s', $html, $header);
+        preg_match('~<aside class="brand-article-aside">(.*?)</aside>~s', $html, $aside);
+        expect($header[1] ?? '')->toContain($duration)
+            ->and($aside[1] ?? '')->not->toContain($duration)->not->toContain('Timurhan Kaya');
+    }
 });

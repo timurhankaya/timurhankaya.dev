@@ -4,11 +4,14 @@ use App\Models\Post;
 use App\Services\Editorial\EditorialBundle;
 use App\Services\Editorial\EditorialPublisher;
 use App\Services\Editorial\RepositoryCollector;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\Process\Process;
 
 uses(RefreshDatabase::class);
+
+beforeEach(fn () => config(['editorial.quota_reset_at' => null]));
 
 function editorialPublicBundle(string $topic = 'market-report'): array
 {
@@ -44,6 +47,7 @@ it('does not recreate a deleted publication or overwrite an edited post', functi
 });
 
 it('serializes and enforces the rolling publication limit including deleted rows', function () {
+    config(['editorial.weekly_limit' => 2]);
     $publisher = app(EditorialPublisher::class);
     $first = $publisher->import(editorialPublicBundle('first-story'));
     $publisher->import(editorialPublicBundle('second-story'));
@@ -172,4 +176,27 @@ it('blocks publication before reading a bundle or contacting production until ow
         ->assertFailed();
 
     expect(DB::table('editorial_publications')->count())->toBe(0);
+});
+
+it('opens four slots after a reset while preserving duplicate and removed-publication checks', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-23 14:00:00 UTC'));
+    $publisher = app(EditorialPublisher::class);
+    $old = editorialPublicBundle('before-reset');
+    $result = $publisher->import($old);
+    Post::findOrFail($result['post_id'])->delete();
+
+    $this->travelTo(CarbonImmutable::parse('2026-10-23 14:18:07 UTC'));
+    config(['editorial.weekly_limit' => 4, 'editorial.quota_reset_at' => now()->toIso8601String()]);
+    expect($publisher->import($old)['status'])->toBe('suppressed');
+    $duplicate = EditorialBundle::seal('before-reset', editorialPublicBundle('different-slug')['story'], hash('sha256', 'new-source'));
+    expect(fn () => $publisher->import($duplicate))->toThrow(ValidationException::class);
+    for ($i = 0; $i < 4; $i++) {
+        $new = $publisher->import(editorialPublicBundle('after-reset-'.$i));
+        expect($new['status'])->toBe('published');
+        Post::findOrFail($new['post_id'])->delete();
+    }
+    expect(fn () => $publisher->import(editorialPublicBundle('over-limit')))->toThrow(ValidationException::class);
+    expect(DB::table('editorial_publications')->count())->toBe(5);
+    $this->travel(8)->days();
+    expect($publisher->import(editorialPublicBundle('over-limit'))['status'])->toBe('published');
 });

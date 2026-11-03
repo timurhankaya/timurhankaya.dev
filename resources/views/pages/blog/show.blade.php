@@ -42,11 +42,11 @@
         <x-breadcrumbs :trail="$trail" />
         <p class="brand-label brand-case-eyebrow">{{ __('brand.type_article') }}</p>
         <h1 class="brand-display">{{ $post->text('title') }}</h1>
-        <x-story-meta :post="$post" :summary="$postDescription" />
+        <x-story-meta :post="$post" :summary="$postDescription" :reading-minutes="max(1, (int) ceil(str_word_count(strip_tags($post->text('content'))) / 200))" />
     </header>
     @if ($post->cover_image)<figure class="brand-article-cover"><img src="{{ $post->coverUrl() }}" alt="{{ $post->text('title') }}"></figure>@endif
     <div class="brand-article-layout">
-        <aside class="brand-article-aside"><x-toc :headings="$headings ?? []" /><p class="brand-label">Timurhan Kaya</p><p>{{ max(1, (int) ceil(str_word_count(strip_tags($post->text('content'))) / 200)) }} {{ __('brand.reading_time') }}</p>@if ($project = app(\App\Services\Portfolio\ProjectCatalog::class)->find($post->project_key))<div class="brand-article-project"><p class="brand-label">{{ __('brand.article_project') }}</p><a class="brand-text-link" href="{{ $project['url'] }}" target="_blank" rel="noopener">{{ $project['name'] }} <x-arrow /></a></div>@endif<a class="brand-text-link" href="{{ $blogUrl }}">{{ __('brand.all_writing') }} <x-arrow /></a></aside>
+        <aside class="brand-article-aside"><x-toc :headings="$headings ?? []" />@if ($project = app(\App\Services\Portfolio\ProjectCatalog::class)->find($post->project_key))<div class="brand-article-project"><p class="brand-label">{{ __('brand.article_project') }}</p><a class="brand-text-link" href="{{ $project['url'] }}" target="_blank" rel="noopener">{{ $project['name'] }} <x-arrow /></a></div>@endif<a class="brand-text-link" href="{{ $blogUrl }}">{{ __('brand.all_writing') }} <x-arrow /></a></aside>
         <article class="brand-prose blog-content">{!! $articleHtml !!}</article>
     </div>
 @endsection

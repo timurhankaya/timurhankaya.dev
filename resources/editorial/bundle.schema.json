@@ -26,6 +26,12 @@
         "tr",
         "en"
       ],
+      "allOf": [
+        {
+          "if": {"properties": {"type": {"const": "case_study"}}, "required": ["type"]},
+          "then": {"properties": {"project_key": {"const": "monafy"}}}
+        }
+      ],
       "properties": {
         "type": {
           "enum": [
@@ -37,7 +43,7 @@
           "type": "string"
         },
         "project_key": {
-          "const": "monafy"
+          "enum": ["monafy", null]
         },
         "sort_order": {
           "type": "integer"

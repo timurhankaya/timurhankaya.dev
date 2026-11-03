@@ -1,4 +1,4 @@
-@props(['post', 'summary' => null])
+@props(['post', 'summary' => null, 'readingMinutes' => null])
 @php
     $summary ??= $post->text('excerpt');
     $published = $post->published_at ?? $post->created_at;
@@ -9,6 +9,7 @@
 @endif
 <p class="brand-byline">
     <span>{{ __('brand.by') }} <a href="{{ \App\Support\Seo::route('cv') }}">Timurhan Kaya</a></span>
+    @if ($readingMinutes !== null)<span>{{ $readingMinutes }} {{ __('brand.reading_time') }}</span>@endif
     @if ($published)<time datetime="{{ $published->toDateString() }}">{{ $published->translatedFormat('j F Y') }}</time>@endif
     @if ($updated)<span>{{ __('brand.updated') }} <time datetime="{{ $updated->toDateString() }}">{{ $updated->translatedFormat('j F Y') }}</time></span>@endif
 </p>

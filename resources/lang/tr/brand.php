@@ -3,8 +3,8 @@
 return [
     'ai_publication_note' => 'Bu yazı, proje kaynakları incelenerek AI destekli yayın akışıyla hazırlandı.',
     'employment_role' => 'Yazılım Geliştirici',
-    'personal' => 'Yazılım ve AI Mühendisi · Kurucu ortak',
-    'intro' => 'Merhaba, ben Timurhan. Yazılım ürünleri ve AI sistemleri geliştiriyorum. Monafy’nin kurucu ortağı olarak ürünün mimarisini tasarlıyor, AI ajanlarıyla geliştirme sürecini yönetiyorum.',
+    'personal' => 'Yazılım ve AI Mühendisi · Teknik kurucu ortak',
+    'intro' => 'Merhaba, ben Timurhan. Yazılım ürünleri ve AI sistemleri geliştiriyorum. Monafy’nin teknik kurucu ortağı olarak ürünün mimarisini tasarlıyor, AI ajanlarıyla geliştirme sürecini yönetiyorum.',
     'currently' => 'Şu anda',
     'based' => 'İstanbul, Türkiye',
     'explore' => 'Çalışmalarımı incele',
@@ -15,7 +15,7 @@ return [
     'visit' => 'Projeyi ziyaret et',
     'about' => 'Ürünü tasarlıyor, AI ile geliştiriyorum.',
     'about_label' => 'Hakkımda',
-    'about_intro' => 'İstanbul’da yazılım ve AI mühendisi, Monafy’de kurucu ortağım. Finans piyasaları ve girişimcilikle ilgileniyorum.',
+    'about_intro' => 'İstanbul’da yazılım ve AI mühendisi, Monafy’de teknik kurucu ortağım. Finans piyasaları ve girişimcilikle ilgileniyorum.',
     'tools' => 'Nasıl üretiyorum',
     'approach_items' => [
         [
@@ -188,7 +188,7 @@ return [
     'writing_empty' => 'Henüz yayınlanmış bir yazı yok.',
     'writing_empty_link' => 'Case study\'lere göz at',
     'breadcrumb' => 'Sayfa yolu',
-    'llms_intro' => 'Timurhan Kaya, İstanbul’da yazılım ve AI mühendisi ve Monafy’nin kurucu ortağı. Ürün geliştirme, kodlama ajanları, prompt ve context engineering üzerine çalışır; deneyimlerini kaynaklarıyla yazar.',
+    'llms_intro' => 'Timurhan Kaya, İstanbul’da yazılım ve AI mühendisi ve Monafy’nin teknik kurucu ortağı. Ürün geliştirme, kodlama ajanları, prompt ve context engineering üzerine çalışır; deneyimlerini kaynaklarıyla yazar.',
     'llms_writing' => 'Yazılar',
     'llms_cases' => 'Case study',
     'llms_projects' => 'Projeler',

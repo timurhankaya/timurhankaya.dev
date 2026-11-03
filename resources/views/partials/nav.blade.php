@@ -1,6 +1,9 @@
 @php
     $homeUrl = \App\Support\Seo::route('home');
-    $localeToggleUrl = \App\Support\Seo::localizedUrl(request()->fullUrl(), app()->getLocale() === 'tr' ? 'en' : 'tr');
+    $toggleLocale = app()->getLocale() === 'tr' ? 'en' : 'tr';
+    $localeToggleUrl = ($isPreview ?? false) && isset($post)
+        ? $post->publicUrl($toggleLocale).'?draft=1'
+        : \App\Support\Seo::localizedUrl(request()->fullUrl(), $toggleLocale);
     if (app()->getLocale() === 'tr' && request()->routeIs('tr.home')) $localeToggleUrl .= '?lang=en';
     $before = [
         [\App\Support\Anchors::home('about'), __('brand.about_label')],

@@ -492,15 +492,7 @@ body:has(.brand-project-dialog[open]) { overflow: hidden; }
 .brand-writing-section + .brand-writing-section { margin-top: 75px; }
 .brand-story-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 45px 30px; }
 .brand-story-card { min-width: 0; display: flex; flex-direction: column; }
-.brand-story-cover { min-height: 245px; display: flex; flex-direction: column; align-items: start; justify-content: space-between; gap: 35px; padding: 25px; position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
-.brand-story-cover::after { content: ''; width: 230px; height: 230px; border: 1px solid currentColor; position: absolute; bottom: -100px; right: -40px; border-radius: 50%; opacity: .15; transition: transform .4s; }
-.brand-story-card:hover .brand-story-cover::after { transform: translate(-20px, -10px); }
-.brand-story-cover-1 { color: #0a0a0b; background: var(--accent); border-color: var(--accent); }
-.brand-story-cover-2 { color: #e1e5ed; background: #20242b; }
-.brand-story-cover-3 { color: var(--accent); }
-.brand-story-name { font-family: var(--heading); font-size: clamp(34px, 4vw, 52px); font-weight: 600; line-height: 1.04; letter-spacing: -.055em; max-width: 80%; z-index: 1; }
-.brand-story-symbol { position: absolute; bottom: 22px; right: 25px; font-size: 40px; line-height: 1; }
-.brand-story-copy { padding-top: 22px; display: flex; flex: 1; flex-direction: column; }
+.brand-story-copy { display: flex; flex: 1; flex-direction: column; }
 .brand-story-copy > .brand-label { color: var(--muted); font-size: 11px; }
 .brand-story-copy h3 { font-family: var(--heading); font-size: 25px; line-height: 1.3; font-weight: 500; letter-spacing: -.035em; margin-top: 12px; }
 .brand-story-copy > p:not(.brand-label) { flex: 1; font-size: 13px; line-height: 1.85; color: var(--muted); margin-top: 13px; }
@@ -618,8 +610,6 @@ body:has(.brand-project-dialog[open]) { overflow: hidden; }
     .brand-game-guide li { display: grid; grid-template-columns: 30px 1fr; gap: 20px; align-items: baseline; padding-block: 20px; }
     .brand-game-guide li p { margin-top: 0; font-size: 13px; }
     .brand-story-grid { grid-template-columns: 1fr; gap: 35px; }
-    .brand-story-cover { min-height: 240px; }
-    .brand-story-name { font-size: 45px; }
     .brand-story-copy h3 { font-size: 24px; }
     .brand-example-card { padding: 24px; }
     .brand-example-card h3 { max-width: 90%; margin-top: 25px; font-size: 27px; }
@@ -662,7 +652,7 @@ body:has(.brand-project-dialog[open]) { overflow: hidden; }
 :is(a, button, summary):is(:hover, :focus-visible) .brand-arrow[data-dir="w"] { --arrow-x: -4px; }
 :is(a, button, summary):is(:hover, :focus-visible) .brand-arrow[data-dir="n"] { --arrow-y: -3px; }
 .brand-game-arrow .brand-arrow { width: 15px; height: 15px; vertical-align: 0; }
-.brand-story-symbol .brand-arrow, .brand-example-arrow .brand-arrow, .brand-post-arrow .brand-arrow, .brand-case-cover-mark .brand-arrow { stroke-width: 1.1; }
+.brand-example-arrow .brand-arrow, .brand-post-arrow .brand-arrow, .brand-case-cover-mark .brand-arrow { stroke-width: 1.1; }
 @media (prefers-reduced-motion: reduce) { .brand-arrow { transition: none; } }
 .brand-site .brand-button { position: relative; overflow: hidden; }
 .brand-site .brand-button::before { content: ""; position: absolute; inset: 0; background: #ffffff; opacity: 0; transform: translateX(-101%); transition: transform .45s cubic-bezier(.2, 0, 0, 1), opacity .45s; pointer-events: none; }
@@ -748,8 +738,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 .brand-preview-notice { padding: 18px 20px; border: 1px solid var(--accent); color: var(--accent); font: 11px/1.8 var(--mono); margin-top: 25px; }
-.brand-story-cover-image { padding: 0; }
-.brand-story-cover-image img { width: 100%; height: 245px; object-fit: cover; }
 .brand-case-article > h2:first-child { margin-top: 0; }
 .brand-prose :is(h2,h3)[id] { scroll-margin-top: 120px; }
 .brand-writing-section.brand-example-card { margin-top: 55px; }
@@ -784,7 +772,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .brand-case-group .brand-section-heading .brand-display { font-size: clamp(32px, 4vw, 48px); margin-top: 14px; }
 .brand-case-group .brand-section-heading .brand-text-link { flex: none; }
 .brand-case-group + .brand-case-group { margin-top: 85px; }
-.brand-story-name { word-break: break-word; }
 @media (max-width: 760px) {
     .brand-case-facts { max-height: none; overflow: visible; padding-right: 0; }
     .brand-case-pager { grid-template-columns: 1fr; gap: 12px; padding-bottom: 35px; }

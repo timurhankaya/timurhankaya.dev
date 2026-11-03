@@ -35,13 +35,22 @@ final class EditorialBundle
         $sources = [];
         foreach ($private['evidence'] as $evidence) {
             foreach ($evidence['sources'] as $source) {
-                $path = realpath($root.'/'.$source['repository']);
-                $this->require(in_array($path, $allowed, true), 'Unknown evidence repository.');
+                $repository = $source['repository'];
+                $external = config('editorial.evidence_repositories', []);
+                $isExternal = array_key_exists($repository, $external);
+                $path = realpath($isExternal ? $external[$repository] : $root.'/'.$repository);
+                $this->require($path !== false && ($isExternal ? file_exists($path.'/.git') : in_array($path, $allowed, true)), 'Unknown evidence repository.');
                 $this->require(RepositoryCollector::safePath($source['path']), 'Unsafe evidence file.');
                 $this->require($collector->git($path, ['merge-base', '--is-ancestor', $source['commit'], 'origin/main'], false, true) === 'ok', 'Evidence is not on the merged main branch.');
                 $object = $source['commit'].':'.$source['path'];
                 $this->require($collector->git($path, ['cat-file', '-t', $object], false) === "blob\n", 'Evidence file does not exist at its recorded commit.');
-                $repositoryName = ltrim(substr($path, strlen($root)), '/');
+                if (in_array($path, $allowed, true)) {
+                    $repositoryName = ltrim(substr($path, strlen($root)), '/');
+                } else {
+                    $aliases = array_keys(array_filter($external, fn ($candidate) => realpath($candidate) === $path));
+                    sort($aliases);
+                    $repositoryName = $aliases[0];
+                }
                 $sources[] = $repositoryName.'@'.$source['commit'];
             }
         }
@@ -62,7 +71,7 @@ final class EditorialBundle
             'story' => ['required', 'array:type,slug,project_key,sort_order,case_meta,tr,en'],
             'story.type' => ['required', Rule::enum(PostType::class)],
             'story.slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'max:200'],
-            'story.project_key' => ['required', 'in:monafy'],
+            'story.project_key' => ['present', 'nullable', 'in:monafy'],
             'story.sort_order' => ['sometimes', 'integer', 'between:0,65535'],
             'story.case_meta' => ['sometimes', 'array:project_name,project_name_en,context,period,technologies,url,links'],
             'story.case_meta.context' => ['sometimes', 'in:founder'],
@@ -72,6 +81,7 @@ final class EditorialBundle
         $expected = self::seal($bundle['topic_key'], $bundle['story'], $bundle['source_fingerprint']);
         $this->require(hash_equals($expected['id'], $bundle['id']), 'The bundle checksum does not match its contents.');
         $story = $bundle['story'];
+        $this->require($story['type'] === PostType::Article->value || $story['project_key'] === 'monafy', 'Case studies require the configured project.');
         foreach (['tr', 'en'] as $locale) {
             Validator::make($story[$locale], [
                 'slug' => ['sometimes', 'required', 'string', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'max:200'],
@@ -98,9 +108,9 @@ final class EditorialBundle
                             $parts = parse_url($attribute->value);
                             if (in_array(strtolower($parts['host'] ?? ''), ['monafy.com', 'www.monafy.com'], true)) {
                                 $path = $parts['path'] ?? '/';
-                                $this->require(($locale === 'tr' ? str_starts_with($path, '/tr/') : $path !== '/' && $path !== '' && ! preg_match('~^/tr(?:/|$)~', $path))
+                                $this->require(($locale === 'tr' ? str_starts_with($path, '/tr/') : ! preg_match('~^/tr(?:/|$)~', $path))
                                     && MonafyLinks::localized($attribute->value, $locale) === $attribute->value,
-                                    'Monafy links must use a direct destination in the story language, not the language-negotiating homepage.');
+                                    'Monafy links must use a direct destination in the story language.');
                             }
                         }
                     }

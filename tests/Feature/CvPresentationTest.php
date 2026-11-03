@@ -42,7 +42,7 @@ it('keeps the shared biography and the hands-off AI development account accurate
         $content = json_decode(file_get_contents(resource_path("content/portfolio.{$locale}.json")), true, flags: JSON_THROW_ON_ERROR);
         $profile = $content['cv']['profile'];
         expect($this->get($path)->assertOk()->getContent())->toContain(e($content['about']['p2']));
-        expect($content['stats']['role_value'])->toContain($locale === 'en' ? 'Co-founder' : 'Kurucu ortak');
+        expect($content['stats']['role_value'])->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik kurucu ortak');
         expect($profile)->toContain($locale === 'en' ? 'without writing the code by hand' : 'kodu elle yazmadan')
             ->toContain($locale === 'en' ? 'verify' : 'doğruluyor');
     }
@@ -56,7 +56,7 @@ it('gives only the CV card its localized engineering role', function () {
         $content = json_decode(file_get_contents(resource_path("content/portfolio.{$locale}.json")), true, flags: JSON_THROW_ON_ERROR);
         expect($card['role'][$locale])->toBe($content['cv']['role']);
         expect(mb_strtolower(json_encode($card, JSON_UNESCAPED_UNICODE)))->not->toContain('co-founder')->not->toContain('kurucu');
-        expect($spec['role'][$locale])->toContain($locale === 'en' ? 'Co-founder' : 'Kurucu ortak');
+        expect($spec['role'][$locale])->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik kurucu ortak');
     }
 });
 

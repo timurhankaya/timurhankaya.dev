@@ -1,5 +1,6 @@
 @php
     $locale = app()->getLocale();
+    $ats = request()->query('ats') === '1';
     if (!in_array($locale, ['en', 'tr'])) {
         $locale = 'en';
     }
@@ -120,7 +121,7 @@
     <title>{{ $t['meta_title'] }}</title>
     <meta name="description" content="{{ \App\Support\Seo::metaDescription($cvDescription) }}">
     <meta name="author" content="Timurhan Kaya">
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="robots" content="{{ $ats ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }}">
     <link rel="canonical" href="{{ $cvUrl }}">
     @foreach ($alternateUrls as $hreflang => $href)
         <link rel="alternate" hreflang="{{ $hreflang }}" href="{{ $href }}">
@@ -133,10 +134,41 @@
     <meta property="og:site_name" content="{{ \App\Support\Seo::siteName() }}">
     <meta property="og:locale" content="{{ \App\Support\Seo::ogLocale($locale) }}">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@_tkaya">
+    <meta name="twitter:creator" content="@_tkaya">
     <meta name="twitter:title" content="{{ $t['meta_title'] }}">
     <meta name="twitter:description" content="{{ \App\Support\Seo::metaDescription($cvDescription) }}">
     <meta name="twitter:image" content="{{ \App\Support\Seo::imageUrl('og-cv.png') }}">
     {!! $cvJsonLd !!}
+    @if ($ats)
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; color: #111; background: #f3f3f3; font: 11pt/1.45 Arial, sans-serif; }
+        .ats-page { max-width: 210mm; margin: 24px auto; padding: 14mm; background: #fff; }
+        .ats-page h1 { margin: 0; font-size: 24pt; line-height: 1.2; }
+        .ats-role { margin: 4px 0 10px; font-size: 13pt; }
+        .ats-contact { font-style: normal; font-size: 10pt; overflow-wrap: anywhere; }
+        .ats-contact p { margin: 2px 0; }
+        .ats-page a { color: inherit; }
+        .ats-page section { margin-top: 20px; }
+        .ats-page h2 { margin: 0 0 8px; padding-bottom: 3px; border-bottom: 1px solid #777; font-size: 13pt; }
+        .ats-page h3 { margin: 12px 0 3px; font-size: 11pt; }
+        .ats-page p { margin: 4px 0; }
+        .ats-page ul { margin: 5px 0 12px; padding-left: 20px; }
+        .ats-page li { margin: 3px 0; }
+        .ats-controls { max-width: 210mm; margin: 20px auto; padding: 0 16px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; font: 14px Arial, sans-serif; }
+        .ats-controls button { padding: 8px 14px; cursor: pointer; }
+        @media (max-width: 600px) { .ats-page { margin: 0; padding: 24px 18px; } }
+        @media print {
+            @page { size: A4; margin: 14mm; }
+            body { background: #fff; }
+            .ats-page { max-width: none; margin: 0; padding: 0; }
+            .ats-controls { display: none; }
+            h1, h2, h3 { break-after: avoid; }
+            p, li { orphans: 2; widows: 2; }
+        }
+    </style>
+    @else
     <link rel="stylesheet" href="{{ asset('fonts/typography.css') }}">
     <style>
         :root {
@@ -524,9 +556,14 @@
             gap: 0.8mm;
         }
     </style>
+    @endif
 </head>
 <body>
 
+@if ($ats)
+    @include('pages.partials.cv-ats')
+@else
+<a class="no-print" href="{{ $cvUrl }}?ats=1" style="position:fixed;bottom:80px;right:24px;color:#fff;font:14px sans-serif;z-index:999;">{{ $locale === 'tr' ? 'ATS sürümü' : 'ATS version' }}</a>
 <button class="print-btn no-print" onclick="window.print()">{{ $t['print_btn'] }}</button>
 
 <div class="page">
@@ -548,7 +585,9 @@
             <a href="https://github.com/timurhankaya" target="_blank" class="contact-item">
                 <span class="label">GitHub</span> @timurhankaya
             </a>
-            <!-- Empty spot for grid to push Web down nicely if needed, or we just rely on grid -->
+            <a href="https://x.com/_tkaya" target="_blank" rel="me noopener noreferrer" class="contact-item">
+                <span class="label">X</span> @_tkaya
+            </a>
             <a href="https://timurhankaya.dev" target="_blank" class="contact-item" style="grid-column: 1 / -1; justify-self: end;">
                 <span class="label">Web</span> timurhankaya.dev
             </a>
@@ -633,5 +672,6 @@
     </div>
 </div>
 
+@endif
 </body>
 </html>

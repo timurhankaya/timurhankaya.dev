@@ -70,8 +70,11 @@ class PostController extends Controller
         ];
     }
 
-    public function show(string $slug, PostContent $content)
+    public function show(Request $request, string $slug, PostContent $content)
     {
+        if ($request->boolean('draft')) {
+            return app(PreviewPostController::class)->bySlug($request, $slug, $content);
+        }
         $post = Post::published()->withPublicSlug($slug)->firstOrFail();
         if ($post->type === PostType::CaseStudy || $slug !== $post->publicSlug()) {
             return redirect($post->publicUrl(), 301);
@@ -80,20 +83,20 @@ class PostController extends Controller
         return view('pages.blog.show', ['post' => $post, ...$content->prepare($post)]);
     }
 
-    public function caseShow(string $slug, PostContent $content)
+    public function caseShow(Request $request, string $slug, PostContent $content)
     {
+        if ($request->boolean('draft')) {
+            return app(PreviewPostController::class)->bySlug($request, $slug, $content, PostType::CaseStudy);
+        }
         $post = Post::published()->where('type', PostType::CaseStudy)->withPublicSlug($slug)->firstOrFail();
         if ($slug !== $post->publicSlug()) {
             return redirect($post->publicUrl(), 301);
         }
         $series = $post->storySeries();
-        $position = $series->search(fn (Post $story): bool => $story->is($post));
 
         return view('pages.case-study', [
             'post' => $post,
             'series' => $series,
-            'previous' => is_int($position) && $position > 0 ? $series[$position - 1] : null,
-            'next' => is_int($position) ? $series->get($position + 1) : null,
             'writing' => $post->project_key ? Post::published()->where('type', PostType::Article)->where('project_key', $post->project_key)->latest('published_at')->limit(3)->get() : collect(),
             'related' => Post::published()->where('type', PostType::CaseStudy)->whereNotIn('id', $series->pluck('id')->push($post->id)->all())
                 ->orderBy('sort_order')->latest('published_at')->limit(2)->get(),

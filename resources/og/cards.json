@@ -1,9 +1,9 @@
 {
-    "role": { "en": "Software & AI Engineer · Co-founder", "tr": "Yazılım ve AI Mühendisi · Kurucu ortak" },
+    "role": { "en": "Software & AI Engineer · Tech Co-founder", "tr": "Yazılım ve AI Mühendisi · Teknik kurucu ortak" },
     "cards": [
-        { "file": "og-basic", "kind": "name", "label": { "en": "Software & AI Engineer / Monafy co-founder", "tr": "Yazılım ve AI Mühendisi / Monafy kurucu ortağı" } },
-        { "file": "og-home", "kind": "name", "label": { "en": "Software & AI Engineer / Monafy co-founder", "tr": "Yazılım ve AI Mühendisi / Monafy kurucu ortağı" } },
-        { "file": "og", "kind": "name", "label": { "en": "Software & AI Engineer / Monafy co-founder", "tr": "Yazılım ve AI Mühendisi / Monafy kurucu ortağı" } },
+        { "file": "og-basic", "kind": "name", "label": { "en": "Software & AI Engineer / Monafy tech co-founder", "tr": "Yazılım ve AI Mühendisi / Monafy teknik kurucu ortağı" } },
+        { "file": "og-home", "kind": "name", "label": { "en": "Software & AI Engineer / Monafy tech co-founder", "tr": "Yazılım ve AI Mühendisi / Monafy teknik kurucu ortağı" } },
+        { "file": "og", "kind": "name", "label": { "en": "Software & AI Engineer / Monafy tech co-founder", "tr": "Yazılım ve AI Mühendisi / Monafy teknik kurucu ortağı" } },
         { "file": "og-blog", "number": "01", "label": { "en": "Blog", "tr": "Blog" }, "title": { "en": "Notes on building software products", "tr": "Yazılım ve ürün geliştirme notları" }, "subtitle": { "en": "Live price streams, AI agents and the decisions behind real products.", "tr": "Canlı fiyat akışları, yapay zekâ ajanları ve gerçek ürünlerin arkasındaki kararlar." } },
         { "file": "og-blog-post", "number": "01", "label": { "en": "Blog", "tr": "Blog" }, "title": { "en": "Writing by Timurhan Kaya", "tr": "Timurhan Kaya’nın yazıları" } },
         { "file": "og-contact", "number": "06", "label": { "en": "Contact", "tr": "İletişim" }, "title": { "en": "Keep in touch.", "tr": "İletişimde kalalım." }, "subtitle": { "en": "A project, a partnership or a question. I reply by email.", "tr": "Bir proje, bir ortaklık ya da bir soru. E-postayla dönerim." } },

@@ -3,6 +3,7 @@
 namespace App\Services\Editorial;
 
 use App\Models\Post;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -24,7 +25,11 @@ final class EditorialPublisher
             if (DB::table('editorial_publications')->where('topic_key', $bundle['topic_key'])->orWhere('source_fingerprint', $bundle['source_fingerprint'])->exists()) {
                 throw ValidationException::withMessages(['bundle' => 'This topic or source set has already been published.']);
             }
-            if (DB::table('editorial_publications')->where('created_at', '>', now()->subDays(7))->count() >= config('editorial.weekly_limit')) {
+            $recent = DB::table('editorial_publications')->where('created_at', '>', now()->subDays(7));
+            if ($reset = config('editorial.quota_reset_at')) {
+                $recent->where('created_at', '>=', CarbonImmutable::parse($reset));
+            }
+            if ($recent->count() >= config('editorial.weekly_limit')) {
                 throw ValidationException::withMessages(['bundle' => 'The rolling seven-day publication limit has been reached.']);
             }
             if (Post::withTrashed()->where('slug', $story['slug'])->exists()) {

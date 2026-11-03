@@ -18,11 +18,27 @@ it('flags banned words in titles and content in both languages', function () {
     expect(StoryStyle::violations(cleanStory(['tr' => ['title' => 'Kusursuz bir deploy nasıl bozuldu?']])))->toContain('tr: banned word “kusursuz”');
 });
 
-it('limits case studies to 350-600 and articles to 500-1000 English words, with shorter Turkish ranges', function () {
-    expect(StoryStyle::violations(cleanStory(['en' => ['content' => storyParagraphs(1100)]])))->toContain('en: case study has 1104 words, expected 350-600')
-        ->and(StoryStyle::violations(cleanStory(['tr' => ['content' => storyParagraphs(200)]])))->toContain('tr: case study has 204 words, expected 280-500')
-        ->and(StoryStyle::violations(cleanStory(['type' => 'article', 'project_key' => null, 'en' => ['content' => storyParagraphs(1500)]])))->toContain('en: article has 1504 words, expected 500-1000')
+it('keeps word ceilings without requiring a minimum length', function () {
+    expect(StoryStyle::violations(cleanStory(['en' => ['content' => storyParagraphs(1100)]])))->toContain('en: case study has 1104 words, maximum 600')
+        ->and(StoryStyle::violations(cleanStory(['tr' => ['content' => storyParagraphs(600)]])))->toContain('tr: case study has 604 words, maximum 500')
+        ->and(StoryStyle::violations(cleanStory(['type' => 'article', 'project_key' => null, 'en' => ['content' => storyParagraphs(1500)]])))->toContain('en: article has 1504 words, maximum 1000')
+        ->and(StoryStyle::violations(cleanStory(['type' => 'article', 'project_key' => null, 'tr' => ['content' => storyParagraphs(900)]])))->toContain('tr: article has 904 words, maximum 850')
         ->and(StoryStyle::violations(cleanStory(['type' => 'article', 'project_key' => null, 'en' => ['content' => storyParagraphs(800)], 'tr' => ['content' => storyParagraphs(600)]])))->toBe([]);
+});
+
+it('accepts concise bilingual notes and case studies without padding', function (string $type) {
+    expect(StoryStyle::violations(cleanStory([
+        'type' => $type, 'project_key' => null,
+        'tr' => ['content' => '<p>Fiyat hesabını formdan ayırdık. Böylece aynı girdinin ürettiği sonucu doğrudan kontrol edebiliyoruz.</p>'],
+        'en' => ['content' => '<p>We separated the price calculation from the form so its result can be checked directly for a given input.</p>'],
+    ])))->toBe([]);
+})->with(['article', 'case_study']);
+
+it('still rejects stories with no readable body', function () {
+    expect(StoryStyle::violations(cleanStory([
+        'tr' => ['content' => '<p> </p>'],
+        'en' => ['content' => '<p>...</p>'],
+    ])))->toContain('tr: story has no readable text', 'en: story has no readable text');
 });
 
 it('keeps every paragraph short', function () {

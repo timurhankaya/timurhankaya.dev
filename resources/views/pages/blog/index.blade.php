@@ -41,8 +41,6 @@
                 <div class="brand-story-grid">
                     @foreach ($group as $post)
                         <a class="brand-story-card" href="{{ $post->publicUrl() }}">
-                            @if ($post->coverUrl())<div class="brand-story-cover brand-story-cover-image"><img src="{{ $post->coverUrl() }}" alt="{{ $post->projectName() }}" loading="lazy"></div>
-                            @else<div class="brand-story-cover brand-story-cover-{{ ($loop->parent->index + $loop->index) % 3 + 1 }}" aria-hidden="true"><span class="brand-label">{{ $post->projectName() }}@if (filled(data_get($post->case_meta, 'period'))) / {{ data_get($post->case_meta, 'period') }}@endif</span><span class="brand-story-name">{{ $group->count() > 1 ? str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) : $post->projectName() }}</span><span class="brand-story-symbol" aria-hidden="true"><x-arrow /></span></div>@endif
                             <div class="brand-story-copy"><p class="brand-label">{{ $group->count() > 1 ? __('brand.series_part', ['current' => $loop->iteration, 'total' => $group->count()]) : __('brand.case_type').' / '.__('brand.context_'.data_get($post->case_meta, 'context', 'personal')) }}</p><h3>{{ $post->text('title') }}</h3><p>{{ $post->text('excerpt') }}</p><span class="brand-story-read">{{ __('brand.read_case') }} <x-arrow /></span></div>
                         </a>
                     @endforeach

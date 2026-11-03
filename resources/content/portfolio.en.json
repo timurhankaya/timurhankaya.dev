@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Timurhan Kaya — Software & AI Engineer",
-    "description": "Software & AI engineer and Monafy co-founder in Istanbul. I build software products, AI agents and financial tools for Turkish and US stock markets."
+    "description": "Software & AI engineer and Monafy tech co-founder in Istanbul. I build software products, AI agents and financial tools for Turkish and US stock markets."
   },
   "cv": {
     "role": "Software & AI Engineer",
@@ -14,9 +14,9 @@
     "kicker": "build products · design context · verify outcomes",
     "greeting": "Hi, I'm",
     "name": "Timurhan Kaya",
-    "title": "Software & AI Engineer · Co-founder",
+    "title": "Software & AI Engineer · Tech Co-founder",
     "titles": [
-      "Software & AI Engineer · Co-founder",
+      "Software & AI Engineer · Tech Co-founder",
       "Building products with AI agents",
       "Prompt and context engineering"
     ],
@@ -28,19 +28,19 @@
     "loc_label": "Location",
     "loc_value": "Istanbul, Turkey",
     "role_label": "Role",
-    "role_value": "Software & AI Engineer · Co-founder",
+    "role_value": "Software & AI Engineer · Tech Co-founder",
     "exp_label": "Experience",
     "exp_value": ":years+ yrs"
   },
   "sidecard": {
     "now_title": "Now",
-    "now_body": "Software developer at Wingie Enuygun Group and co-founder building Monafy."
+    "now_body": "Software developer at Wingie Enuygun Group and tech co-founder building Monafy."
   },
   "about": {
     "title": "About",
     "lead": "",
     "p1": "Since 2019, I have built software for insurance, finance and e-commerce. My work spans product decisions, service integrations, interfaces and the upkeep of production systems.",
-    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I also co-founded Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets.",
+    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
@@ -87,6 +87,7 @@
         "        return [",
         "            'github' => 'github.com/timurhankaya',",
         "            'linkedin' => 'linkedin.com/in/timurhan-kaya',",
+        "            'x' => 'x.com/_tkaya',",
         "        ];",
         "    }",
         "}"
@@ -254,7 +255,7 @@
           },
           {
             "name": "Monafy",
-            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As co-founder, I build the product and its technical foundation.",
+            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As tech co-founder, I design the product architecture and lead technical development.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -276,7 +277,7 @@
               "I connect watchlists, price alerts and subscription access to the product experience."
             ],
             "context": "founder",
-            "context_label": "Co-founder",
+            "context_label": "Tech Co-founder",
             "key": "monafy"
           }
         ]
@@ -822,7 +823,7 @@
   "contact": {
     "title": "Let’s talk.",
     "description": "Have an idea, a question, or something to share? Send me a note.",
-    "meta_description": "Contact Timurhan Kaya, software & AI engineer and Monafy co-founder in Istanbul, about a product, AI integration or collaboration.",
+    "meta_description": "Contact Timurhan Kaya, software & AI engineer and Monafy tech co-founder in Istanbul, about a product, AI integration or collaboration.",
     "email_label": "Email",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",
