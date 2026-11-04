@@ -43,8 +43,8 @@ it('keeps the shared biography and the hands-off AI development account accurate
         $profile = $content['cv']['profile'];
         expect($this->get($path)->assertOk()->getContent())->toContain(e($content['about']['p2']));
         expect($content['stats']['role_value'])->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik kurucu ortak');
-        expect($profile)->toContain($locale === 'en' ? 'without writing the code by hand' : 'kodu elle yazmadan')
-            ->toContain($locale === 'en' ? 'verify' : 'doğruluyor');
+        expect($profile)->toContain($locale === 'en' ? 'AI-assisted development' : 'yapay zekâ destekli geliştirme')
+            ->toContain($locale === 'en' ? 'verification' : 'doğrulamayı');
     }
 });
 

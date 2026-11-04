@@ -1,11 +1,11 @@
 {
   "meta": {
     "title": "Timurhan Kaya — Software & AI Engineer",
-    "description": "Software & AI engineer and Monafy tech co-founder in Istanbul. I build software products, AI agents and financial tools for Turkish and US stock markets."
+    "description": "Timurhan Kaya is a software and AI engineer and Monafy tech co-founder in Istanbul, working on product architecture, web development and AI integrations."
   },
   "cv": {
     "role": "Software & AI Engineer",
-    "profile": "Since 2019, I have built software for insurance, finance and e-commerce. At Wingie Enuygun Group, I develop insurance comparison and purchase flows and their service integrations. Separately, I built Monafy with AI coding agents, without writing the code by hand. I design its product flows and service architecture, connect AI tools to financial data, give agents the context they need and verify their work.",
+    "profile": "Since 2019, I have built software for insurance, finance and e-commerce. At Wingie Enuygun Group, I work on insurance comparison and purchase flows and service integrations. For Monafy, I design product flows and architecture and oversee AI-assisted development and verification.",
     "project_descriptions": {
       "monafy": "A research platform combining financial data, market reports and an AI assistant for Turkish and US stock markets. I design product flows and service architecture, manage AI integrations and direct development with coding agents."
     }
@@ -93,7 +93,7 @@
         "}"
       ]
     },
-    "p3": "I built Monafy with AI agents, without writing the code by hand. I design the product and architecture, give agents the context they need and verify their work. Prompt and context engineering are part of that process, alongside integrations that connect model responses to product data."
+    "p3": "At Monafy, I shape the product’s needs and architecture and use AI tools throughout development. I focus on helping the product evolve reliably by carefully evaluating technical decisions, integrations and the resulting work."
   },
   "skills": {
     "title": "Areas of work",
@@ -189,7 +189,7 @@
   },
   "projects": {
     "title": "Products, platforms & systems",
-    "description": "I’ve taken 30+ projects live. Explore my contributions to SaaS products and high-traffic platforms, along with the engineering decisions that brought them to production.",
+    "description": "Explore my contributions and technical decisions across SaaS products and web platforms.",
     "drawer_cta": "Explore All Projects",
     "sections": [
       {
@@ -822,8 +822,8 @@
   },
   "contact": {
     "title": "Let’s talk.",
-    "description": "Have an idea, a question, or something to share? Send me a note.",
-    "meta_description": "Contact Timurhan Kaya, software & AI engineer and Monafy tech co-founder in Istanbul, about a product, AI integration or collaboration.",
+    "description": "Have a project, a collaboration in mind, or a question? Get in touch and let’s explore what you need.",
+    "meta_description": "Contact Timurhan Kaya about software development, AI integrations or your product idea.",
     "email_label": "Email",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",

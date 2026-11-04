@@ -17,7 +17,7 @@ it('negotiates Turkish at the root and serves English without a prefix', functio
 
 it('keeps explicit route languages accessible regardless of browser or session preference', function () {
     $this->withSession(['locale' => 'en'])->withHeader('Accept-Language', 'en-US')->get('/tr/iletisim')
-        ->assertOk()->assertSee('<html lang="tr"', false)->assertSee('Bir soru, bir fikir ya da sadece tanışmak için.')->assertSessionHas('locale', 'tr');
+        ->assertOk()->assertSee('<html lang="tr"', false)->assertSee('Bir fikrin veya sorun varsa, seni dinlemek isterim.')->assertSessionHas('locale', 'tr');
     $this->get('/')->assertRedirect('/tr');
     $this->get('/contact')->assertOk()->assertSee('<html lang="en"', false)->assertSessionHas('locale', 'en');
 });

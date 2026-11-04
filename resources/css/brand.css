@@ -100,9 +100,6 @@
 .brand-project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
 /* Cards in a row share their height; the description absorbs the difference so the rules below line up. */
 .brand-project { min-width: 0; display: flex; flex-direction: column; position: relative; }
-.brand-project-link::after { content: ""; position: absolute; inset: 0; z-index: 2; }
-.brand-project-link { transition: color .2s; }
-.brand-project:has(.brand-project-link):hover .brand-project-link, .brand-project-link:focus-visible { color: var(--accent); }
 .brand-project-actions, .brand-project-visit { position: relative; z-index: 3; }
 .brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); height: 260px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; overflow: hidden; position: relative; }
 .brand-project-art.has-image { padding: 0; background: #151820; }

@@ -12,10 +12,10 @@ it('tells how Monafy was built and drops the hobby paragraph', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('yapay zekâ ajanlarıyla, kodu elle yazmadan geliştirdim')->not->toContain('%0,01')->not->toContain('Cloudflare')
+    expect($tr)->toContain('geliştirme sürecinde yapay zekâ araçlarından yararlanıyorum')->not->toContain('%0,01')->not->toContain('Cloudflare')
         ->toContain('Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum.')->not->toContain('İş dışında da üretmeyi seviyorum')
         ->not->toContain('finansal veri ve yapay zekâyla çalıştım')->not->toContain('arkadaşlarımla oynamak için yaptığım oyunlar')
-        ->and($en)->toContain('without writing the code by hand')->not->toContain('0.01%')
+        ->and($en)->toContain('use AI tools throughout development')->not->toContain('0.01%')
         ->toContain('At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day.')->not->toContain('I like making things outside work')
         ->not->toContain('Away from the screen');
     expect(preg_match('~<div class="brand-about-copy">\s*(?:<p>[^<]+</p>\s*)*<p>\s*</p>~', $tr))->toBe(0);
@@ -85,7 +85,7 @@ it('keeps the site copy short and plain', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('Ürünü tasarlıyor, AI ile geliştiriyorum.')
+    expect($tr)->toContain('İyi düşünülmüş ürünler geliştiriyorum.')
         ->toContain('Aynı zamanda Monafy’nin teknik kurucu ortağıyım.')
         ->toContain('İstanbul’da yazılım ve AI mühendisi, Monafy’de teknik kurucu ortağım. Finans piyasaları ve girişimcilikle ilgileniyorum.')
         ->toContain('İyi tasarlanmış, özenle işlenmiş ve kullanması kolay ürünler geliştiriyorum.')->not->toContain('aynı özeni gösteririm')
@@ -95,7 +95,7 @@ it('keeps the site copy short and plain', function () {
         ->not->toContain('Ürünü bir bütün olarak düşünürüm.')->not->toContain('sahada, su altında')
         ->not->toContain('Kod · Ürün · Merak')->not->toContain('Derin düşünme')->not->toContain('beni en çok heyecanlandıran')
         ->not->toContain('arkasındaki case study')
-        ->and($en)->toContain('I design products and build with AI.')->toContain('I am also the tech co-founder of Monafy,')
+        ->and($en)->toContain('I build thoughtfully considered products.')->toContain('I am also the tech co-founder of Monafy,')
         ->toContain('Software &amp; AI engineer in Istanbul and tech co-founder of Monafy. I follow financial markets and startups.')
         ->toContain('Careful engineering, lasting products.')
         ->not->toContain('small games to play with friends')->not->toContain('My own products, client work')
@@ -109,9 +109,9 @@ it('describes building with AI agents the way I actually work', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('Yapay zekâyla geliştirme')->toContain('Kodu yapay zekâ ajanlarıyla yazıyorum.')
+    expect($tr)->toContain('Yapay zekâyla geliştirme')->toContain('Yönü ve beklentileri ben belirler, ortaya çıkan işi inceler ve doğrularım.')
         ->not->toContain('Yapay zekâyla hız')->not->toContain('fikirleri hızlı denemek')
-        ->and($en)->toContain('Building with AI')->toContain('I write code with AI agents.')
+        ->and($en)->toContain('Building with AI')->toContain('I set the direction and expectations, then review and verify the resulting work.')
         ->not->toContain('Faster with AI')->not->toContain('to try ideas quickly');
 });
 
