@@ -99,8 +99,15 @@
 .brand-display { text-wrap: balance; font-family: var(--heading); font-weight: 500; font-size: clamp(36px, 4.8vw, 60px); line-height: 1.08; letter-spacing: -.055em; margin-top: 24px; }
 .brand-project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
 /* Cards in a row share their height; the description absorbs the difference so the rules below line up. */
-.brand-project { min-width: 0; display: flex; flex-direction: column; }
+.brand-project { min-width: 0; display: flex; flex-direction: column; position: relative; }
+.brand-project-link::after { content: ""; position: absolute; inset: 0; z-index: 2; }
+.brand-project-link { transition: color .2s; }
+.brand-project:has(.brand-project-link):hover .brand-project-link, .brand-project-link:focus-visible { color: var(--accent); }
+.brand-project-actions, .brand-project-visit { position: relative; z-index: 3; }
 .brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); height: 260px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; overflow: hidden; position: relative; }
+.brand-project-art.has-image { padding: 0; background: #151820; }
+.brand-project-art.has-image img { width: 100%; height: 100%; object-fit: contain; }
+.brand-project-art.has-image::after { display: none; }
 .brand-project-art-1 { background: #ff7a1a; color: #101012; }
 .brand-project-art-2 { background: #20242b; color: #e2e5eb; }
 .brand-project-art-3 { background: #111214; color: #ff8c38; border: 1px solid var(--line); }
@@ -282,8 +289,10 @@
     .brand-hero-intro { font-size: 16px; grid-column: 1; grid-row: 1; }
     .brand-emblem { grid-column: 2; grid-row: 1 / span 2; width: 65px; height: 65px; margin: 0; align-self: center; }
     .brand-hero-note .brand-text-link { justify-self: start; margin-top: 15px; }
-    .brand-hero-bottom { padding-block: 20px; }
+    .brand-hero-bottom { padding-block: 20px; flex-wrap: wrap; gap: 12px; }
     .brand-hero-bottom p { font-size: 11px; gap: 8px; }
+    .brand-hero-bottom p > span:last-child { white-space: nowrap; }
+    .brand-hero-bottom .brand-button { flex: none; white-space: nowrap; gap: 10px; }
     .brand-button { padding-inline: 14px; gap: 20px; font-size: 13px; }
     .brand-site { --section-space: 65px; }
     .brand-section-heading { display: block; margin-bottom: 25px; }

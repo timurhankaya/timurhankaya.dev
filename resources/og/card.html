@@ -26,6 +26,19 @@ html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--p
 .logo span { color: var(--accent); }
 .byline { font: 400 22px/1 'Geist', sans-serif; color: var(--muted); }
 .byline strong { color: var(--ink); font-weight: 500; }
+.card[data-game] .middle { max-width: 690px; position: relative; z-index: 1; }
+.card[data-game] .title { font-size: 72px; }
+.card[data-game] .subtitle { font-size: 25px; }
+.game-art { position: absolute; right: 70px; top: 175px; width: 310px; height: 250px; }
+.fan-card { position: absolute; top: 32px; left: 105px; width: 110px; height: 160px; display: grid; place-items: center; border: 1px solid #555b66; background: #22252b; color: #e4e8ef; border-radius: 4px; font: 54px/1 'IBM Plex Mono', monospace; box-shadow: 0 12px 30px #0008; }
+.fan-card:nth-child(1) { transform: translateX(-75px) rotate(-16deg); }
+.fan-card:nth-child(2) { transform: translateY(-12px) rotate(2deg); }
+.fan-card:nth-child(3) { transform: translateX(75px) rotate(18deg); background: var(--accent); color: #101012; border-color: var(--accent); }
+.night-art { overflow: hidden; border: 1px solid #292b30; background: radial-gradient(120% 70% at 50% 118%, #7a0f1d, #2a0810 38%, transparent 70%), #08090c; }
+.night-art::before { content: ""; position: absolute; top: 35px; right: 52px; width: 95px; height: 95px; border-radius: 50%; box-shadow: -23px 13px 0 #c9d4ea; transform: rotate(-14deg); }
+.night-art::after { content: "✦     ✦"; position: absolute; top: 50px; left: 45px; color: #c9d4ea; font-size: 20px; letter-spacing: 25px; }
+.night-village { position: absolute; bottom: 0; width: 100%; height: 70px; fill: #050506; }
+.card[data-game="games"] .game-art { transform: scale(.82); transform-origin: center; }
 </style>
 </head>
 <body>
@@ -39,6 +52,18 @@ html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--p
 window.render = async (card) => {
     // The language decides capitals: Turkish uppercases i to İ.
     document.documentElement.lang = card.lang;
+    const surface = document.querySelector('.card');
+    surface.removeAttribute('data-game');
+    surface.querySelector('.game-art')?.remove();
+    if (['games', 'imposter', 'vampire'].includes(card.kind)) {
+        surface.dataset.game = card.kind;
+        const art = document.createElement('div');
+        art.className = 'game-art' + (card.kind === 'vampire' ? ' night-art' : '');
+        art.innerHTML = card.kind === 'vampire'
+            ? '<svg class="night-village" viewBox="0 0 320 64" preserveAspectRatio="none"><path d="M0 64V44h22V30l14-12 14 12v14h18V36l10-8 10 8v8h26V22l18-16 18 16v22h20V34l12-10 12 10v10h22V28l16-14 16 14v16h24V38l9-7 9 7v6h20v20Z"/></svg>'
+            : '<span class="fan-card">?</span><span class="fan-card">?</span><span class="fan-card">!</span>';
+        surface.append(art);
+    }
     const number = document.querySelector('.label b');
     number.textContent = card.number ? card.number + ' /' : '';
     number.hidden = !card.number;

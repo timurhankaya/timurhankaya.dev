@@ -1,9 +1,7 @@
 <?php
 
-use App\Enums\ImposterRoomStatus;
 use App\Services\Imposter\ImposterRoomService;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 uses(TestCase::class);
@@ -13,7 +11,7 @@ beforeEach(function () {
 });
 
 afterEach(function () {
-    \Mockery::close();
+    Mockery::close();
 });
 
 function makeRoom(ImposterRoomService $rooms, string $host = 'Host', ?string $password = null): array
@@ -115,14 +113,13 @@ describe('createRoom', function () {
         $thrown = null;
         try {
             $rooms->createRoom('Gambler');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $thrown = $e;
         }
 
         expect($thrown)->toBeNull();
     });
 });
-
 
 // ─── getRoom ─────────────────────────────────────────────────────────────────
 
@@ -170,7 +167,7 @@ describe('joinRoom', function () {
         $rooms->startGame($created['code'], $created['hostPlayerId']);
 
         expect(fn () => $rooms->joinRoom($created['code'], 'Late'))
-            ->toThrow(\InvalidArgumentException::class, 'game_started');
+            ->toThrow(InvalidArgumentException::class, 'game_started');
     });
 
     it('throws InvalidArgumentException wrong_password when password is incorrect', function () {
@@ -178,7 +175,7 @@ describe('joinRoom', function () {
         $created = makeRoom($rooms, 'Host', 'correct');
 
         expect(fn () => $rooms->joinRoom($created['code'], 'Cheater', 'wrong'))
-            ->toThrow(\InvalidArgumentException::class, 'wrong_password');
+            ->toThrow(InvalidArgumentException::class, 'wrong_password');
     });
 
     it('succeeds with correct password', function () {

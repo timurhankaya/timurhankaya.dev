@@ -42,7 +42,7 @@
     <header id="home" class="brand-hero">
         <div class="brand-hero-top brand-label">
             <span>{{ __('brand.personal') }}</span>
-            <span>{{ __('brand.based') }} <x-arrow /></span>
+            <span>{{ __('brand.based') }}</span>
         </div>
         <div class="brand-hero-grid">
             <h1 class="brand-name">Timurhan<br><span>Kaya<span class="brand-period">.</span></span></h1>

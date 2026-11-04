@@ -1,16 +1,22 @@
 @props(['item', 'number' => 0, 'featured' => false])
 @php
     $dialogId = 'project-'.substr(sha1(data_get($item, 'name').$number), 0, 12);
+    $projectUrl = !data_get($item, 'archived', false) ? data_get($item, 'url') : null;
+    $projectImage = ['monafy' => 'images/projects/monafy-og.webp', 'transiyzi' => 'images/projects/transiyzi-og.png'][data_get($item, 'key')] ?? null;
 @endphp
 <article class="brand-project {{ $featured ? 'brand-project-featured' : '' }}">
     @if ($featured)
-        <div class="brand-project-art brand-project-art-{{ (($number - 1) % 3) + 1 }}" aria-hidden="true">
+        <div class="brand-project-art brand-project-art-{{ (($number - 1) % 3) + 1 }} {{ $projectImage ? 'has-image' : '' }}" aria-hidden="true">
+            @if ($projectImage)
+                <img src="{{ asset($projectImage) }}" alt="" width="1200" height="630" loading="lazy" decoding="async">
+            @else
             <span class="brand-project-art-label">{{ data_get($item, 'badge') }} / {{ data_get($item, 'year') }}</span>
             <span class="brand-project-word">{{ data_get($item, 'name') }}</span>
             <span class="brand-project-art-bottom"><span>TKAYA / {{ str_pad((string) $number, 2, '0', STR_PAD_LEFT) }}</span><span aria-hidden="true"><x-arrow /></span></span>
+            @endif
         </div>
     @endif
-    <div class="brand-project-heading"><h3>{{ data_get($item, 'name') }}</h3><span class="brand-label">{{ data_get($item, 'year') }}</span></div>
+    <div class="brand-project-heading"><h3>@if ($projectUrl)<a class="brand-project-link" href="{{ $projectUrl }}" target="_blank" rel="noopener noreferrer">{{ data_get($item, 'name') }}</a>@else{{ data_get($item, 'name') }}@endif</h3><span class="brand-label">{{ data_get($item, 'year') }}</span></div>
     <p class="brand-project-description">{{ data_get($item, 'description') }}</p>
     <div class="brand-project-actions">
         @if (data_get($item, 'highlights'))
@@ -23,9 +29,6 @@
             </dialog>
         @endif
     </div>
-    @if (data_get($item, 'url') && !data_get($item, 'archived', false))
-        <a class="brand-project-visit" href="{{ data_get($item, 'url') }}" target="_blank" rel="noopener noreferrer">{{ __('brand.visit') }} <span class="sr-only">— {{ data_get($item, 'name') }}</span><x-arrow /></a>
-    @endif
     @foreach ((array) data_get($item, 'links', []) as $link)
         <a class="brand-project-visit" href="{{ data_get($link, 'url') }}" target="_blank" rel="noopener noreferrer">{{ data_get($link, 'label') }} <x-arrow /></a>
     @endforeach

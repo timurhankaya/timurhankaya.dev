@@ -27,16 +27,16 @@ enum VampireRoomStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Loading         => 'Yükleniyor',
-            self::Missing        => 'Bulunamadı',
-            self::Lobby           => 'Lobi',
-            self::Night           => 'Gece',
-            self::Dawn            => 'Şafak',
-            self::HunterLastShot  => 'Avcı Son Atış',
-            self::Day             => 'Gündüz',
-            self::DayVoting       => 'Gündüz - Oy',
-            self::DayResults      => 'Gündüz - Sonuç',
-            self::GameOver        => 'Oyun Bitti',
+            self::Loading => 'Yükleniyor',
+            self::Missing => 'Bulunamadı',
+            self::Lobby => 'Lobi',
+            self::Night => 'Gece',
+            self::Dawn => 'Şafak',
+            self::HunterLastShot => 'Avcı Son Atış',
+            self::Day => 'Gündüz',
+            self::DayVoting => 'Gündüz - Oy',
+            self::DayResults => 'Gündüz - Sonuç',
+            self::GameOver => 'Oyun Bitti',
         };
     }
 

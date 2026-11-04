@@ -82,7 +82,7 @@ return [
                     'Building large-scale products and high-performance systems for millions of daily users',
                     'Architecting microservices and integrating complex APIs to power next-gen insurance and fintech experiences',
                     'Designing solid comparison and reservation systems that users can rely on every day',
-                    'Moving platforms forward on speed, scalability, and modern backend standards'
+                    'Moving platforms forward on speed, scalability, and modern backend standards',
                 ],
             ],
             [
