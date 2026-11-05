@@ -2,7 +2,14 @@
 @php
     $dialogId = 'project-'.substr(sha1(data_get($item, 'name').$number), 0, 12);
     $projectUrl = !data_get($item, 'archived', false) ? data_get($item, 'url') : null;
-    $projectImage = ['monafy' => 'images/projects/monafy-og.webp', 'transiyzi' => 'images/projects/transiyzi-og.png'][data_get($item, 'key')] ?? null;
+    $projectImage = [
+        'monafy' => 'images/projects/monafy-og.webp',
+        'moneo-render' => 'images/projects/dynorender.webp',
+        'transiyzi' => 'images/projects/transiyzi.webp',
+        'smart-global' => 'images/projects/smart-global.webp',
+        'edanisman' => 'images/projects/edanisman.webp',
+        'word-imposter' => app()->getLocale() === 'tr' ? 'og-imposter-tr.png' : 'og-imposter.png',
+    ][data_get($item, 'key')] ?? null;
 @endphp
 <article class="brand-project {{ $featured ? 'brand-project-featured' : '' }}">
     @if ($featured)
@@ -16,7 +23,7 @@
             @endif
         </div>
     @endif
-    <div class="brand-project-heading"><h3>{{ data_get($item, 'name') }}</h3><span class="brand-label">{{ data_get($item, 'year') }}</span></div>
+    <div class="brand-project-heading"><h3>@if ($projectUrl)<a class="brand-project-link" href="{{ $projectUrl }}" target="_blank" rel="noopener noreferrer" aria-label="{{ __('brand.visit') }} — {{ data_get($item, 'name') }}">{{ data_get($item, 'name') }}</a>@else{{ data_get($item, 'name') }}@endif</h3><span class="brand-label">{{ data_get($item, 'year') }}</span></div>
     <p class="brand-project-description">{{ data_get($item, 'description') }}</p>
     <div class="brand-project-actions">
         @if (data_get($item, 'highlights'))
@@ -29,9 +36,6 @@
             </dialog>
         @endif
     </div>
-    @if ($projectUrl)
-        <a class="brand-project-visit" href="{{ $projectUrl }}" target="_blank" rel="noopener noreferrer" aria-label="{{ __('brand.visit') }} — {{ data_get($item, 'name') }}">{{ __('brand.visit') }} <x-arrow /></a>
-    @endif
     @foreach ((array) data_get($item, 'links', []) as $link)
         <a class="brand-project-visit" href="{{ data_get($link, 'url') }}" target="_blank" rel="noopener noreferrer">{{ data_get($link, 'label') }} <x-arrow /></a>
     @endforeach

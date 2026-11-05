@@ -97,11 +97,14 @@
 .brand-work-intro { max-width: 620px; margin-top: 13px; color: var(--muted); font-size: 14px; line-height: 1.75; }
 .brand-section-number { color: var(--accent); margin-right: 18px; }
 .brand-display { text-wrap: balance; font-family: var(--heading); font-weight: 500; font-size: clamp(36px, 4.8vw, 60px); line-height: 1.08; letter-spacing: -.055em; margin-top: 24px; }
-.brand-project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
+.brand-project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 25px; }
 /* Cards in a row share their height; the description absorbs the difference so the rules below line up. */
 .brand-project { min-width: 0; display: flex; flex-direction: column; position: relative; }
-.brand-project-actions, .brand-project-visit { position: relative; z-index: 3; }
-.brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); height: 260px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; overflow: hidden; position: relative; }
+.brand-project-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.brand-project-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.brand-project:has(.brand-project-link):hover h3 { color: var(--accent); }
+.brand-project-actions, .brand-project-visit { position: relative; z-index: 2; }
+.brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); aspect-ratio: 1200 / 630; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; overflow: hidden; position: relative; }
 .brand-project-art.has-image { padding: 0; background: #151820; }
 .brand-project-art.has-image img { width: 100%; height: 100%; object-fit: contain; }
 .brand-project-art.has-image::after { display: none; }
@@ -262,7 +265,7 @@
 @media (max-width: 1000px) {
     .brand-hero-grid { grid-template-columns: 1fr 240px; gap: 30px; }
     .brand-name { font-size: clamp(76px, 10.6vw, 125px); }
-    .brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); height: 220px; padding: 18px; }
+    .brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); padding: 18px; }
     .brand-project-word { font-size: 28px; }
     .brand-project-art-3 .brand-project-word { font-size: 42px; }
     .brand-project-art-label { font-size: 11px; }
@@ -295,7 +298,7 @@
     .brand-section-heading { display: block; margin-bottom: 25px; }
     .brand-section-heading > p { margin-top: 17px; max-width: 360px; }
     .brand-project-grid { grid-template-columns: 1fr; gap: 32px; }
-    .brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); height: 260px; padding: 25px; }
+    .brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); padding: 25px; }
     .brand-project-word { font-size: 42px; }
     .brand-project-art-label { font-size: 11px; }
     .brand-project-heading h3 { font-size: 20px; }

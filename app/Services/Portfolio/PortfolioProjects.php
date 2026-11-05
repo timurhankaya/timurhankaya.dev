@@ -21,7 +21,7 @@ final class PortfolioProjects
 
     public function featured(): array
     {
-        $keys = ['monafy', 'moneo-render', 'transiyzi'];
+        $keys = ['monafy', 'moneo-render', 'transiyzi', 'smart-global', 'edanisman', 'word-imposter'];
         $projects = collect($this->sections())->flatMap(fn (array $section): array => $section['items'])->keyBy('key');
 
         return collect($keys)->map(fn (string $key) => $projects->get($key))->filter()->values()->all();

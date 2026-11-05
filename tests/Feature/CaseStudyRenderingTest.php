@@ -60,8 +60,24 @@ it('publishes an anonymous case study without a period and shows no empty year',
 it('features only the strongest projects on the home page', function () {
     $keys = collect(app(PortfolioProjects::class)->featured())->pluck('key')->all();
 
-    expect($keys)->toBe(['monafy', 'moneo-render', 'transiyzi']);
+    expect($keys)->toBe(['monafy', 'moneo-render', 'transiyzi', 'smart-global', 'edanisman', 'word-imposter']);
 });
+
+it('keeps each featured project link separate from its contribution dialog', function (string $path, string $gameUrl) {
+    $html = $this->get($path)->assertOk()->getContent();
+    $dom = new DOMDocument;
+    @$dom->loadHTML($html);
+    $xpath = new DOMXPath($dom);
+    $cards = $xpath->query('//article[contains(concat(" ", normalize-space(@class), " "), " brand-project-featured ")]');
+
+    expect($cards->length)->toBe(6);
+    foreach ($cards as $card) {
+        expect($xpath->query('.//a[contains(concat(" ", normalize-space(@class), " "), " brand-project-link ")]', $card)->length)->toBe(1)
+            ->and($xpath->query('.//button[@data-project-dialog-open]', $card)->length)->toBe(1)
+            ->and($xpath->query('.//a//button', $card)->length)->toBe(0);
+    }
+    expect($html)->toContain('href="'.$gameUrl.'"');
+})->with([['/tr', 'https://timurhankaya.dev/tr/oyunlar/kelime-casusu'], ['/', 'https://timurhankaya.dev/games/imposter']]);
 
 it('lists Monafy first and labels anonymous work by its public name', function () {
     caseStudy(['slug' => 'game-story', 'project_key' => 'vampir-koylu', 'published_at' => now()->subDays(3), 'case_meta' => ['project_name' => 'Vampir Köylü', 'context' => 'personal', 'period' => '2026']]);
