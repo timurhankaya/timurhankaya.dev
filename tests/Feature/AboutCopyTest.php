@@ -85,17 +85,17 @@ it('keeps the site copy short and plain', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('İyi düşünülmüş ürünler geliştiriyorum.')
+    expect($tr)->toContain('Bir fikri sağlam bir ürüne dönüştürmek.')
         ->toContain('Aynı zamanda Monafy’nin teknik kurucu ortağıyım.')
         ->toContain('İstanbul’da yazılım ve AI mühendisi, Monafy’de teknik kurucu ortağım. Finans piyasaları ve girişimcilikle ilgileniyorum.')
-        ->toContain('İyi tasarlanmış, özenle işlenmiş ve kullanması kolay ürünler geliştiriyorum.')->not->toContain('aynı özeni gösteririm')
+        ->toContain('Önce problemi ve ürünü kullanacak insanları anlamaya çalışırım.')->not->toContain('aynı özeni gösteririm')
         ->toContain('Özenli mühendislik, kalıcı ürünler.')
         ->not->toContain('Boş zamanlarımda arkadaşlarla')->not->toContain('Kendi ürünlerim, müşteri işleri')
         ->not->toContain('brand-craft-line')->not->toContain('Finans ve yeni iş fikirleriyle')->not->toContain('İnce işçilik, güzel ürünler.')
         ->not->toContain('Ürünü bir bütün olarak düşünürüm.')->not->toContain('sahada, su altında')
         ->not->toContain('Kod · Ürün · Merak')->not->toContain('Derin düşünme')->not->toContain('beni en çok heyecanlandıran')
         ->not->toContain('arkasındaki case study')
-        ->and($en)->toContain('I build thoughtfully considered products.')->toContain('I am also the tech co-founder of Monafy,')
+        ->and($en)->toContain('Turning an idea into a solid product.')->toContain('I am also the tech co-founder of Monafy,')
         ->toContain('Software &amp; AI engineer in Istanbul and tech co-founder of Monafy. I follow financial markets and startups.')
         ->toContain('Careful engineering, lasting products.')
         ->not->toContain('small games to play with friends')->not->toContain('My own products, client work')
