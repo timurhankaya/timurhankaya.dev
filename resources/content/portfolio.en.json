@@ -142,10 +142,10 @@
         "meta": "Full-time · Hybrid · Istanbul, Türkiye",
         "period": "Oct 2024 - Present",
         "bullets": [
-          "Developing insurance products on a high-traffic comparison platform",
-          "Working on service integrations and APIs for insurance and payment flows",
-          "Improving the comparison and purchase flows customers use every day",
-          "Working on backend performance and code quality"
+          "Developing insurance comparison and purchase flows and building AI solutions for insurance",
+          "Taking an active role in company AI initiatives and AI-DLC processes",
+          "Working on service integrations and APIs for insurance and payment processes",
+          "Focusing on performance, reliability and code quality in production systems"
         ]
       },
       {
@@ -154,11 +154,11 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Oct 2020 - Oct 2024 · 4 yrs 1 mo",
         "bullets": [
-          "Built award-winning insurance sales platforms with thousands of active users",
-          "Worked on insurer integrations and ERP and CRM connections for health insurance products",
-          "Developed and maintained SaaS products such as Kommunity, Transiyzi and Dynorender with Laravel, Vue.js and RabbitMQ",
-          "Turned Figma designs into responsive interfaces",
-          "Mentored junior developers and contributed to technical decisions"
+          "Contributed to the development of insurance sales and comparison platforms",
+          "Built insurer integrations and ERP and CRM connections for health insurance products",
+          "Turned business needs into responsive interfaces and working product features",
+          "Worked on the development and maintenance of production applications",
+          "Mentored junior developers and contributed to technical decisions within the team"
         ]
       },
       {
@@ -167,9 +167,9 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Jun 2019 - Oct 2020 · 1 yr 5 mos",
         "bullets": [
-          "Started web development on live client projects",
-          "Built features alongside senior developers on the same projects",
-          "Learned to write clean code and to work in an agile team"
+          "Contributed to web application development on client projects",
+          "Built product features alongside senior developers",
+          "Gained experience in code quality and collaborative development practices"
         ]
       }
     ]

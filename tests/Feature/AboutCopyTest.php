@@ -138,18 +138,26 @@ it('sets the about column text and chips at a readable size', function () {
         ->and($size('.brand-about-focus .brand-text-link'))->toBeGreaterThanOrEqual(14);
 });
 
-it('words the experience bullets plainly, without claiming to have led', function () {
+it('presents AI work and experience in both languages', function () {
+    $en = $this->get('/')->assertOk()->getContent().$this->get('/cv')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent().$this->get('/tr/ozgecmis')->assertOk()->getContent();
-    $en = $this->get('/cv')->assertOk()->getContent();
 
-    expect($tr)->toContain('Binlerce aktif kullanıcısı olan, ödüllü sigorta satış platformları geliştirdim')
-        ->toContain('Kommunity, Transiyzi ve Dynorender gibi SaaS ürünlerinde')->toContain('Kıdemli geliştiricilerle aynı projelerde özellik geliştirdim')
-        ->not->toContain('aktif rol aldım')->not->toContain('teknik kararları yönlendirdim')->not->toContain('yüksek performanslı')
-        ->not->toContain('öncülük ettim')->not->toContain('yaşam döngüsünü yönettim')->not->toContain('gerçek dünya projeleriyle')
-        ->not->toContain('best practice')->not->toContain('öğrenerek hızlandım')
-        ->and($en)->toContain('Built award-winning insurance sales platforms with thousands of active users')->not->toContain('Actively contributed')->not->toContain('high-performance')
-        ->not->toContain('Led the development')->not->toContain('Managed the lifecycle')->not->toContain('real-world projects');
+    expect($tr)->toContain('sigorta alanında yapay zekâ çözümleri üretiyorum')
+        ->toContain('AI-DLC süreçlerinde aktif rol alıyorum')
+        ->toContain('Genç geliştiricilere mentorluk yaptım')
+        ->not->toContain('Kommunity, Transiyzi ve Dynorender gibi SaaS ürünlerinde')
+        ->and($en)->toContain('building AI solutions for insurance')
+        ->toContain('AI-DLC processes')
+        ->toContain('Mentored junior developers')
+        ->not->toContain('SaaS products such as Kommunity, Transiyzi and Dynorender');
 });
+
+it('places services before games in both languages', function (string $path, string $services, string $games) {
+    $html = $this->get($path)->assertOk()->getContent();
+    expect(strpos($html, $services))->not->toBeFalse()
+        ->and(strpos($html, $games))->not->toBeFalse()
+        ->and(strpos($html, $services))->toBeLessThan(strpos($html, $games));
+})->with([['/', 'Let’s work together.', 'Made for game night.'], ['/tr', 'Birlikte çalışalım.', 'Oyun geceleri için.']]);
 
 it('keeps the games section short and descriptive', function () {
     $tr = $this->get('/tr')->assertOk()->getContent();

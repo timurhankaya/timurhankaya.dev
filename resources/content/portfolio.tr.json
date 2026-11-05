@@ -142,10 +142,10 @@
         "meta": "Tam zamanlı · Hibrit · İstanbul, Türkiye",
         "period": "Ekim 2024 - Şu An",
         "bullets": [
-          "Yüksek trafikli bir karşılaştırma platformunda sigorta ürünleri geliştiriyorum",
-          "Sigorta ve ödeme akışları için servis entegrasyonları ve API'ler üzerinde çalışıyorum",
-          "Müşterilerin her gün kullandığı karşılaştırma ve satın alma akışlarını iyileştiriyorum",
-          "Backend tarafında performans ve kod kalitesi üzerinde çalışıyorum"
+          "Sigorta karşılaştırma ve satın alma akışlarını geliştiriyor, sigorta alanında yapay zekâ çözümleri üretiyorum",
+          "Şirket içindeki yapay zekâ çalışmalarında ve AI-DLC süreçlerinde aktif rol alıyorum",
+          "Sigorta ve ödeme süreçlerini destekleyen servis entegrasyonları ve API’ler üzerinde çalışıyorum",
+          "Canlı sistemlerde performans, güvenilirlik ve kod kalitesini iyileştirmeye odaklanıyorum"
         ]
       },
       {
@@ -154,11 +154,11 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Ekim 2020 - Ekim 2024 · 4 yıl 1 ay",
         "bullets": [
-          "Binlerce aktif kullanıcısı olan, ödüllü sigorta satış platformları geliştirdim",
-          "Sağlık sigortası ürünlerinde sigorta şirketi entegrasyonları, ERP ve CRM bağlantıları üzerinde çalıştım",
-          "Kommunity, Transiyzi ve Dynorender gibi SaaS ürünlerinde Laravel, Vue.js ve RabbitMQ ile geliştirme ve bakım yaptım",
-          "Figma tasarımlarını responsive arayüzlere dönüştürdüm",
-          "Junior geliştiricilere mentorluk yaptım ve teknik kararlara katkı verdim"
+          "Sigorta satış ve karşılaştırma platformlarının geliştirilmesine katkı sağladım",
+          "Sağlık sigortası ürünlerinde sigorta şirketi entegrasyonları ile ERP ve CRM bağlantıları geliştirdim",
+          "İş ihtiyaçlarını farklı ekranlara uyumlu arayüzlere ve çalışan ürün özelliklerine dönüştürdüm",
+          "Canlı uygulamaların geliştirme ve bakım süreçlerinde yer aldım",
+          "Genç geliştiricilere mentorluk yaptım ve ekip içindeki teknik kararlara katkıda bulundum"
         ]
       },
       {
@@ -167,9 +167,9 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Haziran 2019 - Ekim 2020 · 1 yıl 5 ay",
         "bullets": [
-          "Web geliştirmeye canlıdaki müşteri projelerinde başladım",
-          "Kıdemli geliştiricilerle aynı projelerde özellik geliştirdim",
-          "Temiz kod yazmayı ve çevik bir ekipte çalışmayı öğrendim"
+          "Müşteri projelerinde web uygulamalarının geliştirilmesine katkı sağladım",
+          "Kıdemli geliştiricilerle birlikte ürün özellikleri geliştirdim",
+          "Kod kalitesi ve ekip içi çalışma pratikleri konusunda deneyim kazandım"
         ]
       }
     ]

@@ -131,20 +131,9 @@
         <a class="brand-text-link brand-cv-link" href="{{ \App\Support\Seo::route('cv') }}" target="_blank" rel="noopener">{{ __('brand.cv') }} <x-arrow /></a>
     </section>
 
-    <section {!! \App\Support\Anchors::attributes('games') !!} class="brand-section">
-        <div class="brand-section-heading">
-            <div>
-                <p class="brand-label"><span class="brand-section-number">04 /</span> {{ __('portfolio.nav.games') }}</p>
-                <h2 class="brand-display">{{ __('brand.games') }}</h2>
-            </div>
-            <p>{{ __('brand.games_intro') }}</p>
-        </div>
-        @include('partials.brand-games')
-    </section>
-
     <section {!! \App\Support\Anchors::attributes('work-together') !!} class="brand-section brand-services">
         <div class="brand-section-heading">
-            <div><p class="brand-label"><span class="brand-section-number">05 /</span> {{ __('brand.services_label') }}</p><h2 class="brand-display">{{ __('brand.work_together') }}</h2></div>
+            <div><p class="brand-label"><span class="brand-section-number">04 /</span> {{ __('brand.services_label') }}</p><h2 class="brand-display">{{ __('brand.work_together') }}</h2></div>
             <p>{{ __('brand.services_intro') }}</p>
         </div>
         <div class="brand-services-grid">
@@ -153,6 +142,17 @@
             @endforeach
         </div>
         <div class="brand-services-bottom"><p>{{ __('brand.project_invite') }}</p><a class="brand-button" href="{{ \App\Support\Seo::route('contact', ['topic' => 'project']) }}#form">{{ __('brand.project_cta') }} <x-arrow /></a></div>
+    </section>
+
+    <section {!! \App\Support\Anchors::attributes('games') !!} class="brand-section">
+        <div class="brand-section-heading">
+            <div>
+                <p class="brand-label"><span class="brand-section-number">05 /</span> {{ __('portfolio.nav.games') }}</p>
+                <h2 class="brand-display">{{ __('brand.games') }}</h2>
+            </div>
+            <p>{{ __('brand.games_intro') }}</p>
+        </div>
+        @include('partials.brand-games')
     </section>
 
     <section {!! \App\Support\Anchors::attributes('contact') !!} class="brand-section brand-contact">
