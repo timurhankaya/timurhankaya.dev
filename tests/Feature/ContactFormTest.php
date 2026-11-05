@@ -112,3 +112,32 @@ it('keeps contact requests away from anyone who is not an administrator', functi
 
     Livewire::test(ListContactRequests::class)->assertForbidden();
 });
+
+it('provides direct contact and associated message guidance in both languages', function (string $page, string $heading, string $guidance) {
+    $html = $this->get($page)->assertOk()->getContent();
+
+    expect($html)->toContain($heading)->toContain('href="mailto:kayacekovic@gmail.com"')
+        ->toContain('aria-describedby="message-hint"')->toContain('id="message-hint"')->toContain($guidance);
+})->with([
+    ['/tr/iletisim', 'Konuşalım', '20–5.000 karakter.'],
+    ['/contact', 'Let’s talk', '20–5,000 characters.'],
+]);
+
+it('renders a focusable error summary and associates message and service errors', function () {
+    $page = '/tr/iletisim?topic=project';
+    $this->from($page)->post(route('contact.store'), contactPayload(['services' => ['invalid'], 'message' => 'kısa']))
+        ->assertRedirect($page)->assertSessionHasErrors(['services.0', 'message']);
+
+    $html = $this->get($page)->assertOk()->getContent();
+    expect($html)->toContain('role="alert" tabindex="-1" data-form-feedback')
+        ->toContain('aria-describedby="message-hint message-error"')
+        ->toContain('aria-describedby="services-error"')->toContain('id="services-error"')
+        ->toContain('value="Örnek A.Ş."')->toContain('>kısa</textarea>');
+});
+
+it('keeps every supported topic preselection and rejects an unknown topic', function (string $query, string $selected) {
+    $html = $this->get('/contact?topic='.$query)->assertOk()->getContent();
+    expect($html)->toMatch('/<input type="radio" name="topic" value="'.$selected.'" checked/');
+})->with([
+    ['project', 'project'], ['partnership', 'partnership'], ['job', 'job'], ['other', 'other'], ['unknown', 'other'],
+]);

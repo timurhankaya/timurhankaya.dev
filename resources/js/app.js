@@ -839,4 +839,7 @@ document.querySelectorAll('[data-contact-form]').forEach((form) => {
     const sync = () => { project.hidden = form.querySelector('input[name="topic"]:checked')?.value !== 'project'; };
     form.addEventListener('change', (event) => { if (event.target.name === 'topic') sync(); });
     sync();
+    // Wait for native #form navigation to finish before focusing the server response.
+    const feedback = form.querySelector('[data-form-feedback]');
+    if (feedback) window.addEventListener('pageshow', () => feedback.focus(), { once: true });
 });
