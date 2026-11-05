@@ -43,11 +43,6 @@
 
 @section('content')
     <x-breadcrumbs :trail="$trail" />
-    <header class="brand-page-header brand-contact-header">
-        <p class="brand-label">{{ __('brand.contact_page') }}</p>
-        <h1 class="brand-display">{{ __('brand.contact') }}</h1>
-        <p>{{ __('brand.contact_intro') }}</p>
-    </header>
     @php
         // The project call to action preselects its topic; a failed submit keeps what was chosen.
         $topic = old('topic', in_array(request('topic'), \App\Models\ContactRequest::TOPICS, true) ? request('topic') : 'other');
@@ -55,22 +50,25 @@
         $field = fn (string $name): string => $errors->has($name) ? ' aria-invalid="true" aria-describedby="'.$name.'-error"' : '';
     @endphp
     <div class="brand-contact-page">
-        <div class="brand-contact-intro">
-            <div class="brand-form-head"><h2>{{ __('brand.form_title') }}</h2><p>{{ __('brand.form_intro') }}</p></div>
+        <header class="brand-contact-intro">
+            <p class="brand-label brand-contact-eyebrow">{{ __('brand.contact_page') }} <span aria-hidden="true">/ 01</span></p>
+            <h1 class="brand-display">{{ __('brand.contact') }}</h1>
+            <p class="brand-contact-lead">{{ __('brand.contact_intro') }}</p>
             <span class="brand-contact-mark" aria-hidden="true"><x-arrow dir="se" /></span>
-        </div>
+        </header>
         <form id="form" class="brand-form" method="POST" action="{{ route('contact.store') }}" data-contact-form>
             @csrf
             <input type="hidden" name="locale" value="{{ app()->getLocale() }}">
             <input type="hidden" name="started" value="{{ encrypt(now()->timestamp) }}">
             <div class="brand-form-trap" aria-hidden="true"><label>Website <input type="text" name="website" value="" tabindex="-1" autocomplete="off"></label></div>
+            <div class="brand-form-head"><h2>{{ __('brand.form_title') }}</h2><p>{{ __('brand.form_intro') }}</p></div>
             @if (session('contact_sent'))
                 <div class="brand-form-sent" role="status"><p>{{ __('brand.form_sent') }}</p><p>{{ __('brand.form_sent_body') }}</p></div>
             @endif
             @if ($errors->any())
                 <p class="brand-form-alert" role="alert">{{ __('brand.form_errors') }}</p>
             @endif
-            <fieldset class="brand-contact-topic">
+            <fieldset class="brand-contact-topic" @error('topic') aria-describedby="topic-error" @enderror>
                 <legend class="brand-label">{{ __('brand.form_topic') }}</legend>
                 <div class="brand-contact-topics">
                     @foreach (__('brand.form_topics') as $value => $label)
@@ -92,9 +90,11 @@
                         <label class="brand-chip"><input type="checkbox" name="services[]" value="{{ $value }}" @checked(in_array($value, $services, true))><span>{{ $label }}</span></label>
                     @endforeach
                 </div>
+                @error('services')<p class="brand-form-error" role="alert">{{ $message }}</p>@enderror
+                @error('services.*')<p class="brand-form-error" role="alert">{{ $message }}</p>@enderror
                 <div class="brand-form-row">
                     <label class="brand-field"><span class="brand-label">{{ __('brand.form_budget') }}</span><input type="text" name="budget" value="{{ old('budget') }}" maxlength="120" placeholder="{{ __('brand.form_budget_hint') }}"{!! $field('budget') !!}>@error('budget')<span class="brand-form-error" id="budget-error">{{ $message }}</span>@enderror</label>
-                    <label class="brand-field"><span class="brand-label">{{ __('brand.form_timeline') }}</span><select name="timeline"><option value="">—</option>@foreach (__('brand.form_timelines') as $value => $label)<option value="{{ $value }}" @selected(old('timeline') === $value)>{{ $label }}</option>@endforeach</select></label>
+                    <label class="brand-field"><span class="brand-label">{{ __('brand.form_timeline') }}</span><select name="timeline"{!! $field('timeline') !!}><option value="">—</option>@foreach (__('brand.form_timelines') as $value => $label)<option value="{{ $value }}" @selected(old('timeline') === $value)>{{ $label }}</option>@endforeach</select>@error('timeline')<span class="brand-form-error" id="timeline-error">{{ $message }}</span>@enderror</label>
                 </div>
             </fieldset>
             <label class="brand-field"><span class="brand-label">{{ __('brand.form_message') }}</span><textarea name="message" rows="7" minlength="20" maxlength="5000" placeholder="{{ __('brand.form_message_hint') }}" required{!! $field('message') !!}>{{ old('message') }}</textarea>@error('message')<span class="brand-form-error" id="message-error">{{ $message }}</span>@enderror</label>

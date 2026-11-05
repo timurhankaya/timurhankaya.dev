@@ -51,6 +51,17 @@ it('explains what is missing in the visitor’s language and keeps what they typ
     expect(ContactRequest::count())->toBe(0);
 })->with([['tr', '/tr/iletisim', 'Adını yaz.'], ['en', '/contact', 'Tell me your name.']]);
 
+it('shows project detail validation errors and keeps the chosen topic', function () {
+    $page = '/tr/iletisim?topic=project';
+    $this->from($page)->post(route('contact.store'), contactPayload(['timeline' => 'invalid', 'services' => ['invalid']]))
+        ->assertRedirect($page)->assertSessionHasErrors(['timeline', 'services.0']);
+
+    $html = $this->get($page)->assertOk()->getContent();
+    expect($html)->toMatch('/name="timeline"[^>]*aria-invalid="true"[^>]*aria-describedby="timeline-error"/')
+        ->toContain('id="timeline-error"')->toContain('role="alert"')
+        ->toMatch('/<input type="radio" name="topic" value="project" checked/');
+});
+
 it('drops bot submissions quietly without storing them', function (array $overrides) {
     $this->post(route('contact.store'), contactPayload($overrides))->assertRedirect()->assertSessionHas('contact_sent');
 
