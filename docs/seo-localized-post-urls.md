@@ -36,6 +36,8 @@ Ship the final source JSON files with the migration so existing rows receive the
 
 ## Removed stories and Cloudflare email links
 
+All CV versions, including `/cv`, `/tr/ozgecmis` and their `?ats=1` variants, are public but carry `noindex,follow`. CV addresses are excluded from the sitemap and its shared IndexNow list. Keep them crawlable so search engines can read the directive; a noindex exclusion in Search Console is expected.
+
 The eight explicitly retired addresses in `config/retired_urls.php` return localized HTTP 410 responses with `noindex`; they have no replacement and must not be republished or redirected to unrelated content. Other unknown or private addresses retain HTTP 404. Google can group 410 responses with not-found URLs, so this does not promise an empty Search Console report. [Removed-page guidance](https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors).
 
 Public email links use Cloudflare's `email_off` comments so the HTML retains a direct `mailto:` link. The Cloudflare-managed `/cdn-cgi/l/email-protection` endpoint cannot be customized; both the generated robots response and the static `public/robots.txt` exclude `/cdn-cgi/l/` from crawling. Cloudflare image and challenge paths remain unaffected. [Cloudflare endpoint guidance](https://developers.cloudflare.com/fundamentals/reference/cdn-cgi-endpoint/), [email obfuscation exclusions](https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/).

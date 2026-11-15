@@ -121,7 +121,7 @@
     <title>{{ $t['meta_title'] }}</title>
     <meta name="description" content="{{ \App\Support\Seo::metaDescription($cvDescription) }}">
     <meta name="author" content="Timurhan Kaya">
-    <meta name="robots" content="{{ $ats ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }}">
+    <meta name="robots" content="noindex,follow">
     <link rel="canonical" href="{{ $cvUrl }}">
     @foreach ($alternateUrls as $hreflang => $href)
         <link rel="alternate" hreflang="{{ $hreflang }}" href="{{ $href }}">

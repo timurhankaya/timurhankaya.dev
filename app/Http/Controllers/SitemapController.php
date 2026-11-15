@@ -54,7 +54,10 @@ class SitemapController extends Controller
             ->header('Content-Type', 'application/xml; charset=UTF-8')
             ->header('Cache-Control', 'public, max-age=3600');
         // Crawlers re-fetch sitemaps often; an unchanged one is answered with 304.
-        $newest = collect($items)->pluck('lastmod')->filter()->max();
+        // A changed URL policy (for example excluding CVs) also invalidates an older sitemap.
+        $newest = collect($items)->pluck('lastmod')
+            ->push(Seo::contentLastModified([app_path('Support/Sitemap.php')], false))
+            ->filter()->max();
         if ($newest) {
             $response->setLastModified(Carbon::parse($newest));
             $response->isNotModified($request);

@@ -41,3 +41,16 @@ it('keeps the normal CV as the default and offers the ATS variant', function () 
         $this->get($path)->assertOk()->assertDontSee('id="ats-cv"', false)->assertSee('?ats=1', false);
     }
 });
+
+it('keeps every CV version accessible but out of search indexes', function (string $path) {
+    $this->get($path)->assertOk()->assertSee('<meta name="robots" content="noindex,follow">', false);
+})->with(['/cv', '/tr/ozgecmis', '/cv?ats=1', '/tr/ozgecmis?ats=1']);
+
+it('leaves CV addresses out of search submissions without blocking crawlers from reading noindex', function () {
+    $sitemap = simplexml_load_string($this->get('/sitemap.xml')->assertOk()->getContent());
+    $addresses = array_map('strval', $sitemap->xpath('//*[local-name()="loc"]'));
+
+    expect($addresses)->not->toContain(url('/cv'), url('/tr/ozgecmis'), url('/cv?ats=1'), url('/tr/ozgecmis?ats=1'))
+        ->toContain(url('/writing'), url('/tr/yazilar'));
+    expect($this->get('/robots.txt')->assertOk()->getContent())->not->toMatch('~Disallow:\\s*/(?:cv|tr/ozgecmis)(?:[/?\\s]|$)~');
+});

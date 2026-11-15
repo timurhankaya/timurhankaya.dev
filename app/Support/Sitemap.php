@@ -29,7 +29,6 @@ final class Sitemap
             'games.imposter.index' => Seo::contentLastModified([...$lang, ...$views('pages/games/imposter/index')], false),
             'games.vampire.index' => Seo::contentLastModified([...$lang, ...$views('pages/games/vampire/index')], false),
             'contact' => Seo::contentLastModified([...$content, ...$views('pages/contact')], false),
-            'cv' => Seo::contentLastModified([...$content, ...$views('pages/cv')], false),
         ];
 
         $items = collect($pages)->flatMap(fn (?string $lastmod, string $route): array => self::perLocale(Seo::route($route), $lastmod))->all();
