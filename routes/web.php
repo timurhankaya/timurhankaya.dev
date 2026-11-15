@@ -22,6 +22,11 @@ Route::post('/contact-requests', [ContactRequestController::class, 'store'])->mi
 
 Route::get('/admin/preview/posts/{id}', PreviewPostController::class)->whereNumber('id')->name('admin.posts.preview');
 
+foreach (config('retired_urls', []) as $path => $locale) {
+    Route::view($path, 'errors.410', [], 410, ['X-Robots-Tag' => 'noindex, nofollow'])
+        ->defaults('locale', $locale);
+}
+
 foreach (Seo::supportedLocales() as $locale) {
     Route::prefix($locale === 'en' ? '' : $locale)->name($locale.'.')->group(function () use ($locale): void {
         $path = fn (string $name): string => '/'.LocalizedRoutes::PATHS[$name][$locale];

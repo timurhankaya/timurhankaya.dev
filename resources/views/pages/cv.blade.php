@@ -573,9 +573,9 @@
             <p class="title-role">{{ $t['role'] }}</p>
         </div>
         <div class="header-right">
-            <a href="mailto:kayacekovic@gmail.com" class="contact-item">
+            <!--email_off--><a href="mailto:kayacekovic@gmail.com" class="contact-item">
                 <span class="label">{{ $t['email_label'] }}</span> kayacekovic@gmail.com
-            </a>
+            </a><!--/email_off-->
             <a href="https://linkedin.com/in/timurhan-kaya" target="_blank" class="contact-item">
                 <span class="label">LinkedIn</span> /in/timurhan-kaya
             </a>

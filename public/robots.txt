@@ -32,11 +32,13 @@ Allow: /
 Disallow: /admin
 Disallow: /preview/
 Disallow: /tr/onizleme/
+Disallow: /cdn-cgi/l/
 
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /preview/
 Disallow: /tr/onizleme/
+Disallow: /cdn-cgi/l/
 
 Sitemap: https://timurhankaya.dev/sitemap.xml

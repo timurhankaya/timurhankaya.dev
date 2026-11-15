@@ -184,6 +184,8 @@ return [
     'error_403_body' => 'Bu içeriği görme yetkin yok. Bir hata olduğunu düşünüyorsan bana yaz.',
     'error_419_title' => 'Sayfanın süresi doldu.',
     'error_419_body' => 'Sayfa uzun süre açık kaldığı için güvenlik anahtarı yenilendi. Sayfayı yenileyip tekrar dene.',
+    'error_410_title' => 'Bu sayfa yayından kaldırıldı.',
+    'error_410_body' => 'Bu yazı artık yayınlanmıyor. Güncel yazılara ve vaka incelemelerine ana sayfadan ulaşabilirsin.',
     'error_429_title' => 'Çok fazla istek geldi.',
     'error_429_body' => 'Kısa sürede çok fazla deneme yapıldı. Biraz bekleyip tekrar dene ya da doğrudan e-posta gönder.',
     'error_500_title' => 'Bir şeyler ters gitti.',

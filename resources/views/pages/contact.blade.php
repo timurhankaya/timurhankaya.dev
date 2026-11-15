@@ -115,7 +115,7 @@
             <aside class="brand-contact-aside" aria-labelledby="contact-direct">
                 <div class="brand-contact-direct">
                     <h2 id="contact-direct" class="brand-label">{{ __('brand.contact_direct') }}</h2>
-                    <a class="brand-contact-email" href="mailto:kayacekovic@gmail.com">kayacekovic@gmail.com <x-arrow /></a>
+                    <!--email_off--><a class="brand-contact-email" href="mailto:kayacekovic@gmail.com">kayacekovic@gmail.com <x-arrow /></a><!--/email_off-->
                     <p>{{ __('brand.contact_direct_note') }}</p>
                 </div>
                 <div class="brand-contact-socials">

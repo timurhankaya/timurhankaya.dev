@@ -14,7 +14,7 @@ class SitemapController extends Controller
     public function robots(): Response
     {
         // Private tooling and transient pages that should never rank; repeated in every group.
-        $rules = ['Allow: /', 'Disallow: /admin', 'Disallow: /preview/', 'Disallow: /tr/onizleme/'];
+        $rules = ['Allow: /', 'Disallow: /admin', 'Disallow: /preview/', 'Disallow: /tr/onizleme/', 'Disallow: /cdn-cgi/l/'];
         $named = [];
         foreach (['search' => 'Search and answer indexing', 'fetch' => 'User-initiated fetches', 'training' => 'Model training and data collection'] as $key => $label) {
             $named[] = '# '.$label;

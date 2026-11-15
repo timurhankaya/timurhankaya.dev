@@ -61,7 +61,7 @@ it('names every AI crawler in robots.txt and repeats the private-path rules insi
     expect($agents($any))->toBe(['*'])
         ->and($agents($named))->toContain('Googlebot', 'bingbot', 'OAI-SearchBot', 'ChatGPT-User', 'GPTBot', 'Claude-SearchBot', 'Claude-User', 'ClaudeBot', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'CCBot')
         ->and($rules($named))->toBe($rules($any))
-        ->and($rules($named))->toContain('Allow: /', 'Disallow: /admin', 'Disallow: /preview/', 'Disallow: /tr/onizleme/')->not->toContain('Disallow: /livewire');
+        ->and($rules($named))->toContain('Allow: /', 'Disallow: /admin', 'Disallow: /preview/', 'Disallow: /tr/onizleme/', 'Disallow: /cdn-cgi/l/')->not->toContain('Disallow: /livewire');
     expect($robots)->toContain('Sitemap: http')->and(trim($robots))->toEndWith('/sitemap.xml');
 });
 

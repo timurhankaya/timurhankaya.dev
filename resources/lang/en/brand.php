@@ -184,6 +184,8 @@ return [
     'error_403_body' => 'You do not have access to this content. If you think this is a mistake, write to me.',
     'error_419_title' => 'This page has expired.',
     'error_419_body' => 'The page stayed open long enough for its security token to expire. Refresh the page and try again.',
+    'error_410_title' => 'This page has been removed.',
+    'error_410_body' => 'This article is no longer published. You can find current writing and case studies on the home page.',
     'error_429_title' => 'Too many requests.',
     'error_429_body' => 'Too many attempts in a short time. Wait a little and try again, or email me directly.',
     'error_500_title' => 'Something went wrong.',

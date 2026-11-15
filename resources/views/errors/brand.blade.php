@@ -24,7 +24,7 @@
                 <div class="brand-error-actions">
                     <a class="brand-button" href="{{ $home }}">{{ __('brand.error_home') }} <x-arrow /></a>
                     @if ($code === 429)
-                        <a class="brand-text-link" href="mailto:kayacekovic@gmail.com">kayacekovic@gmail.com <x-arrow /></a>
+                        <!--email_off--><a class="brand-text-link" href="mailto:kayacekovic@gmail.com">kayacekovic@gmail.com <x-arrow /></a><!--/email_off-->
                     @else
                         <a class="brand-text-link" href="{{ url(app()->getLocale() === 'tr' ? '/tr/iletisim' : '/contact') }}">{{ __('brand.error_write') }} <x-arrow /></a>
                     @endif

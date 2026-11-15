@@ -19,7 +19,7 @@
         <p class="ats-role">{{ $t['role'] }}</p>
         <address class="ats-contact">
             <p>{{ $t['loc_value'] }}</p>
-            <p>{{ $t['email_label'] }}: <a href="mailto:kayacekovic@gmail.com">kayacekovic@gmail.com</a></p>
+            <p>{{ $t['email_label'] }}: <!--email_off--><a href="mailto:kayacekovic@gmail.com">kayacekovic@gmail.com</a><!--/email_off--></p>
             <p>LinkedIn: <a href="https://linkedin.com/in/timurhan-kaya">https://linkedin.com/in/timurhan-kaya</a></p>
             <p>GitHub: <a href="https://github.com/timurhankaya">https://github.com/timurhankaya</a></p>
             <p>X: <a href="https://x.com/_tkaya">https://x.com/_tkaya</a></p>
