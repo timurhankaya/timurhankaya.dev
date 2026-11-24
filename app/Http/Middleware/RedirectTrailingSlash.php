@@ -29,6 +29,9 @@ class RedirectTrailingSlash
             return redirect(Seo::localizedUrl($request->fullUrl(), $locale), 301);
         }
 
-        return redirect()->to(rtrim($path, '/').($query !== null ? '?'.$query : ''), 301);
+        // `//host` and `/\host` read as another site to a browser, so the target keeps a single leading slash.
+        $target = '/'.ltrim(rtrim($path, '/'), '/\\');
+
+        return redirect()->to($target.($query !== null ? '?'.$query : ''), 301);
     }
 }

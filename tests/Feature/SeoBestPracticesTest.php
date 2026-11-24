@@ -39,6 +39,23 @@ it('sends an address with a trailing slash to the one without it', function (str
     expect($response->getStatusCode())->toBe(301)->and($response->headers->get('Location'))->toBe('http://localhost'.$to);
 })->with([['/writing/', '/writing'], ['/tr/yazilar/?page=2', '/tr/yazilar?page=2'], ['/tr/', '/tr']]);
 
+it('keeps a trailing slash redirect on this site when the path starts with extra slashes', function (string $from, string $to) {
+    // A Location of `//host` or `/\host` would send the browser to another site. The request is built the way
+    // PHP-FPM hands it over, since `Request::create()` refuses a backslash the web server lets through.
+    $request = new HttpRequest(server: ['HTTP_HOST' => 'localhost', 'REQUEST_METHOD' => 'GET', 'REQUEST_URI' => $from, 'QUERY_STRING' => (string) parse_url('http://localhost'.$from, PHP_URL_QUERY)]);
+    $response = app(HttpKernel::class)->handle($request);
+
+    expect($response->getStatusCode())->toBe(301)->and($response->headers->get('Location'))->toBe('http://localhost'.$to);
+})->with([
+    ['//example.com/', '/example.com'],
+    ['///example.com/', '/example.com'],
+    ['/\\example.com/', '/example.com'],
+    ['/\\/example.com/?a=1', '/example.com?a=1'],
+    ['//example.com/path/', '/example.com/path'],
+    ['///', '/'],
+    ['//writing/', '/writing'],
+]);
+
 it('ships a static robots.txt identical to what the app serves in production', function () {
     // The web server answers /robots.txt from disk, so the file must match the route's production output.
     URL::forceRootUrl('https://timurhankaya.dev');
