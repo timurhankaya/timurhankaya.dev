@@ -2,6 +2,8 @@
 
 namespace App\Services\Portfolio;
 
+use App\Enums\PostType;
+use App\Models\Post;
 use App\Support\MonafyLinks;
 
 final class ProjectCatalog
@@ -10,7 +12,7 @@ final class ProjectCatalog
     public const UNLISTED = ['e-commerce' => 'E-ticaret altyapısı (isimsiz müşteri)', 'b2b-saas' => 'B2B SaaS platformu (isimsiz müşteri)'];
 
     /** Reading order of case-study groups: the owner's product first, client work next, side projects last. */
-    public const STORY_ORDER = ['monafy', 'b2b-saas', 'e-commerce', 'vampir-koylu', 'word-imposter'];
+    public const STORY_ORDER = ['adem', 'monafy', 'b2b-saas', 'e-commerce', 'vampir-koylu', 'word-imposter'];
 
     public function options(): array
     {
@@ -26,5 +28,14 @@ final class ProjectCatalog
             ->flatMap(fn (array $section): array => $section['items'])->firstWhere('key', $key);
 
         return filled($project['url'] ?? null) ? ['name' => (string) $project['name'], 'url' => MonafyLinks::localized((string) $project['url'], app()->getLocale())] : null;
+    }
+
+    /** The address of a project's first published case study, or null until one is published (the seeder runs separately from a deploy). */
+    public function caseStudyUrl(string $key, ?string $locale = null): ?string
+    {
+        $story = Post::published()->where('type', PostType::CaseStudy)->where('project_key', $key)
+            ->orderBy('sort_order')->orderBy('published_at')->orderBy('id')->first();
+
+        return $story?->publicUrl($locale ?? app()->getLocale());
     }
 }

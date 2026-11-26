@@ -199,6 +199,34 @@
         "icon": "enterprise",
         "items": [
           {
+            "key": "adem",
+            "name": "ADEM",
+            "description": "An agent platform that runs Claude Code and Codex agents as a team. Tasks move from analysis to release, and nothing ships until a person approves it in Slack. I designed it and built it by directing coding agents.",
+            "stack": [
+              "React 19",
+              "TypeScript",
+              "Inertia",
+              "Laravel 13",
+              "Go",
+              "PostgreSQL",
+              "MongoDB",
+              "Redis",
+              "MCP"
+            ],
+            "url": "",
+            "case_study": true,
+            "badge": "AI agent platform",
+            "year": "2026–",
+            "highlights": [
+              "Designed the workflow as a graph: analysis, development, review, acceptance, staging and release.",
+              "Built role agents with pinned skill versions and permission sets, and a runner written in Go.",
+              "Tied every release to an authorized person’s ✅ in Slack; nothing ADEM writes counts as approval.",
+              "Monafy’s development runs on ADEM."
+            ],
+            "context": "founder",
+            "context_label": "Tech Co-founder"
+          },
+          {
             "name": "Enuygun Sigorta",
             "description": "An insurance quote comparison and policy purchase platform. I contribute to its development as part of Wingie Enuygun Group.",
             "stack": [

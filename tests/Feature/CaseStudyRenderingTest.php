@@ -2,6 +2,7 @@
 
 use App\Services\Portfolio\PortfolioProjects;
 use App\Support\StoryStyle;
+use Database\Seeders\StorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -60,17 +61,19 @@ it('publishes an anonymous case study without a period and shows no empty year',
 it('features only the strongest projects on the home page', function () {
     $keys = collect(app(PortfolioProjects::class)->featured())->pluck('key')->all();
 
-    expect($keys)->toBe(['monafy', 'moneo-render', 'transiyzi', 'smart-global', 'edanisman', 'word-imposter']);
+    expect($keys)->toBe(['adem', 'monafy', 'moneo-render', 'transiyzi', 'smart-global', 'edanisman', 'word-imposter']);
 });
 
 it('keeps each featured project link separate from its contribution dialog', function (string $path, string $gameUrl) {
+    // ADEM's card links to its case study, which exists once the stories are seeded.
+    $this->seed(StorySeeder::class);
     $html = $this->get($path)->assertOk()->getContent();
     $dom = new DOMDocument;
     @$dom->loadHTML($html);
     $xpath = new DOMXPath($dom);
     $cards = $xpath->query('//article[contains(concat(" ", normalize-space(@class), " "), " brand-project-featured ")]');
 
-    expect($cards->length)->toBe(6);
+    expect($cards->length)->toBe(7);
     foreach ($cards as $card) {
         expect($xpath->query('.//a[contains(concat(" ", normalize-space(@class), " "), " brand-project-link ")]', $card)->length)->toBe(1)
             ->and($xpath->query('.//button[@data-project-dialog-open]', $card)->length)->toBe(1)

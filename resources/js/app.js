@@ -813,6 +813,30 @@ function initLocaleLinks() {
     });
 }
 
+function initMotionVideos() {
+    const videos = qsa('[data-motion-video]');
+    const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+    if (!videos.length || !('IntersectionObserver' in window)) {
+        return;
+    }
+    // Recorded loops start only for visitors who allow motion, and only while on screen; otherwise the poster stays.
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(({ target, isIntersecting }) => {
+            if (isIntersecting && motion.matches) {
+                target.play().catch(() => {});
+            } else {
+                target.pause();
+            }
+        });
+    }, { threshold: 0.25 });
+    videos.forEach((video) => observer.observe(video));
+    motion.addEventListener('change', () => {
+        if (!motion.matches) {
+            videos.forEach((video) => video.pause());
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('touchstart', () => {}, { passive: true });
     safeInit('reveal', initReveal, () => {
@@ -825,6 +849,7 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit('modals', initModals);
     safeInit('projectDialogs', initProjectDialogs);
     safeInit('localeLinks', initLocaleLinks);
+    safeInit('motionVideos', initMotionVideos);
     safeInit('imposterArena', initImposterArena);
     safeInit('hashScroll', initHashScroll);
     safeInit('navMenus', initNavMenus);

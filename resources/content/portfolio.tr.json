@@ -199,6 +199,34 @@
         "icon": "enterprise",
         "items": [
           {
+            "key": "adem",
+            "name": "ADEM",
+            "description": "Claude Code ve Codex ajanlarını bir ekip gibi çalıştıran ajan platformu. İşler analizden yayına aynı yoldan ilerler; Slack’te yetkili bir kişi onaylamadan hiçbir şey yayına çıkmaz. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim.",
+            "stack": [
+              "React 19",
+              "TypeScript",
+              "Inertia",
+              "Laravel 13",
+              "Go",
+              "PostgreSQL",
+              "MongoDB",
+              "Redis",
+              "MCP"
+            ],
+            "url": "",
+            "case_study": true,
+            "badge": "AI ajan platformu",
+            "year": "2026–",
+            "highlights": [
+              "İş akışını bir graf olarak tasarladım: analiz, geliştirme, inceleme, kabul, staging ve yayın.",
+              "Sürümü sabitlenmiş skill’leri ve izin setleri olan rol ajanlarını, Go ile yazılmış runner’ı kurdum.",
+              "Her yayını Slack’te yetkili kişinin ✅ onayına bağladım; ADEM’in yazdığı hiçbir şey onay sayılmaz.",
+              "Monafy’nin geliştirmesi ADEM üzerinde yürüyor."
+            ],
+            "context": "founder",
+            "context_label": "Teknik kurucu ortak"
+          },
+          {
             "name": "Enuygun Sigorta",
             "description": "Kasko, trafik ve sağlık sigortası tekliflerini karşılaştırma ve poliçe satın alma platformu. Wingie Enuygun Group bünyesinde geliştirilmesine katkı sağlıyorum.",
             "stack": [

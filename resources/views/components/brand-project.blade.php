@@ -2,6 +2,10 @@
 @php
     $dialogId = 'project-'.substr(sha1(data_get($item, 'name').$number), 0, 12);
     $projectUrl = !data_get($item, 'archived', false) ? data_get($item, 'url') : null;
+    // A project told in a case study on this site links there, in the same tab, once the story is published.
+    $caseUrl = data_get($item, 'case_study') ? app(\App\Services\Portfolio\ProjectCatalog::class)->caseStudyUrl((string) data_get($item, 'key')) : null;
+    // A recorded loop plays over its poster; without motion it stays the still frame.
+    $projectVideo = ['adem' => ['poster' => 'images/projects/adem-hero.webp', 'webm' => 'images/projects/adem-hero.webm', 'mp4' => 'images/projects/adem-hero.mp4']][data_get($item, 'key')] ?? null;
     $projectImage = [
         'monafy' => 'images/projects/monafy-og.webp',
         'moneo-render' => 'images/projects/dynorender.webp',
@@ -13,8 +17,10 @@
 @endphp
 <article class="brand-project {{ $featured ? 'brand-project-featured' : '' }}">
     @if ($featured)
-        <div class="brand-project-art brand-project-art-{{ (($number - 1) % 3) + 1 }} {{ $projectImage ? 'has-image' : '' }}" aria-hidden="true">
-            @if ($projectImage)
+        <div class="brand-project-art brand-project-art-{{ (($number - 1) % 3) + 1 }} {{ $projectImage || $projectVideo ? 'has-image' : '' }}" aria-hidden="true">
+            @if ($projectVideo)
+                <video poster="{{ asset($projectVideo['poster']) }}" width="1200" height="630" muted loop playsinline preload="none" disablepictureinpicture data-motion-video><source src="{{ asset($projectVideo['webm']) }}" type="video/webm"><source src="{{ asset($projectVideo['mp4']) }}" type="video/mp4"></video>
+            @elseif ($projectImage)
                 <img src="{{ asset($projectImage) }}" alt="" width="1200" height="630" loading="lazy" decoding="async">
             @else
             <span class="brand-project-art-label">{{ data_get($item, 'badge') }} / {{ data_get($item, 'year') }}</span>
@@ -23,7 +29,7 @@
             @endif
         </div>
     @endif
-    <div class="brand-project-heading"><h3>@if ($projectUrl)<a class="brand-project-link" href="{{ $projectUrl }}" target="_blank" rel="noopener noreferrer" aria-label="{{ __('brand.visit') }} — {{ data_get($item, 'name') }}">{{ data_get($item, 'name') }}</a>@else{{ data_get($item, 'name') }}@endif</h3><span class="brand-label">{{ data_get($item, 'year') }}</span></div>
+    <div class="brand-project-heading"><h3>@if ($caseUrl)<a class="brand-project-link" href="{{ $caseUrl }}" aria-label="{{ __('brand.read_case') }} — {{ data_get($item, 'name') }}">{{ data_get($item, 'name') }}</a>@elseif ($projectUrl)<a class="brand-project-link" href="{{ $projectUrl }}" target="_blank" rel="noopener noreferrer" aria-label="{{ __('brand.visit') }} — {{ data_get($item, 'name') }}">{{ data_get($item, 'name') }}</a>@else{{ data_get($item, 'name') }}@endif</h3><span class="brand-label">{{ data_get($item, 'year') }}</span></div>
     <p class="brand-project-description">{{ data_get($item, 'description') }}</p>
     <div class="brand-project-actions">
         @if (data_get($item, 'highlights'))
