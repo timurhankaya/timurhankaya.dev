@@ -1,8 +1,3 @@
-@php
-    $technicalSkills = collect($t['projects'])
-        ->flatMap(fn (array $project) => explode(' · ', $project['stack']))
-        ->prepend('Laravel')->prepend('PHP')->filter()->unique()->values()->implode(', ');
-@endphp
 <nav class="ats-controls" aria-label="{{ $locale === 'tr' ? 'CV seçenekleri' : 'CV options' }}">
     <button type="button" onclick="window.print()">{{ $locale === 'tr' ? 'PDF olarak kaydet' : 'Save as PDF' }}</button>
     <a href="{{ $cvUrl }}">{{ $locale === 'tr' ? 'Görsel CV' : 'Designed CV' }}</a>
@@ -48,9 +43,15 @@
         @endforeach
     </section>
 
+    <section aria-labelledby="ats-technologies">
+        <h2 id="ats-technologies">{{ $t['tech_title'] }}</h2>
+        @foreach ($t['tech_groups'] as $group)
+            <p><strong>{{ $group['title'] }}:</strong> {{ implode(', ', $group['items']) }}</p>
+        @endforeach
+    </section>
+
     <section aria-labelledby="ats-skills">
-        <h2 id="ats-skills">{{ $locale === 'tr' ? 'Teknik beceriler' : 'Technical skills' }}</h2>
-        <p>{{ $technicalSkills }}</p>
+        <h2 id="ats-skills">{{ $t['skills_title'] }}</h2>
         @foreach ($t['skill_groups'] as $group)
             <p><strong>{{ $group['title'] }}:</strong> {{ implode(', ', array_column($group['items'], 'label')) }}</p>
         @endforeach

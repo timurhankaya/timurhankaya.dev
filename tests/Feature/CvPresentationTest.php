@@ -51,11 +51,10 @@ it('keeps the shared biography and the hands-off AI development account accurate
     }
 });
 
-it('orders the CV experience, links ADEM to its case study and lists the stack', function (string $locale, string $path) {
+it('orders the CV experience and links ADEM to its case study', function (string $locale, string $path) {
     $content = json_decode(file_get_contents(resource_path("content/portfolio.{$locale}.json")), true, flags: JSON_THROW_ON_ERROR);
     expect(array_column($content['experience']['items'], 'company'))->toBe(['Wingie Enuygun Group', 'Monafy', 'MONEO YAZILIM A.Ş.', 'MONEO YAZILIM A.Ş.'])
-        ->and(collect($content['skills']['groups'])->pluck('items')->flatten(1)->pluck('label')->implode(', '))
-        ->toContain('React, TypeScript, Next.js, Nuxt/Vue')->toContain('Laravel, Symfony, Go, Python');
+        ->and(array_column($content['skills']['groups'], 'title'))->toHaveCount(3);
 
     $this->seed(StorySeeder::class);
     $url = app(ProjectCatalog::class)->caseStudyUrl('adem', $locale);
@@ -63,6 +62,23 @@ it('orders the CV experience, links ADEM to its case study and lists the stack',
     preg_match_all('~<span class="project-name">(.*?)</span>~s', $html, $names);
     expect($names[1][0] ?? '')->toBe('<a href="'.$url.'">ADEM</a>');
     expect($this->get($path.'?ats=1')->assertOk()->getContent())->toContain('<a href="'.$url.'">'.$url.'</a>');
+})->with(['English' => ['en', '/cv'], 'Turkish' => ['tr', '/tr/ozgecmis']]);
+
+it('lists technologies as plain grouped names in both CV views', function (string $locale, string $path) {
+    $expected = [
+        'PHP, TypeScript, JavaScript, Go, Python',
+        'Laravel, Symfony, Node.js, REST APIs, RabbitMQ',
+        'React, Next.js, React Native, Vue, Nuxt, Tailwind CSS',
+        'PostgreSQL, TimescaleDB, MySQL, MongoDB, Redis, Elasticsearch',
+        'Docker, AWS, GCP',
+    ];
+    foreach (['', '?ats=1'] as $view) {
+        $html = html_entity_decode($this->get($path.$view)->assertOk()->getContent(), ENT_QUOTES | ENT_HTML5);
+        preg_match('~<section[^>]*aria-labelledby="ats-technologies".*?</section>|<div class="section cv-technologies">.*?<!-- /technologies -->~s', $html, $block);
+        $text = preg_replace('/\s+/', ' ', strip_tags($block[0] ?? ''));
+        expect($text)->toContain($locale === 'en' ? 'Technologies' : 'Teknolojiler', ...$expected)->not->toContain('%');
+        expect($html)->not->toContain('Inertia');
+    }
 })->with(['English' => ['en', '/cv'], 'Turkish' => ['tr', '/tr/ozgecmis']]);
 
 it('gives only the CV card its localized engineering role', function () {

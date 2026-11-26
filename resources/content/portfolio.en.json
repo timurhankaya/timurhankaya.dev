@@ -9,6 +9,61 @@
     "project_descriptions": {
       "adem": "A digital teammate for a company: a request in everyday language becomes traceable work, run with the AI models and tools it needs; releases wait for an authorized person’s approval. Software development is its first area, and Monafy’s development runs on it. Connected today: Jira, Slack, Claude, Codex, GitLab and Laravel Forge. I designed it and built it by directing coding agents.",
       "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design its product flows and architecture and direct development through ADEM."
+    },
+    "technologies": {
+      "title": "Technologies",
+      "groups": [
+        {
+          "title": "Languages",
+          "items": [
+            "PHP",
+            "TypeScript",
+            "JavaScript",
+            "Go",
+            "Python"
+          ]
+        },
+        {
+          "title": "Backend",
+          "items": [
+            "Laravel",
+            "Symfony",
+            "Node.js",
+            "REST APIs",
+            "RabbitMQ"
+          ]
+        },
+        {
+          "title": "Frontend & Mobile",
+          "items": [
+            "React",
+            "Next.js",
+            "React Native",
+            "Vue",
+            "Nuxt",
+            "Tailwind CSS"
+          ]
+        },
+        {
+          "title": "Data",
+          "items": [
+            "PostgreSQL",
+            "TimescaleDB",
+            "MySQL",
+            "MongoDB",
+            "Redis",
+            "Elasticsearch"
+          ]
+        },
+        {
+          "title": "Cloud & DevOps",
+          "items": [
+            "Docker",
+            "AWS",
+            "GCP"
+          ]
+        }
+      ]
     }
   },
   "hero": {
@@ -129,17 +184,6 @@
           },
           {
             "label": "Code review, testing and production verification"
-          }
-        ]
-      },
-      {
-        "title": "Stack",
-        "items": [
-          {
-            "label": "React, TypeScript, Next.js, Nuxt/Vue"
-          },
-          {
-            "label": "Laravel, Symfony, Go, Python"
           }
         ]
       }

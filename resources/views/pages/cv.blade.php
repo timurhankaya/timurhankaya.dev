@@ -63,6 +63,14 @@
         ->values()
         ->all();
 
+    $technologyGroups = collect((array) data_get($content, 'cv.technologies.groups', []))
+        ->map(fn (array $group): array => [
+            'title' => $tx(data_get($group, 'title')),
+            'items' => array_map($tx, array_values((array) data_get($group, 'items', []))),
+        ])
+        ->values()
+        ->all();
+
     $educationItems = collect((array) data_get($content, 'education.items', []))
         ->map(fn (array $item): array => [
             'title' => $tx(data_get($item, 'title')),
@@ -86,6 +94,8 @@
         'projects' => $projectItems,
         'skills_title' => $tx(data_get($content, 'skills.title')),
         'skill_groups' => $skillGroups,
+        'tech_title' => $tx(data_get($content, 'cv.technologies.title')),
+        'tech_groups' => $technologyGroups,
         'edu_title' => $tx(data_get($content, 'education.title')),
         'education_items' => $educationItems,
         'int_title' => $tx(data_get($content, 'about.interests')),
@@ -97,6 +107,8 @@
     $cvDescription = $t['profile_text'] !== '' ? $t['profile_text'] : $tx(data_get($content, 'meta.description'));
     $cvSkills = collect($t['skill_groups'])
         ->flatMap(fn (array $group): array => array_map(fn (array $item): string => $item['label'], $group['items']))
+        ->merge(collect($t['tech_groups'])->flatMap(fn (array $group): array => $group['items']))
+        ->unique()
         ->values()
         ->all();
     $cvPerson = [...\App\Support\StructuredData::person($locale), 'jobTitle' => $t['role'], 'description' => $cvDescription, 'email' => 'kayacekovic@gmail.com', 'knowsAbout' => $cvSkills];
@@ -652,6 +664,18 @@
                 </div>
                 @endforeach
             </div>
+
+            <div class="section cv-technologies">
+                <div class="section-title">{{ $t['tech_title'] }}</div>
+                @foreach($t['tech_groups'] as $group)
+                <div class="skill-group">
+                    <div class="skill-group-title">{{ $group['title'] }}</div>
+                    <div class="skill-item">
+                        <span class="skill-label">{{ implode(', ', $group['items']) }}</span>
+                    </div>
+                </div>
+                @endforeach
+            </div><!-- /technologies -->
 
             <div class="section">
                 <div class="section-title">{{ $t['edu_title'] }}</div>

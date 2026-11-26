@@ -24,9 +24,9 @@ it('serves an ATS CV with the complete experience in document reading order', fu
         }
     }
     expect($xpath->query('.//table|.//img|.//canvas', $main)->length)->toBe(0)
-        ->and($xpath->query('//h2')->length)->toBe(5);
+        ->and($xpath->query('//h2')->length)->toBe(6);
     $positions = [];
-    foreach (['ats-summary', 'ats-experience', 'ats-skills', 'ats-projects', 'ats-education'] as $id) {
+    foreach (['ats-summary', 'ats-experience', 'ats-technologies', 'ats-skills', 'ats-projects', 'ats-education'] as $id) {
         $positions[] = strpos($html, 'id="'.$id.'"');
     }
     $ordered = $positions;

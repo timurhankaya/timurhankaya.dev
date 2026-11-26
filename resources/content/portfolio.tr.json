@@ -9,6 +9,61 @@
     "project_descriptions": {
       "adem": "Şirket için bir dijital ekip arkadaşı: gündelik dille anlatılan istek izlenebilir bir işe dönüşür, gereken yapay zekâ modelleri ve araçlarla yürütülür; yayın yetkili bir kişinin onayını bekler. İlk alanı yazılım geliştirme; Monafy’nin geliştirmesi bu platformda yürüyor. Bugün bağlı olanlar: Jira, Slack, Claude, Codex, GitLab ve Laravel Forge. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim.",
       "monafy": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanı sunan araştırma platformu. Ürün akışlarını ve mimarisini tasarlıyor, geliştirmeyi ADEM üzerinden yönetiyorum."
+    },
+    "technologies": {
+      "title": "Teknolojiler",
+      "groups": [
+        {
+          "title": "Programlama dilleri",
+          "items": [
+            "PHP",
+            "TypeScript",
+            "JavaScript",
+            "Go",
+            "Python"
+          ]
+        },
+        {
+          "title": "Backend",
+          "items": [
+            "Laravel",
+            "Symfony",
+            "Node.js",
+            "REST APIs",
+            "RabbitMQ"
+          ]
+        },
+        {
+          "title": "Frontend ve mobil",
+          "items": [
+            "React",
+            "Next.js",
+            "React Native",
+            "Vue",
+            "Nuxt",
+            "Tailwind CSS"
+          ]
+        },
+        {
+          "title": "Veri",
+          "items": [
+            "PostgreSQL",
+            "TimescaleDB",
+            "MySQL",
+            "MongoDB",
+            "Redis",
+            "Elasticsearch"
+          ]
+        },
+        {
+          "title": "Bulut ve DevOps",
+          "items": [
+            "Docker",
+            "AWS",
+            "GCP"
+          ]
+        }
+      ]
     }
   },
   "hero": {
@@ -129,17 +184,6 @@
           },
           {
             "label": "Kod inceleme, test ve canlı doğrulama"
-          }
-        ]
-      },
-      {
-        "title": "Teknoloji yığını",
-        "items": [
-          {
-            "label": "React, TypeScript, Next.js, Nuxt/Vue"
-          },
-          {
-            "label": "Laravel, Symfony, Go, Python"
           }
         ]
       }
