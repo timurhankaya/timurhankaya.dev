@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Timurhan Kaya — Software & AI Engineer",
-    "description": "Timurhan Kaya is a software and AI engineer and Monafy tech co-founder in Istanbul, working on product architecture, web development and AI integrations."
+    "description": "Timurhan Kaya is a software and AI engineer and Monafy tech co-founder in Istanbul. He built ADEM, an agent platform, and works on product architecture."
   },
   "cv": {
     "role": "Software & AI Engineer",
@@ -34,13 +34,13 @@
   },
   "sidecard": {
     "now_title": "Now",
-    "now_body": "Software developer at Wingie Enuygun Group and tech co-founder building Monafy."
+    "now_body": "Software developer at Wingie Enuygun Group and tech co-founder building Monafy and its agent platform, ADEM."
   },
   "about": {
     "title": "About",
     "lead": "",
     "p1": "Since 2019, I have built software for insurance, finance and e-commerce. My work spans product decisions, service integrations, interfaces and the upkeep of production systems.",
-    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets.",
+    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets. Monafy’s development runs on ADEM, the agent platform I designed: coding agents take tasks from Jira, write and test the code, and release only after a person approves in Slack.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
@@ -283,7 +283,7 @@
           },
           {
             "name": "Monafy",
-            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As tech co-founder, I design the product architecture and lead technical development.",
+            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As tech co-founder, I design the product architecture and lead technical development, which runs on ADEM, the agent platform I built.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -299,7 +299,7 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "I design product flows and service architecture, and direct development with coding agents.",
+              "I design product flows and service architecture, and direct development with coding agents through ADEM.",
               "I built the session and API integrations connecting Mona AI to financial data tools.",
               "I connected source data, prompt rules and publication checks in the market-report workflow.",
               "I connect watchlists, price alerts and subscription access to the product experience."

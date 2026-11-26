@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Timurhan Kaya — Yazılım ve AI Mühendisi",
-    "description": "Timurhan Kaya: İstanbul’da yazılım ve AI mühendisi, Monafy teknik kurucu ortağı. Ürün mimarisi, web geliştirme ve yapay zekâ entegrasyonları."
+    "description": "Timurhan Kaya: İstanbul’da yazılım ve AI mühendisi, Monafy teknik kurucu ortağı. Ajan platformu ADEM’i geliştirdi; ürün mimarisi ve web geliştirme."
   },
   "cv": {
     "role": "Yazılım ve AI Mühendisi",
@@ -34,13 +34,13 @@
   },
   "sidecard": {
     "now_title": "Şu an",
-    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi teknik kurucu ortağı olarak geliştiriyorum."
+    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi ve ajan platformu ADEM’i teknik kurucu ortağı olarak geliştiriyorum."
   },
   "about": {
     "title": "Hakkımda",
     "lead": "",
     "p1": "2019’dan bu yana sigorta, finans ve e-ticaret ürünleri geliştiriyorum. İşin ürün kararlarından servis entegrasyonlarına, arayüzlerden canlı sistemlerin bakımına kadar farklı aşamalarında çalıştım.",
-    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz.",
+    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz. Monafy’nin geliştirmesi, tasarladığım ajan platformu ADEM üzerinde yürüyor: kodlama ajanları işi Jira’dan alıyor, kodu yazıp test ediyor ve yalnız yetkili bir kişi Slack’te onayladığında yayına çıkarıyor.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
@@ -283,7 +283,7 @@
           },
           {
             "name": "Monafy",
-            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Teknik kurucu ortağı olarak ürün mimarisini tasarlıyor ve teknik geliştirme sürecini yönetiyorum.",
+            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Teknik kurucu ortağı olarak ürün mimarisini tasarlıyor ve teknik geliştirmeyi yönetiyorum; geliştirme, kurduğum ajan platformu ADEM üzerinde yürüyor.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -299,7 +299,7 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "Ürün akışlarını ve servisler arasındaki mimariyi tasarlıyor, kodlama ajanlarıyla geliştirme sürecini yönetiyorum.",
+              "Ürün akışlarını ve servisler arasındaki mimariyi tasarlıyor, geliştirmeyi ADEM üzerinden kodlama ajanlarıyla yönetiyorum.",
               "Mona AI’ı finansal veri araçlarına bağlayan oturum ve API entegrasyonlarını geliştirdim.",
               "Piyasa raporlarında kaynak veriyi, prompt kurallarını ve yayın kontrollerini aynı akışta birleştirdim.",
               "İzleme listeleri, fiyat uyarıları ve abonelik erişimini ürün deneyimine bağlıyorum."
