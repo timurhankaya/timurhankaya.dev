@@ -5,9 +5,10 @@
   },
   "cv": {
     "role": "Yazılım ve AI Mühendisi",
-    "profile": "2019’dan beri sigorta, finans ve e-ticaret alanlarında yazılım geliştiriyorum. Wingie Enuygun Group’ta sigorta karşılaştırma ve satın alma akışları ile servis entegrasyonları üzerinde çalışıyorum. Monafy’de ürün akışlarını ve mimarisini tasarlıyor, yapay zekâ destekli geliştirme sürecini ve doğrulamayı yönetiyorum.",
+    "profile": "2019’dan beri sigorta, finans ve SaaS alanlarında ürünleri uçtan uca geliştiren bir full-stack mühendisiyim. Monafy’nin teknik kurucu ortağıyım; ekibimizin birlikte çalıştığı ajan platformu ADEM’i tasarlayıp geliştirdim: ajanlar işi Jira’dan alıyor, kodu yazıp test ediyor, yalnız bir kişi Slack’te onaylayınca yayına çıkarıyor. Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Serbest müşteri projelerinde de Next.js ve React ile web siteleri geliştiriyorum.",
     "project_descriptions": {
-      "monafy": "Türkiye ve ABD borsaları için finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiren araştırma platformu. Ürün akışlarını ve servis mimarisini tasarlıyor, AI entegrasyonlarını ve kodlama ajanlarıyla geliştirme sürecini yönetiyorum."
+      "adem": "Kodlama ajanlarını bir ekip gibi çalıştırır. Bir iş analiz, geliştirme, inceleme, kabul, staging ve yayın aşamalarından geçer; ADEM sorularını Slack’te sorar ve yalnız bir kişinin onayıyla yayına çıkar. Panel her koşunun ne yaptığını, kime sorduğunu ve maliyetini gösterir. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim; Monafy’nin geliştirmesi bu platform üzerinde yürüyor.",
+      "monafy": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanı sunan araştırma platformu. Ürün akışlarını ve mimarisini tasarlıyor, geliştirmeyi ADEM üzerinden yönetiyorum."
     }
   },
   "hero": {
@@ -130,6 +131,17 @@
             "label": "Kod inceleme, test ve canlı doğrulama"
           }
         ]
+      },
+      {
+        "title": "Teknoloji yığını",
+        "items": [
+          {
+            "label": "React, TypeScript, Next.js, Nuxt/Vue"
+          },
+          {
+            "label": "Laravel, Symfony, Go, Python"
+          }
+        ]
       }
     ]
   },
@@ -142,10 +154,21 @@
         "meta": "Tam zamanlı · Hibrit · İstanbul, Türkiye",
         "period": "Ekim 2024 - Şu An",
         "bullets": [
-          "Sigorta karşılaştırma ve satın alma akışlarını geliştiriyor, sigorta alanında yapay zekâ çözümleri üretiyorum",
-          "Şirket içindeki yapay zekâ çalışmalarında ve AI-DLC süreçlerinde aktif rol alıyorum",
+          "Sigorta karşılaştırma ve satın alma akışlarını geliştiriyor, arayüzlerini düzenli olarak Next.js ve React ile yazıyorum",
+          "Sigorta alanında yapay zekâ çözümleri üretiyor, AI çalışmalarında ve AI-DLC’de aktif rol alıyorum",
           "Sigorta ve ödeme süreçlerini destekleyen servis entegrasyonları ve API’ler üzerinde çalışıyorum",
-          "Canlı sistemlerde performans, güvenilirlik ve kod kalitesini iyileştirmeye odaklanıyorum"
+          "Canlı sistemlerde performans, güvenilirlik ve kod kalitesine odaklanıyorum"
+        ]
+      },
+      {
+        "role": "Teknik Kurucu Ortak",
+        "company": "Monafy",
+        "meta": "",
+        "period": "2025 - Şu An",
+        "bullets": [
+          "Claude Code ve Codex ajanlarını bir ekip gibi çalıştıran ADEM’i tasarlayıp geliştirdim: graf tabanlı iş akışları, kendi skill ve izin setleri olan rol ajanları, her yayından önce Slack’te kişi onayı.",
+          "Monafy’nin servislerini, web istemcisini ve mobil uygulamasını kapsayan mimarisinden sorumluyum: Türkiye ve ABD hisseleri için piyasa verisi, piyasa raporları ve Mona AI asistanı.",
+          "Ajanların ve ekibin uyduğu çalışma standardını belirledim: her değişiklik bitti sayılmadan önce test edilir, bağımsız olarak incelenir ve canlıda kontrol edilir."
         ]
       },
       {
@@ -154,11 +177,9 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Ekim 2020 - Ekim 2024 · 4 yıl 1 ay",
         "bullets": [
-          "Sigorta satış ve karşılaştırma platformlarının geliştirilmesine katkı sağladım",
-          "Sağlık sigortası ürünlerinde sigorta şirketi entegrasyonları ile ERP ve CRM bağlantıları geliştirdim",
-          "İş ihtiyaçlarını farklı ekranlara uyumlu arayüzlere ve çalışan ürün özelliklerine dönüştürdüm",
-          "Canlı uygulamaların geliştirme ve bakım süreçlerinde yer aldım",
-          "Genç geliştiricilere mentorluk yaptım ve ekip içindeki teknik kararlara katkıda bulundum"
+          "Sigorta satış platformları için sigorta şirketi, ERP ve CRM entegrasyonları geliştirdim",
+          "İş ihtiyaçlarını uyumlu arayüzlere dönüştürdüm, canlı uygulamaların bakımında yer aldım",
+          "Genç geliştiricilere mentorluk yaptım, ekipteki teknik kararlara katkıda bulundum"
         ]
       },
       {
@@ -167,9 +188,8 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Haziran 2019 - Ekim 2020 · 1 yıl 5 ay",
         "bullets": [
-          "Müşteri projelerinde web uygulamalarının geliştirilmesine katkı sağladım",
-          "Kıdemli geliştiricilerle birlikte ürün özellikleri geliştirdim",
-          "Kod kalitesi ve ekip içi çalışma pratikleri konusunda deneyim kazandım"
+          "Müşteri projelerinde kıdemli geliştiricilerle birlikte web uygulamaları geliştirdim",
+          "Kod kalitesi ve ekip içi çalışma pratiklerinde deneyim kazandım"
         ]
       }
     ]

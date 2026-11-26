@@ -1,6 +1,8 @@
 <?php
 
+use App\Services\Portfolio\ProjectCatalog;
 use App\Support\Seo;
+use Database\Seeders\StorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
@@ -16,8 +18,10 @@ it('presents engineering work throughout the localized CV and its metadata', fun
 
     expect($decoded)->toContain($content['cv']['role'])
         ->toContain($content['cv']['profile'])
-        ->toContain($content['cv']['project_descriptions']['monafy']);
-    expect(mb_strtolower($decoded))->not->toContain('co-founder')->not->toContain('co-founded')->not->toContain('kurucu');
+        ->toContain($content['cv']['project_descriptions']['monafy'])
+        ->toContain($content['cv']['project_descriptions']['adem']);
+    // The Monafy co-founder role is listed under Wingie Enuygun Group; client names such as Toyka stay off the CV.
+    expect($decoded)->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik Kurucu Ortak')->not->toContain('Toyka')->not->toContain('adem.monafy');
 
     preg_match('~<script type="application/ld\+json">(.*?)</script>~s', $html, $ld);
     $graph = json_decode($ld[1], true, flags: JSON_THROW_ON_ERROR)['@graph'];
@@ -43,10 +47,23 @@ it('keeps the shared biography and the hands-off AI development account accurate
         $profile = $content['cv']['profile'];
         expect($this->get($path)->assertOk()->getContent())->toContain(e($content['about']['p2']));
         expect($content['stats']['role_value'])->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik kurucu ortak');
-        expect($profile)->toContain($locale === 'en' ? 'AI-assisted development' : 'yapay zekâ destekli geliştirme')
-            ->toContain($locale === 'en' ? 'verification' : 'doğrulamayı');
+        expect($profile)->toContain('ADEM')->toContain('Slack')->toContain('Next.js');
     }
 });
+
+it('orders the CV experience, links ADEM to its case study and lists the stack', function (string $locale, string $path) {
+    $content = json_decode(file_get_contents(resource_path("content/portfolio.{$locale}.json")), true, flags: JSON_THROW_ON_ERROR);
+    expect(array_column($content['experience']['items'], 'company'))->toBe(['Wingie Enuygun Group', 'Monafy', 'MONEO YAZILIM A.Ş.', 'MONEO YAZILIM A.Ş.'])
+        ->and(collect($content['skills']['groups'])->pluck('items')->flatten(1)->pluck('label')->implode(', '))
+        ->toContain('React, TypeScript, Next.js, Nuxt/Vue')->toContain('Laravel, Symfony, Go, Python');
+
+    $this->seed(StorySeeder::class);
+    $url = app(ProjectCatalog::class)->caseStudyUrl('adem', $locale);
+    $html = $this->get($path)->assertOk()->getContent();
+    preg_match_all('~<span class="project-name">(.*?)</span>~s', $html, $names);
+    expect($names[1][0] ?? '')->toBe('<a href="'.$url.'">ADEM</a>');
+    expect($this->get($path.'?ats=1')->assertOk()->getContent())->toContain('<a href="'.$url.'">'.$url.'</a>');
+})->with(['English' => ['en', '/cv'], 'Turkish' => ['tr', '/tr/ozgecmis']]);
 
 it('gives only the CV card its localized engineering role', function () {
     $spec = json_decode(file_get_contents(resource_path('og/cards.json')), true, flags: JSON_THROW_ON_ERROR);
@@ -100,5 +117,5 @@ it('loads the new CV schema even when portfolio data from the previous release i
 
     $html = html_entity_decode($this->get($path)->assertOk()->getContent(), ENT_QUOTES | ENT_HTML5);
     expect($html)->toContain($content['cv']['role'])->toContain($content['cv']['profile']);
-    expect(mb_strtolower($html))->not->toContain('co-founder')->not->toContain('kurucu');
+    expect($html)->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik Kurucu Ortak');
 })->with(['en' => ['en', '/cv'], 'tr' => ['tr', '/tr/ozgecmis']]);

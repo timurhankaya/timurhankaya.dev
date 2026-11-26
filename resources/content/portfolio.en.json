@@ -5,9 +5,10 @@
   },
   "cv": {
     "role": "Software & AI Engineer",
-    "profile": "Since 2019, I have built software for insurance, finance and e-commerce. At Wingie Enuygun Group, I work on insurance comparison and purchase flows and service integrations. For Monafy, I design product flows and architecture and oversee AI-assisted development and verification.",
+    "profile": "Full-stack engineer since 2019, building products end to end for insurance, finance and SaaS. I am the tech co-founder of Monafy, where I designed and built ADEM, the agent platform our team ships with: agents take tasks from Jira, write and test the code, and release only after a person approves in Slack. At Wingie Enuygun Group I build the insurance comparison and purchase flows customers use every day. I also build websites with Next.js and React for freelance clients.",
     "project_descriptions": {
-      "monafy": "A research platform combining financial data, market reports and an AI assistant for Turkish and US stock markets. I design product flows and service architecture, manage AI integrations and direct development with coding agents."
+      "adem": "Runs coding agents as a team. A task moves through analysis, implementation, review, acceptance, staging and release; ADEM asks its questions in Slack and ships only with a person’s approval. The panel shows what each run did, whom it asked and what it cost. I designed it and built it by directing coding agents; Monafy’s development runs on it.",
+      "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design its product flows and architecture and direct development through ADEM."
     }
   },
   "hero": {
@@ -130,6 +131,17 @@
             "label": "Code review, testing and production verification"
           }
         ]
+      },
+      {
+        "title": "Stack",
+        "items": [
+          {
+            "label": "React, TypeScript, Next.js, Nuxt/Vue"
+          },
+          {
+            "label": "Laravel, Symfony, Go, Python"
+          }
+        ]
       }
     ]
   },
@@ -142,10 +154,21 @@
         "meta": "Full-time · Hybrid · Istanbul, Türkiye",
         "period": "Oct 2024 - Present",
         "bullets": [
-          "Developing insurance comparison and purchase flows and building AI solutions for insurance",
-          "Taking an active role in company AI initiatives and AI-DLC processes",
-          "Working on service integrations and APIs for insurance and payment processes",
-          "Focusing on performance, reliability and code quality in production systems"
+          "Develop insurance comparison and purchase flows and regularly build their interfaces with Next.js and React",
+          "Build AI solutions for insurance and take an active role in AI initiatives and AI-DLC",
+          "Work on service integrations and APIs for insurance and payment processes",
+          "Focus on performance, reliability and code quality in production systems"
+        ]
+      },
+      {
+        "role": "Tech Co-founder",
+        "company": "Monafy",
+        "meta": "",
+        "period": "2025 - Present",
+        "bullets": [
+          "Designed and built ADEM, a platform that runs Claude Code and Codex agents as a team: graph-based workflows, role agents with their own skills and permission sets, human approval in Slack before every release.",
+          "Own Monafy’s architecture across its services, web client and mobile app: market data for Turkish and US stocks, market reports and the Mona AI assistant.",
+          "Set the working standard that agents and people follow: every change gets tests, an independent review and a check in production before it counts as done."
         ]
       },
       {
@@ -154,11 +177,9 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Oct 2020 - Oct 2024 · 4 yrs 1 mo",
         "bullets": [
-          "Contributed to the development of insurance sales and comparison platforms",
-          "Built insurer integrations and ERP and CRM connections for health insurance products",
-          "Turned business needs into responsive interfaces and working product features",
-          "Worked on the development and maintenance of production applications",
-          "Mentored junior developers and contributed to technical decisions within the team"
+          "Built insurer integrations and ERP and CRM connections for insurance sales platforms",
+          "Turned business needs into responsive interfaces and maintained production applications",
+          "Mentored junior developers and contributed to technical decisions"
         ]
       },
       {
@@ -167,9 +188,8 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Jun 2019 - Oct 2020 · 1 yr 5 mos",
         "bullets": [
-          "Contributed to web application development on client projects",
-          "Built product features alongside senior developers",
-          "Gained experience in code quality and collaborative development practices"
+          "Contributed to web applications on client projects alongside senior developers",
+          "Gained experience in code quality and collaborative development"
         ]
       }
     ]

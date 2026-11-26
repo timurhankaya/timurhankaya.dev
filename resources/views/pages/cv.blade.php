@@ -44,6 +44,8 @@
             'tag' => $tx(data_get($item, 'badge')),
             'desc' => $tx(data_get($content, 'cv.project_descriptions.'.data_get($item, 'key'), data_get($item, 'description'))),
             'stack' => implode(' · ', array_filter(array_map($tx, array_values((array) data_get($item, 'stack', []))))),
+            // A product with a case study on the site links to it; external sites stay off the CV.
+            'url' => data_get($item, 'case_study') ? app(\App\Services\Portfolio\ProjectCatalog::class)->caseStudyUrl((string) data_get($item, 'key'), $locale) : null,
         ])
         ->values()
         ->all();
@@ -452,6 +454,8 @@
             font-weight: 700;
         }
 
+        .project-name a { color: inherit; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 0.6mm; }
+
         .project-desc {
             font-size: 0.76rem;
             color: var(--ink-muted);
@@ -611,7 +615,7 @@
                         <span class="exp-period" {!! $index === 0 ? 'style="font-weight: 700; color: var(--ink);"' : '' !!}>{{ $exp['period'] }}</span>
                     </div>
                     <div class="exp-company">{{ $exp['company'] }}</div>
-                    <div class="exp-meta">{{ $exp['meta'] }}</div>
+                    @if ($exp['meta'] !== '')<div class="exp-meta">{{ $exp['meta'] }}</div>@endif
                     <ul class="exp-bullets">
                         @foreach($exp['bullets'] as $bullet)
                         <li>{{ $bullet }}</li>
@@ -626,7 +630,7 @@
 
                 @foreach($t['projects'] as $proj)
                 <div class="project-compact">
-                    <span class="project-name">{{ $proj['name'] }}</span> <span class="tag">{{ $proj['tag'] }}</span>
+                    <span class="project-name">@if ($proj['url'])<a href="{{ $proj['url'] }}">{{ $proj['name'] }}</a>@else{{ $proj['name'] }}@endif</span> <span class="tag">{{ $proj['tag'] }}</span>
                     <p class="project-desc">{{ $proj['desc'] }}</p>
                     <p class="project-stack">{{ $proj['stack'] }}</p>
                 </div>

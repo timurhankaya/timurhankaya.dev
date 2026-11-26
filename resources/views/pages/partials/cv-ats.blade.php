@@ -38,7 +38,7 @@
             <article>
                 <h3>{{ $exp['role'] }} — {{ $exp['company'] }}</h3>
                 <p>{{ $exp['period'] }}</p>
-                <p>{{ $exp['meta'] }}</p>
+                @if ($exp['meta'] !== '')<p>{{ $exp['meta'] }}</p>@endif
                 <ul>
                     @foreach ($exp['bullets'] as $bullet)
                         <li>{{ $bullet }}</li>
@@ -61,6 +61,7 @@
         @foreach ($t['projects'] as $project)
             <article>
                 <h3>{{ $project['name'] }}</h3>
+                @if ($project['url'])<p>{{ __('brand.case_type') }}: <a href="{{ $project['url'] }}">{{ $project['url'] }}</a></p>@endif
                 <p>{{ $project['desc'] }}</p>
                 <p>{{ $project['stack'] }}</p>
             </article>
