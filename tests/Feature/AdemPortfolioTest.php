@@ -14,7 +14,7 @@ beforeEach(fn () => Cache::flush());
 it('leads the featured work and the case studies with ADEM', function () {
     $keys = array_column(app(PortfolioProjects::class)->featured(), 'key');
 
-    expect($keys)->toBe(['adem', 'monafy', 'moneo-render', 'transiyzi', 'smart-global', 'edanisman', 'word-imposter'])
+    expect($keys)->toBe(['adem', 'monafy', 'moneo-render', 'transiyzi', 'smart-global', 'edanisman'])
         ->and(ProjectCatalog::STORY_ORDER[0])->toBe('adem');
 });
 
