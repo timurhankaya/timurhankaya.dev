@@ -62,14 +62,15 @@ it('shows the games without case study links and names the prerender product Dyn
         ->and($home)->toContain('Dynorender')->not->toContain('Moneo Render');
 });
 
-it('shows the brand logos on the home page without a heading', function () {
+it('shows the brand logos on the home page', function () {
     $html = $this->get('/tr')->assertOk()->getContent();
 
     expect($html)->toContain('class="brand-logos"')
         ->toContain('/images/logos/monafy.svg')->toContain('/images/logos/moneo.svg')->toContain('/images/logos/sistemglobal.png')->toContain('/images/logos/basefy.png')
         ->toContain('/images/logos/smart-global.svg')->toContain('/images/logos/edanisman.png')
         ->not->toContain('/images/logos/transiyzi.svg')->not->toContain('/images/logos/dynorender.png')
-        ->not->toContain('>Birlikte çalıştığım markalar<');
+        // The old wording read like a client list.
+        ->not->toContain('Birlikte çalıştığım markalar');
     foreach (['monafy.svg', 'moneo.svg', 'sistemglobal.png', 'smart-global.svg', 'edanisman.png', 'basefy.png'] as $file) {
         expect(public_path('images/logos/'.$file))->toBeFile();
     }

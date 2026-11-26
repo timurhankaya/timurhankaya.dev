@@ -54,7 +54,7 @@ return [
     'case_hint' => 'Technical write-ups of real problems on real projects',
     'code_copy' => 'Copy',
     'home_crumb' => 'Home',
-    'logos_label' => 'Brands I have worked with',
+    'logos_label' => 'Companies and products I have worked on',
     'code_copied' => 'Copied',
     'article_project' => 'Project',
     'contact_heading' => 'Let’s talk',

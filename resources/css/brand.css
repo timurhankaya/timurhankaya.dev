@@ -864,38 +864,47 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     .brand-case-toc a[aria-current="location"]::before { display: none; }
 }
 
-/* Brands strip on the projects page: white marks at rest; on hover a light tile shows each logo in its own colours. */
-.brand-logos { margin-top: var(--section-space); }
-/* Lines between tiles come from the 1px gap over the line colour, so any count of logos lays out cleanly. */
-.brand-logos-track { width: 100%; }
-.brand-logos ul { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+/* Logo strip under the featured work. White marks at rest; hover or keyboard focus puts one on a light plate in
+   its own colours (several files are dark ink, so they need the plate). The base layout is a still, wrapping grid. */
+.brand-logos { margin-top: var(--section-space); border-bottom: 1px solid var(--line); }
+.brand-logos-title { display: flex; padding-bottom: 14px; border-bottom: 1px solid var(--line); color: var(--muted); }
+.brand-logos ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); }
 .brand-logos ul[aria-hidden="true"] { display: none; }
-.brand-logos li { background: var(--paper); }
-.brand-logo-tile { display: grid; place-items: center; height: 96px; padding: 18px; transition: background .25s; }
-.brand-logo-tile img { max-width: 78%; max-height: 34px; object-fit: contain; filter: brightness(0) invert(1); opacity: .62; transition: filter .25s, opacity .25s; }
-.brand-logo-tile img.is-tall { max-height: 54px; }
-.brand-logo-wordmark { color: var(--muted); font: 600 17px/1 var(--heading); letter-spacing: -.02em; transition: color .25s; }
-.brand-logo-tile:is(:hover, :focus-visible) { background: #f2f3f5; }
+.brand-logos li { display: grid; padding: 8px; background: var(--paper); }
+.brand-logo-tile { display: grid; place-items: center; min-width: 0; height: 88px; padding-inline: 12px; }
+.brand-logo-tile img { width: calc(var(--logo-width) * var(--logo-scale, 1) * 1px); max-width: 100%; height: auto; filter: brightness(0) invert(1); opacity: .6; }
+.brand-logo-tile img.is-thin { opacity: .78; }
+.brand-logo-wordmark { color: var(--muted); font: 600 17px/1 var(--heading); letter-spacing: -.02em; }
+.brand-logo-tile:is(:hover, :focus-visible) { background: #f2f3f5; box-shadow: inset 0 -2px var(--accent); }
 .brand-logo-tile:is(:hover, :focus-visible) img { filter: none; opacity: 1; }
 .brand-logo-tile:is(:hover, :focus-visible) .brand-logo-wordmark { color: #0a0a0b; }
+.brand-site .brand-logos a:focus-visible { outline-offset: 3px; }
 @media (max-width: 760px) {
-    .brand-logos { overflow: hidden; }
-    .brand-logos-track { display: flex; width: max-content; animation: brand-logo-marquee 32s linear infinite; }
-    .brand-logos-track ul { display: flex; flex: none; width: max-content; margin-right: 1px; }
-    .brand-logos-track ul[aria-hidden="true"] { display: flex; }
-    .brand-logos li { flex: 0 0 clamp(152px, 48vw, 220px); }
-    .brand-logo-tile { height: 80px; }
-    .brand-logos-track:is(:hover, :focus-within) { animation-play-state: paused; }
+    .brand-logos { --logo-scale: .88; }
+    .brand-logos ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .brand-logo-tile { height: 76px; }
+}
+/* With motion allowed the two sets run as one loop. Each set is wider than the page column, so no gap opens. */
+@media (prefers-reduced-motion: no-preference) {
+    .brand-logos-viewport { --logo-fade: clamp(28px, 8%, 96px); overflow: hidden; overflow: clip; -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--logo-fade), #000 calc(100% - var(--logo-fade)), transparent); mask-image: linear-gradient(90deg, transparent, #000 var(--logo-fade), #000 calc(100% - var(--logo-fade)), transparent); }
+    .brand-logos-track { display: flex; width: max-content; animation: brand-logo-marquee 52s linear infinite; }
+    .brand-logos ul { display: flex; flex: none; gap: 0; background: none; }
+    .brand-logos ul[aria-hidden="true"] { display: flex; }
+    .brand-logos li { flex: none; padding-inline: 10px; background: none; }
+    .brand-logo-tile { padding-inline: 28px; transition: background .25s, box-shadow .25s; }
+    .brand-logo-tile img { max-width: none; transition: filter .25s, opacity .25s; }
+    .brand-logos-viewport:hover .brand-logos-track { animation-play-state: paused; }
+    /* Keyboard focus rests the loop at its start, so the browser can scroll the focused logo into view. */
+    .brand-logos-viewport:has(:focus-visible) { overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; -webkit-mask-image: none; mask-image: none; }
+    .brand-logos li:has(:focus-visible) { scroll-snap-align: center; }
+    .brand-logos-viewport:has(:focus-visible) .brand-logos-track { animation: none; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+    .brand-logos-track { animation-duration: 40s; }
+    .brand-logos li { padding-inline: 5px; }
+    .brand-logo-tile { padding-inline: 18px; }
 }
 @keyframes brand-logo-marquee { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-    .brand-logo-tile, .brand-logo-tile img, .brand-logo-wordmark { transition: none; }
-    .brand-logos-track { animation: none; }
-    .brand-logos ul[aria-hidden="true"] { display: none; }
-}
-@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
-    .brand-logos ul { max-width: 100%; overflow-x: auto; }
-}
 
 /* Status pages: one oversized code in the accent, the message, and ways back. */
 .brand-error-shell { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; width: min(1184px, 100%); margin-inline: auto; padding-inline: 24px; }

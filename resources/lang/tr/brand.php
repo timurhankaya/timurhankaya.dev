@@ -54,7 +54,7 @@ return [
     'case_hint' => 'Gerçek projelerdeki problemlerin teknik incelemesi',
     'code_copy' => 'Kopyala',
     'home_crumb' => 'Ana sayfa',
-    'logos_label' => 'Birlikte çalıştığım markalar',
+    'logos_label' => 'Üzerinde çalıştığım şirket ve ürünler',
     'code_copied' => 'Kopyalandı',
     'article_project' => 'Proje',
     'contact_heading' => 'Konuşalım',
