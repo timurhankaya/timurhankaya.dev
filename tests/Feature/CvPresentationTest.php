@@ -47,7 +47,7 @@ it('keeps the shared biography and the hands-off AI development account accurate
         $profile = $content['cv']['profile'];
         expect($this->get($path)->assertOk()->getContent())->toContain(e($content['about']['p2']));
         expect($content['stats']['role_value'])->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik kurucu ortak');
-        expect($profile)->toContain('ADEM')->toContain('Slack')->toContain('Next.js');
+        expect($profile)->toContain('ADEM')->toContain('Next.js');
     }
 });
 

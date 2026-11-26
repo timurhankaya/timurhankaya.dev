@@ -19,7 +19,7 @@ it('leads the featured work and the case studies with ADEM', function () {
 });
 
 it('links the ADEM card to its case study on this site once the story is published', function (string $locale, string $home) {
-    $this->get($home)->assertOk()->assertDontSee('vaka-incelemeleri/kendi-yayinini', false)->assertDontSee('case-studies/coding-agents', false);
+    $this->get($home)->assertOk()->assertDontSee('vaka-incelemeleri/onayinizi-bekleyen', false)->assertDontSee('case-studies/digital-teammate', false);
 
     $this->seed(StorySeeder::class);
     $story = Post::published()->where('project_key', 'adem')->firstOrFail();

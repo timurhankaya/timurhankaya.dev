@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Timurhan Kaya — Yazılım ve AI Mühendisi",
-    "description": "Timurhan Kaya: İstanbul’da yazılım ve AI mühendisi, Monafy teknik kurucu ortağı. Ajan platformu ADEM’i geliştirdi; ürün mimarisi ve web geliştirme."
+    "description": "Timurhan Kaya: İstanbul’da yazılım ve AI mühendisi, Monafy teknik kurucu ortağı. Dijital ekip arkadaşı ADEM’i tasarladı; ürün mimarisi ve web geliştirme."
   },
   "cv": {
     "role": "Yazılım ve AI Mühendisi",
-    "profile": "2019’dan beri sigorta, finans ve SaaS alanlarında ürünleri uçtan uca geliştiren bir full-stack mühendisiyim. Monafy’nin teknik kurucu ortağıyım; ekibimizin birlikte çalıştığı ajan platformu ADEM’i tasarlayıp geliştirdim: ajanlar işi Jira’dan alıyor, kodu yazıp test ediyor, yalnız bir kişi Slack’te onaylayınca yayına çıkarıyor. Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Serbest müşteri projelerinde de Next.js ve React ile web siteleri geliştiriyorum.",
+    "profile": "2019’dan beri sigorta, finans ve SaaS alanlarında ürünleri uçtan uca geliştiren bir full-stack mühendisiyim. Monafy’nin teknik kurucu ortağıyım; gündelik dille anlatılan isteği izlenebilir işe çeviren, yalnız yetkili bir kişi onaylayınca yayına çıkan dijital ekip arkadaşı ADEM’i tasarlayıp geliştirdim. İlk alanı yazılım geliştirme. Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Serbest müşteri projelerinde de Next.js ve React ile web siteleri geliştiriyorum.",
     "project_descriptions": {
-      "adem": "Kodlama ajanlarını bir ekip gibi çalıştırır. Bir iş analiz, geliştirme, inceleme, kabul, staging ve yayın aşamalarından geçer; ADEM sorularını Slack’te sorar ve yalnız bir kişinin onayıyla yayına çıkar. Panel her koşunun ne yaptığını, kime sorduğunu ve maliyetini gösterir. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim; Monafy’nin geliştirmesi bu platform üzerinde yürüyor.",
+      "adem": "Şirket için bir dijital ekip arkadaşı: gündelik dille anlatılan istek izlenebilir bir işe dönüşür, gereken yapay zekâ modelleri ve araçlarla yürütülür; yayın yetkili bir kişinin onayını bekler. İlk alanı yazılım geliştirme; Monafy’nin geliştirmesi bu platformda yürüyor. Bugün bağlı olanlar: Jira, Slack, Claude, Codex, GitLab ve Laravel Forge. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim.",
       "monafy": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanı sunan araştırma platformu. Ürün akışlarını ve mimarisini tasarlıyor, geliştirmeyi ADEM üzerinden yönetiyorum."
     }
   },
@@ -35,13 +35,13 @@
   },
   "sidecard": {
     "now_title": "Şu an",
-    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi ve ajan platformu ADEM’i teknik kurucu ortağı olarak geliştiriyorum."
+    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi ve şirketler için dijital ekip arkadaşı ADEM’i teknik kurucu ortağı olarak geliştiriyorum."
   },
   "about": {
     "title": "Hakkımda",
     "lead": "",
     "p1": "2019’dan bu yana sigorta, finans ve e-ticaret ürünleri geliştiriyorum. İşin ürün kararlarından servis entegrasyonlarına, arayüzlerden canlı sistemlerin bakımına kadar farklı aşamalarında çalıştım.",
-    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz. Monafy’nin geliştirmesi, tasarladığım ajan platformu ADEM üzerinde yürüyor: kodlama ajanları işi Jira’dan alıyor, kodu yazıp test ediyor ve yalnız yetkili bir kişi Slack’te onayladığında yayına çıkarıyor.",
+    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz. Şirket için dijital ekip arkadaşı ADEM’i de tasarladım: işi gündelik dille anlatırsınız, ADEM onu izlenebilir bir işe çevirir, yayın yetkili bir kişinin onayını bekler. İlk alanı yazılım geliştirme; Monafy’nin geliştirmesi de ADEM üzerinde yürüyor.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
@@ -166,7 +166,7 @@
         "meta": "",
         "period": "2025 - Şu An",
         "bullets": [
-          "Claude Code ve Codex ajanlarını bir ekip gibi çalıştıran ADEM’i tasarlayıp geliştirdim: graf tabanlı iş akışları, kendi skill ve izin setleri olan rol ajanları, her yayından önce Slack’te kişi onayı.",
+          "Şirket için dijital ekip arkadaşı ADEM’i, ilk alanı yazılım geliştirme olacak şekilde tasarlayıp geliştirdim: graf tabanlı iş akışları, kendi skill ve izin setleri olan rol ajanları, her yayından önce yetkili kişi onayı.",
           "Monafy’nin servislerini, web istemcisini ve mobil uygulamasını kapsayan mimarisinden sorumluyum: Türkiye ve ABD hisseleri için piyasa verisi, piyasa raporları ve Mona AI asistanı.",
           "Ajanların ve ekibin uyduğu çalışma standardını belirledim: her değişiklik bitti sayılmadan önce test edilir, bağımsız olarak incelenir ve canlıda kontrol edilir."
         ]
@@ -221,11 +221,10 @@
           {
             "key": "adem",
             "name": "ADEM",
-            "description": "Claude Code ve Codex ajanlarını bir ekip gibi çalıştıran ajan platformu. İşler analizden yayına aynı yoldan ilerler; Slack’te yetkili bir kişi onaylamadan hiçbir şey yayına çıkmaz. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim.",
+            "description": "Şirket için bir dijital ekip arkadaşı: işi gündelik dille anlatırsınız; ADEM onu izlenebilir bir işe çevirir, gereken yapay zekâ modellerini ve araçları çalıştırır. Yayın, yetkili bir kişinin onayını bekler. İlk alanı yazılım geliştirme. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim.",
             "stack": [
               "React 19",
               "TypeScript",
-              "Inertia",
               "Laravel 13",
               "Go",
               "PostgreSQL",
@@ -235,13 +234,13 @@
             ],
             "url": "",
             "case_study": true,
-            "badge": "AI ajan platformu",
+            "badge": "Dijital ekip arkadaşı",
             "year": "2026–",
             "highlights": [
-              "İş akışını bir graf olarak tasarladım: analiz, geliştirme, inceleme, kabul, staging ve yayın.",
+              "Geliştirme akışını bir graf olarak tasarladım: analiz, geliştirme, inceleme, kabul, staging ve yayın.",
               "Sürümü sabitlenmiş skill’leri ve izin setleri olan rol ajanlarını, Go ile yazılmış runner’ı kurdum.",
-              "Her yayını Slack’te yetkili kişinin ✅ onayına bağladım; ADEM’in yazdığı hiçbir şey onay sayılmaz.",
-              "Monafy’nin geliştirmesi ADEM üzerinde yürüyor."
+              "Her yayını yetkili kişinin onayına bağladım; ADEM’in yazdığı hiçbir şey onay sayılmaz.",
+              "Bugün bağlı olanlar: Jira, Slack, Claude, Codex, GitLab ve Laravel Forge. Monafy’nin geliştirmesi ADEM üzerinde yürüyor."
             ],
             "context": "founder",
             "context_label": "Teknik kurucu ortak"
@@ -303,7 +302,7 @@
           },
           {
             "name": "Monafy",
-            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Teknik kurucu ortağı olarak ürün mimarisini tasarlıyor ve teknik geliştirmeyi yönetiyorum; geliştirme, kurduğum ajan platformu ADEM üzerinde yürüyor.",
+            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Teknik kurucu ortağı olarak ürün mimarisini tasarlıyor ve teknik geliştirmeyi yönetiyorum; geliştirme ADEM üzerinde yürüyor.",
             "stack": [
               "Laravel",
               "Nuxt.js",

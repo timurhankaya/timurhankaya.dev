@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Timurhan Kaya — Software & AI Engineer",
-    "description": "Timurhan Kaya is a software and AI engineer and Monafy tech co-founder in Istanbul. He built ADEM, an agent platform, and works on product architecture."
+    "description": "Timurhan Kaya is a software and AI engineer and Monafy tech co-founder in Istanbul. He designed ADEM, a digital teammate, and works on product architecture."
   },
   "cv": {
     "role": "Software & AI Engineer",
-    "profile": "Full-stack engineer since 2019, building products end to end for insurance, finance and SaaS. I am the tech co-founder of Monafy, where I designed and built ADEM, the agent platform our team ships with: agents take tasks from Jira, write and test the code, and release only after a person approves in Slack. At Wingie Enuygun Group I build the insurance comparison and purchase flows customers use every day. I also build websites with Next.js and React for freelance clients.",
+    "profile": "Full-stack engineer since 2019, building products end to end for insurance, finance and SaaS. I am the tech co-founder of Monafy, where I designed and built ADEM, a digital teammate that turns everyday requests into traceable work and releases only after an authorized person approves; software development is its first area. At Wingie Enuygun Group I build the insurance comparison and purchase flows customers use every day. I also build websites with Next.js and React for freelance clients.",
     "project_descriptions": {
-      "adem": "Runs coding agents as a team. A task moves through analysis, implementation, review, acceptance, staging and release; ADEM asks its questions in Slack and ships only with a person’s approval. The panel shows what each run did, whom it asked and what it cost. I designed it and built it by directing coding agents; Monafy’s development runs on it.",
+      "adem": "A digital teammate for a company: a request in everyday language becomes traceable work, run with the AI models and tools it needs; releases wait for an authorized person’s approval. Software development is its first area, and Monafy’s development runs on it. Connected today: Jira, Slack, Claude, Codex, GitLab and Laravel Forge. I designed it and built it by directing coding agents.",
       "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design its product flows and architecture and direct development through ADEM."
     }
   },
@@ -35,13 +35,13 @@
   },
   "sidecard": {
     "now_title": "Now",
-    "now_body": "Software developer at Wingie Enuygun Group and tech co-founder building Monafy and its agent platform, ADEM."
+    "now_body": "Software developer at Wingie Enuygun Group and tech co-founder building Monafy and ADEM, a digital teammate for companies."
   },
   "about": {
     "title": "About",
     "lead": "",
     "p1": "Since 2019, I have built software for insurance, finance and e-commerce. My work spans product decisions, service integrations, interfaces and the upkeep of production systems.",
-    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets. Monafy’s development runs on ADEM, the agent platform I designed: coding agents take tasks from Jira, write and test the code, and release only after a person approves in Slack.",
+    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets. I also designed ADEM, a digital teammate for a company: you describe the work in everyday language, ADEM turns it into traceable work, and releases wait for an authorized person’s approval. Software development is its first area, and Monafy’s development runs on it.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
@@ -166,7 +166,7 @@
         "meta": "",
         "period": "2025 - Present",
         "bullets": [
-          "Designed and built ADEM, a platform that runs Claude Code and Codex agents as a team: graph-based workflows, role agents with their own skills and permission sets, human approval in Slack before every release.",
+          "Designed and built ADEM, a digital teammate for a company, starting with software development: graph-based workflows, role agents with their own skills and permission sets, and an authorized person’s approval before every release.",
           "Own Monafy’s architecture across its services, web client and mobile app: market data for Turkish and US stocks, market reports and the Mona AI assistant.",
           "Set the working standard that agents and people follow: every change gets tests, an independent review and a check in production before it counts as done."
         ]
@@ -221,11 +221,10 @@
           {
             "key": "adem",
             "name": "ADEM",
-            "description": "An agent platform that runs Claude Code and Codex agents as a team. Tasks move from analysis to release, and nothing ships until a person approves it in Slack. I designed it and built it by directing coding agents.",
+            "description": "A digital teammate for a company: you describe the work in everyday language, and ADEM turns it into traceable work and runs the AI models and tools it needs. Releases wait for an authorized person’s approval. Software development is its first area. I designed it and built it by directing coding agents.",
             "stack": [
               "React 19",
               "TypeScript",
-              "Inertia",
               "Laravel 13",
               "Go",
               "PostgreSQL",
@@ -235,13 +234,13 @@
             ],
             "url": "",
             "case_study": true,
-            "badge": "AI agent platform",
+            "badge": "Digital teammate",
             "year": "2026–",
             "highlights": [
-              "Designed the workflow as a graph: analysis, development, review, acceptance, staging and release.",
+              "Designed the development workflow as a graph: analysis, development, review, acceptance, staging and release.",
               "Built role agents with pinned skill versions and permission sets, and a runner written in Go.",
-              "Tied every release to an authorized person’s ✅ in Slack; nothing ADEM writes counts as approval.",
-              "Monafy’s development runs on ADEM."
+              "Tied every release to an authorized person’s approval; nothing ADEM writes counts as approval.",
+              "Connected today: Jira, Slack, Claude, Codex, GitLab and Laravel Forge. Monafy’s development runs on ADEM."
             ],
             "context": "founder",
             "context_label": "Tech Co-founder"
@@ -303,7 +302,7 @@
           },
           {
             "name": "Monafy",
-            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As tech co-founder, I design the product architecture and lead technical development, which runs on ADEM, the agent platform I built.",
+            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As tech co-founder, I design the product architecture and lead technical development, which runs on ADEM.",
             "stack": [
               "Laravel",
               "Nuxt.js",
