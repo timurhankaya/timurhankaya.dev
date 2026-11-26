@@ -5,9 +5,9 @@
   },
   "cv": {
     "role": "Yazılım ve AI Mühendisi",
-    "profile": "2019’dan beri sigorta, finans ve SaaS alanlarında ürünleri uçtan uca geliştiren bir full-stack mühendisiyim. Monafy’nin teknik kurucu ortağıyım; gündelik dille anlatılan isteği izlenebilir işe çeviren, yalnız yetkili bir kişi onaylayınca yayına çıkan dijital ekip arkadaşı ADEM’i tasarlayıp geliştirdim. İlk alanı yazılım geliştirme. Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Serbest müşteri projelerinde de Next.js ve React ile web siteleri geliştiriyorum.",
+    "profile": "2019’dan beri sigorta, finans ve e-ticaret alanlarında yazılım geliştiriyorum. Wingie Enuygun Group’ta sigorta karşılaştırma ve satın alma akışları ile servis entegrasyonları üzerinde çalışıyorum. Monafy’nin teknik kurucu ortağıyım; ürün akışlarını ve mimarisini tasarlıyorum. Geliştirme işlerini yürüten dijital ekip arkadaşı ADEM’i tasarlayıp geliştirdim. Serbest projelerde Next.js ve React ile web siteleri geliştiriyorum.",
     "project_descriptions": {
-      "adem": "Şirket için bir dijital ekip arkadaşı: gündelik dille anlatılan istek izlenebilir bir işe dönüşür, gereken yapay zekâ modelleri ve araçlarla yürütülür; yayın yetkili bir kişinin onayını bekler. İlk alanı yazılım geliştirme; Monafy’nin geliştirmesi bu platformda yürüyor. Bugün bağlı olanlar: Jira, Slack, Claude, Codex, GitLab ve Laravel Forge. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim.",
+      "adem": "Şirketler için dijital ekip arkadaşı. Board’dan ya da Jira’dan gelen geliştirme işini alır, eksik bilgiyi Slack’te sorar, kodlar ve test eder. Onayla yayına alır, canlıda kontrol eder ve rapor yazar. Monafy’nin geliştirmesi ADEM üzerinde yürüyor. Tasarladım ve kodlama ajanlarıyla geliştirdim.",
       "monafy": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanı sunan araştırma platformu. Ürün akışlarını ve mimarisini tasarlıyor, geliştirmeyi ADEM üzerinden yönetiyorum.",
       "enuygun-sigorta": "Kasko, trafik ve sağlık sigortası tekliflerini karşılaştırma ve poliçe satın alma platformu."
     },
@@ -97,7 +97,7 @@
     "title": "Hakkımda",
     "lead": "",
     "p1": "2019’dan bu yana sigorta, finans ve e-ticaret ürünleri geliştiriyorum. İşin ürün kararlarından servis entegrasyonlarına, arayüzlerden canlı sistemlerin bakımına kadar farklı aşamalarında çalıştım.",
-    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz. Şirket için dijital ekip arkadaşı ADEM’i de tasarladım: işi gündelik dille anlatırsınız, ADEM onu izlenebilir bir işe çevirir, yayın yetkili bir kişinin onayını bekler. İlk alanı yazılım geliştirme; Monafy’nin geliştirmesi de ADEM üzerinde yürüyor.",
+    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz. Şirketler için dijital ekip arkadaşı ADEM’i de tasarlayıp geliştirdim. ADEM geliştirme işini alır, kodlar ve test eder; yayına onayla çıkar. Monafy’nin geliştirmesi ADEM üzerinde yürüyor.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
@@ -199,10 +199,10 @@
         "meta": "Tam zamanlı · Hibrit · İstanbul, Türkiye",
         "period": "Ekim 2024 - Şu An",
         "bullets": [
-          "Sigorta karşılaştırma ve satın alma akışlarını geliştiriyor, arayüzlerini düzenli olarak Next.js ve React ile yazıyorum",
-          "Sigorta alanında yapay zekâ çözümleri üretiyor, AI çalışmalarında ve AI-DLC’de aktif rol alıyorum",
+          "Sigorta karşılaştırma ve satın alma akışlarını geliştiriyor, arayüzlerini Next.js ve React ile yazıyorum",
+          "Sigorta alanında yapay zekâ çözümleri üretiyor, şirket içindeki yapay zekâ çalışmalarında ve AI-DLC süreçlerinde aktif rol alıyorum",
           "Sigorta ve ödeme süreçlerini destekleyen servis entegrasyonları ve API’ler üzerinde çalışıyorum",
-          "Canlı sistemlerde performans, güvenilirlik ve kod kalitesine odaklanıyorum"
+          "Canlı sistemlerde performans, güvenilirlik ve kod kalitesini iyileştirmeye odaklanıyorum"
         ]
       },
       {
@@ -211,9 +211,9 @@
         "meta": "",
         "period": "2025 - Şu An",
         "bullets": [
-          "Şirket için dijital ekip arkadaşı ADEM’i, ilk alanı yazılım geliştirme olacak şekilde tasarlayıp geliştirdim: graf tabanlı iş akışları, kendi skill ve izin setleri olan rol ajanları, her yayından önce yetkili kişi onayı.",
-          "Monafy’nin servislerini ve web istemcisini kapsayan ürün mimarisinden sorumluyum: Türkiye ve ABD hisseleri için piyasa verisi, piyasa raporları ve Mona AI asistanı.",
-          "Ajanlara işin nasıl verileceğini belirledim: kabul ölçütleri geliştirmeden önce tanımlanır, “bitti” bildirimi değişiklik ve doğrulama çıktısıyla kontrol edilir."
+          "Türkiye ve ABD borsaları için piyasa verisi, piyasa raporları ve AI asistanı sunan ürünün akışlarını ve mimarisini tasarlıyorum",
+          "Geliştirme işlerini yürüten dijital ekip arkadaşı ADEM’i tasarlayıp geliştirdim",
+          "Geliştirme sürecini ADEM üzerinden yönetiyor, çıkan işi yayından önce doğruluyorum"
         ]
       },
       {
@@ -222,8 +222,8 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Ekim 2020 - Ekim 2024 · 4 yıl 1 ay",
         "bullets": [
-          "Sigorta platformlarında sigorta şirketi, ERP ve CRM entegrasyonları ile uyumlu arayüzler geliştirdim",
-          "Genç geliştiricilere mentorluk yaptım, ekipteki teknik kararlara katkıda bulundum"
+          "Sigorta satış ve karşılaştırma platformlarında sigorta şirketi entegrasyonları ile ERP ve CRM bağlantıları geliştirdim",
+          "Genç geliştiricilere mentorluk yaptım ve ekip içindeki teknik kararlara katkıda bulundum"
         ]
       },
       {
@@ -264,7 +264,7 @@
           {
             "key": "adem",
             "name": "ADEM",
-            "description": "Şirket için bir dijital ekip arkadaşı: işi gündelik dille anlatırsınız; ADEM onu izlenebilir bir işe çevirir, gereken yapay zekâ modellerini ve araçları çalıştırır. Yayın, yetkili bir kişinin onayını bekler. İlk alanı yazılım geliştirme. Tasarladım ve kodlama ajanlarını yöneterek geliştirdim.",
+            "description": "Şirketler için dijital ekip arkadaşı. Board’dan ya da Jira’dan gelen geliştirme işini alır, eksik bilgiyi Slack’te sorar, kodlar ve test eder. Onayla yayına alır, canlıda kontrol eder ve rapor yazar. Tasarladım ve kodlama ajanlarıyla geliştirdim.",
             "stack": [
               "React 19",
               "TypeScript",

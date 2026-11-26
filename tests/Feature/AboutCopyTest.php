@@ -169,10 +169,10 @@ it('presents AI work and experience in both languages', function () {
     $tr = $this->get('/tr')->assertOk()->getContent().$this->get('/tr/ozgecmis')->assertOk()->getContent();
 
     expect($tr)->toContain('Sigorta alanında yapay zekâ çözümleri üretiyor')
-        ->toContain('AI-DLC’de aktif rol alıyorum')
+        ->toContain('AI-DLC süreçlerinde aktif rol alıyorum')
         ->toContain('Genç geliştiricilere mentorluk yaptım')
         ->not->toContain('Kommunity, Transiyzi ve Dynorender gibi SaaS ürünlerinde')
-        ->and($en)->toContain('Build AI solutions for insurance')
+        ->and($en)->toContain('Building AI solutions for insurance')
         ->toContain('AI initiatives and AI-DLC')
         ->toContain('Mentored junior developers')
         ->not->toContain('SaaS products such as Kommunity, Transiyzi and Dynorender');

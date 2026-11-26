@@ -5,9 +5,9 @@
   },
   "cv": {
     "role": "Software & AI Engineer",
-    "profile": "Full-stack engineer since 2019, building products end to end for insurance, finance and SaaS. I am the tech co-founder of Monafy, where I designed and built ADEM, a digital teammate that turns everyday requests into traceable work and releases only after an authorized person approves; software development is its first area. At Wingie Enuygun Group I build the insurance comparison and purchase flows customers use every day. I also build websites with Next.js and React for freelance clients.",
+    "profile": "Since 2019, I have built software for insurance, finance and e-commerce. At Wingie Enuygun Group, I work on insurance comparison and purchase flows and service integrations. I am the tech co-founder of Monafy, where I design the product flows and architecture. I designed and built ADEM, a digital teammate that carries out development work. I also build websites with Next.js and React for freelance clients.",
     "project_descriptions": {
-      "adem": "A digital teammate for a company: a request in everyday language becomes traceable work, run with the AI models and tools it needs; releases wait for an authorized person’s approval. Software development is its first area, and Monafy’s development runs on it. Connected today: Jira, Slack, Claude, Codex, GitLab and Laravel Forge. I designed it and built it by directing coding agents.",
+      "adem": "A digital teammate for companies. It takes development tasks from the board or Jira, asks for missing details in Slack, writes and tests the code, ships with a person’s approval, checks it live and writes a report. Monafy’s development runs on ADEM. I designed it and built it with coding agents.",
       "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design its product flows and architecture and direct development through ADEM.",
       "enuygun-sigorta": "An insurance quote comparison and policy purchase platform."
     },
@@ -97,7 +97,7 @@
     "title": "About",
     "lead": "",
     "p1": "Since 2019, I have built software for insurance, finance and e-commerce. My work spans product decisions, service integrations, interfaces and the upkeep of production systems.",
-    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets. I also designed ADEM, a digital teammate for a company: you describe the work in everyday language, ADEM turns it into traceable work, and releases wait for an authorized person’s approval. Software development is its first area, and Monafy’s development runs on it.",
+    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets. I also designed and built ADEM, a digital teammate for companies. It takes development work, writes and tests the code, and ships only with a person’s approval. Monafy’s development runs on ADEM.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
@@ -199,10 +199,10 @@
         "meta": "Full-time · Hybrid · Istanbul, Türkiye",
         "period": "Oct 2024 - Present",
         "bullets": [
-          "Develop insurance comparison and purchase flows and regularly build their interfaces with Next.js and React",
-          "Build AI solutions for insurance and take an active role in AI initiatives and AI-DLC",
-          "Work on service integrations and APIs for insurance and payment processes",
-          "Focus on performance, reliability and code quality in production systems"
+          "Developing insurance comparison and purchase flows and building their interfaces with Next.js and React",
+          "Building AI solutions for insurance and taking an active role in company AI initiatives and AI-DLC processes",
+          "Working on service integrations and APIs for insurance and payment processes",
+          "Focusing on performance, reliability and code quality in production systems"
         ]
       },
       {
@@ -211,9 +211,9 @@
         "meta": "",
         "period": "2025 - Present",
         "bullets": [
-          "Designed and built ADEM, a digital teammate for a company, starting with software development: graph-based workflows, role agents with their own skills and permission sets, and an authorized person’s approval before every release.",
-          "Own Monafy’s product architecture across its services and web client: market data for Turkish and US stocks, market reports and the Mona AI assistant.",
-          "Set how coding work is handed to agents: acceptance criteria defined before implementation, and reported completion checked against the change and its verification output."
+          "Designing product flows and architecture for a platform with market data, market reports and an AI assistant for Turkish and US stock markets",
+          "Designed and built ADEM, a digital teammate that carries out development work",
+          "Directing development through ADEM and verifying the work before release"
         ]
       },
       {
@@ -222,8 +222,8 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Oct 2020 - Oct 2024 · 4 yrs 1 mo",
         "bullets": [
-          "Built insurer, ERP and CRM integrations and responsive interfaces for insurance platforms",
-          "Mentored junior developers and contributed to technical decisions"
+          "Built insurer integrations and ERP and CRM connections for insurance sales and comparison platforms",
+          "Mentored junior developers and contributed to technical decisions within the team"
         ]
       },
       {
@@ -232,7 +232,7 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Jun 2019 - Oct 2020 · 1 yr 5 mos",
         "bullets": [
-          "Contributed to web applications on client projects alongside senior developers"
+          "Contributed to web application development on client projects alongside senior developers"
         ]
       }
     ]
@@ -264,7 +264,7 @@
           {
             "key": "adem",
             "name": "ADEM",
-            "description": "A digital teammate for a company: you describe the work in everyday language, and ADEM turns it into traceable work and runs the AI models and tools it needs. Releases wait for an authorized person’s approval. Software development is its first area. I designed it and built it by directing coding agents.",
+            "description": "A digital teammate for companies. It takes development tasks from the board or Jira, asks for missing details in Slack, writes and tests the code, ships with a person’s approval, checks it live and writes a report. I designed it and built it with coding agents.",
             "stack": [
               "React 19",
               "TypeScript",
