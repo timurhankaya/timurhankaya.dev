@@ -178,6 +178,11 @@
             body { background: #fff; }
             .ats-page { max-width: none; margin: 0; padding: 0; }
             .ats-controls { display: none; }
+            .ats-page section { margin-top: 12px; }
+            .ats-page h3 { margin-top: 8px; }
+            .ats-page ul { margin: 3px 0 4px; }
+            .ats-page li { margin: 1px 0; }
+            .ats-page p { margin: 2px 0; }
             h1, h2, h3 { break-after: avoid; }
             p, li { orphans: 2; widows: 2; }
         }

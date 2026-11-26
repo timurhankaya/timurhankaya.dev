@@ -8,7 +8,8 @@
     "profile": "Full-stack engineer since 2019, building products end to end for insurance, finance and SaaS. I am the tech co-founder of Monafy, where I designed and built ADEM, a digital teammate that turns everyday requests into traceable work and releases only after an authorized person approves; software development is its first area. At Wingie Enuygun Group I build the insurance comparison and purchase flows customers use every day. I also build websites with Next.js and React for freelance clients.",
     "project_descriptions": {
       "adem": "A digital teammate for a company: a request in everyday language becomes traceable work, run with the AI models and tools it needs; releases wait for an authorized person’s approval. Software development is its first area, and Monafy’s development runs on it. Connected today: Jira, Slack, Claude, Codex, GitLab and Laravel Forge. I designed it and built it by directing coding agents.",
-      "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design its product flows and architecture and direct development through ADEM."
+      "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design its product flows and architecture and direct development through ADEM.",
+      "enuygun-sigorta": "An insurance quote comparison and policy purchase platform."
     },
     "technologies": {
       "title": "Technologies",
@@ -211,8 +212,8 @@
         "period": "2025 - Present",
         "bullets": [
           "Designed and built ADEM, a digital teammate for a company, starting with software development: graph-based workflows, role agents with their own skills and permission sets, and an authorized person’s approval before every release.",
-          "Own Monafy’s architecture across its services, web client and mobile app: market data for Turkish and US stocks, market reports and the Mona AI assistant.",
-          "Set the working standard that agents and people follow: every change gets tests, an independent review and a check in production before it counts as done."
+          "Own Monafy’s product architecture across its services and web client: market data for Turkish and US stocks, market reports and the Mona AI assistant.",
+          "Set how coding work is handed to agents: acceptance criteria defined before implementation, and reported completion checked against the change and its verification output."
         ]
       },
       {
@@ -221,8 +222,7 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Oct 2020 - Oct 2024 · 4 yrs 1 mo",
         "bullets": [
-          "Built insurer integrations and ERP and CRM connections for insurance sales platforms",
-          "Turned business needs into responsive interfaces and maintained production applications",
+          "Built insurer, ERP and CRM integrations and responsive interfaces for insurance platforms",
           "Mentored junior developers and contributed to technical decisions"
         ]
       },
@@ -232,8 +232,7 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Jun 2019 - Oct 2020 · 1 yr 5 mos",
         "bullets": [
-          "Contributed to web applications on client projects alongside senior developers",
-          "Gained experience in code quality and collaborative development"
+          "Contributed to web applications on client projects alongside senior developers"
         ]
       }
     ]
