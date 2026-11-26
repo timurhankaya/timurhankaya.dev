@@ -132,6 +132,15 @@ class Post extends Model
         })->filter(fn (array $link): bool => $link['label'] !== '' && $link['url'] !== '')->values()->all();
     }
 
+    /** What the owner did, in the page language: `role` (Turkish) and `role_en` describe the work; without them, the context label. */
+    public function caseRole(?string $locale = null): string
+    {
+        $locale ??= app()->getLocale();
+        $role = trim((string) data_get($this->case_meta, $locale === 'en' ? 'role_en' : 'role'));
+
+        return $role !== '' ? $role : __('brand.context_'.(data_get($this->case_meta, 'context') ?: 'personal'), [], $locale);
+    }
+
     /** Project label in the page language: `project_name` is Turkish (primary), `project_name_en` an optional English name. */
     public function projectName(?string $locale = null): string
     {

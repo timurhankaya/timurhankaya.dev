@@ -15,6 +15,17 @@ it('shows the project name in the page language when an English name is given', 
     $this->get('/tr/vaka-incelemeleri/anonymous-story')->assertOk()->assertSee('E-ticaret altyapısı');
 });
 
+it('describes the work in the sidebar when a role is given, and falls back to the context label', function () {
+    $post = caseStudy(['slug' => 'role-story', 'case_meta' => ['project_name' => 'ADEM', 'context' => 'founder', 'role' => 'Ürün tasarımı ve mühendislik', 'role_en' => 'Product design and engineering', 'period' => '2026–']]);
+
+    expect($post->caseRole('tr'))->toBe('Ürün tasarımı ve mühendislik')->and($post->caseRole('en'))->toBe('Product design and engineering');
+    $this->get('/case-studies/role-story')->assertOk()->assertSee('<dd>Product design and engineering</dd>', false)->assertDontSee('<dd>Co-founder</dd>', false);
+    $this->get('/tr/vaka-incelemeleri/role-story')->assertOk()->assertSee('<dd>Ürün tasarımı ve mühendislik</dd>', false);
+
+    $plain = caseStudy(['slug' => 'plain-story', 'case_meta' => ['project_name' => 'Monafy', 'context' => 'founder', 'period' => '2025–']]);
+    expect($plain->caseRole('en'))->toBe('Co-founder')->and($plain->caseRole('tr'))->toBe('Kurucu ortak');
+});
+
 it('renders code blocks as a highlighted, numbered, copyable component', function () {
     caseStudy(['slug' => 'code-story', 'content' => '<p>Kod.</p><pre><code class="language-php">$total = $price * $qty; // net
 echo "&lt;script&gt;";</code></pre>']);

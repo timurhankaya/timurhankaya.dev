@@ -85,6 +85,8 @@ class PostForm
                 TextInput::make('case_meta.project_name')->label('Proje adı')->required(fn (Get $get) => filled($get('published_at')))->maxLength(255),
                 TextInput::make('case_meta.project_name_en')->label('Proje adı (İngilizce)')->helperText('Boşsa İngilizce sayfada da Türkçe ad görünür.')->maxLength(255),
                 Select::make('case_meta.context')->label('Çalışma türü')->options(['founder' => 'Kurucu ortak', 'employment' => 'Maaşlı çalışma', 'client' => 'Müşteri çalışması', 'personal' => 'Kişisel proje'])->required(fn (Get $get) => filled($get('published_at'))),
+                TextInput::make('case_meta.role')->label('Çalışma kapsamı')->helperText('Boşsa çalışma türü görünür.')->maxLength(120),
+                TextInput::make('case_meta.role_en')->label('Çalışma kapsamı (İngilizce)')->helperText('Boşsa İngilizce sayfada çalışma türü görünür.')->maxLength(120),
                 TextInput::make('case_meta.period')->label('Dönem')->helperText('İsimsiz işlerde boş bırakılabilir.')->maxLength(100),
                 TagsInput::make('case_meta.technologies')->label('Teknolojiler')->required(fn (Get $get) => filled($get('published_at')))->splitKeys([','])->nestedRecursiveRules(['string', 'max:100']),
                 TextInput::make('case_meta.url')->label('Proje bağlantısı')->url()->rules(['nullable', 'url:http,https'])->maxLength(2000),
