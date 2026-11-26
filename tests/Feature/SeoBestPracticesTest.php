@@ -184,7 +184,7 @@ it('gives every logo a width and height', function () {
     preg_match('~<section class="brand-logos".*?</section>~s', $this->get('/')->assertOk()->getContent(), $section);
     preg_match_all('~<img\b[^>]*>~', $section[0], $images);
 
-    expect($images[0])->toHaveCount(12);
+    expect($images[0])->toHaveCount(16);
     foreach ($images[0] as $image) {
         expect($image)->toMatch('/ width="\d+"/')->toMatch('/ height="\d+"/');
     }

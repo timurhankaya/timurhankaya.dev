@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Portfolio\ProjectCatalog;
+use Database\Seeders\StorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -70,6 +72,29 @@ it('shows the brand logos on the home page without a heading', function () {
         ->not->toContain('>Birlikte çalıştığım markalar<');
     foreach (['monafy.svg', 'moneo.svg', 'sistemglobal.png', 'smart-global.svg', 'edanisman.png', 'basefy.png'] as $file) {
         expect(public_path('images/logos/'.$file))->toBeFile();
+    }
+});
+
+it('adds ADEM and Toyka to the logo strip with transparent logos', function () {
+    $tile = fn (string $html, string $file): string => preg_match('~<li>(?:(?!</li>).)*?/images/logos/'.preg_quote($file, '~').'(?:(?!</li>).)*</li>~s', $html, $match) ? $match[0] : '';
+
+    // Before the case study is published the ADEM tile shows its logo without a link.
+    $html = $this->get('/')->assertOk()->getContent();
+    expect($tile($html, 'adem.png'))->toContain('<span class="brand-logo-tile" title="ADEM">')->not->toContain('href=')
+        ->and($tile($html, 'toyka.png'))->toContain('href="https://toyka.com.tr" target="_blank" rel="noopener"')->toContain('alt="Toyka"');
+
+    $this->seed(StorySeeder::class);
+    foreach (['en' => '/', 'tr' => '/tr'] as $locale => $path) {
+        $url = app(ProjectCatalog::class)->caseStudyUrl('adem', $locale);
+        $adem = $tile($this->get($path)->assertOk()->getContent(), 'adem.png');
+        expect($url)->not->toBeNull()
+            ->and($adem)->toContain('href="'.$url.'"')->not->toContain('target="_blank"')->toContain('alt="ADEM"');
+    }
+
+    foreach (['adem.png', 'toyka.png'] as $file) {
+        $image = imagecreatefrompng(public_path('images/logos/'.$file));
+        // A transparent corner keeps the white silhouette filter from drawing a box around the logo.
+        expect((imagecolorat($image, 0, 0) >> 24) & 0x7F)->toBe(127);
     }
 });
 
