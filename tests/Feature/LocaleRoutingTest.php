@@ -23,14 +23,36 @@ it('keeps explicit route languages accessible regardless of browser or session p
 });
 
 it('redirects old and mixed language addresses preserving parameters', function () {
-    $this->get('/?lang=tr')->assertStatus(301)->assertRedirect('/tr');
+    $this->get('/?lang=tr')->assertStatus(302)->assertRedirect('/tr');
     $this->get('/blog?lang=en&page=2')->assertStatus(301)->assertRedirect('/writing?page=2');
     $this->get('/games/imposter/ABC123?lang=tr')->assertStatus(301)->assertRedirect('/tr/oyunlar/kelime-casusu/ABC123');
     $this->get('/tr/contact?lang=en')->assertStatus(301)->assertRedirect('/tr/iletisim');
     $this->get('/en/contact')->assertStatus(301)->assertRedirect('/contact');
     $this->get('/en')->assertStatus(301)->assertRedirect(url('/').'/');
     $this->get('/tr')->assertOk();
-    $this->get('/?lang=en')->assertStatus(301)->assertRedirect('/');
+    $this->get('/?lang=en')->assertStatus(302)->assertRedirect('/');
+    $this->get('/')->assertOk()->assertSee('<html lang="en"', false);
+});
+
+it('switches the home language with redirects a browser never stores', function () {
+    // A browser replays a stored 301 without asking the server, so the preference would never change.
+    foreach (['/?lang=en' => '/', '/?lang=tr' => '/tr', '/?lang=en&switch=1' => '/'] as $path => $target) {
+        $response = $this->get($path)->assertStatus(302)->assertRedirect($target === '/' ? url('/') : $target);
+        expect($response->headers->get('Cache-Control'))->toContain('no-store');
+    }
+});
+
+it('points the Turkish home language button at an address no browser has stored yet', function () {
+    $html = $this->get('/tr')->assertOk()->getContent();
+    preg_match('~<a class="brand-language" data-locale-switch href="([^"]+)"~', $html, $switch);
+    // Earlier releases answered /?lang=en with a permanent redirect that browsers keep.
+    expect(html_entity_decode($switch[1] ?? ''))->toBe(url('/').'/?lang=en&switch=1');
+
+    $this->get('/tr');
+    $this->get(html_entity_decode($switch[1]))->assertStatus(302)->assertSessionHas('locale', 'en');
+    $this->get('/')->assertOk()->assertSee('<html lang="en"', false);
+    $this->get('/tr');
+    $this->get(html_entity_decode($switch[1]))->assertStatus(302);
     $this->get('/')->assertOk()->assertSee('<html lang="en"', false);
 });
 

@@ -4,7 +4,9 @@
     $localeToggleUrl = ($isPreview ?? false) && isset($post)
         ? $post->publicUrl($toggleLocale).'?draft=1'
         : \App\Support\Seo::localizedUrl(request()->fullUrl(), $toggleLocale);
-    if (app()->getLocale() === 'tr' && request()->routeIs('tr.home')) $localeToggleUrl .= '?lang=en';
+    // `/` alone would follow the remembered Turkish preference back to /tr. `switch=1` keeps the
+    // address apart from `/?lang=en`, which earlier releases answered with a permanent redirect browsers kept.
+    if (app()->getLocale() === 'tr' && request()->routeIs('tr.home')) $localeToggleUrl .= '?lang=en&switch=1';
     $before = [
         [\App\Support\Anchors::home('about'), __('brand.about_label')],
         [\App\Support\Seo::route('games.index'), __('portfolio.nav.games')],

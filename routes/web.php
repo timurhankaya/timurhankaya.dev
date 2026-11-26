@@ -34,8 +34,9 @@ foreach (Seo::supportedLocales() as $locale) {
             return Route::get($path($name), $action)->defaults('locale', $locale)->name($name);
         };
         $register('home', function (PortfolioContentService $portfolio, PortfolioProjects $projects) use ($locale) {
+            // Choosing a language changes the remembered preference, so the redirect must reach the server every time.
             if (request()->query->has('lang')) {
-                return redirect(Seo::route('home'), 301);
+                return redirect(Seo::route('home'), 302)->header('Cache-Control', 'no-store, private');
             }
             if ($locale === 'en' && app()->getLocale() === 'tr') {
                 return redirect(Seo::route('home'), 302)->header('Vary', 'Accept-Language, Cookie')->header('Cache-Control', 'private, no-cache');
