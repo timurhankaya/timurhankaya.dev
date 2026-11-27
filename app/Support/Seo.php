@@ -51,8 +51,8 @@ final class Seo
             : self::currentLocale();
 
         return $resolvedLocale === 'tr'
-            ? self::siteName().' — Yazılım ve AI Mühendisi'
-            : self::siteName().' — Software & AI Engineer';
+            ? self::siteName().' — Yazılım ve Yapay Zekâ Geliştiricisi'
+            : self::siteName().' — Software & AI Developer';
     }
 
     public static function defaultDescription(?string $locale = null): string
@@ -62,8 +62,8 @@ final class Seo
             : self::currentLocale();
 
         return $resolvedLocale === 'tr'
-            ? 'Timurhan Kaya, yazılım ve AI mühendisi ve Monafy’nin teknik kurucu ortağı. Ürün geliştirme, AI ajanları, teknik yazılar ve vaka incelemeleri.'
-            : 'Timurhan Kaya, software & AI engineer and Monafy tech co-founder in Istanbul. Product development, AI agents, engineering articles and case studies.';
+            ? 'Timurhan Kaya, İstanbul’da yazılım ve yapay zekâ geliştiricisi, Monafy’nin kurucu ortağı. Projeler, teknik yazılar ve vaka incelemeleri.'
+            : 'Timurhan Kaya, software and AI developer in Istanbul and a co-founder of Monafy. Projects, technical articles and case studies.';
     }
 
     /**

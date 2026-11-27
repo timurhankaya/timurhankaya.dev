@@ -17,6 +17,16 @@ it('serves an ATS CV with the complete experience in document reading order', fu
     expect($main)->not->toBeNull();
     $text = $main->textContent;
     expect($text)->toContain('Timurhan Kaya', 'kayacekovic@gmail.com', 'https://linkedin.com/in/timurhan-kaya', 'Laravel', 'PHP');
+    expect($text)->toContain($content['cv']['awards']['items'][0]['body']);
+    expect($xpath->evaluate('string(//h2[@id="ats-projects"])'))->toBe($content['cv']['projects_title']);
+    $projectDescriptions = $xpath->query('//section[@aria-labelledby="ats-projects"]/article/p[not(a)]');
+    expect($projectDescriptions->length)->toBe(count($content['cv']['projects']));
+    foreach ($content['cv']['projects'] as $index => $key) {
+        expect($projectDescriptions->item($index)->textContent)->toBe($content['cv']['project_descriptions'][$key]);
+    }
+    foreach ($content['cv']['technologies']['groups'] as $group) {
+        expect($text)->toContain(implode(', ', $group['items']));
+    }
     foreach ($content['experience']['items'] as $experience) {
         expect($text)->toContain($experience['role'], $experience['company'], $experience['period']);
         foreach ($experience['bullets'] as $bullet) {
@@ -24,9 +34,9 @@ it('serves an ATS CV with the complete experience in document reading order', fu
         }
     }
     expect($xpath->query('.//table|.//img|.//canvas', $main)->length)->toBe(0)
-        ->and($xpath->query('//h2')->length)->toBe(6);
+        ->and($xpath->query('//h2')->length)->toBe(7);
     $positions = [];
-    foreach (['ats-summary', 'ats-experience', 'ats-technologies', 'ats-skills', 'ats-projects', 'ats-education'] as $id) {
+    foreach (['ats-summary', 'ats-experience', 'ats-technologies', 'ats-skills', 'ats-projects', 'ats-education', 'ats-awards'] as $id) {
         $positions[] = strpos($html, 'id="'.$id.'"');
     }
     $ordered = $positions;

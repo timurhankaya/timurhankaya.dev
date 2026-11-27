@@ -47,8 +47,8 @@ it('titles the logo strip in plain words', function (string $path, string $title
         // The strip belongs to section 01, so it carries no number of its own.
         ->and($heading->textContent)->not->toMatch('/\d/');
 })->with([
-    ['/', 'Companies and products I have worked on'],
-    ['/tr', 'Üzerinde çalıştığım şirket ve ürünler'],
+    ['/', 'Companies and products'],
+    ['/tr', 'Şirketler ve ürünler'],
 ]);
 
 it('keeps the logo order, names and destinations', function () {

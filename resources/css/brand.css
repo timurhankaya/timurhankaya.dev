@@ -153,6 +153,7 @@
 .brand-approach-list p { color: var(--muted); font-size: 13px; line-height: 1.8; margin-top: 6px; max-width: 440px; }
 .brand-experience-list { border-top: 1px solid var(--line); }
 .brand-job { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; padding-block: 32px; border-bottom: 1px solid var(--line); }
+.brand-job:last-child { padding-bottom: 0; border-bottom: 0; }
 .brand-job-period { font-variant-numeric: tabular-nums; font: 11px/1.8 var(--mono); color: var(--muted); padding-top: 5px; }
 .brand-job h3 { font-size: 21px; letter-spacing: -.04em; font-weight: 500; }
 .brand-job-role { color: var(--accent); font-size: 13px; margin-top: 7px; }
@@ -160,7 +161,6 @@
 .brand-job ul { list-style: disc; margin: 22px 0 0 15px; max-width: 610px; }
 .brand-job li { font-size: 13px; color: var(--muted); line-height: 1.9; padding-left: 3px; }
 .brand-job li + li { margin-top: 6px; }
-.brand-cv-link { margin-top: 25px; }
 .brand-games-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
 .brand-game { padding: 25px 30px 30px; position: relative; overflow: hidden; }
 .brand-game-imposter { background: #151619; color: #f2f3f5; border: 1px solid #303239; }
@@ -339,7 +339,7 @@
 .brand-case-link { display: flex; align-items: center; justify-content: space-between; gap: 18px; color: var(--accent); font-size: 12px; font-weight: 500; padding-block: 16px; margin-top: 0; }
 .brand-case-link:hover { color: var(--ink); }
 .brand-project-grid { row-gap: 48px; }
-.brand-services { margin-top: 90px; border-top: 1px solid var(--line); padding-top: 36px; }
+.brand-services { margin-top: calc(var(--section-space) / 2); border-top: 1px solid var(--line); padding-top: calc(var(--section-space) / 2); }
 .brand-services .brand-display { font-size: clamp(34px, 4.6vw, 58px); }
 .brand-services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); margin-top: 38px; }
 .brand-service { padding: 28px; background: var(--surface); }
@@ -391,7 +391,6 @@
     .brand-case-layout { gap: 55px; grid-template-columns: 200px minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
-    .brand-services { margin-top: 60px; }
     .brand-services-grid { grid-template-columns: 1fr; margin-top: 25px; }
     .brand-service { padding: 24px; }
     .brand-service + .brand-service { border-left: 0; border-top: 1px solid var(--line); }

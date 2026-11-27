@@ -44,10 +44,12 @@
     </section>
 
     <section aria-labelledby="ats-technologies">
-        <h2 id="ats-technologies">{{ $t['tech_title'] }}</h2>
-        @foreach ($t['tech_groups'] as $group)
+        <h2 id="ats-technologies">{{ $t['tech_title'] ?: ($locale === 'tr' ? 'Teknolojiler' : 'Technologies') }}</h2>
+        @forelse ($t['tech_groups'] as $group)
             <p><strong>{{ $group['title'] }}:</strong> {{ implode(', ', $group['items']) }}</p>
-        @endforeach
+        @empty
+            <p>{{ collect($t['projects'])->flatMap(fn (array $project) => explode(' · ', $project['stack']))->prepend('Laravel')->prepend('PHP')->filter()->unique()->implode(', ') }}</p>
+        @endforelse
     </section>
 
     <section aria-labelledby="ats-skills">
@@ -58,13 +60,12 @@
     </section>
 
     <section aria-labelledby="ats-projects">
-        <h2 id="ats-projects">{{ $locale === 'tr' ? 'Seçilmiş projeler' : 'Selected projects' }}</h2>
+        <h2 id="ats-projects">{{ $t['projects_title'] }}</h2>
         @foreach ($t['projects'] as $project)
             <article>
                 <h3>{{ $project['name'] }}</h3>
                 @if ($project['url'])<p>{{ __('brand.case_type') }}: <a href="{{ $project['url'] }}">{{ $project['url'] }}</a></p>@endif
                 <p>{{ $project['desc'] }}</p>
-                <p>{{ $project['stack'] }}</p>
             </article>
         @endforeach
     </section>
@@ -76,4 +77,14 @@
             <p>{{ $education['subtitle'] }}</p>
         @endforeach
     </section>
+
+    @if ($t['awards'])
+        <section aria-labelledby="ats-awards">
+            <h2 id="ats-awards">{{ $t['awards_title'] }}</h2>
+            @foreach ($t['awards'] as $award)
+                <h3>{{ $award['title'] }} · {{ $award['year'] }}</h3>
+                <p>{{ $award['body'] }}</p>
+            @endforeach
+        </section>
+    @endif
 </main>

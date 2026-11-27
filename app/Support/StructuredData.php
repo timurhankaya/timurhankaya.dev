@@ -65,7 +65,7 @@ final class StructuredData
             'givenName' => 'Timurhan',
             'familyName' => 'Kaya',
             'url' => Seo::route('home', [], $locale),
-            'jobTitle' => $locale === 'tr' ? 'Yazılım ve AI Mühendisi' : 'Software & AI Engineer',
+            'jobTitle' => $locale === 'tr' ? 'Yazılım ve Yapay Zekâ Geliştiricisi' : 'Software & AI Developer',
             'worksFor' => ['@type' => 'Organization', 'name' => self::EMPLOYER],
             'knowsAbout' => ['Software development', 'Laravel', 'PHP', 'Next.js', 'Nuxt', 'PostgreSQL', 'Redis', 'Fintech', 'AI agents', 'Prompt engineering', 'Context engineering', 'AI integrations'],
             'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Istanbul', 'addressCountry' => 'TR'],

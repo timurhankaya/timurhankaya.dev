@@ -10,17 +10,21 @@ uses(RefreshDatabase::class);
 
 beforeEach(fn () => Cache::flush());
 
-it('tells how Monafy was built and drops the hobby paragraph', function () {
+it('describes current work and Monafy without a hobby paragraph', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('geliştirme sürecinde yapay zekâ araçlarından yararlanıyorum')->not->toContain('%0,01')->not->toContain('Cloudflare')
-        ->toContain('Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum.')->not->toContain('İş dışında da üretmeyi seviyorum')
+    $trAbout = Str::betweenFirst($tr, '<div class="brand-about-copy">', '<div id="skills"');
+    $enAbout = Str::betweenFirst($en, '<div class="brand-about-copy">', '<div id="skills"');
+
+    expect($trAbout)->toContain('Monafy’nin kurucu ortağı olarak Türkiye ve ABD borsalarına yönelik yapay zekâ destekli araştırma araçlarının mimarisini tasarlıyor ve geliştirme sürecini yönetiyorum.')
+        ->not->toContain('%0,01')->not->toContain('Cloudflare')
+        ->toContain('Wingie Enuygun Group’ta sigorta ürünleri geliştiriyorum.')->not->toContain('İş dışında da üretmeyi seviyorum')
         ->not->toContain('finansal veri ve yapay zekâyla çalıştım')->not->toContain('arkadaşlarımla oynamak için yaptığım oyunlar')
-        ->and($en)->toContain('use AI tools throughout development')->not->toContain('0.01%')
-        ->toContain('At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day.')->not->toContain('I like making things outside work')
+        ->and($enAbout)->toContain('As a co-founder of Monafy, I design the architecture and lead development')->not->toContain('0.01%')
+        ->toContain('I build insurance products at Wingie Enuygun Group.')->not->toContain('I like making things outside work')
         ->not->toContain('Away from the screen');
-    expect(preg_match('~<div class="brand-about-copy">\s*(?:<p>[^<]+</p>\s*)*<p>\s*</p>~', $tr))->toBe(0);
+    expect(substr_count($trAbout, '<p>'))->toBe(2)->and(substr_count($enAbout, '<p>'))->toBe(2);
 });
 
 it('leaves employment markers out of the CV project list', function () {
@@ -33,25 +37,30 @@ it('keeps Turkish badge words out of the English pages', function () {
         ->not->toContain('>Topluluk<')->not->toContain('>Kurumsal<')->not->toContain('>E-Ticaret<');
 });
 
-it('leaves recognition and adrenaline sports out of the CV and the home page', function () {
+it('keeps the awards on the CV and adrenaline sports off the CV and home page', function () {
     $html = $this->get('/cv')->assertOk()->getContent().$this->get('/tr/ozgecmis')->assertOk()->getContent();
 
-    expect($html)->not->toContain('Başarılar')->not->toContain('recognition-item')->not->toContain('Adrenalin')->not->toContain('Adrenaline')
-        ->and($this->get('/tr')->getContent())->not->toContain('Adrenalin');
+    expect($html)->toContain('Ödüller')->not->toContain('Adrenalin')->not->toContain('Adrenaline')
+        ->and($this->get('/tr')->getContent())->not->toContain('Adrenalin', 'Yılın Sigorta Girişimi');
 });
 
 it('offers six ways to work together, ending with a partnership on a new idea', function () {
     $tr = $this->get('/tr')->assertOk()->getContent();
 
     expect(substr_count($tr, '<article class="brand-service">'))->toBe(6)
-        ->and($tr)->toContain('Mobil uygulamalar')->toContain('ERP &amp; CRM')->toContain('Ortaklık');
+        ->and($tr)->toContain('Mobil uygulamalar')->toContain('ERP &amp; CRM')->toContain('Teknik ortaklık');
 });
 
 it('keeps the current job description modest and drops the experience intro line', function () {
-    $html = $this->get('/')->getContent().$this->get('/cv')->getContent().$this->get('/tr/ozgecmis')->getContent();
+    $home = $this->get('/')->assertOk()->getContent();
+    $html = $home.$this->get('/cv')->getContent().$this->get('/tr/ozgecmis')->getContent();
+    $hero = Str::betweenFirst($home, 'class="brand-hero"', '</header>');
+    $experience = Str::betweenFirst($home, 'class="brand-experience-list"', '</section>');
 
     expect($html)->not->toContain('Architecting')->not->toContain('next-gen')->not->toContain('mikroservis mimarileri')
-        ->not->toContain('From my first projects in 2019');
+        ->not->toContain('From my first projects in 2019')
+        ->and($hero)->toContain('View my CV')
+        ->and($experience)->not->toContain('View my CV');
 });
 
 it('shows the games without case study links and names the prerender product Dyno Render', function () {
@@ -62,10 +71,11 @@ it('shows the games without case study links and names the prerender product Dyn
         ->and($home)->toContain('Dynorender')->not->toContain('Moneo Render');
 });
 
-it('shows the brand logos on the home page', function () {
+it('labels the brand logos with a short heading on the home page', function () {
     $html = $this->get('/tr')->assertOk()->getContent();
 
-    expect($html)->toContain('class="brand-logos"')
+    expect($html)->toContain('class="brand-logos" aria-labelledby="brand-logos-title"')
+        ->toContain('<span>Şirketler ve ürünler</span>')
         ->toContain('/images/logos/monafy.svg')->toContain('/images/logos/moneo.svg')->toContain('/images/logos/sistemglobal.png')->toContain('/images/logos/basefy.png')
         ->toContain('/images/logos/smart-global.svg')->toContain('/images/logos/edanisman.png')
         ->not->toContain('/images/logos/transiyzi.svg')->not->toContain('/images/logos/dynorender.png')
@@ -111,19 +121,24 @@ it('keeps the site copy short and plain', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('Bir fikri sağlam bir ürüne dönüştürmek.')
-        ->toContain('Aynı zamanda Monafy’nin teknik kurucu ortağıyım.')
-        ->toContain('İstanbul’da yazılım ve AI mühendisi, Monafy’de teknik kurucu ortağım. Finans piyasaları ve girişimcilikle ilgileniyorum.')
-        ->toContain('Önce problemi ve ürünü kullanacak insanları anlamaya çalışırım.')->not->toContain('aynı özeni gösteririm')
-        ->toContain('Özenli mühendislik, kalıcı ürünler.')
+    expect(Str::betweenFirst($tr, '<p class="brand-hero-intro">', '</p>'))->toBe('Merhaba, ben Timurhan. Yazılım ürünleri ve yapay zekâ sistemleri geliştiriyorum.')
+        ->and(Str::betweenFirst($en, '<p class="brand-hero-intro">', '</p>'))->toBe('Hi, I’m Timurhan. I build software products and AI systems.');
+
+    expect($tr)->toContain('Bir fikri ürüne dönüştürmek.')
+        ->toContain('Monafy’nin kurucu ortağı olarak')
+        ->toContain('Web teknolojilerindeki gelişmeleri ve yapay zekânın ürün geliştirmeyi nasıl değiştirdiğini takip ediyorum.')
+        ->toContain('Bir ürünün günlük kullanımını ve zaman içinde nasıl geliştirileceğini birlikte düşünürüm.')
+        ->toContain('Derin düşünme')->toContain('İnce işçilik')
+        ->not->toContain('Özenli mühendislik, kalıcı ürünler.')
         ->not->toContain('Boş zamanlarımda arkadaşlarla')->not->toContain('Kendi ürünlerim, müşteri işleri')
         ->not->toContain('brand-craft-line')->not->toContain('Finans ve yeni iş fikirleriyle')->not->toContain('İnce işçilik, güzel ürünler.')
         ->not->toContain('Ürünü bir bütün olarak düşünürüm.')->not->toContain('sahada, su altında')
-        ->not->toContain('Kod · Ürün · Merak')->not->toContain('Derin düşünme')->not->toContain('beni en çok heyecanlandıran')
+        ->not->toContain('Kod · Ürün · Merak')->not->toContain('beni en çok heyecanlandıran')
         ->not->toContain('arkasındaki case study')
-        ->and($en)->toContain('Turning an idea into a solid product.')->toContain('I am also the tech co-founder of Monafy,')
-        ->toContain('Software &amp; AI engineer in Istanbul and tech co-founder of Monafy. I follow financial markets and startups.')
-        ->toContain('Careful engineering, lasting products.')
+        ->and($en)->toContain('Turning an idea into a product.')->toContain('As a co-founder of Monafy,')
+        ->toContain('I follow developments in web technology and how AI is changing the way products are built.')
+        ->toContain('Deep thinking')->toContain('Careful craft')
+        ->not->toContain('Careful engineering, lasting products.')
         ->not->toContain('small games to play with friends')->not->toContain('My own products, client work')
         ->not->toContain('Fine craft, beautiful products.')
         ->not->toContain('I think about the whole product.')->not->toContain('Code · Products · Curiosity')
@@ -131,13 +146,13 @@ it('keeps the site copy short and plain', function () {
         ->and($this->get('/tr/llms.txt')->assertOk()->getContent())->not->toContain('brand.work_intro')->not->toContain('Kendi ürünlerim');
 });
 
-it('describes building with AI agents the way I actually work', function () {
+it('describes the AI-assisted development approach and review before release', function () {
     $en = $this->get('/')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent();
 
-    expect($tr)->toContain('Yapay zekâyla geliştirme')->toContain('Yönü ve beklentileri ben belirler, ortaya çıkan işi inceler ve doğrularım.')
+    expect($tr)->toContain('Hızlı üretim')->toContain('Değişiklikleri yayına almadan önce inceler ve test ederim.')
         ->not->toContain('Yapay zekâyla hız')->not->toContain('fikirleri hızlı denemek')
-        ->and($en)->toContain('Building with AI')->toContain('I set the direction and expectations, then review and verify the resulting work.')
+        ->and($en)->toContain('Fast delivery')->toContain('I review and test changes before release.')
         ->not->toContain('Faster with AI')->not->toContain('to try ideas quickly');
 });
 
@@ -168,12 +183,12 @@ it('presents AI work and experience in both languages', function () {
     $en = $this->get('/')->assertOk()->getContent().$this->get('/cv')->assertOk()->getContent();
     $tr = $this->get('/tr')->assertOk()->getContent().$this->get('/tr/ozgecmis')->assertOk()->getContent();
 
-    expect($tr)->toContain('Sigorta alanında yapay zekâ çözümleri üretiyor')
-        ->toContain('AI-DLC süreçlerinde aktif rol alıyorum')
+    expect($tr)->toContain('<li>Sigorta alanında yapay zekâ uygulamaları geliştiriyorum</li>')
+        ->toContain('<li>Şirket içi AI-DLC çalışmalarına katkıda bulunuyorum</li>')
         ->toContain('Genç geliştiricilere mentorluk yaptım')
         ->not->toContain('Kommunity, Transiyzi ve Dynorender gibi SaaS ürünlerinde')
-        ->and($en)->toContain('Building AI solutions for insurance')
-        ->toContain('AI initiatives and AI-DLC')
+        ->and($en)->toContain('<li>Develop AI applications for insurance</li>')
+        ->toContain('<li>Contribute to the company’s AI-DLC initiatives</li>')
         ->toContain('Mentored junior developers')
         ->not->toContain('SaaS products such as Kommunity, Transiyzi and Dynorender');
 });
@@ -189,10 +204,10 @@ it('keeps the games section short and descriptive', function () {
     $tr = $this->get('/tr')->assertOk()->getContent();
 
     expect($tr)->toContain('Oyun geceleri için.')
-        ->toContain('Aynı odadaki arkadaşlarınla telefondan oynayacağın çok oyunculu oyunlar.')
+        ->toContain('Aynı odadayken telefonlarınızdan oynayabileceğiniz oyunlar.')
         ->toContain('Kelimeyi açık etmeden ipuçları verin.')
         ->not->toContain('Bir kelime, masada bir Imposter.')
-        ->toContain('geceyi sistem yönetir, moderatör gerekmez.')
+        ->toContain('Geceyi oyun yönetir, moderatör gerekmez.')
         ->not->toContain('kelimeyi bilmeyeni oylayın')->not->toContain('Boş zamanlarımda yaptığım')
         ->not->toContain('Herkes aynı kelimeyi bilir, biri hariç.')->not->toContain('gündüz köy oylamayla şüpheliyi seçer')
         ->not->toContain('İşin bir de oyun tarafı var.')->not->toContain('bulabilir misin?')

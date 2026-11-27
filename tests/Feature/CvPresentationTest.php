@@ -11,17 +11,23 @@ uses(RefreshDatabase::class);
 
 beforeEach(fn () => Cache::flush());
 
-it('presents engineering work throughout the localized CV and its metadata', function (string $locale, string $path) {
+it('presents the developer role throughout the localized CV and its metadata', function (string $locale, string $path) {
     $content = json_decode(file_get_contents(resource_path("content/portfolio.{$locale}.json")), true, flags: JSON_THROW_ON_ERROR);
     $html = $this->get($path)->assertOk()->getContent();
     $decoded = html_entity_decode($html, ENT_QUOTES | ENT_HTML5);
 
-    expect($decoded)->toContain($content['cv']['role'])
+    expect($decoded)->toContain('<p class="title-role">'.$content['cv']['role'].'</p>')
         ->toContain($content['cv']['profile'])
-        ->toContain($content['cv']['project_descriptions']['monafy'])
-        ->toContain($content['cv']['project_descriptions']['adem']);
-    // The Monafy co-founder role is listed under Wingie Enuygun Group; client names such as Toyka stay off the CV.
-    expect($decoded)->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik Kurucu Ortak')->not->toContain('Toyka')->not->toContain('adem.monafy');
+        ->toContain('<div class="section-title">'.$content['cv']['projects_title'].'</div>')
+        ->toContain('<span class="project-name">ADEM</span>')
+        ->toContain($content['cv']['awards']['items'][0]['body'])
+        ->not->toContain('class="project-stack"');
+    foreach ($content['cv']['project_descriptions'] as $description) {
+        expect($decoded)->toContain('<p class="project-desc">'.$description.'</p>');
+    }
+    foreach ($content['cv']['technologies']['groups'] as $group) {
+        expect($decoded)->toContain('<p class="skill-label">'.implode(', ', $group['items']).'</p>');
+    }
 
     preg_match('~<script type="application/ld\+json">(.*?)</script>~s', $html, $ld);
     $graph = json_decode($ld[1], true, flags: JSON_THROW_ON_ERROR)['@graph'];
@@ -29,7 +35,8 @@ it('presents engineering work throughout the localized CV and its metadata', fun
 
     expect($person['jobTitle'])->toBe($content['cv']['role'])
         ->and($person['description'])->toBe($content['cv']['profile'])
-        ->and($person['worksFor']['name'])->toBe('Wingie Enuygun Group');
+        ->and($person['worksFor']['name'])->toBe('Wingie Enuygun Group')
+        ->and($person['knowsAbout'])->toContain('PHP', 'Go', 'TypeScript');
 
     preg_match_all('~<span class="exp-role">([^<]+)</span>~', $html, $roles);
     preg_match_all('~<div class="exp-company">([^<]+)</div>~', $html, $companies);
@@ -41,13 +48,15 @@ it('presents engineering work throughout the localized CV and its metadata', fun
         ->toContain('<meta name="twitter:image" content="'.$image.'">');
 })->with(['English' => ['en', '/cv'], 'Turkish' => ['tr', '/tr/ozgecmis']]);
 
-it('keeps the shared biography and the hands-off AI development account accurate', function () {
+it('keeps the portfolio biography and CV skills summary distinct', function () {
     foreach (['en' => '/', 'tr' => '/tr'] as $locale => $path) {
         $content = json_decode(file_get_contents(resource_path("content/portfolio.{$locale}.json")), true, flags: JSON_THROW_ON_ERROR);
         $profile = $content['cv']['profile'];
         expect($this->get($path)->assertOk()->getContent())->toContain(e($content['about']['p2']));
-        expect($content['stats']['role_value'])->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik kurucu ortak');
-        expect($profile)->toContain('ADEM')->toContain('Next.js');
+        expect($content['stats']['role_value'])->toContain($locale === 'en' ? 'Co-founder' : 'Kurucu ortak');
+        expect($profile)->toContain('AI-DLC', $locale === 'en' ? 'product architecture' : 'Ürün mimarisi')
+            ->toContain($locale === 'en' ? 'microservice-based systems' : 'mikroservis tabanlı sistemler')
+            ->not->toContain('Wingie Enuygun Group', 'Monafy', 'ADEM');
     }
 });
 
@@ -74,14 +83,14 @@ it('lists technologies as plain grouped names in both CV views', function (strin
     ];
     foreach (['', '?ats=1'] as $view) {
         $html = html_entity_decode($this->get($path.$view)->assertOk()->getContent(), ENT_QUOTES | ENT_HTML5);
-        preg_match('~<section[^>]*aria-labelledby="ats-technologies".*?</section>|<div class="section cv-technologies">.*?<!-- /technologies -->~s', $html, $block);
+        preg_match('~<section[^>]*aria-labelledby="ats-technologies".*?</section>|<div class="section cv-technologies">.*?(?=<div class="section")~s', $html, $block);
         $text = preg_replace('/\s+/', ' ', strip_tags($block[0] ?? ''));
         expect($text)->toContain($locale === 'en' ? 'Technologies' : 'Teknolojiler', ...$expected)->not->toContain('%');
         expect($html)->not->toContain('Inertia');
     }
 })->with(['English' => ['en', '/cv'], 'Turkish' => ['tr', '/tr/ozgecmis']]);
 
-it('gives only the CV card its localized engineering role', function () {
+it('gives only the CV card its localized developer role without the founder title', function () {
     $spec = json_decode(file_get_contents(resource_path('og/cards.json')), true, flags: JSON_THROW_ON_ERROR);
     $card = collect($spec['cards'])->firstWhere('file', 'og-cv');
 
@@ -89,7 +98,7 @@ it('gives only the CV card its localized engineering role', function () {
         $content = json_decode(file_get_contents(resource_path("content/portfolio.{$locale}.json")), true, flags: JSON_THROW_ON_ERROR);
         expect($card['role'][$locale])->toBe($content['cv']['role']);
         expect(mb_strtolower(json_encode($card, JSON_UNESCAPED_UNICODE)))->not->toContain('co-founder')->not->toContain('kurucu');
-        expect($spec['role'][$locale])->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik kurucu ortak');
+        expect($spec['role'][$locale])->toContain($locale === 'en' ? 'Co-founder' : 'Kurucu ortak');
     }
 });
 
@@ -132,6 +141,5 @@ it('loads the new CV schema even when portfolio data from the previous release i
     Cache::put('portfolio:content:v3:'.$locale, $old, 1800);
 
     $html = html_entity_decode($this->get($path)->assertOk()->getContent(), ENT_QUOTES | ENT_HTML5);
-    expect($html)->toContain($content['cv']['role'])->toContain($content['cv']['profile']);
-    expect($html)->toContain($locale === 'en' ? 'Tech Co-founder' : 'Teknik Kurucu Ortak');
+    expect($html)->toContain('<p class="title-role">'.$content['cv']['role'].'</p>')->toContain($content['cv']['profile']);
 })->with(['en' => ['en', '/cv'], 'tr' => ['tr', '/tr/ozgecmis']]);

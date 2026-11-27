@@ -1,16 +1,26 @@
 {
   "meta": {
-    "title": "Timurhan Kaya — Yazılım ve AI Mühendisi",
-    "description": "Timurhan Kaya: İstanbul’da yazılım ve AI mühendisi, Monafy teknik kurucu ortağı. Dijital ekip arkadaşı ADEM’i tasarladı; ürün mimarisi ve web geliştirme."
+    "title": "Timurhan Kaya — Yazılım ve Yapay Zekâ Geliştiricisi",
+    "description": "Timurhan Kaya: İstanbul’da yazılım ve yapay zekâ geliştiricisi, Monafy kurucu ortağı. Ürün mimarisi, web geliştirme ve yapay zekâ entegrasyonları."
   },
   "cv": {
-    "role": "Yazılım ve AI Mühendisi",
-    "profile": "2019’dan beri sigorta, finans ve e-ticaret alanlarında yazılım geliştiriyorum. Wingie Enuygun Group’ta sigorta karşılaştırma ve satın alma akışları ile servis entegrasyonları üzerinde çalışıyorum. Monafy’nin teknik kurucu ortağıyım; ürün akışlarını ve mimarisini tasarlıyorum. Geliştirme işlerini yürüten dijital ekip arkadaşı ADEM’i tasarlayıp geliştirdim. Serbest projelerde Next.js ve React ile web siteleri geliştiriyorum.",
+    "role": "Yazılım ve Yapay Zekâ Geliştiricisi",
+    "profile": "2019’dan bu yana sigorta, finans ve e-ticaret alanlarında yazılım geliştiriyorum. Ürün mimarisi tasarlıyor, mikroservis tabanlı sistemler ve API entegrasyonları geliştiriyorum. Planlama, geliştirme, kod inceleme ve test süreçlerinde AI-DLC yaklaşımını uyguluyorum.",
+    "projects_title": "Seçili projeler",
     "project_descriptions": {
-      "adem": "Şirketler için dijital ekip arkadaşı. Board’dan ya da Jira’dan gelen geliştirme işini alır, eksik bilgiyi Slack’te sorar, kodlar ve test eder. Onayla yayına alır, canlıda kontrol eder ve rapor yazar. Monafy’nin geliştirmesi ADEM üzerinde yürüyor. Tasarladım ve kodlama ajanlarıyla geliştirdim.",
-      "monafy": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanı sunan araştırma platformu. Ürün akışlarını ve mimarisini tasarlıyor, geliştirmeyi ADEM üzerinden yönetiyorum.",
-      "enuygun-sigorta": "Kasko, trafik ve sağlık sigortası tekliflerini karşılaştırma ve poliçe satın alma platformu."
+      "adem": "Yazılım geliştirme görevlerini takipten test ve onaylı yayına kadar yürüten yapay zekâ platformu. İş akışını tasarladım ve ekip araçlarını platforma entegre ettim.",
+      "monafy": "Türkiye ve ABD borsalarını takip eden yatırımcılar için araştırma platformu. Piyasa verisini araştırma araçlarına bağlayan ürün mimarisini tasarlıyor ve geliştirmeyi yönetiyorum.",
+      "enuygun-sigorta": "Sigorta tekliflerini karşılaştırma ve poliçe satın alma akışlarını geliştiriyor, bu akışları sigorta ve ödeme servisleriyle entegre ediyorum.",
+      "tamamlayc-saglk": "Sağlık sigortası karşılaştırma ve satış platformunun mimarisini ve iç operasyon modüllerini tasarladım. 20’den fazla sigorta şirketinin teklif ve poliçe servislerini entegre ettim.",
+      "edanisman": "Sistem Global’in danışmanlık platformu için servis mimarisini tasarladım. Randevu ve finans işlemlerini destekleyen iş akışlarını geliştirdim."
     },
+    "projects": [
+      "adem",
+      "monafy",
+      "enuygun-sigorta",
+      "tamamlayc-saglk",
+      "edanisman"
+    ],
     "technologies": {
       "title": "Teknolojiler",
       "groups": [
@@ -65,15 +75,25 @@
           ]
         }
       ]
+    },
+    "awards": {
+      "title": "Ödüller",
+      "items": [
+        {
+          "title": "Tamamlayıcı Sağlık",
+          "body": "Yılın Sigorta Girişimi ve En Insurtech Sigorta Müşteri Uygulaması",
+          "year": "2022"
+        }
+      ]
     }
   },
   "hero": {
     "kicker": "ürün geliştir · bağlamı tasarla · sonucu doğrula",
     "greeting": "Merhaba, ben",
     "name": "Timurhan Kaya",
-    "title": "Yazılım ve AI Mühendisi · Teknik kurucu ortak",
+    "title": "Yazılım ve Yapay Zekâ Geliştiricisi · Kurucu ortak",
     "titles": [
-      "Yazılım ve AI Mühendisi · Teknik kurucu ortak",
+      "Yazılım ve Yapay Zekâ Geliştiricisi · Kurucu ortak",
       "AI ajanlarıyla ürün geliştirme",
       "Prompt ve context engineering"
     ],
@@ -85,19 +105,19 @@
     "loc_label": "Konum",
     "loc_value": "İstanbul, Türkiye",
     "role_label": "Rol",
-    "role_value": "Yazılım ve AI Mühendisi · Teknik kurucu ortak",
+    "role_value": "Yazılım ve Yapay Zekâ Geliştiricisi · Kurucu ortak",
     "exp_label": "Deneyim",
     "exp_value": ":years+ yıl"
   },
   "sidecard": {
     "now_title": "Şu an",
-    "now_body": "Wingie Enuygun Group’ta yazılım geliştirici olarak çalışıyor, Monafy’yi ve şirketler için dijital ekip arkadaşı ADEM’i teknik kurucu ortağı olarak geliştiriyorum."
+    "now_body": "Wingie Enuygun Group’ta yazılım geliştiriciyim ve Monafy’nin kurucu ortağıyım."
   },
   "about": {
     "title": "Hakkımda",
     "lead": "",
-    "p1": "2019’dan bu yana sigorta, finans ve e-ticaret ürünleri geliştiriyorum. İşin ürün kararlarından servis entegrasyonlarına, arayüzlerden canlı sistemlerin bakımına kadar farklı aşamalarında çalıştım.",
-    "p2": "Wingie Enuygun Group’ta müşterilerin her gün kullandığı sigorta karşılaştırma ve satın alma akışlarını geliştiriyorum. Aynı zamanda Monafy’nin teknik kurucu ortağıyım. Türkiye ve ABD borsaları için geliştirdiğimiz üründe finansal verileri, piyasa raporlarını ve AI asistanını bir araya getiriyoruz. Şirketler için dijital ekip arkadaşı ADEM’i de tasarlayıp geliştirdim. ADEM geliştirme işini alır, kodlar ve test eder; yayına onayla çıkar. Monafy’nin geliştirmesi ADEM üzerinde yürüyor.",
+    "p1": "2019’dan bu yana sigorta, finans ve e-ticaret alanlarında yazılım geliştiriyorum. Bu deneyim, yeni bir ürünü yayına hazırlamaktan kullanımda olan sistemleri iyileştirmeye kadar uzanıyor.",
+    "p2": "Wingie Enuygun Group’ta sigorta ürünleri geliştiriyorum. Monafy’nin kurucu ortağı olarak Türkiye ve ABD borsalarına yönelik yapay zekâ destekli araştırma araçlarının mimarisini tasarlıyor ve geliştirme sürecini yönetiyorum.",
     "interests": "İlgi Alanları & Hobiler",
     "hobbies": [
       "Voleybol",
@@ -114,7 +134,7 @@
         "final readonly class TimurhanKaya extends Developer implements ArchitectInterface",
         "{",
         "    public function __construct(",
-        "        public string $role = 'Software & AI Engineer',",
+        "        public string $role = 'Software & AI Developer',",
         "        public string $location = 'Istanbul, TR',",
         "        public int $experienceYears = :years,",
         "    ) {}",
@@ -149,20 +169,19 @@
         "    }",
         "}"
       ]
-    },
-    "p3": "Monafy’de ürünün ihtiyaçlarını ve mimarisini şekillendiriyor, geliştirme sürecinde yapay zekâ araçlarından yararlanıyorum. Teknik kararları, entegrasyonları ve ortaya çıkan işi dikkatle değerlendirerek ürünün güvenilir biçimde gelişmesine odaklanıyorum."
+    }
   },
   "skills": {
     "title": "Çalışma alanları",
     "groups": [
       {
-        "title": "AI sistemleri",
+        "title": "Yapay zekâ",
         "items": [
           {
             "label": "Prompt ve context engineering"
           },
           {
-            "label": "Araç kullanan AI ajanları ve LLM entegrasyonları"
+            "label": "Araç kullanan yapay zekâ ajanları ve LLM entegrasyonları"
           }
         ]
       },
@@ -173,18 +192,21 @@
             "label": "Ürün mimarisi ve API tasarımı"
           },
           {
+            "label": "Mikroservisler ve olay tabanlı entegrasyonlar"
+          },
+          {
             "label": "SaaS, finans ve sigorta platformları"
           }
         ]
       },
       {
-        "title": "Geliştirme süreci",
+        "title": "Geliştirme ve doğrulama",
         "items": [
           {
             "label": "Kodlama ajanlarıyla geliştirme"
           },
           {
-            "label": "Kod inceleme, test ve canlı doğrulama"
+            "label": "Kod inceleme, test ve canlı sistemlerde doğrulama"
           }
         ]
       }
@@ -199,14 +221,15 @@
         "meta": "Tam zamanlı · Hibrit · İstanbul, Türkiye",
         "period": "Ekim 2024 - Şu An",
         "bullets": [
-          "Sigorta karşılaştırma ve satın alma akışlarını geliştiriyor, arayüzlerini Next.js ve React ile yazıyorum",
-          "Sigorta alanında yapay zekâ çözümleri üretiyor, şirket içindeki yapay zekâ çalışmalarında ve AI-DLC süreçlerinde aktif rol alıyorum",
-          "Sigorta ve ödeme süreçlerini destekleyen servis entegrasyonları ve API’ler üzerinde çalışıyorum",
-          "Canlı sistemlerde performans, güvenilirlik ve kod kalitesini iyileştirmeye odaklanıyorum"
+          "Sigorta ürünlerine yönelik web uygulamalarını ve poliçe satın alma süreçlerini geliştiriyorum",
+          "Sigorta ve ödeme servislerini ürünlere entegre ediyorum",
+          "Sigorta alanında yapay zekâ uygulamaları geliştiriyorum",
+          "Şirket içi AI-DLC çalışmalarına katkıda bulunuyorum",
+          "Canlı uygulamaların bakımı, performansı ve güvenilirliği üzerinde çalışıyorum"
         ]
       },
       {
-        "role": "Teknik Kurucu Ortak",
+        "role": "Kurucu Ortak",
         "company": "Monafy",
         "meta": "",
         "period": "2025 - Şu An",
@@ -222,7 +245,10 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Ekim 2020 - Ekim 2024 · 4 yıl 1 ay",
         "bullets": [
-          "Sigorta satış ve karşılaştırma platformlarında sigorta şirketi entegrasyonları ile ERP ve CRM bağlantıları geliştirdim",
+          "Sigorta satış ve karşılaştırma platformlarının geliştirilmesine katkı sağladım",
+          "Sağlık sigortası ürünlerinde sigorta şirketi entegrasyonları ile ERP ve CRM bağlantıları geliştirdim",
+          "İş ihtiyaçlarını farklı ekranlara uyumlu arayüzlere ve çalışan ürün özelliklerine dönüştürdüm",
+          "Canlı uygulamaların geliştirme ve bakım süreçlerinde yer aldım",
           "Genç geliştiricilere mentorluk yaptım ve ekip içindeki teknik kararlara katkıda bulundum"
         ]
       },
@@ -232,7 +258,9 @@
         "meta": "Tam zamanlı · Uzaktan · İstanbul, Türkiye",
         "period": "Haziran 2019 - Ekim 2020 · 1 yıl 5 ay",
         "bullets": [
-          "Müşteri projelerinde kıdemli geliştiricilerle birlikte web uygulamaları geliştirdim"
+          "Müşteri projelerinde web uygulamalarının geliştirilmesine katkı sağladım",
+          "Kıdemli geliştiricilerle birlikte ürün özellikleri geliştirdim",
+          "Kod kalitesi ve ekip içi çalışma pratikleri konusunda deneyim kazandım"
         ]
       }
     ]
@@ -242,11 +270,11 @@
     "items": [
       {
         "title": "Yazılım Meslek Lisesi",
-        "subtitle": "Yazılım temelleri ve pratik odaklı eğitim"
+        "subtitle": "Yazılım geliştirme"
       },
       {
         "title": "Beykent Üniversitesi",
-        "subtitle": "Bilgisayar Programcılığı"
+        "subtitle": "Bilgisayar Programcılığı, Ön Lisans"
       }
     ]
   },
@@ -264,7 +292,7 @@
           {
             "key": "adem",
             "name": "ADEM",
-            "description": "Şirketler için dijital ekip arkadaşı. Board’dan ya da Jira’dan gelen geliştirme işini alır, eksik bilgiyi Slack’te sorar, kodlar ve test eder. Onayla yayına alır, canlıda kontrol eder ve rapor yazar. Tasarladım ve kodlama ajanlarıyla geliştirdim.",
+            "description": "Yazılım geliştirme işlerini görev takibinden test ve yayına kadar yürüten dijital ekip arkadaşı. Yayın için yetkili kişinin onayı gerekir.",
             "stack": [
               "React 19",
               "TypeScript",
@@ -280,17 +308,16 @@
             "badge": "Dijital ekip arkadaşı",
             "year": "2026–",
             "highlights": [
-              "Geliştirme akışını bir graf olarak tasarladım: analiz, geliştirme, inceleme, kabul, staging ve yayın.",
-              "Sürümü sabitlenmiş skill’leri ve izin setleri olan rol ajanlarını, Go ile yazılmış runner’ı kurdum.",
-              "Her yayını yetkili kişinin onayına bağladım; ADEM’in yazdığı hiçbir şey onay sayılmaz.",
-              "Bugün bağlı olanlar: Jira, Slack, Claude, Codex, GitLab ve Laravel Forge. Monafy’nin geliştirmesi ADEM üzerinde yürüyor."
+              "Geliştirme işlerinin analiz, geliştirme, inceleme ve yayın adımlarını tasarladım.",
+              "Görev takibi, ekip iletişimi ve geliştirme araçlarını aynı iş akışına bağladım.",
+              "Yayın sürecine onay ve canlı ortamda doğrulama adımları ekledim."
             ],
             "context": "founder",
-            "context_label": "Teknik kurucu ortak"
+            "context_label": "Kurucu ortak"
           },
           {
             "name": "Enuygun Sigorta",
-            "description": "Kasko, trafik ve sağlık sigortası tekliflerini karşılaştırma ve poliçe satın alma platformu. Wingie Enuygun Group bünyesinde geliştirilmesine katkı sağlıyorum.",
+            "description": "Kasko, trafik ve sağlık sigortası tekliflerini karşılaştırma ve poliçe satın alma platformu. Satın alma akışları ve servis entegrasyonları üzerinde çalışıyorum.",
             "stack": [
               "Symfony",
               "Next.js",
@@ -319,7 +346,7 @@
           },
           {
             "name": "Tamamlayıcı Sağlık",
-            "description": "Genç Sigorta için geliştirdiğim sağlık sigortası karşılaştırma ve satış platformu. Sigorta entegrasyonları, ERP ve CRM tek üründe.",
+            "description": "Genç Sigorta için sağlık sigortası karşılaştırma ve satış platformu. 20’den fazla sigorta şirketinin fiyat ve poliçe servislerini entegre ettim, ERP ve CRM modülleri tasarladım.",
             "stack": [
               "Laravel",
               "Node.js",
@@ -345,7 +372,7 @@
           },
           {
             "name": "Monafy",
-            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve AI asistanını bir araya getiren araştırma platformu. Teknik kurucu ortağı olarak ürün mimarisini tasarlıyor ve teknik geliştirmeyi yönetiyorum; geliştirme ADEM üzerinde yürüyor.",
+            "description": "Türkiye ve ABD borsaları için finansal veri, piyasa raporları ve yapay zekâ asistanı sunan araştırma platformu.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -361,13 +388,12 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "Ürün akışlarını ve servisler arasındaki mimariyi tasarlıyor, geliştirmeyi ADEM üzerinden kodlama ajanlarıyla yönetiyorum.",
-              "Mona AI’ı finansal veri araçlarına bağlayan oturum ve API entegrasyonlarını geliştirdim.",
-              "Piyasa raporlarında kaynak veriyi, prompt kurallarını ve yayın kontrollerini aynı akışta birleştirdim.",
-              "İzleme listeleri, fiyat uyarıları ve abonelik erişimini ürün deneyimine bağlıyorum."
+              "Ürün mimarisini tasarlıyor ve geliştirme sürecini yönetiyorum.",
+              "Finansal veri, piyasa raporları ve yapay zekâ özelliklerini araştırma platformunda bir araya getiriyorum.",
+              "Piyasa takibi, uyarılar ve abonelik özellikleri üzerinde çalışıyorum."
             ],
             "context": "founder",
-            "context_label": "Teknik kurucu ortak",
+            "context_label": "Kurucu ortak",
             "key": "monafy"
           }
         ]
@@ -380,7 +406,7 @@
         "items": [
           {
             "name": "eDanışman",
-            "description": "Sistem Global’in danışmanlık, randevu ve finans süreçlerini bir araya getiren SaaS ürünü.",
+            "description": "Sistem Global için danışmanlık, randevu ve finans işlemlerini yöneten SaaS uygulaması.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -391,10 +417,9 @@
             "badge": "Müşteri çalışması",
             "year": "2026",
             "highlights": [
-              "Danışmanlık süreçleri için SaaS mimarisi kurdum.",
-              "Randevu ve finansal işlem akışlarını geliştirdim.",
-              "Nuxt.js ile sunucuda işlenen arayüzü entegre ettim.",
-              "Modüler bir servis yapısı oluşturdum."
+              "Danışmanlık hizmetleri için uygulamanın servis mimarisini tasarladım.",
+              "Randevu ve finans işlemlerini destekleyen iş akışlarını geliştirdim.",
+              "Web arayüzünü uygulamanın servisleriyle entegre ettim."
             ],
             "context": "freelance",
             "context_label": "Freelance",
@@ -451,7 +476,7 @@
           },
           {
             "name": "Transiyzi",
-            "description": "Yazılım ve oyunlar için yapay zekâ destekli çeviri yönetimi. Dosya aktarımı, CLI ve API üzerinden geliştirme süreçlerine bağlanır.",
+            "description": "Yazılım ve oyunlar için yapay zekâ destekli çeviri yönetimi. Dosya aktarımı, komut satırı ve API üzerinden kullanılabiliyor.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -463,10 +488,9 @@
             "badge": "Kurumsal",
             "year": "2022–2023",
             "highlights": [
-              "Platformun mimarisini ve uygulamasını sıfırdan geliştirdim.",
-              "GPT-3, DeepL, Google ve Microsoft çeviri servislerini entegre ettim.",
-              "XML, JSON ve XLS gibi dosyalar için içe ve dışa aktarma özellikleri geliştirdim.",
-              "CLI ve REST API ile otomasyon desteği sağladım."
+              "Yazılım ve oyunların yerelleştirilmesi için platformun mimarisini tasarladım ve uygulamayı geliştirdim.",
+              "Çeviri servislerini entegre ettim, dosya içe ve dışa aktarma özelliklerini geliştirdim.",
+              "Çevirileri geliştirme iş akışına bağlamak için API ve komut satırı desteği ekledim."
             ],
             "context": "company",
             "context_label": "Şirket",
@@ -474,7 +498,7 @@
           },
           {
             "name": "Dynorender",
-            "description": "JavaScript uygulamalarını arama motorları ve sosyal medya önizlemeleri için önceden işleyen servis.",
+            "description": "JavaScript sayfalarından arama motorları ve sosyal medya önizlemeleri için HTML üreten servis.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -484,7 +508,8 @@
             "badge": "Kurumsal",
             "year": "2022–2023",
             "highlights": [
-              "Bot isteklerini kaynak sunucuda doğru servise yönlendiren entegrasyonu ve işlenmiş HTML’i Redis’te saklayan önbelleği geliştirdim. Önbellek yenilemeyi ve kayıtları yönetmek için Laravel tabanlı SaaS panelini de oluşturdum."
+              "Arama motorlarının ve sosyal platformların işlenmiş web sayfalarına erişmesini sağlayan servis entegrasyonunu geliştirdim.",
+              "Sayfaların önbelleğe alınmasını ve yenilenmesini yönetmek için bir kontrol paneli geliştirdim."
             ],
             "context": "company",
             "context_label": "Şirket",
@@ -811,7 +836,7 @@
           },
           {
             "name": "Word Imposter",
-            "description": "Arkadaş grupları için kelime ipuçlarıyla aranızdaki casusu bulduğunuz tarayıcı oyunu.",
+            "description": "Arkadaşlarla kelime ipuçları verip gizli kelimeyi bilmeyen oyuncuyu bulmaya çalıştığınız tarayıcı oyunu.",
             "stack": [
               "Laravel",
               "Livewire",
@@ -821,8 +846,7 @@
             "badge": "Oyun",
             "year": "2026",
             "highlights": [
-              "Çok oyunculu oyun akışını Laravel ve Livewire ile geliştirdim.",
-              "Şifreli lobi, oyuncu yönetimi ve tur akışını kurdum.",
+              "Çok oyunculu tarayıcı oyununda oda oluşturma, oyuncu katılımı ve tur yönetimini geliştirdim.",
               "Oyunu kişisel siteme entegre ettim."
             ],
             "context": "personal",
@@ -851,7 +875,7 @@
           {
             "key": "smart-global",
             "name": "Smart Global",
-            "description": "Değerleme ve danışmanlık hizmetleri için iki dilli kurumsal web deneyimi.",
+            "description": "Değerleme ve danışmanlık hizmetleri sunan Smart Global’in Türkçe ve İngilizce web sitesi.",
             "year": "2026",
             "stack": [
               "Next.js",
@@ -862,9 +886,8 @@
             "url": "https://smartglobalval.co.uk",
             "badge": "Müşteri çalışması",
             "highlights": [
-              "Uzmanlık gerektiren bir hizmeti anlatan site, ziyaretçinin doğru hizmeti bulmasını ve iletişime geçmesini kolaylaştırmalı. İki dilde de aynı güveni ve içerik tutarlılığını korumalı.",
-              "İngilizce ve Türkçe içerikler, dile uygun adresler ve ortak görsel kimlik altında düzenleniyor. Hizmetler, sektörler ve iletişim arasında doğrudan bir gezinme akışı kuruluyor.",
-              "Çalışma; kurumsal sayfaları, iki dilli içerik yapısını, farklı ekranlara uyumlu arayüzü ve iletişim talebi akışını kapsıyor. Yeni sayfa ve içeriklerin aynı yapı içinde genişletilebilmesine odaklanıyor."
+              "Değerleme ve danışmanlık hizmetleri için iki dilli, mobil uyumlu bir kurumsal site geliştirdim.",
+              "Hizmet ve sektör sayfalarının içerik yapısını ve ziyaretçilerin iletişim talebi iletebileceği formu oluşturdum."
             ]
           },
           {
@@ -911,8 +934,8 @@
   },
   "contact": {
     "title": "Konuşalım.",
-    "description": "Bir proje, iş birliği ya da sorun varsa yaz. İhtiyacını dinleyip birlikte değerlendirelim.",
-    "meta_description": "Timurhan Kaya ile yazılım geliştirme, yapay zekâ entegrasyonları veya ürün fikrin hakkında iletişime geç.",
+    "description": "Yazılım projeleri, teknik ortaklık ve iş fırsatları için Timurhan Kaya ile iletişime geç.",
+    "meta_description": "Yazılım projeleri, teknik ortaklık ve iş fırsatları için Timurhan Kaya ile iletişime geç.",
     "email_label": "E-posta",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",

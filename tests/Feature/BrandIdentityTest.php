@@ -6,10 +6,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 it('presents the localized AI and cofounder identity consistently', function () {
-    $this->get('/')->assertOk()->assertSee('Software &amp; AI Engineer', false)->assertSee('Tech Co-founder');
-    $this->get('/tr')->assertOk()->assertSee('Yazılım ve AI Mühendisi')->assertSee('Teknik kurucu ortak');
-    expect(StructuredData::person('en')['jobTitle'])->toBe('Software & AI Engineer')
-        ->and(StructuredData::person('tr')['jobTitle'])->toBe('Yazılım ve AI Mühendisi');
+    $this->get('/')->assertOk()->assertSee('Software &amp; AI Developer', false)->assertSee('Co-founder');
+    $this->get('/tr')->assertOk()->assertSee('Yazılım ve Yapay Zekâ Geliştiricisi')->assertSee('Kurucu ortak');
+    expect(StructuredData::person('en')['jobTitle'])->toBe('Software & AI Developer')
+        ->and(StructuredData::person('tr')['jobTitle'])->toBe('Yazılım ve Yapay Zekâ Geliştiricisi');
 });
 
 it('describes Monafy with the approved market names in both languages', function () {

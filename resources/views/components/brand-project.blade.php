@@ -12,7 +12,6 @@
         'transiyzi' => 'images/projects/transiyzi.webp',
         'smart-global' => 'images/projects/smart-global.webp',
         'edanisman' => 'images/projects/edanisman.webp',
-        'word-imposter' => app()->getLocale() === 'tr' ? 'og-imposter-tr.png' : 'og-imposter.png',
     ][data_get($item, 'key')] ?? null;
 @endphp
 <article class="brand-project {{ $featured ? 'brand-project-featured' : '' }}">

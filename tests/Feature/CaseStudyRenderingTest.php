@@ -85,10 +85,13 @@ it('keeps each featured project link separate from its contribution dialog', fun
     $cards = $xpath->query('//article[contains(concat(" ", normalize-space(@class), " "), " brand-project-featured ")]');
 
     expect($cards->length)->toBe(6);
+    expect($xpath->evaluate('normalize-space(.//h3)', $cards->item(0)))->toBe('ADEM')
+        ->and($xpath->query('.//video[contains(@poster, "/images/projects/adem-hero.webp")]', $cards->item(0))->length)->toBe(1);
     foreach ($cards as $card) {
         expect($xpath->query('.//a[contains(concat(" ", normalize-space(@class), " "), " brand-project-link ")]', $card)->length)->toBe(1)
             ->and($xpath->query('.//button[@data-project-dialog-open]', $card)->length)->toBe(1)
-            ->and($xpath->query('.//a//button', $card)->length)->toBe(0);
+            ->and($xpath->query('.//a//button', $card)->length)->toBe(0)
+            ->and($xpath->evaluate('normalize-space(.//h3)', $card))->not->toBe('Word Imposter');
     }
 })->with(['/tr', '/']);
 

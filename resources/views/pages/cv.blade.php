@@ -36,9 +36,13 @@
         ->values()
         ->all();
 
-    $projectItems = collect((array) data_get($content, 'projects.sections', []))
+    $portfolioProjects = collect((array) data_get($content, 'projects.sections', []))
         ->flatMap(fn (array $section): array => array_values((array) data_get($section, 'items', [])))
-        ->take(4)
+        ->keyBy('key');
+    $projectKeys = data_get($content, 'cv.projects', $portfolioProjects->keys()->take(4)->all());
+    $projectItems = collect($projectKeys)
+        ->map(fn (string $key): ?array => $portfolioProjects->get($key))
+        ->filter()
         ->map(fn (array $item): array => [
             'name' => $tx(data_get($item, 'name')),
             'tag' => $tx(data_get($item, 'badge')),
@@ -86,11 +90,11 @@
         'loc_label' => $tx(data_get($content, 'stats.loc_label')),
         'loc_value' => $tx(data_get($content, 'stats.loc_value')),
         'email_label' => $locale === 'tr' ? 'E-posta' : 'Email',
-        'profile_title' => $tx(data_get($content, 'about.title')),
+        'profile_title' => $locale === 'tr' ? 'Profil' : 'Profile',
         'profile_text' => $tx(data_get($content, 'cv.profile')),
         'exp_title' => $tx(data_get($content, 'experience.title')),
         'exp_items' => $experienceItems,
-        'projects_title' => $tx(data_get($content, 'projects.title')),
+        'projects_title' => $tx(data_get($content, 'cv.projects_title', data_get($content, 'projects.title'))),
         'projects' => $projectItems,
         'skills_title' => $tx(data_get($content, 'skills.title')),
         'skill_groups' => $skillGroups,
@@ -98,6 +102,8 @@
         'tech_groups' => $technologyGroups,
         'edu_title' => $tx(data_get($content, 'education.title')),
         'education_items' => $educationItems,
+        'awards_title' => $tx(data_get($content, 'cv.awards.title')),
+        'awards' => (array) data_get($content, 'cv.awards.items', []),
         'int_title' => $tx(data_get($content, 'about.interests')),
         'interests' => array_map($tx, array_values((array) data_get($content, 'about.hobbies', []))),
     ];
@@ -175,8 +181,11 @@
         @media (max-width: 600px) { .ats-page { margin: 0; padding: 24px 18px; } }
         @media print {
             @page { size: A4; margin: 14mm; }
-            body { background: #fff; }
+            body { background: #fff; font-size: 10.5pt; line-height: 1.35; }
             .ats-page { max-width: none; margin: 0; padding: 0; }
+            .ats-page section { margin-top: 14px; }
+            .ats-page h3 { margin-top: 8px; }
+            .ats-page li { margin-block: 2px; }
             .ats-controls { display: none; }
             .ats-page section { margin-top: 12px; }
             .ats-page h3 { margin-top: 8px; }
@@ -435,6 +444,8 @@
             font-weight: 500;
         }
 
+        .cv-technologies .skill-group-title { margin-bottom: 0.3mm; }
+
         /* ---- Education ---- */
         .edu-item { margin-bottom: 1.8mm; }
         .edu-item:last-child { margin-bottom: 0; }
@@ -477,13 +488,6 @@
             font-size: 0.76rem;
             color: var(--ink-muted);
             line-height: 1.45;
-            margin-top: 0.3mm;
-        }
-
-        .project-stack {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.62rem;
-            color: var(--ink-muted);
             margin-top: 0.3mm;
         }
 
@@ -545,11 +549,21 @@
             }
         }
 
-        .print-btn {
+        .cv-controls {
             position: fixed;
             bottom: 24px;
             right: 24px;
             z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .cv-controls a { color: #fff; }
+
+        .print-btn {
             background: var(--ink);
             color: white;
             border: none;
@@ -565,6 +579,33 @@
         .print-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 28px rgba(0,0,0,.28);
+        }
+
+        @media screen and (max-width: 1060px) {
+            .cv-controls {
+                position: static;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+                width: min(210mm, calc(100% - 24px));
+                margin: 12px auto;
+            }
+        }
+
+        @media screen and (max-width: 820px) {
+            html { font-size: 14px; }
+            .page {
+                width: min(210mm, calc(100% - 24px));
+                height: auto;
+                margin: 12px auto;
+                padding: 24px 18px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 14px; }
+            .header-right { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+            .contact-item { flex-wrap: wrap; row-gap: 1px; overflow-wrap: anywhere; }
+            .columns { flex-direction: column; }
+            .col-side { width: auto; }
+            .exp-header { flex-wrap: wrap; gap: 4px 12px; }
         }
 
         /* ---- Header Info Layout Update ---- */
@@ -584,8 +625,10 @@
 @if ($ats)
     @include('pages.partials.cv-ats')
 @else
-<a class="no-print" href="{{ $cvUrl }}?ats=1" style="position:fixed;bottom:80px;right:24px;color:#fff;font:14px sans-serif;z-index:999;">{{ $locale === 'tr' ? 'ATS sürümü' : 'ATS version' }}</a>
-<button class="print-btn no-print" onclick="window.print()">{{ $t['print_btn'] }}</button>
+<nav class="cv-controls no-print" aria-label="{{ $locale === 'tr' ? 'CV seçenekleri' : 'CV options' }}">
+    <a href="{{ $cvUrl }}?ats=1">{{ $locale === 'tr' ? 'ATS sürümü' : 'ATS version' }}</a>
+    <button class="print-btn" onclick="window.print()">{{ $t['print_btn'] }}</button>
+</nav>
 
 <div class="page">
     <header class="header">
@@ -649,13 +692,24 @@
                 <div class="project-compact">
                     <span class="project-name">@if ($proj['url'])<a href="{{ $proj['url'] }}">{{ $proj['name'] }}</a>@else{{ $proj['name'] }}@endif</span> <span class="tag">{{ $proj['tag'] }}</span>
                     <p class="project-desc">{{ $proj['desc'] }}</p>
-                    <p class="project-stack">{{ $proj['stack'] }}</p>
                 </div>
                 @endforeach
             </div>
         </div>
 
         <div class="col-side">
+            @if ($t['tech_groups'])
+            <div class="section cv-technologies">
+                <div class="section-title">{{ $t['tech_title'] }}</div>
+                @foreach ($t['tech_groups'] as $group)
+                <div class="skill-group">
+                    <div class="skill-group-title">{{ $group['title'] }}</div>
+                    <p class="skill-label">{{ implode(', ', $group['items']) }}</p>
+                </div>
+                @endforeach
+            </div>
+            @endif
+
             <div class="section">
                 <div class="section-title">{{ $t['skills_title'] }}</div>
                 @foreach($t['skill_groups'] as $group)
@@ -670,18 +724,6 @@
                 @endforeach
             </div>
 
-            <div class="section cv-technologies">
-                <div class="section-title">{{ $t['tech_title'] }}</div>
-                @foreach($t['tech_groups'] as $group)
-                <div class="skill-group">
-                    <div class="skill-group-title">{{ $group['title'] }}</div>
-                    <div class="skill-item">
-                        <span class="skill-label">{{ implode(', ', $group['items']) }}</span>
-                    </div>
-                </div>
-                @endforeach
-            </div><!-- /technologies -->
-
             <div class="section">
                 <div class="section-title">{{ $t['edu_title'] }}</div>
                 @foreach($t['education_items'] as $edu)
@@ -692,6 +734,18 @@
                 @endforeach
             </div>
 
+
+            @if ($t['awards'])
+            <div class="section cv-awards">
+                <div class="section-title">{{ $t['awards_title'] }}</div>
+                @foreach ($t['awards'] as $award)
+                <div class="edu-item">
+                    <div class="edu-title">{{ $award['title'] }} · {{ $award['year'] }}</div>
+                    <p class="edu-subtitle">{{ $award['body'] }}</p>
+                </div>
+                @endforeach
+            </div>
+            @endif
 
             <div class="section">
                 <div class="section-title">{{ $t['int_title'] }}</div>

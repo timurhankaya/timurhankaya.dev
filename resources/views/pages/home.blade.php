@@ -128,7 +128,6 @@
                 </article>
             @endforeach
         </div>
-        <a class="brand-text-link brand-cv-link" href="{{ \App\Support\Seo::route('cv') }}" target="_blank" rel="noopener">{{ __('brand.cv') }} <x-arrow /></a>
     </section>
 
     <section {!! \App\Support\Anchors::attributes('work-together') !!} class="brand-section brand-services">

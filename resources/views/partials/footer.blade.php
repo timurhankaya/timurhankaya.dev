@@ -1,7 +1,7 @@
 <footer class="brand-footer">
     <div class="brand-footer-top">
         <a class="brand-logo" href="{{ \App\Support\Seo::route('home') }}" aria-label="tkaya. — Timurhan Kaya">tkaya<span>.</span></a>
-        <p>{{ __('brand.footer') }}</p>
+        <p>{{ __('brand.based') }}</p>
         <a class="brand-text-link" href="#content">{{ __('brand.back_top') }} <x-arrow dir="n" /></a>
     </div>
     <div class="brand-footer-bottom">

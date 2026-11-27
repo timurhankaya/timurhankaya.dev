@@ -1,16 +1,26 @@
 {
   "meta": {
-    "title": "Timurhan Kaya — Software & AI Engineer",
-    "description": "Timurhan Kaya is a software and AI engineer and Monafy tech co-founder in Istanbul. He designed ADEM, a digital teammate, and works on product architecture."
+    "title": "Timurhan Kaya — Software & AI Developer",
+    "description": "Timurhan Kaya is a software and AI developer in Istanbul and a co-founder of Monafy, working on product architecture, web development and AI integrations."
   },
   "cv": {
-    "role": "Software & AI Engineer",
-    "profile": "Since 2019, I have built software for insurance, finance and e-commerce. At Wingie Enuygun Group, I work on insurance comparison and purchase flows and service integrations. I am the tech co-founder of Monafy, where I design the product flows and architecture. I designed and built ADEM, a digital teammate that carries out development work. I also build websites with Next.js and React for freelance clients.",
+    "role": "Software & AI Developer",
+    "profile": "I’ve been developing software for insurance, finance and e-commerce since 2019. I design product architecture and build microservice-based systems and API integrations. I apply an AI-driven development lifecycle (AI-DLC) to planning, implementation, code review and testing.",
+    "projects_title": "Selected projects",
     "project_descriptions": {
-      "adem": "A digital teammate for companies. It takes development tasks from the board or Jira, asks for missing details in Slack, writes and tests the code, ships with a person’s approval, checks it live and writes a report. Monafy’s development runs on ADEM. I designed it and built it with coding agents.",
-      "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design its product flows and architecture and direct development through ADEM.",
-      "enuygun-sigorta": "An insurance quote comparison and policy purchase platform."
+      "adem": "An AI platform that handles software development tasks from tracking and testing through to approved releases. I designed the workflow and integrated the tools teams use.",
+      "monafy": "A research platform for investors following Turkish and US stock markets. I design the architecture that connects market data to research tools and lead development.",
+      "enuygun-sigorta": "I develop the flows for comparing insurance quotes and buying policies, and connect them to insurance and payment services.",
+      "tamamlayc-saglk": "I designed the architecture and internal operations modules for a health insurance comparison and sales platform. I integrated quote and policy services from more than 20 insurers.",
+      "edanisman": "I designed the service architecture for Sistem Global’s consulting platform and built the workflows for appointments and financial transactions."
     },
+    "projects": [
+      "adem",
+      "monafy",
+      "enuygun-sigorta",
+      "tamamlayc-saglk",
+      "edanisman"
+    ],
     "technologies": {
       "title": "Technologies",
       "groups": [
@@ -65,15 +75,25 @@
           ]
         }
       ]
+    },
+    "awards": {
+      "title": "Awards",
+      "items": [
+        {
+          "title": "Tamamlayıcı Sağlık",
+          "body": "Insurance Initiative of the Year and Best Insurtech Customer Application",
+          "year": "2022"
+        }
+      ]
     }
   },
   "hero": {
     "kicker": "build products · design context · verify outcomes",
     "greeting": "Hi, I'm",
     "name": "Timurhan Kaya",
-    "title": "Software & AI Engineer · Tech Co-founder",
+    "title": "Software & AI Developer · Co-founder",
     "titles": [
-      "Software & AI Engineer · Tech Co-founder",
+      "Software & AI Developer · Co-founder",
       "Building products with AI agents",
       "Prompt and context engineering"
     ],
@@ -85,19 +105,19 @@
     "loc_label": "Location",
     "loc_value": "Istanbul, Turkey",
     "role_label": "Role",
-    "role_value": "Software & AI Engineer · Tech Co-founder",
+    "role_value": "Software & AI Developer · Co-founder",
     "exp_label": "Experience",
     "exp_value": ":years+ yrs"
   },
   "sidecard": {
     "now_title": "Now",
-    "now_body": "Software developer at Wingie Enuygun Group and tech co-founder building Monafy and ADEM, a digital teammate for companies."
+    "now_body": "Software developer at Wingie Enuygun Group and co-founder of Monafy."
   },
   "about": {
     "title": "About",
     "lead": "",
-    "p1": "Since 2019, I have built software for insurance, finance and e-commerce. My work spans product decisions, service integrations, interfaces and the upkeep of production systems.",
-    "p2": "At Wingie Enuygun Group, I build the insurance comparison and purchase flows customers use every day. I am also the tech co-founder of Monafy, where we bring financial data, market reports and an AI assistant together for Turkish and US stock markets. I also designed and built ADEM, a digital teammate for companies. It takes development work, writes and tests the code, and ships only with a person’s approval. Monafy’s development runs on ADEM.",
+    "p1": "I’ve built software for insurance, finance and e-commerce since 2019. My work has ranged from preparing new products for launch to improving systems already in use.",
+    "p2": "I build insurance products at Wingie Enuygun Group. As a co-founder of Monafy, I design the architecture and lead development for AI-assisted research tools covering Turkish and US stock markets.",
     "interests": "Interests & Hobbies",
     "hobbies": [
       "Volleyball",
@@ -114,7 +134,7 @@
         "final readonly class TimurhanKaya extends Developer implements ArchitectInterface",
         "{",
         "    public function __construct(",
-        "        public string $role = 'Software & AI Engineer',",
+        "        public string $role = 'Software & AI Developer',",
         "        public string $location = 'Istanbul, TR',",
         "        public int $experienceYears = :years,",
         "    ) {}",
@@ -149,14 +169,13 @@
         "    }",
         "}"
       ]
-    },
-    "p3": "At Monafy, I shape the product’s needs and architecture and use AI tools throughout development. I focus on helping the product evolve reliably by carefully evaluating technical decisions, integrations and the resulting work."
+    }
   },
   "skills": {
     "title": "Areas of work",
     "groups": [
       {
-        "title": "AI systems",
+        "title": "AI",
         "items": [
           {
             "label": "Prompt and context engineering"
@@ -173,12 +192,15 @@
             "label": "Product architecture and API design"
           },
           {
+            "label": "Microservices and event-driven integrations"
+          },
+          {
             "label": "SaaS, finance and insurance platforms"
           }
         ]
       },
       {
-        "title": "Development workflow",
+        "title": "Development and verification",
         "items": [
           {
             "label": "Development with coding agents"
@@ -199,14 +221,15 @@
         "meta": "Full-time · Hybrid · Istanbul, Türkiye",
         "period": "Oct 2024 - Present",
         "bullets": [
-          "Developing insurance comparison and purchase flows and building their interfaces with Next.js and React",
-          "Building AI solutions for insurance and taking an active role in company AI initiatives and AI-DLC processes",
-          "Working on service integrations and APIs for insurance and payment processes",
-          "Focusing on performance, reliability and code quality in production systems"
+          "Build web applications and policy purchase flows for insurance products",
+          "Integrate insurance and payment services",
+          "Develop AI applications for insurance",
+          "Contribute to the company’s AI-DLC initiatives",
+          "Maintain production applications and work on performance and reliability"
         ]
       },
       {
-        "role": "Tech Co-founder",
+        "role": "Co-founder",
         "company": "Monafy",
         "meta": "",
         "period": "2025 - Present",
@@ -222,7 +245,10 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Oct 2020 - Oct 2024 · 4 yrs 1 mo",
         "bullets": [
-          "Built insurer integrations and ERP and CRM connections for insurance sales and comparison platforms",
+          "Contributed to the development of insurance sales and comparison platforms",
+          "Built insurer integrations and ERP and CRM connections for health insurance products",
+          "Turned business needs into responsive interfaces and working product features",
+          "Worked on the development and maintenance of production applications",
           "Mentored junior developers and contributed to technical decisions within the team"
         ]
       },
@@ -232,7 +258,9 @@
         "meta": "Full-time · Remote · Istanbul, Türkiye",
         "period": "Jun 2019 - Oct 2020 · 1 yr 5 mos",
         "bullets": [
-          "Contributed to web application development on client projects alongside senior developers"
+          "Contributed to web application development on client projects",
+          "Built product features alongside senior developers",
+          "Gained experience in code quality and collaborative development practices"
         ]
       }
     ]
@@ -242,11 +270,11 @@
     "items": [
       {
         "title": "Software Vocational High School",
-        "subtitle": "Early foundations in software engineering"
+        "subtitle": "Software development"
       },
       {
         "title": "Beykent University",
-        "subtitle": "Computer Programming"
+        "subtitle": "Associate Degree in Computer Programming"
       }
     ]
   },
@@ -264,7 +292,7 @@
           {
             "key": "adem",
             "name": "ADEM",
-            "description": "A digital teammate for companies. It takes development tasks from the board or Jira, asks for missing details in Slack, writes and tests the code, ships with a person’s approval, checks it live and writes a report. I designed it and built it with coding agents.",
+            "description": "A digital teammate that handles software development tasks from tracking through testing and release. Releases require approval from an authorised person.",
             "stack": [
               "React 19",
               "TypeScript",
@@ -280,17 +308,16 @@
             "badge": "Digital teammate",
             "year": "2026–",
             "highlights": [
-              "Designed the development workflow as a graph: analysis, development, review, acceptance, staging and release.",
-              "Built role agents with pinned skill versions and permission sets, and a runner written in Go.",
-              "Tied every release to an authorized person’s approval; nothing ADEM writes counts as approval.",
-              "Connected today: Jira, Slack, Claude, Codex, GitLab and Laravel Forge. Monafy’s development runs on ADEM."
+              "I designed the workflow for analysis, development, review and release.",
+              "I connected task tracking, team communication and development tools in one workflow.",
+              "I added approval and production verification steps to the release process."
             ],
             "context": "founder",
-            "context_label": "Tech Co-founder"
+            "context_label": "Co-founder"
           },
           {
             "name": "Enuygun Sigorta",
-            "description": "An insurance quote comparison and policy purchase platform. I contribute to its development as part of Wingie Enuygun Group.",
+            "description": "A platform for comparing car and health insurance quotes and buying policies. I work on purchase flows and service integrations.",
             "stack": [
               "Symfony",
               "Next.js",
@@ -319,7 +346,7 @@
           },
           {
             "name": "Tamamlayıcı Sağlık",
-            "description": "A health insurance comparison and sales platform for Genç Sigorta, with insurance integrations, ERP, and CRM in one product.",
+            "description": "A health insurance comparison and sales platform for Genç Sigorta. I integrated pricing and policy services from more than 20 insurers and designed ERP and CRM modules.",
             "stack": [
               "Laravel",
               "Node.js",
@@ -345,7 +372,7 @@
           },
           {
             "name": "Monafy",
-            "description": "A research platform for Turkish and US stock markets, combining financial data, market reports and an AI assistant. As tech co-founder, I design the product architecture and lead technical development, which runs on ADEM.",
+            "description": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -361,13 +388,12 @@
             "badge": "FinTech",
             "year": "2025–",
             "highlights": [
-              "I design product flows and service architecture, and direct development with coding agents through ADEM.",
-              "I built the session and API integrations connecting Mona AI to financial data tools.",
-              "I connected source data, prompt rules and publication checks in the market-report workflow.",
-              "I connect watchlists, price alerts and subscription access to the product experience."
+              "I design the product architecture and lead development.",
+              "I bring financial data, market reports and AI features together in the research platform.",
+              "I work on market tracking, alerts and subscriptions."
             ],
             "context": "founder",
-            "context_label": "Tech Co-founder",
+            "context_label": "Co-founder",
             "key": "monafy"
           }
         ]
@@ -380,7 +406,7 @@
         "items": [
           {
             "name": "eDanışman",
-            "description": "A SaaS product for Sistem Global, bringing consulting, appointment, and financial workflows together.",
+            "description": "A SaaS application for Sistem Global to manage consulting, appointments and financial transactions.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -391,10 +417,9 @@
             "badge": "Client work",
             "year": "2026",
             "highlights": [
-              "Built the SaaS architecture for consulting workflows.",
-              "Developed appointment and financial transaction flows.",
-              "Integrated a server-rendered Nuxt.js interface.",
-              "Created a modular service structure."
+              "I designed the application’s service architecture for the consulting business.",
+              "I built workflows for appointments and financial transactions.",
+              "I integrated the web interface with the application services."
             ],
             "context": "freelance",
             "context_label": "Freelance",
@@ -451,7 +476,7 @@
           },
           {
             "name": "Transiyzi",
-            "description": "AI-assisted translation management for software and games, with file imports, CLI tools, and API access.",
+            "description": "AI-assisted translation management for software and games, with file imports, a command-line tool and an API.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -463,10 +488,9 @@
             "badge": "Corporate",
             "year": "2022–2023",
             "highlights": [
-              "Built the platform’s architecture and application from scratch.",
-              "Integrated GPT-3, DeepL, Google, and Microsoft translation services.",
-              "Developed import and export support for formats including XML, JSON, and XLS.",
-              "Added CLI and REST API support for automation."
+              "I designed and built a platform for localising software and games.",
+              "I integrated translation providers and built file import and export features.",
+              "I added API and command-line support so translation tasks could run as part of software development workflows."
             ],
             "context": "company",
             "context_label": "Company",
@@ -474,7 +498,7 @@
           },
           {
             "name": "Dynorender",
-            "description": "A service that pre-renders JavaScript applications for search engines and social previews.",
+            "description": "A service that renders JavaScript pages to HTML for search engines and social media previews.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -484,7 +508,8 @@
             "badge": "Corporate",
             "year": "2022–2023",
             "highlights": [
-              "Built the integration that routes bot requests to the right service and the Redis cache that stores rendered HTML. I also developed the Laravel SaaS dashboard for managing cached pages and refresh settings."
+              "I built the service integration that makes rendered web pages available to search engines and social platforms.",
+              "I developed a dashboard for managing how pages are cached and refreshed."
             ],
             "context": "company",
             "context_label": "Company",
@@ -812,7 +837,7 @@
           },
           {
             "name": "Word Imposter",
-            "description": "A browser game where friends use word clues to find the imposter in their group.",
+            "description": "A browser game where friends share clues and try to identify the player who doesn’t know the secret word.",
             "stack": [
               "Laravel",
               "Livewire",
@@ -822,9 +847,8 @@
             "badge": "Game",
             "year": "2026",
             "highlights": [
-              "Built multiplayer game flows with Laravel and Livewire.",
-              "Implemented password-protected lobbies, player management, and round logic.",
-              "Integrated the game into my personal site."
+              "I built room creation, player participation and round management for the multiplayer browser game.",
+              "I integrated the game into my personal website."
             ],
             "context": "personal",
             "context_label": "Personal",
@@ -852,7 +876,7 @@
           {
             "key": "smart-global",
             "name": "Smart Global",
-            "description": "A bilingual corporate web experience for valuation and advisory services.",
+            "description": "A Turkish and English website for Smart Global’s valuation and advisory services.",
             "year": "2026",
             "stack": [
               "Next.js",
@@ -863,9 +887,8 @@
             "url": "https://smartglobalval.co.uk",
             "badge": "Client work",
             "highlights": [
-              "A specialist services website should help people find the right service and make contact. It needs consistent content and credibility in both languages.",
-              "The site organises English and Turkish content under localised URLs and a shared visual identity. Services, sectors, and contact pages form a direct navigation flow.",
-              "The work covers corporate pages, bilingual content, responsive interfaces, and contact enquiries. It provides a consistent foundation for extending pages and content."
+              "I built a bilingual, responsive website for a valuation and advisory firm.",
+              "I organised the service and sector pages and built the contact form for enquiries."
             ]
           },
           {
@@ -912,8 +935,8 @@
   },
   "contact": {
     "title": "Let’s talk.",
-    "description": "Have a project, a collaboration in mind, or a question? Get in touch and let’s explore what you need.",
-    "meta_description": "Contact Timurhan Kaya about software development, AI integrations or your product idea.",
+    "description": "Contact Timurhan Kaya about software projects, technical partnerships and job opportunities.",
+    "meta_description": "Contact Timurhan Kaya about software projects, technical partnerships and job opportunities.",
     "email_label": "Email",
     "linkedin_label": "LinkedIn",
     "github_label": "GitHub",
