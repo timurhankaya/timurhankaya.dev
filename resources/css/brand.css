@@ -103,7 +103,7 @@
 .brand-project-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 .brand-project-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .brand-project:has(.brand-project-link):hover h3 { color: var(--accent); }
-.brand-project-actions, .brand-project-visit { position: relative; z-index: 2; }
+.brand-project-visit { position: relative; z-index: 2; }
 .brand-project-art { background-image: linear-gradient(90deg, transparent 49.7%, #ffffff05 50%, transparent 50.3%); aspect-ratio: 1200 / 630; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; overflow: hidden; position: relative; }
 .brand-project-art.has-image { padding: 0; background: #151820; }
 .brand-project-art.has-image :is(img, video) { display: block; width: 100%; height: 100%; object-fit: contain; }
@@ -125,7 +125,6 @@
 .brand-project-heading h3 { font-size: 17px; font-weight: 500; letter-spacing: -.04em; }
 .brand-project-heading > span { color: var(--muted); flex-shrink: 0; font-size: 11px; }
 .brand-project-description { flex-grow: 1; color: var(--muted); font-size: 13px; line-height: 1.8; margin-top: 11px; }
-.brand-project-stack { font: 11px/1.8 var(--mono); color: var(--muted); margin-top: 14px; }
 .brand-site summary::-webkit-details-marker { display: none; }
 .brand-project-visit { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; padding-block: 8px; margin-right: 10px; text-decoration: underline; text-underline-offset: 4px; }
 .brand-project-visit:hover { color: var(--accent); }
@@ -303,7 +302,6 @@
     .brand-project-art-label { font-size: 11px; }
     .brand-project-heading h3 { font-size: 20px; }
     .brand-project-description { font-size: 13px; }
-    .brand-project-stack { font-size: 11px; }
     .brand-about { grid-template-columns: 1fr; gap: 0; }
     .brand-about .brand-display { max-width: none; }
     .brand-hobbies { margin-top: 20px; max-width: none; }
@@ -415,36 +413,16 @@
     .brand-case-invite .brand-button { margin-top: 25px; }
     .brand-case-related > div { grid-template-columns: 1fr; }
 }
-/* Collection pages and contribution dialogs. */
+/* Contact page. */
 .brand-contact-bottom { align-items: center; flex-wrap: wrap; gap: 25px; }
 .brand-contact-bottom > p { flex: 1 1 220px; }
 .brand-contact-heading { display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-top: 24px; }
 .brand-contact-heading .brand-display { margin-top: 0; }
 .brand-contact-heading .brand-button { flex-shrink: 0; }
-.brand-project-actions { margin-top: 17px; border-top: 1px solid var(--line); }
-.brand-project-actions:empty { display: none; }
-.brand-project-actions > * + .brand-contribution-button { border-top: 1px solid var(--line); }
-.brand-contribution-button { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; gap: 16px; padding-block: 16px; font-size: 12px; cursor: pointer; }
-.brand-contribution-button > span { color: var(--accent); font-size: 20px; line-height: 1; }
-.brand-contribution-button:hover { color: var(--accent); }
-.brand-project-dialog { color: var(--ink); background: var(--surface); border: 1px solid var(--modal-line); box-shadow: var(--modal-shadow); padding: 24px 26px 26px; width: min(500px, calc(100% - 32px)); max-height: min(80dvh, 680px); margin: auto; overscroll-behavior: contain; }
-.brand-project-dialog::backdrop { background: var(--modal-scrim); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-.brand-project-dialog[open] { animation: brand-modal-in .32s var(--modal-ease) both; }
-.brand-project-dialog[open]::backdrop { animation: brand-modal-fade .32s ease both; }
-.brand-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--muted); }
-.brand-dialog-close { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; transition: color .2s, border-color .2s; }
-.brand-dialog-close:hover { color: var(--accent); border-color: var(--accent); }
-.brand-project-dialog h2 { font-family: var(--heading); font-size: clamp(24px, 3vw, 30px); letter-spacing: -.04em; line-height: 1.2; margin-top: 14px; }
-.brand-dialog-description { margin-top: 10px; color: var(--muted); line-height: 1.7; font-size: 14px; }
-.brand-project-dialog ul { list-style: disc; padding-left: 18px; margin-top: 18px; font-size: 14px; line-height: 1.7; }
-.brand-project-dialog li { padding-left: 4px; }
-.brand-project-dialog li + li { margin-top: 8px; }
-.brand-project-dialog > .brand-project-stack { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
-.brand-project-dialog .brand-text-link { margin-top: 18px; color: var(--accent); }
-@keyframes brand-modal-in { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
-@keyframes brand-modal-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* Command palette (Ctrl/⌘ K). */
+@keyframes brand-modal-in { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes brand-modal-fade { from { opacity: 0; } to { opacity: 1; } }
 .brand-palette { position: fixed; inset: 0; z-index: 160; display: grid; justify-items: center; align-items: start; padding: min(14vh, 120px) 16px 16px; }
 .brand-palette.hidden { display: none; }
 .brand-palette-scrim { position: absolute; inset: 0; background: var(--modal-scrim); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); cursor: default; animation: brand-modal-fade .25s ease both; }
@@ -473,9 +451,8 @@
 .brand-palette-foot { padding: 10px 18px 12px; border-top: 1px solid var(--line); color: #6b707a; font-size: 12px; }
 .brand-palette-foot kbd { padding: 1px 5px; border: 1px solid var(--line); font: 11px/1.4 var(--mono); color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
-    .brand-project-dialog[open], .brand-project-dialog[open]::backdrop, .brand-palette-scrim, .brand-palette-panel { animation: none; }
+    .brand-palette-scrim, .brand-palette-panel { animation: none; }
 }
-body:has(.brand-project-dialog[open]) { overflow: hidden; }
 /* Playable, editorial game covers. */
 .brand-games-header { position: relative; }
 .brand-game-note { display: flex; align-items: center; gap: 12px; color: var(--muted); margin-top: 30px; font-size: 11px; }
@@ -609,7 +586,6 @@ body:has(.brand-project-dialog[open]) { overflow: hidden; }
     .brand-contact-bottom { display: flex; align-items: start; }
     .brand-contact-bottom > p { flex-basis: 100%; }
     .brand-contact-heading { flex-wrap: wrap; gap: 22px; }
-    .brand-project-dialog { padding: 20px 20px 22px; }
     .brand-game-note { line-height: 1.9; align-items: baseline; }
     .brand-game-note .brand-status { flex: none; }
     .brand-game-drawing { height: 205px; }
@@ -685,7 +661,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 @media (pointer: coarse) {
     .brand-site :is(.brand-nav-actions a, .brand-menu-toggle, .brand-footer a, .brand-project-visit, .brand-text-link,
-        .brand-case-toc a, .brand-series a, .brand-case-links a, .brand-contribution-button,
+        .brand-case-toc a, .brand-series a, .brand-case-links a,
         .brand-case-writing a, .brand-mobile-menu a) { min-height: 44px; }
     .brand-site :is(.brand-nav-actions a, .brand-footer-bottom a, .brand-project-visit, .brand-series a) { display: inline-flex; align-items: center; }
     .brand-footer-bottom > div { gap: 4px 18px; }

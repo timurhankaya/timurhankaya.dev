@@ -61,8 +61,6 @@ it('offers the same destinations as the navigation, plus every published story',
 it('keeps modal surfaces square like the rest of the site', function (string $file, string $selector) {
     expect(cssRule($file, $selector))->not->toBe('')->not->toContain('border-radius');
 })->with([
-    ['brand.css', '.brand-project-dialog'],
-    ['brand.css', '.brand-dialog-close'],
     ['brand.css', '.brand-palette-panel'],
     ['brand.css', '.brand-palette-item'],
     ['games.css', '.game-dialog'],
@@ -76,7 +74,6 @@ it('keeps modal surfaces square like the rest of the site', function (string $fi
 it('gives every modal the same softer scrim', function (string $file, string $selector) {
     expect(cssRule($file, $selector))->toContain('var(--modal-scrim)');
 })->with([
-    ['brand.css', '.brand-project-dialog::backdrop'],
     ['brand.css', '.brand-palette-scrim'],
     ['games.css', '.game-dialog-scrim'],
     ['games.css', '.vk-notice-scrim'],

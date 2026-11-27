@@ -8,11 +8,11 @@
     "profile": "I’ve been developing software for insurance, finance and e-commerce since 2019. I design product architecture and build microservice-based systems and API integrations. I apply an AI-driven development lifecycle (AI-DLC) to planning, implementation, code review and testing.",
     "projects_title": "Selected projects",
     "project_descriptions": {
-      "adem": "An AI platform that handles software development tasks from tracking and testing through to approved releases. I designed the workflow and integrated the tools teams use.",
-      "monafy": "A research platform for investors following Turkish and US stock markets. I design the architecture that connects market data to research tools and lead development.",
-      "enuygun-sigorta": "I develop the flows for comparing insurance quotes and buying policies, and connect them to insurance and payment services.",
-      "tamamlayc-saglk": "I designed the architecture and internal operations modules for a health insurance comparison and sales platform. I integrated quote and policy services from more than 20 insurers.",
-      "edanisman": "I designed the service architecture for Sistem Global’s consulting platform and built the workflows for appointments and financial transactions."
+      "adem": "An AI-powered teammate for software teams. I designed the workflow that connects task tracking with development tools.",
+      "monafy": "A research platform for Turkish and US stock markets with financial data, market reports and an AI assistant. I design the product architecture and lead development.",
+      "enuygun-sigorta": "I build quote comparison and purchase flows for car and health insurance and integrate insurer and payment services.",
+      "tamamlayc-saglk": "I designed the architecture and ERP/CRM modules for Genç Sigorta’s health insurance platform and integrated quote and policy services from more than 20 insurers.",
+      "edanisman": "I designed the service architecture for Sistem Global’s consulting application and built workflows for appointment scheduling and financial transactions."
     },
     "projects": [
       "adem",
@@ -292,7 +292,7 @@
           {
             "key": "adem",
             "name": "ADEM",
-            "description": "A digital teammate that handles software development tasks from tracking through testing and release. Releases require approval from an authorised person.",
+            "description": "An AI-powered teammate for software teams that brings task tracking, team communication and development tools together.",
             "stack": [
               "React 19",
               "TypeScript",
@@ -307,11 +307,6 @@
             "case_study": true,
             "badge": "Digital teammate",
             "year": "2026–",
-            "highlights": [
-              "I designed the workflow for analysis, development, review and release.",
-              "I connected task tracking, team communication and development tools in one workflow.",
-              "I added approval and production verification steps to the release process."
-            ],
             "context": "founder",
             "context_label": "Co-founder"
           },
@@ -333,12 +328,6 @@
             "url": "https://www.enuygunsigorta.com",
             "badge": "InsureTech",
             "year": "2024–",
-            "highlights": [
-              "Work on insurance comparison and purchase products.",
-              "Contribute to service integrations supporting product workflows.",
-              "Work on production performance, maintenance, and reliability."
-            ],
-            "highlights_title": "What I Am Doing",
             "context": "company",
             "context_label": "Company",
             "key": "enuygun-sigorta",
@@ -359,12 +348,6 @@
             "url": "https://www.tamamlayicisaglik.com",
             "badge": "InsureTech",
             "year": "2020–2024",
-            "highlights": [
-              "Designed the architecture and brought the platform to production.",
-              "Integrated pricing and policy services from more than 20 insurers.",
-              "Mentored the team on interface implementation.",
-              "Built ERP and CRM modules for internal teams."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "tamamlayc-saglk",
@@ -387,11 +370,6 @@
             "url": "https://monafy.com",
             "badge": "FinTech",
             "year": "2025–",
-            "highlights": [
-              "I design the product architecture and lead development.",
-              "I bring financial data, market reports and AI features together in the research platform.",
-              "I work on market tracking, alerts and subscriptions."
-            ],
             "context": "founder",
             "context_label": "Co-founder",
             "key": "monafy"
@@ -406,7 +384,7 @@
         "items": [
           {
             "name": "eDanışman",
-            "description": "A SaaS application for Sistem Global to manage consulting, appointments and financial transactions.",
+            "description": "A web application that lets Sistem Global manage its consulting workflows, appointment scheduling and financial transactions in one place.",
             "stack": [
               "Laravel",
               "Nuxt.js",
@@ -416,11 +394,6 @@
             "url": "https://edanisman.com",
             "badge": "Client work",
             "year": "2026",
-            "highlights": [
-              "I designed the application’s service architecture for the consulting business.",
-              "I built workflows for appointments and financial transactions.",
-              "I integrated the web interface with the application services."
-            ],
             "context": "freelance",
             "context_label": "Freelance",
             "key": "edanisman"
@@ -442,11 +415,6 @@
             "url": "https://www.kommunity.com",
             "badge": "Community",
             "year": "2020–2024",
-            "highlights": [
-              "Managed technical operations for communities and conferences.",
-              "Coordinated speaker screens, streaming, and event infrastructure.",
-              "Contributed to content management and admin tools with Laravel Nova."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "kommunity",
@@ -464,11 +432,6 @@
             "url": "https://marpo.app",
             "badge": "Corporate",
             "year": "2023–2024",
-            "highlights": [
-              "Built the backend for the recommendation engine.",
-              "Reduced feed latency with Redis caching.",
-              "Set up the Nuxt.js interface and asynchronous news integrations."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "marpo",
@@ -476,7 +439,7 @@
           },
           {
             "name": "Transiyzi",
-            "description": "AI-assisted translation management for software and games, with file imports, a command-line tool and an API.",
+            "description": "An AI-assisted translation platform for localising software and games. Teams can manage translation files in one place and integrate translation tasks into their development workflows through an API or the command line.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -487,18 +450,13 @@
             "url": "https://transiyzi.com",
             "badge": "Corporate",
             "year": "2022–2023",
-            "highlights": [
-              "I designed and built a platform for localising software and games.",
-              "I integrated translation providers and built file import and export features.",
-              "I added API and command-line support so translation tasks could run as part of software development workflows."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "transiyzi"
           },
           {
             "name": "Dynorender",
-            "description": "A service that renders JavaScript pages to HTML for search engines and social media previews.",
+            "description": "A service that renders and caches pages built with JavaScript. It serves ready-to-read HTML so search engines can crawl the content and social platforms can generate link previews.",
             "stack": [
               "Laravel",
               "Tailwind CSS",
@@ -507,10 +465,6 @@
             "url": "https://monerender.com",
             "badge": "Corporate",
             "year": "2022–2023",
-            "highlights": [
-              "I built the service integration that makes rendered web pages available to search engines and social platforms.",
-              "I developed a dashboard for managing how pages are cached and refreshed."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "moneo-render"
@@ -527,10 +481,6 @@
             "url": "https://www.abilitypool.com",
             "badge": "Corporate",
             "year": "2023",
-            "highlights": [
-              "Implemented the interface from Figma designs.",
-              "Contributed to application logic with Symfony."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "abilitypool",
@@ -546,10 +496,6 @@
             "url": "https://esim.getcontact.com",
             "badge": "Corporate",
             "year": "2023",
-            "highlights": [
-              "Implemented Figma designs.",
-              "Developed interface workflows with the Teknasyon team."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "getcontact-esim",
@@ -565,10 +511,6 @@
             "badge": "Corporate",
             "archived": true,
             "year": "2021–2022",
-            "highlights": [
-              "Helped build the pallet delivery and operations tracking system end-to-end",
-              "Assisted in designing the real-time logistics dashboard for field teams"
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "palex-its",
@@ -591,10 +533,6 @@
             "url": "https://www.akrep.com",
             "badge": "FinTech",
             "year": "2022–2023",
-            "highlights": [
-              "My first software project (where I learned Laravel)",
-              "Helped build the data scraping pipeline and price comparison engine"
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "akrep",
@@ -611,12 +549,6 @@
             "badge": "FinTech",
             "archived": true,
             "year": "2023–2024",
-            "highlights": [
-              "Helped build the seller onboarding portal.",
-              "Modelled order workflows and state transitions.",
-              "Turned Figma designs into responsive interfaces.",
-              "Added real-time order tracking."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "guille-marketplace",
@@ -633,11 +565,6 @@
             "url": "",
             "badge": "FinTech",
             "year": "2023–2024",
-            "highlights": [
-              "Built filters for range, age, budget, and passenger capacity.",
-              "Developed a dashboard for comparing technical data.",
-              "Created a data-focused dark interface."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "moneo-aircraft",
@@ -653,11 +580,6 @@
             "url": "https://herbalfithayat.com",
             "badge": "E-commerce",
             "year": "2019–2020",
-            "highlights": [
-              "Helped build three independent e-commerce stores (Hayat, Sepet, Değişim) on a shared infrastructure",
-              "Implemented product, category, and order management systems",
-              "Delivered responsive mobile-first designs using Bootstrap"
-            ],
             "context": "freelance",
             "context_label": "Freelance",
             "key": "herbalfit",
@@ -681,11 +603,6 @@
             "url": "https://cashflownft.net",
             "badge": "Web3",
             "year": "2022",
-            "highlights": [
-              "Integrated Web3 wallet connection and NFT sale flows",
-              "Helped build smart contract-based ownership verification on the backend",
-              "Developed Referral and Star management systems"
-            ],
             "context": "freelance",
             "context_label": "Freelance",
             "key": "cashflow-nft-phoenic-node",
@@ -702,10 +619,6 @@
             "badge": "Corporate",
             "archived": true,
             "year": "2021",
-            "highlights": [
-              "Helped build the corporate landing page for a plastic packaging company",
-              "Implemented the design pixel-perfectly from Figma"
-            ],
             "context": "freelance",
             "context_label": "Freelance",
             "key": "eagle-global-plastik",
@@ -720,9 +633,6 @@
             "url": "https://sera-ambalaj.com",
             "badge": "Corporate",
             "year": "2024",
-            "highlights": [
-              "Built the site for friends in a few hours with AI assistance."
-            ],
             "context": "freelance",
             "context_label": "Freelance",
             "key": "sera-ambalaj",
@@ -738,10 +648,6 @@
             "url": "https://vispera.co",
             "badge": "Corporate",
             "year": "2021–2022",
-            "highlights": [
-              "Helped build corporate websites for Vispera (visual AI for retail) and Moneo (software company)",
-              "Implemented Figma designs pixel-perfectly with Tailwind CSS"
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "moneo-vispera",
@@ -757,11 +663,6 @@
             "url": "https://phpkonf.org",
             "badge": "Community",
             "year": "2021–2024",
-            "highlights": [
-              "Implemented event pages from Figma designs.",
-              "Helped build reusable programme, speaker, and registration components.",
-              "Delivered responsive pages for each conference."
-            ],
             "context": "company",
             "context_label": "Company",
             "key": "tech-conferences"
@@ -777,10 +678,6 @@
             "badge": "Community",
             "archived": true,
             "year": "2021",
-            "highlights": [
-              "Helped build a community site for Rise Online players.",
-              "Contributed backend APIs for player statistics and dynamic content."
-            ],
             "key": "rise-online-fan"
           },
           {
@@ -793,10 +690,6 @@
             "url": "https://yeniyilarkadasim.com",
             "badge": "Community",
             "year": "2023",
-            "highlights": [
-              "Implemented the interface from Figma designs.",
-              "Contributed to the draw and participant matching logic."
-            ],
             "links": [
               {
                 "label": "Triwizard Tournament",
@@ -821,10 +714,6 @@
             "url": "https://ucbuyucuturnuvasi.com",
             "badge": "Community",
             "year": "2021",
-            "highlights": [
-              "Implemented interfaces for tournament and campaign flows.",
-              "Built interactions for the tournament and related campaigns."
-            ],
             "links": [
               {
                 "label": "Endless Fame",
@@ -846,10 +735,6 @@
             "url": "https://timurhankaya.dev/games/imposter",
             "badge": "Game",
             "year": "2026",
-            "highlights": [
-              "I built room creation, player participation and round management for the multiplayer browser game.",
-              "I integrated the game into my personal website."
-            ],
             "context": "personal",
             "context_label": "Personal",
             "key": "word-imposter"
@@ -864,10 +749,6 @@
             "badge": "Corporate",
             "archived": true,
             "year": "2021",
-            "highlights": [
-              "Took over the project from another team and made it functional",
-              "Participated in developing Sapaad and Loyalty system integrations"
-            ],
             "context": "freelance",
             "context_label": "Freelance",
             "key": "vietnamees-foodies",
@@ -876,7 +757,7 @@
           {
             "key": "smart-global",
             "name": "Smart Global",
-            "description": "A Turkish and English website for Smart Global’s valuation and advisory services.",
+            "description": "A bilingual website that presents Smart Global’s valuation and advisory services and the industries it serves. Visitors can submit enquiries through the contact form.",
             "year": "2026",
             "stack": [
               "Next.js",
@@ -885,11 +766,7 @@
               "TR / EN"
             ],
             "url": "https://smartglobalval.co.uk",
-            "badge": "Client work",
-            "highlights": [
-              "I built a bilingual, responsive website for a valuation and advisory firm.",
-              "I organised the service and sector pages and built the contact form for enquiries."
-            ]
+            "badge": "Client work"
           },
           {
             "key": "vampir-koylu",
@@ -902,12 +779,7 @@
               "State transitions"
             ],
             "url": null,
-            "badge": "Personal project",
-            "highlights": [
-              "I wanted friends to join one room and play with hidden roles. What players can do and see changes as the game progresses.",
-              "The lobby and role assignment lead to night actions, day voting, and result tracking. Roles such as doctor, detective, and hunter introduce different rules. Each phase needs a consistent transition to the next.",
-              "I separated role assignment, night resolution, and win conditions into focused responsibilities. Public player state stays separate from hidden role information. This keeps the interface simple and makes individual rules easier to verify."
-            ]
+            "badge": "Personal project"
           }
         ]
       }

@@ -683,20 +683,6 @@ function initHashScroll() {
     window.setTimeout(scroll, 520);
 }
 
-function initProjectDialogs() {
-    qsa('[data-project-dialog-open]').forEach((button) => {
-        const dialog = document.getElementById(button.dataset.projectDialogOpen);
-        if (!(dialog instanceof HTMLDialogElement)) return;
-        button.addEventListener('click', () => dialog.showModal());
-        dialog.addEventListener('click', (event) => {
-            if (event.target !== dialog) return;
-            const bounds = dialog.getBoundingClientRect();
-            if (event.clientX < bounds.left || event.clientX > bounds.right ||
-                event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
-        });
-    });
-}
-
 // Contents lists follow the reader: the last section whose heading passed under the sticky nav is marked current.
 function initToc() {
     qsa('[data-toc]').forEach((toc) => {
@@ -847,7 +833,6 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit('commandPalette', initCommandPalette);
     safeInit('mobileNav', initMobileNav);
     safeInit('modals', initModals);
-    safeInit('projectDialogs', initProjectDialogs);
     safeInit('localeLinks', initLocaleLinks);
     safeInit('motionVideos', initMotionVideos);
     safeInit('imposterArena', initImposterArena);
