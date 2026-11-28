@@ -36,7 +36,7 @@ it('presents the developer role throughout the localized CV and its metadata', f
     expect($person['jobTitle'])->toBe($content['cv']['role'])
         ->and($person['description'])->toBe($content['cv']['profile'])
         ->and($person['worksFor']['name'])->toBe('Wingie Enuygun Group')
-        ->and($person['knowsAbout'])->toContain('PHP', 'Go', 'TypeScript');
+        ->and($person['knowsAbout'])->toContain('PHP', 'Go', 'TypeScript', 'Apache Kafka', 'TimescaleDB');
 
     preg_match_all('~<span class="exp-role">([^<]+)</span>~', $html, $roles);
     preg_match_all('~<div class="exp-company">([^<]+)</div>~', $html, $companies);
@@ -76,8 +76,9 @@ it('orders the CV experience and links ADEM to its case study', function (string
 it('lists technologies as plain grouped names in both CV views', function (string $locale, string $path) {
     $expected = [
         'PHP, TypeScript, JavaScript, Go, Python',
-        'Laravel, Symfony, Node.js, REST APIs, RabbitMQ',
+        'Laravel, Symfony, Node.js, REST APIs',
         'React, Next.js, React Native, Vue, Nuxt, Tailwind CSS',
+        'Apache Kafka, RabbitMQ',
         'PostgreSQL, TimescaleDB, MySQL, MongoDB, Redis, Elasticsearch',
         'Docker, AWS, GCP',
     ];

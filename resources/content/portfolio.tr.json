@@ -40,8 +40,7 @@
             "Laravel",
             "Symfony",
             "Node.js",
-            "REST APIs",
-            "RabbitMQ"
+            "REST APIs"
           ]
         },
         {
@@ -56,7 +55,14 @@
           ]
         },
         {
-          "title": "Veri",
+          "title": "Mesajlaşma ve veri akışı",
+          "items": [
+            "Apache Kafka",
+            "RabbitMQ"
+          ]
+        },
+        {
+          "title": "Veri altyapısı",
           "items": [
             "PostgreSQL",
             "TimescaleDB",
